@@ -4,6 +4,8 @@ import { connect, css, decode } from 'frontity';
 import { Row, Column, Loader } from 'gfw-components';
 import { CancelToken } from 'axios';
 
+import theme from '../../app/theme';
+
 import { fetchPostTypeData } from '../../helpers/request';
 
 import Link from '../../components/link';
@@ -132,7 +134,7 @@ const SearchPage = ({ state, libraries }) => {
         `}
       >
         <Column width={[3 / 4]}>
-          {/* <Breadcrumbs
+          <Breadcrumbs
             css={css`
               margin-bottom: 25px;
 
@@ -140,7 +142,7 @@ const SearchPage = ({ state, libraries }) => {
                 margin-bottom: 40px;
               }
             `}
-          /> */}
+          />
         </Column>
         {!isSearch && (
           <Column width={[1 / 4]}>

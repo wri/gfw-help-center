@@ -9,7 +9,7 @@ import Wrapper from './styles';
 
 const Breadcrumbs = ({ state }) => {
   const data = state.source.get(state.router.link);
-  const pageData = state.source[data.type][data.id];
+  const pageData = state.source?.[data?.type]?.[data?.id];
   const parent = state.source?.[pageData?.type]?.[pageData?.parent];
 
   return (
