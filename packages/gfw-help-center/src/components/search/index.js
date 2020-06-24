@@ -30,6 +30,7 @@ const Search = ({
 }) => {
   const parse = libraries.source.parse(state.router.link);
   const searchQuery = parse.query.s ? decodeURI(parse.query.s) : '';
+  const { tags } = state.source.data['top-tags/'];
 
   const [search, setSearch] = useState(searchQuery);
   const [articles, setArticles] = useState([]);
@@ -55,9 +56,9 @@ const Search = ({
     ? filteredMeta
     : [{ name: search, link: `/?s=${search}` }];
 
-  const searchResults = filteredResults.map((meta) => ({
+  const searchResults = [...filteredResults, { name: 'divider', id: 'divider' }, ...tags].map((meta) => ({
     ...meta,
-    name: meta?.name?.replace(re, `<b>$1</b>`),
+    name: meta.name !== 'divider' ? meta?.name?.replace(re, `<b>$1</b>`) : meta.name
   }));
 
   useEffect(() => {
