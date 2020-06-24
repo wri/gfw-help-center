@@ -11,11 +11,11 @@ const Articles = ({ libraries, posts: articles }) => {
   const Html2React = libraries?.html2react?.Component;
 
   return articles?.map(
-    ({ id, content, link, ...rest }) => (
+    ({ id, excerpt, link, ...rest }) => (
       <LinkWrapper link={link} key={id}>
         <SimpleCard
-          text={<Html2React html={content.rendered} />}
           {...rest}
+          text={<Html2React html={excerpt?.rendered} />}
           arrow
         />
       </LinkWrapper>

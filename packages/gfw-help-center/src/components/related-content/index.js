@@ -23,7 +23,7 @@ const RelatedContent = ({ sections, maxCols }) => (
       sections?.map((section) => {
         const { acf_fc_layout: sectionType, title: sectionTitle } = section;
         const Component = ContentComponents[sectionType];
-        const include = section[`${sectionType}_by_id`];
+        const include = section[`${sectionType}_by_id`] || section[sectionType];
 
         return Component && include ? (
           <div key={sectionTitle || sectionType}>

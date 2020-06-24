@@ -15,7 +15,7 @@ const Organizations = ({ libraries, posts: organizations }) => {
       <CardWrapper key={id}>
         <ExpandableCard
           {...rest}
-          text={<Html2React html={content.rendered} />}
+          text={<Html2React html={content?.rendered} />}
           thumbnail={media?.media_details?.sizes?.medium?.source_url}
           arrow
           small

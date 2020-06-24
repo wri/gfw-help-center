@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, css } from 'frontity';
-import { isAfter, toDate } from 'date-fns';
+import { isAfter } from 'date-fns';
 
 import { Row, Column, Loader } from 'gfw-components';
 
 import PostContent from '../../components/content';
 import Breadcrumbs from '../../components/breadcrumbs';
 import RelatedContent from '../../components/related-content';
+import CategoryList from '../../components/category-list';
 
-import { PostContainer, BreadCrumbsWrapper, PostTitle, Divider, PostContentWrapper } from './styles';
+import { PostContainer, BreadCrumbsWrapper, PostTitle, TagsWrapper, Divider, PostContentWrapper } from './styles';
 
 const Post = ({ state, libraries }) => {
   const Html2React = libraries.html2react.Component;
@@ -19,14 +20,18 @@ const Post = ({ state, libraries }) => {
   const {
     title,
     content,
+    tags: tagIds,
     acf: { related_content: relatedContent, date_time },
   } = pageData || {};
+
+  const allTags = Object.values(state.source.tag);
+  const tags = allTags?.filter((tag) => tagIds.includes(tag.id));
 
   const webinarDate = new Date(date_time);
   const now = new Date();
   const isUpcoming = isAfter(webinarDate, now);
 
-  const postTitle = isUpcoming ? `Upcoming webinar: ${title.rendered}` : title.rendered;
+  const postTitle = isUpcoming ? `Upcoming webinar: ${title.rendered}` : `Webinar: ${title.rendered}`;
 
   return (
     <PostContainer>
@@ -52,6 +57,11 @@ const Post = ({ state, libraries }) => {
                 <PostContent align="left">
                   <Html2React html={content.rendered} />
                 </PostContent>
+                {tags && (
+                  <TagsWrapper>
+                    <CategoryList categories={tags} light />
+                  </TagsWrapper>
+                )}
               </PostContentWrapper>
               {relatedContent && (
                 <>
