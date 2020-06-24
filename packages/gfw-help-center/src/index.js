@@ -44,6 +44,39 @@ const allToolsHandler = {
   },
 };
 
+const topTagsHandler = {
+  name: 'topTags',
+  priority: 1,
+  pattern: 'top-tags',
+  func: async ({ route, state, libraries }) => {
+    const { api } = libraries.source;
+
+    // 1. fetch the data you want from the endpoint page
+    const response = await api.get({
+      endpoint: 'tags',
+      params: {
+        per_page: 100, // To make sure you get all of them
+        orderby: 'count',
+        order: 'desc',
+      },
+    });
+
+    // 2. get an array with each item in json format
+    const items = await response.json();
+
+    const tags = items.map((tag) => ({
+      ...tag,
+      link: `/tag/${tag.slug}`,
+    }));
+    // 3. add data to source
+    const currentPageData = state.source.data[route];
+
+    Object.assign(currentPageData, {
+      tags,
+    });
+  },
+};
+
 const gfwHelpCenter = {
   name: '@gfw/hel-center-theme',
   roots: {
@@ -90,6 +123,7 @@ const gfwHelpCenter = {
       },
       beforeSSR: ({ actions }) => async () => {
         await actions.source.fetch('all-tools');
+        await actions.source.fetch('top-tags');
       },
     },
   },
@@ -102,7 +136,7 @@ const gfwHelpCenter = {
       processors: [image, iframe],
     },
     source: {
-      handlers: [allToolsHandler],
+      handlers: [allToolsHandler, topTagsHandler],
     },
   },
 };

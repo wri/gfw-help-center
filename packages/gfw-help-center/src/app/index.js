@@ -15,7 +15,7 @@ import Home from '../pages/home';
 import Tools from '../pages/tools';
 import Article from '../pages/article';
 import Webinar from '../pages/webinar';
-import Search from '../pages/search';
+import Archive from '../pages/archive';
 import Error from '../pages/error';
 
 import HelpFooter from '../components/footer';
@@ -50,7 +50,7 @@ const Theme = ({ state, actions }) => {
           <Tools when={data.isTools} />
           <Article when={data.isArticles} />
           <Webinar when={data.isWebinars} />
-          <Search when={data.isSearch} />
+          <Archive when={data.isSearch || data.isTag} />
           <Error when={data.isError} />
         </Switch>
       </Main>
