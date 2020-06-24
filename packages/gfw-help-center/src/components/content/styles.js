@@ -77,6 +77,11 @@ export default styled.div`
     ${theme.mediaQueries.small} {
       width: calc(100% + (100% / 7));
       margin-left: calc(-100% / 7);
+
+      ${({ align }) => align === 'left' && `
+        margin-left: unset;
+        margin-right: calc(-100% / 7);
+      `}
     }
   }
 

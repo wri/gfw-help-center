@@ -69,12 +69,12 @@ const Post = ({ state, libraries }) => {
                 Print this article
               </MetaItem>
             </Column>
-            <Column width={[1, 3 / 4]}>
+            <Column width={[1, 7 / 12]}>
               <PostTitle className="notranslate">
                 <Html2React html={title.rendered} />
               </PostTitle>
               <PostContentWrapper>
-                <PostContent>
+                <PostContent align="left">
                   <Html2React html={content.rendered} />
                 </PostContent>
                 {tags && (
