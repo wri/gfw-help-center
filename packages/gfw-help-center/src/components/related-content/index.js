@@ -23,8 +23,9 @@ const RelatedContent = ({ sections, maxCols }) => (
       sections?.map((section) => {
         const { acf_fc_layout: sectionType, title: sectionTitle } = section;
         const Component = ContentComponents[sectionType];
+        const include = section[`${sectionType}_by_id`];
 
-        return Component ? (
+        return Component && include ? (
           <div key={sectionTitle || sectionType}>
             {sectionType === 'webinars' && <Divider />}
             {sectionTitle && (
@@ -36,7 +37,7 @@ const RelatedContent = ({ sections, maxCols }) => (
                 {sectionTitle}
               </H4>
             )}
-            <Component {...section} postType={sectionType} include={section[`${sectionType}_by_id`]} maxCols={maxCols} />
+            <Component {...section} postType={sectionType} include={include} maxCols={maxCols} />
           </div>
         ) : null;
       })}

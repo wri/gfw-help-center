@@ -58,6 +58,10 @@ export const PostContentWrapper = styled.div`
   margin-bottom: 65px;
 `;
 
+export const TagsWrapper = styled.div`
+  margin: 90px 0;
+`;
+
 export const Divider = styled.div`
   border-top: 1px solid ${theme.colors.lightGrey};
   margin-top: 2.5rem;

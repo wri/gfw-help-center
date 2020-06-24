@@ -12,7 +12,7 @@ import RelatedContent from '../../components/related-content';
 
 import PrintIconSrc from '../../assets/icons/print.svg';
 
-import { PostContainer, BreadCrumbsWrapper, PostTitle, Divider, StyledButton, PrintIcon, MetaItem, PostContentWrapper } from './styles';
+import { PostContainer, BreadCrumbsWrapper, PostTitle, TagsWrapper, Divider, StyledButton, PrintIcon, MetaItem, PostContentWrapper } from './styles';
 
 const isServer = typeof window === 'undefined';
 
@@ -77,9 +77,18 @@ const Post = ({ state, libraries }) => {
                 <PostContent>
                   <Html2React html={content.rendered} />
                 </PostContent>
-                {tags && <CategoryList categories={tags} light />}
+                {tags && (
+                  <TagsWrapper>
+                    <CategoryList categories={tags} light />
+                  </TagsWrapper>
+                )}
               </PostContentWrapper>
-              {relatedContent && <RelatedContent sections={relatedContent} />}
+              {relatedContent && (
+                <>
+                  <Divider />
+                  <RelatedContent sections={relatedContent} />
+                </>
+              )}
             </Column>
           </Row>
           {blogPosts && (
