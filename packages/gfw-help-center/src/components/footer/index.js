@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'frontity';
+import { css, connect } from 'frontity';
 import { Row, Column, H4 } from 'gfw-components';
 import SimpleCard from '../card-simple';
 
 import supportCards from './config';
 
-const Footer = () => {
+const Footer = ({ actions }) => {
   return (
     <Row>
       <Column>
@@ -21,7 +21,16 @@ const Footer = () => {
       {supportCards.map((card) => {
         return (
           <Column width={[1, 1 / 2]} key={card.title}>
-            <SimpleCard {...card} />
+            {card.link && (
+              <a href={card.link} target="_blank" rel="noopener noreferrer">
+                <SimpleCard {...card} />
+              </a>
+            )}
+            {!card.link && (
+              <button css={css`text-align: left;`} onClick={actions.theme.toggleContactUsModal}>
+                <SimpleCard {...card} />
+              </button>
+            )}
           </Column>
         );
       })}
@@ -29,9 +38,8 @@ const Footer = () => {
   );
 };
 
-export default Footer;
-
 Footer.propTypes = {
-  items: PropTypes.array,
-  state: PropTypes.object,
+  actions: PropTypes.object
 };
+
+export default connect(Footer);

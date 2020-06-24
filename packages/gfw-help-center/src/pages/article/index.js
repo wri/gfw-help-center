@@ -31,7 +31,7 @@ const Post = ({ state, libraries }) => {
 
   const allTags = Object.values(state.source.tag);
   const tags = allTags?.filter((tag) => tagIds.includes(tag.id));
-
+  console.log(related_content);
   const relatedContent = related_content?.filter(
     (c) => c.acf_fc_layout !== 'posts'
   );
@@ -81,7 +81,7 @@ const Post = ({ state, libraries }) => {
           </Row>
           <Row>
             <Column>
-              {blogPosts && <RelatedContent sections={blogPosts} />}
+              {blogPosts && <RelatedContent sections={blogPosts} maxCols={3} />}
             </Column>
           </Row>
         </>

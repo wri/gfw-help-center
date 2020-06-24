@@ -10,6 +10,7 @@ export default [
       title: 'community forum',
     },
     large: true,
+    link: 'https://groups.google.com/g/globalforestwatch'
   },
   {
     title: 'Contact us',
@@ -19,6 +20,6 @@ export default [
       url: emailIcon,
       title: 'contact us',
     },
-    large: true,
-  },
+    large: true
+  }
 ];

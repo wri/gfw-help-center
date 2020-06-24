@@ -43,9 +43,9 @@ const Card = ({ link, title, excerpt, media, categories, large }) => (
 Card.propTypes = {
   link: PropTypes.string,
   title: PropTypes.string,
-  excerpt: PropTypes.string,
+  excerpt: PropTypes.node,
   media: PropTypes.object,
-  categories: PropTypes.object,
+  categories: PropTypes.array,
   large: PropTypes.bool,
 };
 

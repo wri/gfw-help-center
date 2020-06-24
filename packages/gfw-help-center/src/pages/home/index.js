@@ -9,6 +9,7 @@ import Intro from '../../components/intro';
 import ToolCard from '../../components/card-tool';
 import SimpleCard from '../../components/card-simple';
 import Search from '../../components/search';
+import Link from '../../components/link';
 
 import ArrowIcon from '../../assets/icons/arrow.svg';
 
@@ -95,7 +96,9 @@ const HomePage = ({ state, libraries }) => {
                 </Desktop>
               </Prompt>
             )}
-            <ToolCard active={i === 0} {...tool} />
+            <Link link={tool.link}>
+              <ToolCard active={i === 0} {...tool} />
+            </Link>
           </Column>
         ))}
       </Row>
@@ -120,7 +123,9 @@ const HomePage = ({ state, libraries }) => {
                 margin-bottom: 40px;
               `}
             >
-              <SimpleCard {...tool} large={isFirst} />
+              <Link link={tool.link}>
+                <SimpleCard {...tool} large={isFirst} />
+              </Link>
             </Column>
           );
         })}
