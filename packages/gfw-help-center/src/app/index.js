@@ -14,6 +14,7 @@ import Loading from '../pages/loading';
 import Home from '../pages/home';
 import Tools from '../pages/tools';
 import Article from '../pages/article';
+import Webinar from '../pages/webinar';
 import Error from '../pages/error';
 
 import HelpFooter from '../components/footer';
@@ -47,6 +48,7 @@ const Theme = ({ state, actions }) => {
           <Home when={data.isHome && !data.link.includes('/?s=')} />
           <Tools when={data.isTools} />
           <Article when={data.isArticles} />
+          <Webinar when={data.isWebinars} />
           <Error when={data.isError} />
         </Switch>
       </Main>
