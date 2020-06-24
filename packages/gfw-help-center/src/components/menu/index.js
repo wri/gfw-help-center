@@ -9,9 +9,15 @@ const Menu = ({ links }) => (
   <ul>
     {links?.map((l) => (
       <MenuItem active={l.active} key={l.label}>
-        <Link link={l.link} onClick={() => {}}>
-          {l.label}
-        </Link>
+        {l.link ? (
+          <Link link={l.link}>
+            {`${l.label}${l.count ? ` (${l.count})` : ''}`}
+          </Link>
+        ) : (
+          <button onClick={l.onClick}>
+            {`${l.label}${l.count ? ` (${l.count})` : ''}`}
+          </button>
+        )}
       </MenuItem>
     ))}
   </ul>
