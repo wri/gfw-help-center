@@ -36,11 +36,13 @@ const Page = ({ state, libraries, actions }) => {
   const toolsOptions = [
     ...primaryTools,
     {
-      name: 'divider-1'
+      name: 'divider',
+      id: 'div-1'
     },
     ...secondaryTools,
     {
-      name: 'divider-2'
+      name: 'divider',
+      id: 'div-2'
     },
     {
       name: 'Community forum',

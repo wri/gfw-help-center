@@ -14,14 +14,16 @@ export const ListWrapper = styled.ul`
 `;
 
 export const ListItem = styled.li`
-  font-size: 22px;
   width: 100%;
 
-  a {
+  a,
+  button {
     color: ${theme.colors.grey};
     padding: 20px 0;
     width: 100%;
     display: block;
+    font-size: 22px;
+    text-align: left;
 
     &:hover {
       color: ${theme.colors.darkGrey};

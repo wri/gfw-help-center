@@ -28,11 +28,21 @@ const ResultsList = ({
                 {item.name === 'divider' ? (
                   <Divider />
                 ) : (
-                  <Link link={item.link} onClick={onClickResult}>
-                    <Html2React
-                      html={`${item.name}${showCount ? ` (${item.count})` : ''}`}
-                    />
-                  </Link>
+                  <>
+                    {item.link ? (
+                      <Link link={item.link} onClick={onClickResult}>
+                        <Html2React
+                          html={`${item.name}${showCount ? ` (${item.count})` : ''}`}
+                        />
+                      </Link>
+                      ) : (
+                        <button onClick={item.onClick}>
+                          <Html2React
+                            html={`${item.name}${showCount ? ` (${item.count})` : ''}`}
+                          />
+                        </button>
+                    )}
+                  </>
                 )}
               </ListItem>
             )
