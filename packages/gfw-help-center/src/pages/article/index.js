@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { connect, css } from 'frontity';
 import { format } from 'date-fns';
 
-import { Row, Column, Loader, Button } from 'gfw-components';
+import { Row, Column, Loader } from 'gfw-components';
 
 import PostContent from '../../components/content';
 import Breadcrumbs from '../../components/breadcrumbs';
 import CategoryList from '../../components/category-list';
 import RelatedContent from '../../components/related-content';
 
-import PrintIcon from '../../assets/icons/comment.svg';
+import PrintIconSrc from '../../assets/icons/print.svg';
 
-import { PostContainer, Search, BreadCrumbsWrapper, PostTitle } from './styles';
+import { PostContainer, BreadCrumbsWrapper, PostTitle, Divider, StyledButton, PrintIcon, MetaItem, PostContentWrapper } from './styles';
 
 const isServer = typeof window === 'undefined';
 
@@ -56,34 +56,43 @@ const Post = ({ state, libraries }) => {
             <BreadCrumbsWrapper width={[5 / 6, 3 / 4]}>
               <Breadcrumbs />
             </BreadCrumbsWrapper>
-            <Column width={[1 / 6, 1 / 4]}>
-              <Search open={state.theme.searchIsActive} />
-            </Column>
           </Row>
           <Row>
             <Column width={[1, 1 / 4]}>
-              {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
-              <Button light round onClick={handlePrint}>
-                <img src={PrintIcon} alt="print this article" />
-              </Button>
-              Print this article
+              <MetaItem>
+                {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
+              </MetaItem>
+              <StyledButton light round onClick={handlePrint}>
+                <PrintIcon src={PrintIconSrc} alt="print this article" />
+              </StyledButton>
+              <MetaItem>
+                Print this article
+              </MetaItem>
             </Column>
             <Column width={[1, 3 / 4]}>
               <PostTitle className="notranslate">
                 <Html2React html={title.rendered} />
               </PostTitle>
-              <PostContent>
-                <Html2React html={content.rendered} />
-              </PostContent>
-              {tags && <CategoryList categories={tags} light />}
+              <PostContentWrapper>
+                <PostContent>
+                  <Html2React html={content.rendered} />
+                </PostContent>
+                {tags && <CategoryList categories={tags} light />}
+              </PostContentWrapper>
               {relatedContent && <RelatedContent sections={relatedContent} />}
             </Column>
           </Row>
-          <Row>
-            <Column>
-              {blogPosts && <RelatedContent sections={blogPosts} maxCols={3} />}
-            </Column>
-          </Row>
+          {blogPosts && (
+            <>
+              <Divider />
+              <Row>
+                <Column>
+                  <RelatedContent sections={blogPosts} maxCols={3} />
+                </Column>
+              </Row>
+              <Divider />
+            </>
+          )}
         </>
       ) : (
         <Loader />
