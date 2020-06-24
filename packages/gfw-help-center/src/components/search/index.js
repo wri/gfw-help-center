@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect, css } from 'frontity';
 import deburr from 'lodash/deburr';
 import toUpper from 'lodash/toUpper';
+import debounce from 'lodash/debounce';
 import { SearchIcon, CloseIcon, Button } from 'gfw-components';
+import { get, CancelToken } from 'axios';
 
 import ResultsList from '../results-list';
 
@@ -30,6 +32,7 @@ const Search = ({
   const searchQuery = parse.query.s ? decodeURI(parse.query.s) : '';
 
   const [search, setSearch] = useState(searchQuery);
+  const [articles, setArticles] = useState([]);
 
   const open = state.theme.searchIsActive;
 
@@ -44,7 +47,7 @@ const Search = ({
     }
   };
 
-  const filteredMeta = [].filter((meta) =>
+  const filteredMeta = articles.filter((meta) =>
     deburrUpper(meta.name).includes(deburrUpper(search))
   ) || [{ name: search, link: `/?s=${search}` }];
 
@@ -54,12 +57,31 @@ const Search = ({
 
   const searchResults = filteredResults.map((meta) => ({
     ...meta,
-    name: meta.name.replace(re, `<b>$1</b>`),
+    name: meta?.name?.replace(re, `<b>$1</b>`),
   }));
 
   useEffect(() => {
     if (open) inputRef.current.focus();
   }, [open]);
+
+  useEffect(debounce(() => {
+    if (search && search.length > 2) {
+      const source = CancelToken.source();
+      get(`${state.source.api}/wp/v2/articles?search=${search}`, {
+        cancelToken: source.token,
+      })
+        .then((response) => {
+          setArticles(response.data.map(r => {
+            const url = new URL(r.link);
+
+            return {
+              name: r.title.rendered,
+              link: url.pathname
+            }
+          }));
+        })
+    }
+  }, 300), [search])
 
   return (
     <Wrapper {...props} open={open}>

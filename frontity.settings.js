@@ -45,7 +45,7 @@ const settings = {
             {
               type: 'articles', // type slug
               endpoint: 'articles', // REST API endpoint
-              archive: '/articles', // link where this custom posts are listed
+              archive: '/step-by-step-instructions', // link where this custom posts are listed
             },
             {
               type: 'webinars', // type slug
