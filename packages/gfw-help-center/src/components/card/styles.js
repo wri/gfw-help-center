@@ -1,4 +1,5 @@
 import { styled } from 'frontity';
+import { rgba } from 'emotion-rgba';
 import theme from '../../app/theme';
 
 export const CardWrapper = styled.article`
@@ -26,6 +27,8 @@ export const MediaWrapper = styled.div`
   height: 200px;
   overflow: hidden;
   margin-bottom: 20px;
+  position: relative;
+  display: flex;
 
   ${theme.mediaQueries.small} {
     ${({ large }) =>
@@ -35,6 +38,23 @@ export const MediaWrapper = styled.div`
     `}
   }
 `;
+
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${rgba(theme.colors.darkestGrey ,0.4)};
+`
+
+export const PlayIcon = styled.img`
+  width: 10px;
+  height: 10px;
+`
 
 export const PostTitle = styled.h3`
   font-size: 22px;

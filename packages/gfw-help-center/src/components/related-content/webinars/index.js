@@ -13,10 +13,11 @@ const Webinars = ({ libraries, posts: webinars }) => {
       <Card
         key={id}
         {...rest}
-        text={<Html2React html={content.rendered} />}
+        excerpt={<Html2React html={content.rendered} />}
         {...media && {
           media
         }}
+        video
       />
     )
   )
