@@ -38,3 +38,10 @@ export const ListItem = styled.li`
     color: ${theme.colors.darkestGrey};
   }
 `;
+
+export const Divider = styled.div`
+  width: 65px;
+  height: 2px;
+  background-color: ${theme.colors.lightGrey};
+  margin: 15px 0;
+`

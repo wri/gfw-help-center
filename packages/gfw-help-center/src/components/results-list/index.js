@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'frontity';
 import Link from '../link';
 
-import { ListWrapper, ListItem } from './styles';
+import { ListWrapper, ListItem, Divider } from './styles';
 
 const ResultsList = ({
   items = [],
@@ -25,11 +25,15 @@ const ResultsList = ({
                 key={item.id || item.name}
                 selected={item.id === selected}
               >
-                <Link link={item.link} onClick={onClickResult}>
-                  <Html2React
-                    html={`${item.name}${showCount ? ` (${item.count})` : ''}`}
-                  />
-                </Link>
+                {item.name === 'divider' ? (
+                  <Divider />
+                ) : (
+                  <Link link={item.link} onClick={onClickResult}>
+                    <Html2React
+                      html={`${item.name}${showCount ? ` (${item.count})` : ''}`}
+                    />
+                  </Link>
+                )}
               </ListItem>
             )
         )}

@@ -14,7 +14,7 @@ import RelatedContent from '../../components/related-content';
 
 import { Wrapper, ContentWrapper } from './styles';
 
-const Page = ({ state, libraries }) => {
+const Page = ({ state, libraries, actions }) => {
   const { tools } = state.source.data['all-tools/'];
   const route = state.source.get(state.router.link);
 
@@ -30,6 +30,27 @@ const Page = ({ state, libraries }) => {
     id: tool.id,
     link: tool.link,
   }));
+
+  const primaryTools = parentPageOptions.slice(0, 4);
+  const secondaryTools = parentPageOptions.slice(4, 8);
+  const toolsOptions = [
+    ...primaryTools,
+    {
+      name: 'divider-1'
+    },
+    ...secondaryTools,
+    {
+      name: 'divider-2'
+    },
+    {
+      name: 'Community forum',
+      link: 'https://groups.google.com/g/globalforestwatch'
+    },
+    {
+      name: 'Contact us',
+      onClick: () => actions.theme.toggleContactUsModal()
+    }
+  ]
 
   // build the options for the side bar menu
   const links = siblingPages?.map((sub, i) => ({
@@ -76,7 +97,7 @@ const Page = ({ state, libraries }) => {
             margin-bottom: 90px;
           `}
         >
-          <Dropdown items={parentPageOptions} selected={currentParentPage} />
+          <Dropdown items={toolsOptions} selected={currentParentPage} />
         </Column>
       </Row>
       <Row>
@@ -111,6 +132,7 @@ const Page = ({ state, libraries }) => {
 
 Page.propTypes = {
   state: PropTypes.object,
+  actions: PropTypes.object,
   libraries: PropTypes.object,
 };
 
