@@ -65,22 +65,20 @@ const Search = ({
   }, [open]);
 
   useEffect(debounce(() => {
-    if (search && search.length > 2) {
-      const source = CancelToken.source();
-      get(`${state.source.api}/wp/v2/articles?search=${search}`, {
-        cancelToken: source.token,
-      })
-        .then((response) => {
-          setArticles(response.data.map(r => {
-            const url = new URL(r.link);
+    const source = CancelToken.source();
+    get(`${state.source.api}/wp/v2/articles${search ? `?search=${search}` : ''}`, {
+      cancelToken: source.token,
+    })
+      .then((response) => {
+        setArticles(response.data.map(r => {
+          const url = new URL(r.link);
 
-            return {
-              name: r.title.rendered,
-              link: url.pathname
-            }
-          }));
-        })
-    }
+          return {
+            name: r.title.rendered,
+            link: url.pathname
+          }
+        }));
+      })
   }, 300), [search])
 
   return (
