@@ -63,4 +63,5 @@ export const Thumbnail = styled.img`
   border-radius: 50px;
   overflow: hidden;
   margin-right: 30px;
+  object-fit: cover;
 `;
