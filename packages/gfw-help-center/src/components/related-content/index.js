@@ -7,7 +7,7 @@ import { H4 } from 'gfw-components';
 import FAQs from './faqs';
 import PostType from './post-type';
 
-import { Wrapper } from './styles';
+import { Wrapper, Divider } from './styles';
 
 const ContentComponents = {
   faqs: FAQs,
@@ -26,6 +26,7 @@ const RelatedContent = ({ sections, maxCols }) => (
 
         return Component ? (
           <div key={sectionTitle || sectionType}>
+            {sectionType === 'webinars' && <Divider />}
             {sectionTitle && (
               <H4
                 css={css`
