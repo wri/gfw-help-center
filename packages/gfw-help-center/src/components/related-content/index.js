@@ -6,6 +6,7 @@ import { H4 } from 'gfw-components';
 
 import FAQs from './faqs';
 import PostType from './post-type';
+import WebinarRequest from './webinar-request';
 
 import { Wrapper, Divider } from './styles';
 
@@ -15,6 +16,7 @@ const ContentComponents = {
   organizations: PostType,
   webinars: PostType,
   posts: PostType,
+  webinar_request: WebinarRequest
 };
 
 const RelatedContent = ({ sections, maxCols }) => (
