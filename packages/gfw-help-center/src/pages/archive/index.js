@@ -163,10 +163,10 @@ const SearchPage = ({ state, libraries }) => {
             position: relative;
           `}
         >
-          <Column width={[1, 3 / 4]}>
+          <Column width={[1, 2 / 3]}>
             <Dropdown items={allTaxOptions} selected={taxId} />
           </Column>
-          <Column width={[1, 1 / 4]}>
+          <Column width={[1, 1 / 3]}>
             <SearchDesktop showTitle open={state.theme.searchIsActive} />
           </Column>
         </Row>

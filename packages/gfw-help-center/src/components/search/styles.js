@@ -9,7 +9,6 @@ export const Wrapper = styled.div`
   cursor: pointer;
   z-index: 20;
   position: relative;
-
   ${theme.mediaQueries.small} {
     height: 80px;
   }
@@ -21,11 +20,15 @@ export const Container = styled.div`
   justify-content: flex-end;
   width: 100%;
   height: 60px;
-  border-bottom: solid 1px ${theme.colors.grey};
-
+  border-bottom: solid 1px transparent;
   ${theme.mediaQueries.small} {
     height: 80px;
   }
+  ${({ open, expanded }) =>
+    (open || expanded) &&
+    `
+    border-bottom-color: ${theme.colors.grey};
+  `}
 `;
 
 export const SearchClosed = styled.div`
@@ -61,21 +64,17 @@ export const Input = styled(BasicInput)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
   &:focus {
     outline: none;
   }
-
   ${theme.mediaQueries.small} {
     padding: 0 20px;
   }
-
   ${({ value, expanded }) =>
     value && expanded &&
     `
     padding: 0 !important;
   `}
-
   ${({ expanded }) =>
     expanded &&
     `

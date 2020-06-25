@@ -12,7 +12,7 @@ import Content from '../../components/content';
 import Menu from '../../components/menu';
 import RelatedContent from '../../components/related-content';
 
-import { Wrapper, ContentWrapper } from './styles';
+import { Wrapper, ContentWrapper, SearchMobile, SearchDesktop } from './styles';
 
 const Page = ({ state, libraries, actions }) => {
   const { tools } = state.source.data['all-tools/'];
@@ -91,15 +91,25 @@ const Page = ({ state, libraries, actions }) => {
             `}
           />
         </Column>
+        <Column width={[1 / 4]}>
+          <SearchMobile open={state.theme.searchIsActive} />
+        </Column>
       </Row>
-      <Row>
+      <Row
+        css={css`
+          position: relative;
+        `}
+      >
         <Column
-          width={[1, 7 / 12]}
+          width={[1, 2 / 3]}
           css={css`
             margin-bottom: 90px;
           `}
         >
           <Dropdown items={toolsOptions} selected={currentParentPage} />
+        </Column>
+        <Column width={[1, 1 / 3]}>
+          <SearchDesktop showTitle open={state.theme.searchIsActive} />
         </Column>
       </Row>
       <Row>
