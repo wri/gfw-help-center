@@ -12,6 +12,7 @@ import Content from '../../components/content';
 import Menu from '../../components/menu';
 import RelatedContent from '../../components/related-content';
 import RequestForm from '../../components/forms/request-webinar';
+import RegisterForm from '../../components/forms/register-webinar';
 
 import { Wrapper, ContentWrapper } from './styles';
 
@@ -124,7 +125,7 @@ const Page = ({ state, libraries, actions }) => {
               </Content>
             </ContentWrapper>
           )}
-          <RequestForm />
+          <RegisterForm />
           {relatedContent?.length > 0 && (
             <RelatedContent sections={relatedContent} />
           )}
