@@ -59,7 +59,7 @@ const HomePage = ({ state, libraries }) => {
           <Search expanded />
         </SearchWrapper>
       </Row>
-      <Row>
+      <Row css={css`margin-bottom: 30px;`}>
         <Column>
           <ToolsTitle>
             Getting started on the GFW tools

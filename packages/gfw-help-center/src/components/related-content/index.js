@@ -2,13 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'frontity';
-import { H4 } from 'gfw-components';
 
 import FAQs from './faqs';
 import PostType from './post-type';
 import WebinarRequest from './webinar-request';
 
-import { Wrapper, Divider } from './styles';
+import { Wrapper, Divider, Title } from './styles';
 
 const ContentComponents = {
   faqs: FAQs,
@@ -31,13 +30,9 @@ const RelatedContent = ({ sections, maxCols }) => (
           <div key={sectionTitle || sectionType}>
             {sectionType === 'webinars' && <Divider />}
             {sectionTitle && (
-              <H4
-                css={css`
-                  margin-bottom: 30px;
-                `}
-              >
+              <Title>
                 {sectionTitle}
-              </H4>
+              </Title>
             )}
             <Component {...section} postType={sectionType} include={include} maxCols={maxCols} />
           </div>

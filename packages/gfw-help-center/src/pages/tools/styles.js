@@ -1,10 +1,12 @@
 import { styled } from 'frontity';
+import { H3, Column } from 'gfw-components';
 
 import Search from '../../components/search';
 import theme from '../../app/theme';
 
 export const Wrapper = styled.div`
   width: 100%;
+  padding: 30px 0;
 
   ${theme.mediaQueries.small} {
     padding: 50px 0;
@@ -13,6 +15,26 @@ export const Wrapper = styled.div`
 
 export const ContentWrapper = styled.div`
   margin-bottom: 40px;
+`;
+
+export const Title = styled(H3)`
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 500;
+
+  ${theme.mediaQueries.small} {
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 300;
+  }
+`;
+
+export const HeaderWrapper = styled(Column)`
+  margin-bottom: 45px;
+
+  ${theme.mediaQueries.small} {
+    margin-bottom: 90px;
+  }
 `;
 
 export const SearchMobile = styled(Search)`

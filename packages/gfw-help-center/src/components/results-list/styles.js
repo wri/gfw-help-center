@@ -8,9 +8,13 @@ export const ListWrapper = styled.ul`
   max-height: 360px;
   border: solid 1px ${theme.colors.grey};
   border-top: none;
-  padding: 25px 40px;
+  padding: 15px 30px;
   background-color: ${theme.colors.white};
   overflow-y: scroll;
+
+  ${theme.mediaQueries.small} {
+    padding: 25px 40px;
+  }
 `;
 
 export const ListItem = styled.li`

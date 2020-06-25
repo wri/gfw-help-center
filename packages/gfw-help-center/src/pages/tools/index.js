@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, css } from 'frontity';
-import { Row, Column, H3 } from 'gfw-components';
+import { Row, Column } from 'gfw-components';
 
 import Breadcrumbs from '../../components/breadcrumbs';
 import Dropdown from '../../components/dropdown';
@@ -12,7 +12,7 @@ import Content from '../../components/content';
 import Menu from '../../components/menu';
 import RelatedContent from '../../components/related-content';
 
-import { Wrapper, ContentWrapper, SearchMobile, SearchDesktop } from './styles';
+import { Wrapper, ContentWrapper, SearchMobile, SearchDesktop, Title, HeaderWrapper } from './styles';
 
 const Page = ({ state, libraries, actions }) => {
   const { tools } = state.source.data['all-tools/'];
@@ -100,31 +100,22 @@ const Page = ({ state, libraries, actions }) => {
           position: relative;
         `}
       >
-        <Column
-          width={[1, 2 / 3]}
-          css={css`
-            margin-bottom: 90px !important;
-          `}
-        >
+        <HeaderWrapper width={[1, 2 / 3]}>
           <Dropdown items={toolsOptions} selected={currentParentPage} />
-        </Column>
+        </HeaderWrapper>
         <Column width={[1, 1 / 3]}>
           <SearchDesktop showTitle open={state.theme.searchIsActive} />
         </Column>
       </Row>
       <Row>
-        <Column width={[1 / 4]}>
+        <Column width={[1, 1 / 4]}>
           <Menu links={links} />
         </Column>
-        <Column width={[7 / 12]}>
+        <Column width={[1, 7 / 12]}>
           {title && (
-            <H3
-              css={css`
-                margin-bottom: 25px;
-              `}
-            >
+            <Title>
               <Html2React html={title?.rendered} />
-            </H3>
+            </Title>
           )}
           {content && (
             <ContentWrapper>

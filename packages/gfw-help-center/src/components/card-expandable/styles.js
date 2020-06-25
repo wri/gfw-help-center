@@ -6,10 +6,15 @@ export const Card = styled.button`
   width: 100%;
   height: 100%;
   border: 1px solid #e5e5df;
-  padding: 30px 54px;
+  padding: 30px 30px;
   position: relative;
   display: flex;
   justify-content: space-between;
+
+  ${theme.mediaQueries.small} {
+    font-size: 14px;
+    padding: 30px 50px;
+  }
 `;
 
 export const Icon = styled.img`
@@ -56,12 +61,19 @@ export const Text = styled.div`
 `;
 
 export const Thumbnail = styled.img`
-  width: 100px;
-  min-width: 100px;
-  height: 100px;
-  min-height: 100px;
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
+  min-height: 50px;
   border-radius: 50px;
   overflow: hidden;
   margin-right: 30px;
   object-fit: cover;
+
+  ${theme.mediaQueries.small} {
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    min-height: 100px;
+  }
 `;
