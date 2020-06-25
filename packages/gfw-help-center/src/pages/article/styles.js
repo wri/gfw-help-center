@@ -2,6 +2,7 @@ import { styled } from 'frontity';
 import { Column, Button } from 'gfw-components';
 import { rgba } from 'emotion-rgba';
 
+import SearchComponent from '../../components/search';
 import theme from '../../app/theme';
 
 export const PostContainer = styled.div`
@@ -13,6 +14,28 @@ export const PostContainer = styled.div`
   ${theme.mediaQueries.small} {
     padding-top: 40px;
   }
+`;
+
+export const Search = styled(SearchComponent)`
+  margin-top: -20px;
+  ${theme.mediaQueries.small} {
+    margin-top: -30px;
+  }
+  ${({ open }) =>
+    open &&
+    `
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -20px;
+    max-width: 1120px;
+    padding: 0 16px;
+    margin: 0 auto;
+    ${theme.mediaQueries.small} {
+      padding: 0 20px;
+      top: 0;
+    }
+  `}
 `;
 
 export const BreadCrumbsWrapper = styled(Column)`

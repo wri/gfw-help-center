@@ -11,7 +11,7 @@ import RelatedContent from '../../components/related-content';
 import CategoryList from '../../components/category-list';
 import RegisterForm from '../../components/forms/register-webinar';
 
-import { PostContainer, BreadCrumbsWrapper, PostTitle, TagsWrapper, Divider, PostContentWrapper, FormWrapper } from './styles';
+import { PostContainer, BreadCrumbsWrapper, Search, PostTitle, TagsWrapper, Divider, PostContentWrapper, FormWrapper } from './styles';
 
 const Post = ({ state, libraries }) => {
   const Html2React = libraries.html2react.Component;
@@ -44,9 +44,12 @@ const Post = ({ state, libraries }) => {
               min-height: 40px;
             `}
           >
-            <BreadCrumbsWrapper width={[5 / 6, 3 / 4]}>
+            <BreadCrumbsWrapper width={[5 / 6, 2 / 3]}>
               <Breadcrumbs />
             </BreadCrumbsWrapper>
+            <Column width={[1 / 6, 1 / 3]}>
+              <Search open={state.theme.searchIsActive} showTitle />
+            </Column>
           </Row>
           <Row>
             <Column width={[1, 1 / 4]} />

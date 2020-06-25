@@ -12,7 +12,7 @@ import RelatedContent from '../../components/related-content';
 
 import PrintIconSrc from '../../assets/icons/print.svg';
 
-import { PostContainer, BreadCrumbsWrapper, PostTitle, TagsWrapper, Divider, StyledButton, PrintIcon, MetaItem, PostContentWrapper } from './styles';
+import { PostContainer, BreadCrumbsWrapper, Search, PostTitle, TagsWrapper, Divider, StyledButton, PrintIcon, MetaItem, PostContentWrapper } from './styles';
 
 const isServer = typeof window === 'undefined';
 
@@ -53,9 +53,12 @@ const Post = ({ state, libraries }) => {
               min-height: 40px;
             `}
           >
-            <BreadCrumbsWrapper width={[5 / 6, 3 / 4]}>
+            <BreadCrumbsWrapper width={[5 / 6, 2 / 3]}>
               <Breadcrumbs />
             </BreadCrumbsWrapper>
+            <Column width={[1 / 6, 1 / 3]}>
+              <Search open={state.theme.searchIsActive} showTitle />
+            </Column>
           </Row>
           <Row>
             <Column width={[1, 1 / 4]}>
