@@ -41,7 +41,8 @@
     "husky": "^4.2.3",
     "lint-staged": "^10.1.0",
     "lodash": "^4.17.15",
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "react-to-print": "^2.9.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

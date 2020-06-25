@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect, css } from 'frontity';
 import { format } from 'date-fns';
+import ReactToPrint from 'react-to-print';
 
 import { Row, Column, Loader, Desktop, Mobile } from 'gfw-components';
 
@@ -11,6 +12,8 @@ import CategoryList from '../../components/category-list';
 import RelatedContent from '../../components/related-content';
 
 import PrintIconSrc from '../../assets/icons/print.svg';
+
+import PrintArticle from './print';
 
 import { PostContainer, BreadCrumbsWrapper, Search, PostTitle, TagsWrapper, Divider, StyledButton, PrintIcon, MetaItem, PostContentWrapper } from './styles';
 
@@ -37,11 +40,7 @@ const Post = ({ state, libraries }) => {
   );
   const blogPosts = related_content?.filter((c) => c.acf_fc_layout === 'posts');
 
-  const handlePrint = () => {
-    if (!isServer) {
-      window.print();
-    }
-  };
+  const contentEl = useRef(null);
 
   return (
     <PostContainer>
@@ -70,9 +69,16 @@ const Post = ({ state, libraries }) => {
               <MetaItem>
                 {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
               </MetaItem>
-              <StyledButton light round onClick={handlePrint}>
-                <PrintIcon src={PrintIconSrc} alt="print this article" />
-              </StyledButton>
+              <ReactToPrint
+                documentTitle="Global Forest Watch Help Center"
+                trigger={() => (
+                  <StyledButton light round>
+                    <PrintIcon src={PrintIconSrc} alt="print this article" />
+                  </StyledButton>
+                )}
+                content={() => contentEl.current}
+              />
+              <div css={css`display: none;`}><PrintArticle ref={contentEl} /></div>
               <MetaItem>
                 Print this article
               </MetaItem>
