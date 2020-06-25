@@ -63,7 +63,7 @@ const HomePage = ({ state, libraries }) => {
         </Column>
         <Column
           css={css`
-            margin-bottom: 100px;
+            margin-bottom: 100px !important;
           `}
         >
           <Search expanded />
@@ -73,7 +73,7 @@ const HomePage = ({ state, libraries }) => {
         <Column>
           <H4
             css={css`
-              margin-bottom: 50px;
+              margin-bottom: 50px !important;
             `}
           >
             Getting started on the GFW tools
@@ -85,7 +85,7 @@ const HomePage = ({ state, libraries }) => {
             key={tool.id}
             css={css`
               position: relative;
-              margin-bottom: 40px;
+              margin-bottom: 40px !important;
             `}
           >
             {i === 0 && (
@@ -105,7 +105,7 @@ const HomePage = ({ state, libraries }) => {
       <Row>
         <Column
           css={css`
-            margin: 50px 0;
+            margin: 50px 0 !important;
           `}
         >
           <H4>Using global forest watch</H4>
@@ -120,7 +120,7 @@ const HomePage = ({ state, libraries }) => {
               })}
               key={tool.title}
               css={css`
-                margin-bottom: 40px;
+                margin-bottom: 40px !important;
               `}
             >
               <Link link={tool.link}>

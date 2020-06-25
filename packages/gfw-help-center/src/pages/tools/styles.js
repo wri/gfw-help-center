@@ -15,7 +15,6 @@ export const ContentWrapper = styled.div`
   margin-bottom: 40px;
 `;
 
-
 export const SearchMobile = styled(Search)`
   display: block;
   margin-top: -20px;

@@ -56,7 +56,7 @@ export const Input = styled(BasicInput)`
   width: 100%;
   height: 100%;
   background: ${theme.colors.white};
-  border: none;
+  border: none !important;
   border-radius: 0;
   font-size: 22px;
   color: ${theme.colors.darkestGrey};
@@ -64,17 +64,21 @@ export const Input = styled(BasicInput)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
   &:focus {
     outline: none;
   }
+
   ${theme.mediaQueries.small} {
     padding: 0 20px;
   }
+
   ${({ value, expanded }) =>
     value && expanded &&
     `
     padding: 0 !important;
   `}
+
   ${({ expanded }) =>
     expanded &&
     `

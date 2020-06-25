@@ -103,7 +103,7 @@ const Page = ({ state, libraries, actions }) => {
         <Column
           width={[1, 2 / 3]}
           css={css`
-            margin-bottom: 90px;
+            margin-bottom: 90px !important;
           `}
         >
           <Dropdown items={toolsOptions} selected={currentParentPage} />
