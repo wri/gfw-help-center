@@ -58,6 +58,10 @@ export const PostContentWrapper = styled.div`
   margin-bottom: 65px;
 `;
 
+export const FormWrapper = styled.div`
+  margin: 60px 0 100px;
+`;
+
 export const TagsWrapper = styled.div`
   margin: 90px 0;
 `;

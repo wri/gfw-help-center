@@ -9,8 +9,9 @@ import PostContent from '../../components/content';
 import Breadcrumbs from '../../components/breadcrumbs';
 import RelatedContent from '../../components/related-content';
 import CategoryList from '../../components/category-list';
+import RegisterForm from '../../components/forms/register-webinar';
 
-import { PostContainer, BreadCrumbsWrapper, PostTitle, TagsWrapper, Divider, PostContentWrapper } from './styles';
+import { PostContainer, BreadCrumbsWrapper, PostTitle, TagsWrapper, Divider, PostContentWrapper, FormWrapper } from './styles';
 
 const Post = ({ state, libraries }) => {
   const Html2React = libraries.html2react.Component;
@@ -53,6 +54,11 @@ const Post = ({ state, libraries }) => {
               <PostTitle className="notranslate">
                 {postTitle}
               </PostTitle>
+              {isUpcoming && (
+                <FormWrapper>
+                  <RegisterForm />
+                </FormWrapper>
+              )}
               <PostContentWrapper>
                 <PostContent align="left">
                   <Html2React html={content.rendered} />
