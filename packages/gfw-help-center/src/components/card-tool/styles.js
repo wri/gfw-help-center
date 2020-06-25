@@ -7,13 +7,17 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 50px 40px;
+  padding: 50px 30px;
   background-color: #f6f6f4;
   border: 1px solid ${theme.colors.lightGrey};
   margin-bottom: 32px;
   height: 100%;
   width: 100%;
   min-height: 480px;
+
+  ${theme.mediaQueries.small} {
+    padding: 50px 40px;
+  }
 
   ${({ active }) =>
     active &&
@@ -38,9 +42,13 @@ export const Title = styled.h4`
 export const Text = styled.div`
   margin: 20px 0;
   color: ${theme.colors.darkGrey};
-  font-size: 18px;
+  font-size: 16px;
   line-height: 30px;
   z-index: 1;
+
+  ${theme.mediaQueries.small} {
+    font-size: 18px;
+  }
 `;
 
 export const BannerImage = styled.div`

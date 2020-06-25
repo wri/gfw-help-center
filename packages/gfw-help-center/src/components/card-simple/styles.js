@@ -4,15 +4,23 @@ import theme from '../../app/theme';
 export const Card = styled.div`
   height: 100%;
   border: 1px solid #e5e5df;
-  padding: 50px 45px;
+  padding: 50px 30px;
   position: relative;
   display: flex;
   justify-content: space-between;
 
+  ${theme.mediaQueries.small} {
+    padding: 50px 45px;
+  }
+
   ${({ large }) =>
     large &&
     `
-    padding: 50px 80px;
+    padding: 50px 30px;
+
+    ${theme.mediaQueries.small} {
+      padding: 50px 80px;
+    }
   `}
 `;
 
