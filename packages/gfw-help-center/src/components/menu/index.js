@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Mobile } from 'gfw-components';
 
 import Link from '../link';
 
-import { MenuItem } from './styles';
+import { MenuWrapper, MenuItem, Title } from './styles';
 
 const Menu = ({ links }) => (
-  <ul>
+  <MenuWrapper>
+    <Mobile>
+      <Title>Categories</Title>
+    </Mobile>
     {links?.map((l) => (
       <MenuItem active={l.active} key={l.label}>
         {l.link ? (
@@ -20,7 +24,7 @@ const Menu = ({ links }) => (
         )}
       </MenuItem>
     ))}
-  </ul>
+  </MenuWrapper>
 );
 
 Menu.propTypes = {

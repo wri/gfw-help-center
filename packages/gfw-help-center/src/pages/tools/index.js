@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, css } from 'frontity';
-import { Row, Column } from 'gfw-components';
+import { Row, Column, Desktop, Mobile } from 'gfw-components';
 
 import Breadcrumbs from '../../components/breadcrumbs';
 import Dropdown from '../../components/dropdown';
@@ -109,7 +109,9 @@ const Page = ({ state, libraries, actions }) => {
       </Row>
       <Row>
         <Column width={[1, 1 / 4]}>
-          <Menu links={links} />
+          <Desktop>
+            <Menu links={links} />
+          </Desktop>
         </Column>
         <Column width={[1, 7 / 12]}>
           {title && (
@@ -129,6 +131,9 @@ const Page = ({ state, libraries, actions }) => {
           )}
         </Column>
       </Row>
+      <Mobile>
+        <Menu links={links} />
+      </Mobile>
     </Wrapper>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect, css, decode } from 'frontity';
-import { Row, Column, Loader } from 'gfw-components';
+import { Row, Column, Loader, Mobile, Desktop } from 'gfw-components';
 import { CancelToken } from 'axios';
 
 import theme from '../../app/theme';
@@ -187,7 +187,9 @@ const SearchPage = ({ state, libraries }) => {
               <ResultsStatement>{resultsStatement}</ResultsStatement>
             </Column>
             <Column width={[1, 1/4]}>
-              <Menu links={links} />
+              <Desktop>
+                <Menu links={links} />
+              </Desktop>
             </Column>
             <Column width={[1, 3/4]}>
               <Row nested>
@@ -225,6 +227,9 @@ const SearchPage = ({ state, libraries }) => {
           </>
         )}
       </Row>
+      <Mobile>
+        <Menu links={links} />
+      </Mobile>
     </Wrapper>
   );
 };

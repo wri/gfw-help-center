@@ -1,14 +1,31 @@
 import { styled } from 'frontity';
+import { H4 } from 'gfw-components';
+
 import theme from '../../app/theme';
 
-// eslint-disable-next-line import/prefer-default-export
-export const MenuItem = styled.li`
-  margin-bottom: 35px;
+export const MenuWrapper = styled.ul`
+  background-color: #F6F6F4;
+  width: 100%;
+  padding: 30px 0;
 
+  ${theme.mediaQueries.small} {
+    background-color: ${theme.colors.white};
+    padding: 0;
+  }
+`
+
+export const MenuItem = styled.li`
   a,
   button {
     font-size: 16px;
+    line-height: 24px;
     color: ${theme.colors.grey};
+    padding: 10px ${theme.grid.mobileGutter};
+    display: block;
+
+    ${theme.mediaQueries.small} {
+      padding: 10px 0;
+    }
   }
 
   ${({ active }) => active && `
@@ -17,4 +34,9 @@ export const MenuItem = styled.li`
       color: ${theme.colors.green};
     }
   `}
+`
+
+export const Title = styled(H4)`
+  margin-left: ${theme.grid.mobileGutter};
+  margin-bottom: 20px;
 `
