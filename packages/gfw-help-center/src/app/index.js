@@ -54,9 +54,11 @@ const Theme = ({ state, actions }) => {
           <Error when={data.isError} />
         </Switch>
       </Main>
-      <HelpFooterWrapper>
-        <HelpFooter />
-      </HelpFooterWrapper>
+      {!data.isError && (
+        <HelpFooterWrapper>
+          <HelpFooter />
+        </HelpFooterWrapper>
+      )}
       <FooterWrapper>
         <Footer openContactUsModal={actions.theme.toggleContactUsModal} />
       </FooterWrapper>

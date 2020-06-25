@@ -11,6 +11,7 @@ import theme from '../../app/theme';
 import Content from '../../components/content';
 import Menu from '../../components/menu';
 import RelatedContent from '../../components/related-content';
+import RequestForm from '../../components/forms/request-webinar';
 
 import { Wrapper, ContentWrapper } from './styles';
 
@@ -106,7 +107,7 @@ const Page = ({ state, libraries, actions }) => {
         <Column width={[1 / 4]}>
           <Menu links={links} />
         </Column>
-        <Column width={[3 / 4]}>
+        <Column width={[7 / 12]}>
           {title && (
             <H3
               css={css`
@@ -123,6 +124,7 @@ const Page = ({ state, libraries, actions }) => {
               </Content>
             </ContentWrapper>
           )}
+          <RequestForm />
           {relatedContent?.length > 0 && (
             <RelatedContent sections={relatedContent} />
           )}
