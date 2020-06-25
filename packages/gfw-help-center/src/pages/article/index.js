@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect, css } from 'frontity';
 import { format } from 'date-fns';
 
-import { Row, Column, Loader } from 'gfw-components';
+import { Row, Column, Loader, Desktop, Mobile } from 'gfw-components';
 
 import PostContent from '../../components/content';
 import Breadcrumbs from '../../components/breadcrumbs';
@@ -57,7 +57,12 @@ const Post = ({ state, libraries }) => {
               <Breadcrumbs />
             </BreadCrumbsWrapper>
             <Column width={[1 / 6, 1 / 3]}>
-              <Search open={state.theme.searchIsActive} showTitle />
+              <Desktop>
+                <Search open={state.theme.searchIsActive} showTitle />
+              </Desktop>
+              <Mobile>
+                <Search open={state.theme.searchIsActive} />
+              </Mobile>
             </Column>
           </Row>
           <Row>

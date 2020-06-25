@@ -4,7 +4,7 @@ import theme from '../../app/theme';
 export const Card = styled.div`
   height: 100%;
   border: 1px solid #e5e5df;
-  padding: 50px 30px;
+  padding: 40px 30px;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -46,10 +46,15 @@ export const ArrowIcon = styled.img`
 export const Title = styled.h4`
   margin-bottom: 10px;
   color: #333333;
-  font-size: 22px;
-  line-height: 28px;
+  font-size: 20px;
+  line-height: 24px;
   z-index: 1;
   position: relative;
+
+  ${theme.mediaQueries.small} {
+    font-size: 22px;
+    line-height: 28px;
+  }
 
   ${({ light }) =>
     light &&

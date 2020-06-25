@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'frontity';
+import { Desktop } from 'gfw-components';
 
 import Media from '../media';
 
@@ -31,7 +32,11 @@ const SimpleCard = ({
       <Title light={!!backgroundImage}>{title}</Title>
       <Text light={!!backgroundImage}>{text}</Text>
     </div>
-    {arrow && <ArrowIcon src={arrowIconSrc} alt={title} />}
+    {arrow && (
+      <Desktop>
+        <ArrowIcon src={arrowIconSrc} alt={title} />
+      </Desktop>
+    )}
   </Card>
 );
 
