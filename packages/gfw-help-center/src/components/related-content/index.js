@@ -1,13 +1,12 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'frontity';
 
 import FAQs from './faqs';
 import PostType from './post-type';
 import WebinarRequest from './webinar-request';
 
-import { Wrapper, Divider, Title } from './styles';
+import { Wrapper, Divider, Title, Subtitle } from './styles';
 
 const ContentComponents = {
   faqs: FAQs,
@@ -22,7 +21,7 @@ const RelatedContent = ({ sections, maxCols }) => (
   <Wrapper>
     {sections?.length > 0 &&
       sections?.map((section) => {
-        const { acf_fc_layout: sectionType, title: sectionTitle } = section;
+        const { acf_fc_layout: sectionType, title: sectionTitle, subtitle } = section;
         const Component = ContentComponents[sectionType];
         const include = section[`${sectionType}_by_id`] || section[sectionType];
 
@@ -33,6 +32,11 @@ const RelatedContent = ({ sections, maxCols }) => (
               <Title>
                 {sectionTitle}
               </Title>
+            )}
+            {subtitle && (
+              <Subtitle>
+                {subtitle}
+              </Subtitle>
             )}
             <Component {...section} postType={sectionType} include={include} maxCols={maxCols} />
           </div>

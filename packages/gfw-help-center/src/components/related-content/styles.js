@@ -1,5 +1,5 @@
 import { styled } from 'frontity';
-import { H4 } from 'gfw-components';
+import { H4, H5 } from 'gfw-components';
 
 import theme from '../../app/theme';
 
@@ -19,5 +19,14 @@ export const Title = styled(H4)`
 
   ${theme.mediaQueries.small} {
     margin-bottom: 30px;
+  }
+`;
+
+export const Subtitle = styled(H5)`
+  margin-bottom: 10px;
+  color: ${theme.colors.mediumGrey};
+
+  ${theme.mediaQueries.small} {
+    margin-bottom: 20px;
   }
 `;
