@@ -17,7 +17,7 @@ import { Wrapper, Prompt, Tag, Arrow, ToolsTitle, ToolCardsWrapper, SearchWrappe
 const HomePage = ({ state, libraries }) => {
   const Html2React = libraries?.html2react?.Component;
 
-  const { tools } = state.source.data['all-tools/'];
+  const { tools, home } = state.source.data['all-tools/'];
 
   const allTools = tools?.['0']?.map((tool) => ({
     ...tool,
@@ -53,7 +53,7 @@ const HomePage = ({ state, libraries }) => {
     <Wrapper>
       <Row>
         <Column width={[1, 5 / 6, 2 / 3]}>
-          <Intro title="Help Center" description={state.frontity.description} />
+          <Intro title={home?.title?.rendered || 'Help Center'} description={<Html2React html={home?.content?.rendered} /> || state.frontity.description} />
         </Column>
         <SearchWrapper>
           <Search expanded />

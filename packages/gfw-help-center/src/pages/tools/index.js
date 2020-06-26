@@ -57,7 +57,7 @@ const Page = ({ state, libraries, actions }) => {
   // build the options for the side bar menu
   const links = siblingPages?.map((sub, i) => ({
     label: sub.title.rendered,
-    link: sub.link,
+    link: sub?.acf?.alt_link || sub.link,
     active:
       (!currentPage.parent && i === 0) || currentPage.link === `${sub.link}/`,
   }));

@@ -23,7 +23,7 @@ const allToolsHandler = {
     // 2. get an array with each item in json format
     const items = await response.json();
     const tools = sortBy(
-      items.map((c) => {
+      items.filter(i => i.slug !== 'help-center').map((c) => {
         const url = new URL(c.link);
         return {
           ...c,
@@ -40,6 +40,7 @@ const allToolsHandler = {
 
     Object.assign(currentPageData, {
       tools: toolsGrouped,
+      home: items.find(i => i.slug === 'help-center')
     });
   },
 };
