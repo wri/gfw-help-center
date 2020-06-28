@@ -35,10 +35,10 @@ const Post = ({ state, libraries }) => {
   const allTags = Object.values(state.source.tag);
   const tags = allTags?.filter((tag) => tagIds.includes(tag.id));
 
-  const relatedContent = related_content?.filter(
+  const relatedContent = related_content?.length && related_content?.filter(
     (c) => c.acf_fc_layout !== 'posts'
   );
-  const blogPosts = related_content?.filter((c) => c.acf_fc_layout === 'posts');
+  const blogPosts = related_content?.length && related_content?.filter((c) => c.acf_fc_layout === 'posts');
 
   const contentEl = useRef(null);
 
