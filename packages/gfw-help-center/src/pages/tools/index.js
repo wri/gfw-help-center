@@ -15,7 +15,7 @@ import RelatedContent from '../../components/related-content';
 import { Wrapper, ContentWrapper, SearchMobile, SearchDesktop, Title, HeaderWrapper } from './styles';
 
 const Page = ({ state, libraries, actions }) => {
-  const { tools } = state.source.data['all-tools/'];
+  const { tools, support, contactUs } = state.source.data['all-tools/'];
   const route = state.source.get(state.router.link);
 
   const allParentPages = tools?.['0'];
@@ -45,11 +45,11 @@ const Page = ({ state, libraries, actions }) => {
       id: 'div-2'
     },
     {
-      name: 'Community forum',
-      link: 'https://groups.google.com/g/globalforestwatch'
+      name: support?.title?.rendered,
+      link: support?.acf?.alt_link
     },
     {
-      name: 'Contact us',
+      name: contactUs?.title?.rendered,
       onClick: () => actions.theme.toggleContactUsModal()
     }
   ]
