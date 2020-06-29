@@ -1,4 +1,3 @@
-import image from '@frontity/html2react/processors/image';
 import iframe from '@frontity/html2react/processors/iframe';
 import sortBy from 'lodash/sortBy';
 import groupBy from 'lodash/groupBy';
@@ -25,7 +24,7 @@ const allToolsHandler = {
     const items = await response.json();
 
     // parse and add basic props
-    const toolsMapped = items.map(item => ({
+    const toolsMapped = items.map((item) => ({
       ...item,
       ...(item?.acf?.logo && {
         logo: {
@@ -48,17 +47,21 @@ const allToolsHandler = {
           sizes: getACFImageSizes(item?.acf?.background_image?.sizes),
         },
       }),
-    }))
-
+    }));
 
     const tools = sortBy(
-      toolsMapped.filter(i => !['help-center', 'community-forum', 'contact-us'].includes(i.slug)).map((c) => {
-        const url = new URL(c.link);
-        return {
-          ...c,
-          link: url?.pathname,
-        };
-      }),
+      toolsMapped
+        .filter(
+          (i) =>
+            !['help-center', 'community-forum', 'contact-us'].includes(i.slug)
+        )
+        .map((c) => {
+          const url = new URL(c.link);
+          return {
+            ...c,
+            link: url?.pathname,
+          };
+        }),
       'menu_order'
     );
 
@@ -69,9 +72,9 @@ const allToolsHandler = {
 
     Object.assign(currentPageData, {
       tools: toolsGrouped,
-      home: toolsMapped.find(i => i.slug === 'help-center'),
-      support: toolsMapped.find(i => i.slug === 'community-forum'),
-      contactUs: toolsMapped.find(i => i.slug === 'contact-us')
+      home: toolsMapped.find((i) => i.slug === 'help-center'),
+      support: toolsMapped.find((i) => i.slug === 'community-forum'),
+      contactUs: toolsMapped.find((i) => i.slug === 'contact-us'),
     });
   },
 };
@@ -165,7 +168,7 @@ const gfwHelpCenter = {
        * Add a processor to `html2react` so it processes the `<img>` tags
        * inside the content HTML. You can add your own processors too
        */
-      processors: [image, iframe],
+      processors: [iframe],
     },
     source: {
       handlers: [allToolsHandler, topTagsHandler],

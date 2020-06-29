@@ -15,9 +15,18 @@ import PrintIconSrc from '../../assets/icons/print.svg';
 
 import PrintArticle from './print';
 
-import { PostContainer, BreadCrumbsWrapper, Search, PostTitle, TagsWrapper, Divider, StyledButton, PrintIcon, MetaItem, PostContentWrapper } from './styles';
-
-const isServer = typeof window === 'undefined';
+import {
+  PostContainer,
+  BreadCrumbsWrapper,
+  Search,
+  PostTitle,
+  TagsWrapper,
+  Divider,
+  StyledButton,
+  PrintIcon,
+  MetaItem,
+  PostContentWrapper,
+} from './styles';
 
 const Post = ({ state, libraries }) => {
   const Html2React = libraries.html2react.Component;
@@ -35,10 +44,12 @@ const Post = ({ state, libraries }) => {
   const allTags = Object.values(state.source.tag);
   const tags = allTags?.filter((tag) => tagIds.includes(tag.id));
 
-  const relatedContent = related_content?.length && related_content?.filter(
-    (c) => c.acf_fc_layout !== 'posts'
-  );
-  const blogPosts = related_content?.length && related_content?.filter((c) => c.acf_fc_layout === 'posts');
+  const relatedContent =
+    related_content?.length &&
+    related_content?.filter((c) => c.acf_fc_layout !== 'posts');
+  const blogPosts =
+    related_content?.length &&
+    related_content?.filter((c) => c.acf_fc_layout === 'posts');
 
   const contentEl = useRef(null);
 
@@ -78,10 +89,14 @@ const Post = ({ state, libraries }) => {
                 )}
                 content={() => contentEl.current}
               />
-              <div css={css`display: none;`}><PrintArticle ref={contentEl} /></div>
-              <MetaItem>
-                Print this article
-              </MetaItem>
+              <div
+                css={css`
+                  display: none;
+                `}
+              >
+                <PrintArticle ref={contentEl} />
+              </div>
+              <MetaItem>Print this article</MetaItem>
             </Column>
             <Column width={[1, 7 / 12]}>
               <PostTitle className="notranslate">
