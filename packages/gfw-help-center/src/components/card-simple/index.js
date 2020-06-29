@@ -29,8 +29,8 @@ const SimpleCard = ({
     <div>
       {icon && <Icon src={icon.url} alt={icon.title} />}
       {categories && <CategoriesList categories={categories} />}
-      <Title light={!!backgroundImage}>{title}</Title>
-      <Text light={!!backgroundImage}>{text}</Text>
+      {title && <Title light={!!backgroundImage}>{title}</Title>}
+      {text && <Text light={!!backgroundImage}>{text}</Text>}
     </div>
     {arrow && (
       <Desktop>

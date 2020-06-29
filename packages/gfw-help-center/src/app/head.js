@@ -22,7 +22,7 @@ const AppHead = ({ state, redirecting }) => {
   // get search
   const {
     query: { s: searchQuery },
-  } = data;
+  } = data || {};
 
   // if no meta data from API lets set some defaults
   if (!yoastHead) {

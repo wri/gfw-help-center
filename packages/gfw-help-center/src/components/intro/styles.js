@@ -13,7 +13,7 @@ export const Title = styled.h1`
   }
 `;
 
-export const Description = styled.p`
+export const Description = styled.div`
   margin-bottom: 20px;
   font-size: 18px;
   line-height: 30px;

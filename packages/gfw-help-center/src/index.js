@@ -3,6 +3,7 @@ import iframe from '@frontity/html2react/processors/iframe';
 import sortBy from 'lodash/sortBy';
 import groupBy from 'lodash/groupBy';
 
+import { getACFImageSizes } from './helpers/media';
 import Theme from './app';
 
 const allToolsHandler = {
@@ -22,8 +23,36 @@ const allToolsHandler = {
 
     // 2. get an array with each item in json format
     const items = await response.json();
+
+    // parse and add basic props
+    const toolsMapped = items.map(item => ({
+      ...item,
+      ...(item?.acf?.logo && {
+        logo: {
+          ...item?.acf?.logo,
+          sizes: getACFImageSizes(item?.acf?.logo?.sizes),
+        },
+      }),
+      ...(item?.acf?.icon && {
+        icon: item?.acf?.icon,
+      }),
+      ...(item?.acf?.banner_image && {
+        bannerImage: {
+          ...item?.acf?.banner_image,
+          sizes: getACFImageSizes(item?.acf?.banner_image?.sizes),
+        },
+      }),
+      ...(item?.acf?.background_image && {
+        backgroundImage: {
+          ...item?.acf?.background_image,
+          sizes: getACFImageSizes(item?.acf?.background_image?.sizes),
+        },
+      }),
+    }))
+
+
     const tools = sortBy(
-      items.filter(i => i.slug !== 'help-center').map((c) => {
+      toolsMapped.filter(i => !['help-center', 'community-forum', 'contact-us'].includes(i.slug)).map((c) => {
         const url = new URL(c.link);
         return {
           ...c,
@@ -40,7 +69,9 @@ const allToolsHandler = {
 
     Object.assign(currentPageData, {
       tools: toolsGrouped,
-      home: items.find(i => i.slug === 'help-center')
+      home: toolsMapped.find(i => i.slug === 'help-center'),
+      support: toolsMapped.find(i => i.slug === 'community-forum'),
+      contactUs: toolsMapped.find(i => i.slug === 'contact-us')
     });
   },
 };

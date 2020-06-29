@@ -214,7 +214,7 @@ const SearchPage = ({ state, libraries }) => {
                   >
                     <Card
                       {...rest}
-                      excerpt={<Html2React html={excerpt.rendered} />}
+                      text={<Html2React html={excerpt?.rendered} />}
                       {...media && {
                         media
                       }}

@@ -17,7 +17,7 @@ const ExpandableCard = ({ title, text, thumbnail, small }) => {
       {thumbnail && <Thumbnail src={thumbnail} alt={title} />}
       <ContentWrapper>
         <Title>{title}</Title>
-        {open && (
+        {open && text && (
           <Content>
             <Text small={small}>{text}</Text>
           </Content>

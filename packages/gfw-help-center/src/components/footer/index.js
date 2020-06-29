@@ -5,9 +5,10 @@ import { Row, Column, H4 } from 'gfw-components';
 import SimpleCard from '../card-simple';
 import theme from '../../app/theme';
 
-import supportCards from './config';
+const Footer = ({ state, actions, libraries }) => {
+  const { support, contactUs } = state.source.data['all-tools/'];
+  const Html2React = libraries?.html2react?.Component;
 
-const Footer = ({ actions }) => {
   return (
     <Row>
       <Column>
@@ -15,22 +16,16 @@ const Footer = ({ actions }) => {
           Get support
         </Title>
       </Column>
-      {supportCards.map((card) => {
-        return (
-          <Column width={[1, 1 / 2]} key={card.title} css={css`margin-bottom: 30px;`}>
-            {card.link && (
-              <a href={card.link} target="_blank" rel="noopener noreferrer">
-                <SimpleCard {...card} />
-              </a>
-            )}
-            {!card.link && (
-              <button css={css`text-align: left; padding: 0;`} onClick={actions.theme.toggleContactUsModal}>
-                <SimpleCard {...card} />
-              </button>
-            )}
-          </Column>
-        );
-      })}
+      <Column width={[1, 1 / 2]} css={css`margin-bottom: 30px;`}>
+        <a href={support?.acf?.alt_link} target="_blank" rel="noopener noreferrer">
+          <SimpleCard {...support} title={support?.title?.rendered} text={<Html2React html={support?.excerpt?.rendered} />} />
+        </a>
+      </Column>
+      <Column width={[1, 1 / 2]} css={css`margin-bottom: 30px;`}>
+        <button css={css`text-align: left; padding: 0; width: 100%;`} onClick={actions.theme.toggleContactUsModal}>
+          <SimpleCard {...contactUs} title={contactUs?.title?.rendered} text={<Html2React html={contactUs?.excerpt?.rendered} />} />
+        </button>
+      </Column>
     </Row>
   );
 };
@@ -44,7 +39,9 @@ const Title = styled(H4)`
 `;
 
 Footer.propTypes = {
-  actions: PropTypes.object
+  actions: PropTypes.object,
+  state: PropTypes.object,
+  libraries: PropTypes.object,
 };
 
 export default connect(Footer);

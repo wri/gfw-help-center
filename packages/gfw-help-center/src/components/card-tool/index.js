@@ -9,8 +9,8 @@ import { Card, ContentWrapper, Title, Text, BannerImage, Logo } from './styles';
 const ToolCard = ({ title, text, bannerImage, logo, active }) => (
   <Card active={active}>
     <ContentWrapper>
-      <Title>{title}</Title>
-      <Text>{text}</Text>
+      {title && <Title>{title}</Title>}
+      {text && <Text>{text}</Text>}
     </ContentWrapper>
     {logo && (
       <Logo>

@@ -8,9 +8,7 @@ const Intro = ({ title, description }) => {
   return (
     <>
       <Title>{title}</Title>
-      <Description>
-        <b>{description}</b>
-      </Description>
+      <Description>{description}</Description>
     </>
   );
 };

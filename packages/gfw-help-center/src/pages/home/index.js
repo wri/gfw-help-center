@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect, css } from 'frontity';
 import { Row, Column, Desktop } from 'gfw-components';
 
-import { getACFImageSizes } from '../../helpers/media';
 import ToolCard from '../../components/card-tool';
 import SimpleCard from '../../components/card-simple';
 import Search from '../../components/search';
@@ -19,32 +18,7 @@ const HomePage = ({ state, libraries }) => {
 
   const { tools, home } = state.source.data['all-tools/'];
 
-  const allTools = tools?.['0']?.map((tool) => ({
-    ...tool,
-    title: tool?.title?.rendered,
-    text: <Html2React html={tool?.content?.rendered} />,
-    ...(tool?.acf?.logo && {
-      logo: {
-        ...tool?.acf?.logo,
-        sizes: getACFImageSizes(tool?.acf?.logo?.sizes),
-      },
-    }),
-    ...(tool?.acf?.icon && {
-      icon: tool?.acf?.icon,
-    }),
-    ...(tool?.acf?.banner_image && {
-      bannerImage: {
-        ...tool?.acf?.banner_image,
-        sizes: getACFImageSizes(tool?.acf?.banner_image?.sizes),
-      },
-    }),
-    ...(tool?.acf?.background_image && {
-      backgroundImage: {
-        ...tool?.acf?.background_image,
-        sizes: getACFImageSizes(tool?.acf?.background_image?.sizes),
-      },
-    }),
-  }));
+  const allTools = tools?.['0'];
 
   const primaryTools = allTools?.slice(0, 4);
   const secondaryTools = allTools?.slice(4, 8);
@@ -53,7 +27,7 @@ const HomePage = ({ state, libraries }) => {
     <Wrapper>
       <Row>
         <Column width={[1, 5 / 6, 2 / 3]}>
-          <Intro title={home?.title?.rendered || 'Help Center'} description={<Html2React html={home?.content?.rendered} /> || state.frontity.description} />
+          <Intro title={home?.title?.rendered || 'Help Center'} description={<Html2React html={home?.excerpt?.rendered} /> || state.frontity.description} />
         </Column>
         <SearchWrapper>
           <Search expanded />
@@ -79,7 +53,7 @@ const HomePage = ({ state, libraries }) => {
               </Prompt>
             )}
             <Link link={tool.link}>
-              <ToolCard active={i === 0} {...tool} />
+              <ToolCard active={i === 0} {...tool} title={tool?.title?.rendered} text={<Html2React html={tool?.excerpt?.rendered} />} />
             </Link>
           </ToolCardsWrapper>
         ))}
@@ -96,10 +70,10 @@ const HomePage = ({ state, libraries }) => {
               {...(!isFirst && {
                 width: [1, 1 / 3],
               })}
-              key={tool.title}
+              key={tool.id}
             >
               <Link link={tool.link}>
-                <SimpleCard {...tool} large={isFirst} />
+                <SimpleCard {...tool} large={isFirst} title={tool?.title?.rendered} text={<Html2React html={tool?.excerpt?.rendered} />} />
               </Link>
             </ToolCardsWrapper>
           );
