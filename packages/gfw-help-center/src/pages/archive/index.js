@@ -22,7 +22,6 @@ import {
   ResultsStatement,
 } from './styles';
 
-
 const SearchPage = ({ state, libraries }) => {
   const Html2React = libraries?.html2react?.Component;
 
@@ -47,8 +46,7 @@ const SearchPage = ({ state, libraries }) => {
       state.source[data.taxonomy][data.id].name
     )}`;
 
-  const resultsStatement =
-    searchStatement || tagStatement;
+  const resultsStatement = searchStatement || tagStatement;
 
   const { tags } = state.source.data['top-tags/'];
 
@@ -71,15 +69,15 @@ const SearchPage = ({ state, libraries }) => {
       label: 'Articles',
       onClick: () => setType('articles'),
       active: type === 'articles',
-      count: articles.length
+      count: articles.length,
     },
     {
       label: 'Webinars',
       onClick: () => setType('webinars'),
       active: type === 'webinars',
-      count: webinars.length
-    }
-  ]
+      count: webinars.length,
+    },
+  ];
 
   useEffect(() => {
     const getSearchResults = async () => {
@@ -90,37 +88,37 @@ const SearchPage = ({ state, libraries }) => {
           baseUrl: state.source.api,
           type: 'articles',
           params: {
-            ...searchQuery && {
-              search: searchQuery
-            },
-            ...isTag && {
-              tags: data.id
-            }
+            ...(searchQuery && {
+              search: searchQuery,
+            }),
+            ...(isTag && {
+              tags: data.id,
+            }),
           },
-          cancelToken: source.token
+          cancelToken: source.token,
         });
 
         const webinarResponse = await fetchPostTypeData({
           baseUrl: state.source.api,
           type: 'webinars',
           params: {
-            ...searchQuery && {
-              search: searchQuery
-            },
-            ...isTag && {
-              tags: data.id
-            }
+            ...(searchQuery && {
+              search: searchQuery,
+            }),
+            ...(isTag && {
+              tags: data.id,
+            }),
           },
-          cancelToken: source.token
+          cancelToken: source.token,
         });
 
-        setArticles(articlesResponse)
-        setWebinars(webinarResponse)
-        setLoading(false)
+        setArticles(articlesResponse);
+        setWebinars(webinarResponse);
+        setLoading(false);
       } catch (err) {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
     getSearchResults();
   }, [searchQuery]);
@@ -173,7 +171,12 @@ const SearchPage = ({ state, libraries }) => {
       )}
       <Row>
         {loading && (
-          <Column css={css`position: relative; min-height: 300px;`}>
+          <Column
+            css={css`
+              position: relative;
+              min-height: 300px;
+            `}
+          >
             <Loader />
           </Column>
         )}
@@ -186,42 +189,51 @@ const SearchPage = ({ state, libraries }) => {
             >
               <ResultsStatement>{resultsStatement}</ResultsStatement>
             </Column>
-            <Column width={[1, 1/4]}>
+            <Column width={[1, 1 / 4]}>
               <Desktop>
                 <Menu links={links} />
               </Desktop>
             </Column>
-            <Column width={[1, 3/4]}>
+            <Column width={[1, 3 / 4]}>
               <Row nested>
-                {type === 'articles' && articles?.map(({ id, excerpt, link, ...rest }) => (
-                  <Column key={id}>
-                    <Link link={link}>
-                      <SimpleCard
-                        {...rest}
-                        text={<Html2React html={excerpt?.rendered} />}
-                        arrow
-                      />
-                    </Link>
-                  </Column>
-                ))}
-                {type === 'webinars' && webinars?.map(({ id, excerpt, featured_media: media, ...rest }) => (
-                  <Column
-                    width={[1, 1 / 2]}
-                    css={css`
-                      margin-bottom: 40px !important;
-                    `}
-                    key={id}
-                  >
-                    <Card
-                      {...rest}
-                      text={<Html2React html={excerpt?.rendered} />}
-                      {...media && {
-                        media
-                      }}
-                      video
-                    />
-                  </Column>
-                ))}
+                {type === 'articles' &&
+                  articles?.map(({ id, excerpt, link, ...rest }) => (
+                    <Column
+                      key={id}
+                      css={css`
+                        margin-bottom: 40px !important;
+                      `}
+                    >
+                      <Link link={link}>
+                        <SimpleCard
+                          {...rest}
+                          text={<Html2React html={excerpt?.rendered} />}
+                          arrow
+                        />
+                      </Link>
+                    </Column>
+                  ))}
+                {type === 'webinars' &&
+                  webinars?.map(
+                    ({ id, excerpt, featured_media: media, ...rest }) => (
+                      <Column
+                        width={[1, 1 / 2]}
+                        css={css`
+                          margin-bottom: 40px !important;
+                        `}
+                        key={id}
+                      >
+                        <Card
+                          {...rest}
+                          excerpt={<Html2React html={excerpt?.rendered} />}
+                          {...(media && {
+                            media,
+                          })}
+                          video
+                        />
+                      </Column>
+                    )
+                  )}
               </Row>
             </Column>
           </>
@@ -236,7 +248,7 @@ const SearchPage = ({ state, libraries }) => {
 
 SearchPage.propTypes = {
   state: PropTypes.object,
-  libraries: PropTypes.object
+  libraries: PropTypes.object,
 };
 
 export default connect(SearchPage);
