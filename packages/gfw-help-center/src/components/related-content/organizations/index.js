@@ -11,12 +11,22 @@ const Organizations = ({ libraries, posts: organizations }) => {
   const Html2React = libraries?.html2react?.Component;
 
   return organizations?.map(
-    ({ id, content, thumbnail, excerpt, featured_media: media, ...rest }) => (
+    ({
+      id,
+      content,
+      thumbnail,
+      acf,
+      excerpt,
+      featured_media: media,
+      ...rest
+    }) => (
       <CardWrapper key={id}>
         <ExpandableCard
           {...rest}
           text={<Html2React html={content?.rendered} />}
-          excerpt={<Html2React html={excerpt?.rendered} />}
+          excerpt={
+            <Html2React html={`${content?.rendered?.split('</p>')[0]}</p>`} />
+          }
           thumbnail={media?.media_details?.sizes?.medium?.source_url}
           arrow
           small
