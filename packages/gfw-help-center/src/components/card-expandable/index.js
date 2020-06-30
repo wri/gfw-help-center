@@ -9,7 +9,7 @@ import minusIcon from '../../assets/icons/minus.svg';
 
 import { Card, Title, Text, Icon, Thumbnail, ContentWrapper } from './styles';
 
-const ExpandableCard = ({ title, text, thumbnail, small }) => {
+const ExpandableCard = ({ title, text, excerpt, thumbnail, small }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -20,6 +20,11 @@ const ExpandableCard = ({ title, text, thumbnail, small }) => {
         {open && text && (
           <Content>
             <Text small={small}>{text}</Text>
+          </Content>
+        )}
+        {!open && excerpt && (
+          <Content>
+            <Text small={small}>{excerpt}</Text>
           </Content>
         )}
       </ContentWrapper>
@@ -36,6 +41,7 @@ ExpandableCard.propTypes = {
   title: PropTypes.string,
   thumbnail: PropTypes.string,
   text: PropTypes.node,
+  excerpt: PropTypes.node,
   small: PropTypes.bool,
 };
 
