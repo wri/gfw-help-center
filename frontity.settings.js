@@ -43,7 +43,7 @@ const settings = {
               archive: '/faqs', // link where this custom posts are listed
             },
             {
-              type: 'articles', // type slug
+              type: 'step-by-step-instructions', // type slug
               endpoint: 'articles', // REST API endpoint
               archive: '/step-by-step-instructions', // link where this custom posts are listed
             },
