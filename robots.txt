@@ -1,5 +1,5 @@
-Sitemap: https://content.globalforestwatch.org/post-sitemap.xml
-Sitemap: https://content.globalforestwatch.org/category-sitemap.xml
-Sitemap: https://content.globalforestwatch.org/post_tag-sitemap.xml
+Sitemap: https://content.globalforestwatch.org/articles-sitemap.xml
+Sitemap: https://content.globalforestwatch.org/webinars-sitemap.xml
+Sitemap: https://content.globalforestwatch.org/tools-sitemap.xml
 User-agent: *
 Disallow:
