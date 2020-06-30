@@ -113,7 +113,7 @@ const topTagsHandler = {
 };
 
 const gfwHelpCenter = {
-  name: '@gfw/hel-center-theme',
+  name: '@gfw/help-center-theme',
   roots: {
     /**
      *  In Frontity, any package can add React components to the site.

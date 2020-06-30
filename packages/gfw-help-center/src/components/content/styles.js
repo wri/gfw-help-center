@@ -78,7 +78,9 @@ export default styled.div`
       width: calc(100% + (100% / 7));
       margin-left: calc(-100% / 7);
 
-      ${({ align }) => align === 'left' && `
+      ${({ align }) =>
+        align === 'left' &&
+        `
         margin-left: unset;
         margin-right: calc(-100% / 7);
       `}
@@ -93,7 +95,7 @@ export default styled.div`
   }
 
   img {
-    width: 100%;
+    max-width: 100%;
     object-fit: cover;
     object-position: center;
     margin-bottom: 0;

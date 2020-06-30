@@ -11,23 +11,24 @@ const Organizations = ({ libraries, posts: organizations }) => {
   const Html2React = libraries?.html2react?.Component;
 
   return organizations?.map(
-    ({ id, content, thumbnail, featured_media: media, ...rest }) => (
+    ({ id, content, thumbnail, excerpt, featured_media: media, ...rest }) => (
       <CardWrapper key={id}>
         <ExpandableCard
           {...rest}
           text={<Html2React html={content?.rendered} />}
+          excerpt={<Html2React html={excerpt?.rendered} />}
           thumbnail={media?.media_details?.sizes?.medium?.source_url}
           arrow
           small
         />
       </CardWrapper>
     )
-  )
-}
+  );
+};
 
 Organizations.propTypes = {
   posts: PropTypes.array,
-  libraries: PropTypes.object
+  libraries: PropTypes.object,
 };
 
 export default connect(Organizations);

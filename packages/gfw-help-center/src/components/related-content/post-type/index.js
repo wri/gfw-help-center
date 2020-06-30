@@ -19,16 +19,11 @@ const ContentComponents = {
   articles: Articles,
   webinars: Webinars,
   posts: Posts,
-  organizations: Organizations
+  organizations: Organizations,
 };
 
-const PostType = ({
-  state,
-  postType,
-  include,
-  maxCols
-}) => {
-  const Component = ContentComponents[postType]
+const PostType = ({ state, postType, include, maxCols }) => {
+  const Component = ContentComponents[postType];
 
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -42,31 +37,25 @@ const PostType = ({
           baseUrl: state.source.api,
           type: postType,
           params: {
-            include: include?.join(',') || ''
+            include: include?.join(',') || '',
           },
-          cancelToken: source.token
+          cancelToken: source.token,
         });
 
-        setPosts(data)
-        setLoading(false)
+        setPosts(data);
+        setLoading(false);
       } catch (err) {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
     getArticles();
   }, []);
 
   return (
-    <PostsWrapper>
+    <PostsWrapper waiting={loading}>
       {loading && <Loader />}
-      {!loading && (
-        <Component
-          key={`${PostType}-`}
-          posts={posts}
-          maxCols={maxCols}
-        />
-      )}
+      {!loading && <Component posts={posts} maxCols={maxCols} />}
     </PostsWrapper>
   );
 };

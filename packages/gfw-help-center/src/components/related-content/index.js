@@ -14,31 +14,32 @@ const ContentComponents = {
   organizations: PostType,
   webinars: PostType,
   posts: PostType,
-  webinar_request: WebinarRequest
+  webinar_request: WebinarRequest,
 };
 
 const RelatedContent = ({ sections, maxCols }) => (
   <Wrapper>
     {sections?.length > 0 &&
-      sections?.map((section) => {
-        const { acf_fc_layout: sectionType, title: sectionTitle, subtitle } = section;
+      sections?.map((section, i) => {
+        const {
+          acf_fc_layout: sectionType,
+          title: sectionTitle,
+          subtitle,
+        } = section;
         const Component = ContentComponents[sectionType];
         const include = section[`${sectionType}_by_id`] || section[sectionType];
 
         return Component && include ? (
-          <div key={sectionTitle || sectionType}>
+          <div key={`${sectionTitle || sectionType}-${i}`}>
             {sectionType === 'webinars' && <Divider />}
-            {sectionTitle && (
-              <Title>
-                {sectionTitle}
-              </Title>
-            )}
-            {subtitle && (
-              <Subtitle>
-                {subtitle}
-              </Subtitle>
-            )}
-            <Component {...section} postType={sectionType} include={include} maxCols={maxCols} />
+            {sectionTitle && <Title>{sectionTitle}</Title>}
+            {subtitle && <Subtitle>{subtitle}</Subtitle>}
+            <Component
+              {...section}
+              postType={sectionType}
+              include={include}
+              maxCols={maxCols}
+            />
           </div>
         ) : null;
       })}

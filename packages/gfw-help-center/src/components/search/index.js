@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect, css } from 'frontity';
+import compact from 'lodash/compact';
 import deburr from 'lodash/deburr';
 import toUpper from 'lodash/toUpper';
 import debounce from 'lodash/debounce';
@@ -33,7 +34,7 @@ const Search = ({
   const { tags } = state.source.data['top-tags/'];
 
   const [search, setSearch] = useState(searchQuery);
-  const [articles, setArticles] = useState([]);
+  const [results, setResults] = useState([]);
 
   const open = state.theme.searchIsActive;
 
@@ -48,7 +49,7 @@ const Search = ({
     }
   };
 
-  const filteredMeta = articles.filter((meta) =>
+  const filteredMeta = results.filter((meta) =>
     deburrUpper(meta.name).includes(deburrUpper(search))
   ) || [{ name: search, link: `/?s=${search}` }];
 
@@ -56,31 +57,64 @@ const Search = ({
     ? filteredMeta
     : [{ name: search, link: `/?s=${search}` }];
 
-  const searchResults = [...filteredResults, { name: 'divider', id: 'divider' }, ...tags].map((meta) => ({
+  const searchResults = [
+    ...filteredResults,
+    { name: 'divider', id: 'divider' },
+    ...tags,
+  ].map((meta) => ({
     ...meta,
-    name: meta.name !== 'divider' ? meta?.name?.replace(re, `<b>$1</b>`) : meta.name
+    name:
+      meta.name !== 'divider'
+        ? meta?.name?.replace(re, `<b>$1</b>`)
+        : meta.name,
   }));
 
   useEffect(() => {
     if (open) inputRef.current.focus();
   }, [open]);
 
-  useEffect(debounce(() => {
-    const source = CancelToken.source();
-    get(`${state.source.api}/wp/v2/articles${search ? `?search=${search}` : ''}`, {
-      cancelToken: source.token,
-    })
-      .then((response) => {
-        setArticles(response.data.map(r => {
+  useEffect(
+    debounce(() => {
+      const fetchSearchContent = async () => {
+        const source = CancelToken.source();
+
+        const articlesResponse = await get(
+          `${state.source.api}/wp/v2/articles${
+            search ? `?search=${search}` : '?filter[meta_key]=featured'
+          }`,
+          {
+            cancelToken: source.token,
+          }
+        );
+
+        const webinarsResponse = await get(
+          `${state.source.api}/wp/v2/webinars${
+            search ? `?search=${search}` : '?filter[meta_key]=featured'
+          }`,
+          {
+            cancelToken: source.token,
+          }
+        );
+
+        const allResults = compact([
+          ...articlesResponse?.data,
+          ...webinarsResponse?.data,
+        ])?.map((r) => {
           const url = new URL(r.link);
 
           return {
             name: r.title.rendered,
-            link: url.pathname
-          }
-        }));
-      })
-  }, 300), [search])
+            link: url.pathname,
+          };
+        });
+
+        setResults(allResults);
+      };
+
+      fetchSearchContent();
+    }, 500),
+    [search]
+  );
 
   return (
     <Wrapper {...props} open={open}>
