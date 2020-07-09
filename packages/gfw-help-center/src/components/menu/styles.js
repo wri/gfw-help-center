@@ -1,10 +1,8 @@
 import { styled } from 'frontity';
-import { H4 } from 'gfw-components';
-
-import theme from '../../app/theme';
+import { H4, theme } from 'gfw-components';
 
 export const MenuWrapper = styled.ul`
-  background-color: #F6F6F4;
+  background-color: #f6f6f4;
   width: 100%;
   padding: 30px 0;
 
@@ -12,7 +10,7 @@ export const MenuWrapper = styled.ul`
     background-color: ${theme.colors.white};
     padding: 0;
   }
-`
+`;
 
 export const MenuItem = styled.li`
   a,
@@ -28,15 +26,17 @@ export const MenuItem = styled.li`
     }
   }
 
-  ${({ active }) => active && `
+  ${({ active }) =>
+    active &&
+    `
     a,
     button {
       color: ${theme.colors.green};
     }
   `}
-`
+`;
 
 export const Title = styled(H4)`
   margin-left: ${theme.grid.mobileGutter};
   margin-bottom: 20px;
-`
+`;

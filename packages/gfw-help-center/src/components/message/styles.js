@@ -1,6 +1,6 @@
 import { styled } from 'frontity';
 
-import theme from '../../app/theme';
+import { theme } from 'gfw-components';
 
 export const Container = styled.div`
   display: flex;
@@ -30,7 +30,9 @@ export const Title = styled.h1`
     margin-bottom: 30px;
   }
 
-  ${({ small }) => small && `
+  ${({ small }) =>
+    small &&
+    `
     font-size: 36px !important;
   `}
 `;
@@ -41,7 +43,9 @@ export const Description = styled.div`
   color: ${theme.colors.darkestGrey};
   text-align: center;
 
-  ${({ small }) => small && `
+  ${({ small }) =>
+    small &&
+    `
     font-size: 16px;
   `}
 `;

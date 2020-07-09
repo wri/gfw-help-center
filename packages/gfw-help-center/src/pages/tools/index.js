@@ -2,17 +2,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, css } from 'frontity';
-import { Row, Column, Desktop, Mobile } from 'gfw-components';
+import { Row, Column, Desktop, Mobile, theme } from 'gfw-components';
 
 import Breadcrumbs from '../../components/breadcrumbs';
 import Dropdown from '../../components/dropdown';
-import theme from '../../app/theme';
 
 import Content from '../../components/content';
 import Menu from '../../components/menu';
 import RelatedContent from '../../components/related-content';
 
-import { Wrapper, ContentWrapper, SearchMobile, SearchDesktop, Title, HeaderWrapper } from './styles';
+import {
+  Wrapper,
+  ContentWrapper,
+  SearchMobile,
+  SearchDesktop,
+  Title,
+  HeaderWrapper,
+} from './styles';
 
 const Page = ({ state, libraries, actions }) => {
   const { tools, support, contactUs } = state.source.data['all-tools/'];
@@ -37,22 +43,22 @@ const Page = ({ state, libraries, actions }) => {
     ...primaryTools,
     {
       name: 'divider',
-      id: 'div-1'
+      id: 'div-1',
     },
     ...secondaryTools,
     {
       name: 'divider',
-      id: 'div-2'
+      id: 'div-2',
     },
     {
       name: support?.title?.rendered,
-      link: support?.acf?.alt_link
+      link: support?.acf?.alt_link,
     },
     {
       name: contactUs?.title?.rendered,
-      onClick: () => actions.theme.toggleContactUsModal()
-    }
-  ]
+      onClick: () => actions.theme.toggleContactUsModal(),
+    },
+  ];
 
   // build the options for the side bar menu
   const links = siblingPages?.map((sub, i) => ({

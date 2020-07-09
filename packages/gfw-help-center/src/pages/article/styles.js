@@ -1,9 +1,8 @@
 import { styled } from 'frontity';
-import { Column, Button } from 'gfw-components';
+import { Column, Button, theme } from 'gfw-components';
 import { rgba } from 'emotion-rgba';
 
 import SearchComponent from '../../components/search';
-import theme from '../../app/theme';
 
 export const PostContainer = styled.div`
   padding-top: 20px;

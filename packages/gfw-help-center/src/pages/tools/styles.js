@@ -1,8 +1,7 @@
 import { styled } from 'frontity';
-import { H3, Column } from 'gfw-components';
+import { H3, Column, theme } from 'gfw-components';
 
 import Search from '../../components/search';
-import theme from '../../app/theme';
 
 export const Wrapper = styled.div`
   width: 100%;

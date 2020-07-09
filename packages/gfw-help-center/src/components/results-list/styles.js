@@ -1,5 +1,5 @@
 import { styled } from 'frontity';
-import theme from '../../app/theme';
+import { theme } from 'gfw-components';
 
 export const ListWrapper = styled.ul`
   display: flex;
@@ -50,4 +50,4 @@ export const Divider = styled.div`
   height: 2px;
   background-color: ${theme.colors.lightGrey};
   margin: 15px 0;
-`
+`;

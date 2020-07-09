@@ -1,6 +1,6 @@
 import { styled } from 'frontity';
 
-import theme from '../../app/theme';
+import { theme } from 'gfw-components';
 
 export const Card = styled.div`
   position: relative;

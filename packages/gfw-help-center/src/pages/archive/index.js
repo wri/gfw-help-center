@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect, css, decode } from 'frontity';
-import { Row, Column, Loader, Mobile, Desktop } from 'gfw-components';
+import { Row, Column, Loader, Mobile, Desktop, theme } from 'gfw-components';
 import { CancelToken } from 'axios';
-
-import theme from '../../app/theme';
 
 import { fetchPostTypeData } from '../../helpers/request';
 

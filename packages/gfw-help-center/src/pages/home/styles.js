@@ -1,8 +1,7 @@
 import { styled } from 'frontity';
-import { H4, Column } from 'gfw-components';
+import { H4, Column, theme } from 'gfw-components';
 
 import IntroComp from '../../components/intro';
-import theme from '../../app/theme';
 
 // eslint-disable-next-line import/prefer-default-export
 export const Wrapper = styled.div`
@@ -20,7 +19,7 @@ export const Intro = styled(IntroComp)`
   ${theme.mediaQueries.small} {
     margin-bottom: 30px;
   }
-`
+`;
 
 export const Prompt = styled.div`
   position: absolute;

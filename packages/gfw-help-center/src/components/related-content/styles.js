@@ -1,7 +1,5 @@
 import { styled } from 'frontity';
-import { H4, H5 } from 'gfw-components';
-
-import theme from '../../app/theme';
+import { H4, H5, theme } from 'gfw-components';
 
 export const Wrapper = styled.div`
   width: 100%;

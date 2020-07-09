@@ -5,9 +5,14 @@ import { rgba } from 'emotion-rgba';
 
 import Switch from '@frontity/components/switch';
 
-import { Header, Footer, ContactUsModal, GlobalStyles } from 'gfw-components';
+import {
+  Header,
+  Footer,
+  ContactUsModal,
+  GlobalStyles,
+  theme,
+} from 'gfw-components';
 
-import theme from './theme';
 import Head from './head';
 
 import Loading from '../pages/loading';

@@ -1,6 +1,6 @@
 import { styled } from 'frontity';
 import { rgba } from 'emotion-rgba';
-import theme from '../../app/theme';
+import { theme } from 'gfw-components';
 
 export const CardWrapper = styled.article`
   position: relative;
@@ -48,13 +48,13 @@ export const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${rgba(theme.colors.darkestGrey ,0.4)};
-`
+  background-color: ${rgba(theme.colors.darkestGrey, 0.4)};
+`;
 
 export const PlayIcon = styled.img`
   width: 10px;
   height: 10px;
-`
+`;
 
 export const PostTitle = styled.h3`
   font-size: 22px;
