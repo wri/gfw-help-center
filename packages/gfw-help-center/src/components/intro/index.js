@@ -16,5 +16,5 @@ export default Intro;
 
 Intro.propTypes = {
   title: PropTypes.string,
-  description: PropTypes.string,
+  description: PropTypes.node,
 };

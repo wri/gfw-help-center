@@ -3,6 +3,36 @@ import groupBy from 'lodash/groupBy';
 
 import { getACFImageSizes } from './helpers/media';
 
+const convertTool = (item) => {
+  const url = new URL(item.link);
+
+  return {
+    ...item,
+    link: url.pathname,
+    ...(item?.acf?.logo && {
+      logo: {
+        ...item?.acf?.logo,
+        sizes: getACFImageSizes(item?.acf?.logo?.sizes),
+      },
+    }),
+    ...(item?.acf?.icon && {
+      icon: item?.acf?.icon,
+    }),
+    ...(item?.acf?.banner_image && {
+      bannerImage: {
+        ...item?.acf?.banner_image,
+        sizes: getACFImageSizes(item?.acf?.banner_image?.sizes),
+      },
+    }),
+    ...(item?.acf?.background_image && {
+      backgroundImage: {
+        ...item?.acf?.background_image,
+        sizes: getACFImageSizes(item?.acf?.background_image?.sizes),
+      },
+    }),
+  };
+};
+
 export const allToolsHandler = {
   name: 'allTools',
   priority: 10,
@@ -23,44 +53,18 @@ export const allToolsHandler = {
     const items = await response.json();
 
     // parse and add basic props
-    const toolsMapped = items.map((item) => ({
-      ...item,
-      ...(item?.acf?.logo && {
-        logo: {
-          ...item?.acf?.logo,
-          sizes: getACFImageSizes(item?.acf?.logo?.sizes),
-        },
-      }),
-      ...(item?.acf?.icon && {
-        icon: item?.acf?.icon,
-      }),
-      ...(item?.acf?.banner_image && {
-        bannerImage: {
-          ...item?.acf?.banner_image,
-          sizes: getACFImageSizes(item?.acf?.banner_image?.sizes),
-        },
-      }),
-      ...(item?.acf?.background_image && {
-        backgroundImage: {
-          ...item?.acf?.background_image,
-          sizes: getACFImageSizes(item?.acf?.background_image?.sizes),
-        },
-      }),
+    const toolsMapped = items.map((tool) => ({
+      ...convertTool(tool),
+      translations_posts: tool.translations_posts.map((tl) => ({
+        ...convertTool(tl),
+      })),
     }));
 
     const tools = sortBy(
-      toolsMapped
-        .filter(
-          (i) =>
-            !['help-center', 'community-forum', 'contact-us'].includes(i.slug)
-        )
-        .map((c) => {
-          const url = new URL(c.link);
-          return {
-            ...c,
-            link: url?.pathname,
-          };
-        }),
+      toolsMapped.filter(
+        (i) =>
+          !['help-center', 'community-forum', 'contact-us'].includes(i.slug)
+      ),
       'menu_order'
     );
 
