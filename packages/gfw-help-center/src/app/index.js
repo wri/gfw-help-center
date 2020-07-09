@@ -38,6 +38,42 @@ const Theme = ({ state, actions }) => {
           relative
           pathname="https://www.globalforestwatch.org/help-center"
           openContactUsModal={actions.theme.toggleContactUsModal}
+          navMain={[
+            { label: 'Map', href: '/map' },
+            { label: 'Dashboard', href: '/dashboards/global' },
+            {
+              label: 'Topics',
+              href: '/topics',
+              submenu: [
+                {
+                  label: 'Biodiversity',
+                  as: '/topics/biodiversity',
+                  href: '/topics/[topic]',
+                },
+                {
+                  label: 'Climate',
+                  as: '/topics/climate',
+                  href: '/topics/[topic]',
+                },
+                {
+                  label: 'Commodities',
+                  as: '/topics/commodities',
+                  href: '/topics/[topic]',
+                },
+                {
+                  label: 'Water',
+                  as: '/topics/water',
+                  href: '/topics/[topic]',
+                },
+              ],
+            },
+            { label: 'Blog', extLink: 'https://blog.globalforestwatch.org/' },
+            { label: 'About', href: '/about' },
+            {
+              label: 'Help Center',
+              extLink: 'https://www.globalforestwatch.org/help-center',
+            },
+          ]}
         />
       </HeaderWrapper>
       <Main>
