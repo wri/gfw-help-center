@@ -20,8 +20,8 @@ import {
   HeaderWrapper,
 } from './styles';
 
-const Page = ({ state, libraries, actions }) => {
-  const { tools, support, contactUs } = state.source.data['all-tools/'];
+const Page = ({ state, libraries }) => {
+  const { tools } = state.source.data['all-tools/'];
   const route = state.source.get(state.router.link);
 
   const allParentPages = tools?.['0'];
@@ -46,18 +46,6 @@ const Page = ({ state, libraries, actions }) => {
       id: 'div-1',
     },
     ...secondaryTools,
-    {
-      name: 'divider',
-      id: 'div-2',
-    },
-    {
-      name: support?.title?.rendered,
-      link: support?.acf?.alt_link,
-    },
-    {
-      name: contactUs?.title?.rendered,
-      onClick: () => actions.theme.toggleContactUsModal(),
-    },
   ];
 
   // build the options for the side bar menu
@@ -146,7 +134,6 @@ const Page = ({ state, libraries, actions }) => {
 
 Page.propTypes = {
   state: PropTypes.object,
-  actions: PropTypes.object,
   libraries: PropTypes.object,
 };
 
