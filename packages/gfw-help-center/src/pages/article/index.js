@@ -39,7 +39,10 @@ const Post = ({ state, libraries }) => {
     modified,
     tags: tagIds,
     acf: { related_content },
+    tool_cats,
   } = pageData || {};
+
+  const categories = tool_cats?.map((catId) => state.source.tool_cats[catId]);
 
   const allTags = Object.values(state.source.tag);
   const tags = allTags?.filter((tag) => tagIds.includes(tag.id));
@@ -99,6 +102,7 @@ const Post = ({ state, libraries }) => {
               <MetaItem>Print this article</MetaItem>
             </Column>
             <Column width={[1, 7 / 12]}>
+              {categories && <CategoryList categories={categories} />}
               <PostTitle className="notranslate">
                 <Html2React html={title.rendered} />
               </PostTitle>

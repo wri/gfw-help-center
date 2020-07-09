@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'frontity';
 
 import { Title, Description } from './styles';
 
@@ -13,7 +12,7 @@ const Intro = ({ title, description }) => {
   );
 };
 
-export default connect(Intro);
+export default Intro;
 
 Intro.propTypes = {
   title: PropTypes.string,

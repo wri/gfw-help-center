@@ -4,36 +4,23 @@ config();
 
 const settings = {
   name: 'gfw-help-center',
-  match: ['https://www.globalforestwatch.org/help-center'],
   state: {
     frontity: {
       url: 'https://www.globalforestwatch.org/help-center',
-      title: 'Help Center | Global Forest Watch',
-      description:
-        'Learn how to better manage, protect and restore forest landscapes. The Global Forest Watch help center offers resources to help guide you through its forest monitoring data, technology and tools.',
     },
   },
   packages: [
     {
       name: '@gfw/help-center-theme',
-      state: {
-        theme: {
-          featured: {
-            showOnList: true,
-            showOnPost: true,
-          },
-        },
-      },
     },
     {
       name: '@frontity/wp-source',
       state: {
         source: {
           api: `${process.env.WORDPRESS_API_URL}/wp-json`,
-          postEndpoint: 'tools',
           postTypes: [
             {
-              type: 'tools', // type slug
+              type: '/help-center', // type slug
               endpoint: 'tools', // REST API endpoint
               archive: '/', // link where this custom posts are listed
             },
@@ -43,7 +30,7 @@ const settings = {
               archive: '/faqs', // link where this custom posts are listed
             },
             {
-              type: 'step-by-step-instructions', // type slug
+              type: '(.*)?/step-by-step-instructions', // type slug
               endpoint: 'articles', // REST API endpoint
               archive: '/step-by-step-instructions', // link where this custom posts are listed
             },
@@ -51,6 +38,13 @@ const settings = {
               type: 'webinars', // type slug
               endpoint: 'webinars', // REST API endpoint
               archive: '/webinars', // link where this custom posts are listed
+            },
+          ],
+          taxonomies: [
+            {
+              taxonomy: 'tool_cats', // taxonomy slug
+              endpoint: 'tool_cats', // REST API endpoint
+              postTypeEndpoint: 'articles', // endpoint from which posts from this taxonomy are fetched
             },
           ],
         },

@@ -12,14 +12,21 @@ const Webinars = ({ libraries, posts: webinars, maxCols }) => {
   return (
     <Row nested>
       {webinars?.map(
-        ({ id, excerpt, featured_media: media, ...rest }) => (
-          <Column key={id} width={[1, 1/2, 1/(maxCols || 2)]} css={css`margin-bottom: 30px;`}>
+        ({ id, excerpt, featured_media: media, tool_cats, ...rest }) => (
+          <Column
+            key={id}
+            width={[1, 1 / 2, 1 / (maxCols || 2)]}
+            css={css`
+              margin-bottom: 30px;
+            `}
+          >
             <Card
               {...rest}
               excerpt={<Html2React html={excerpt.rendered} />}
-              {...media && {
-                media
-              }}
+              categories={tool_cats}
+              {...(media && {
+                media,
+              })}
               video
             />
           </Column>
@@ -27,12 +34,12 @@ const Webinars = ({ libraries, posts: webinars, maxCols }) => {
       )}
     </Row>
   );
-}
+};
 
 Webinars.propTypes = {
   posts: PropTypes.array,
   libraries: PropTypes.object,
-  maxCols: PropTypes.number
+  maxCols: PropTypes.number,
 };
 
 export default connect(Webinars);
