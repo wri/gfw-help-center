@@ -15,6 +15,7 @@ export const allToolsHandler = {
       endpoint: 'tools',
       params: {
         per_page: 100, // To make sure you get all of them
+        lang: 'en',
       },
     });
 

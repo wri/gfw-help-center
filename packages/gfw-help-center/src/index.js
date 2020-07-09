@@ -33,6 +33,9 @@ const gfwHelpCenter = {
       setSearchOpen: ({ state }) => (open) => {
         state.theme.searchIsActive = open;
       },
+      changeLanguage: ({ state }) => (value) => {
+        state.theme.lang = value;
+      },
       beforeSSR: ({ actions }) => async () => {
         await actions.source.fetch('all-tools');
         await actions.source.fetch('top-tags');

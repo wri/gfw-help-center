@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect, styled } from 'frontity';
 import PropTypes from 'prop-types';
 import { rgba } from 'emotion-rgba';
@@ -15,6 +15,8 @@ import {
 
 import Head from './head';
 
+import { getAPILangCode } from '../helpers/lang';
+
 import Loading from '../pages/loading';
 import Home from '../pages/home';
 import Tools from '../pages/tools';
@@ -28,6 +30,43 @@ import HelpFooter from '../components/footer';
 const Theme = ({ state, actions }) => {
   const data = state.source.get(state.router.link);
   const searchOpen = state.theme.searchIsActive;
+  const redirectionPost =
+    !data.redirection &&
+    data.is404 &&
+    state.source.post &&
+    Object.values(state.source.post)?.[0];
+
+  if (data.isAuthor) {
+    data.is404 = true;
+  }
+
+  useEffect(() => {
+    if (data.redirection) {
+      actions.router.set(data.redirection);
+    }
+
+    if (redirectionPost) {
+      actions.router.set(redirectionPost.link);
+    }
+  }, []);
+
+  useEffect(() => {
+    const lang = JSON.parse(localStorage.getItem('txlive:selectedlang'));
+    actions.theme.changeLanguage(getAPILangCode(lang));
+  }, []);
+
+  const handleLangSelect = (lang) => {
+    actions.theme.changeLanguage(getAPILangCode(lang));
+    if (data.isPostType && data.isPost) {
+      const post = state.source[data.type][data.id];
+      const translation = post?.translations_posts?.find((p) =>
+        p?.locale?.includes(lang)
+      );
+      if (translation) {
+        actions.router.set(translation.link);
+      }
+    }
+  };
 
   return (
     <>
@@ -38,6 +77,7 @@ const Theme = ({ state, actions }) => {
           relative
           pathname="https://www.globalforestwatch.org/help-center"
           openContactUsModal={actions.theme.toggleContactUsModal}
+          afterLangSelect={handleLangSelect}
           navMain={[
             { label: 'Map', href: '/map' },
             { label: 'Dashboard', href: '/dashboards/global' },
