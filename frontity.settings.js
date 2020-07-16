@@ -25,6 +25,51 @@ const settings = {
               archive: '/help', // link where this custom posts are listed
             },
             {
+              type: 'help/map-and-dashboards', // type slug
+              endpoint: 'tools', // REST API endpoint
+              archive: '/help', // link where this custom posts are listed
+            },
+            {
+              type: 'help/map-and-dashboards', // type slug
+              endpoint: 'tools', // REST API endpoint
+              archive: '/help', // link where this custom posts are listed
+            },
+            {
+              type: 'help/forest-watcher', // type slug
+              endpoint: 'tools', // REST API endpoint
+              archive: '/help', // link where this custom posts are listed
+            },
+            {
+              type: 'help/mapbuilder', // type slug
+              endpoint: 'tools', // REST API endpoint
+              archive: '/help', // link where this custom posts are listed
+            },
+            {
+              type: 'help/gfw-pro', // type slug
+              endpoint: 'tools', // REST API endpoint
+              archive: '/help', // link where this custom posts are listed
+            },
+            {
+              type: 'help/see-how-people-use-gfw', // type slug
+              endpoint: 'tools', // REST API endpoint
+              archive: '/help', // link where this custom posts are listed
+            },
+            {
+              type: 'help/faqs', // type slug
+              endpoint: 'tools', // REST API endpoint
+              archive: '/help', // link where this custom posts are listed
+            },
+            {
+              type: 'help/account-management', // type slug
+              endpoint: 'tools', // REST API endpoint
+              archive: '/help', // link where this custom posts are listed
+            },
+            {
+              type: 'help/developer-docs', // type slug
+              endpoint: 'tools', // REST API endpoint
+              archive: '/help', // link where this custom posts are listed
+            },
+            {
               type: 'help/step-by-step-instructions', // type slug
               endpoint: 'articles', // REST API endpoint
               archive: '/step-by-step-instructions', // link where this custom posts are listed
