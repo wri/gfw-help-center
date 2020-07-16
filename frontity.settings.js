@@ -25,17 +25,12 @@ const settings = {
               archive: '/help', // link where this custom posts are listed
             },
             {
-              type: 'faqs', // type slug
-              endpoint: 'faqs', // REST API endpoint
-              archive: '/faqs', // link where this custom posts are listed
-            },
-            {
               type: '(.*)?/step-by-step-instructions', // type slug
               endpoint: 'articles', // REST API endpoint
               archive: '/step-by-step-instructions', // link where this custom posts are listed
             },
             {
-              type: 'webinars', // type slug
+              type: '(.*)?/webinars', // type slug
               endpoint: 'webinars', // REST API endpoint
               archive: '/webinars', // link where this custom posts are listed
             },
