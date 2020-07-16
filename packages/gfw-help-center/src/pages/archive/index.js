@@ -29,7 +29,7 @@ const SearchPage = ({ state, libraries }) => {
   const [loading, setLoading] = useState(true);
 
   const data = state.source.get(state.router.link);
-  const { isTag, searchQuery } = data;
+  const { isHelpTags, searchQuery } = data;
   const isSearchEmpty = data.link === '/?s=';
   const isSearch = isSearchEmpty || data.isSearch;
   const total = articles.length + webinars.length;
@@ -39,7 +39,7 @@ const SearchPage = ({ state, libraries }) => {
     isSearch &&
     `${total} ${articleText} with the keyword ${decodeURI(searchQuery)}`;
   const tagStatement =
-    isTag &&
+    isHelpTags &&
     `${total} ${articleText} tagged with ${decode(
       state.source[data.taxonomy][data.id].name
     )}`;
@@ -48,7 +48,7 @@ const SearchPage = ({ state, libraries }) => {
 
   const { tags } = state.source.data['top-tags/'];
 
-  const allTags = isTag && tags;
+  const allTags = isHelpTags && tags;
   const taxOptions = allTags || [];
   const taxFromList =
     !!taxOptions?.length && taxOptions.find((tax) => tax.id === data?.id);
@@ -89,7 +89,7 @@ const SearchPage = ({ state, libraries }) => {
             ...(searchQuery && {
               search: searchQuery,
             }),
-            ...(isTag && {
+            ...(isHelpTags && {
               tags: data.id,
             }),
           },
@@ -103,7 +103,7 @@ const SearchPage = ({ state, libraries }) => {
             ...(searchQuery && {
               search: searchQuery,
             }),
-            ...(isTag && {
+            ...(isHelpTags && {
               tags: data.id,
             }),
           },

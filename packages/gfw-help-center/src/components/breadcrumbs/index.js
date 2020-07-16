@@ -11,18 +11,17 @@ const Breadcrumbs = ({ state }) => {
   const data = state.source.get(state.router.link);
   const pageData = state.source?.[data?.type]?.[data?.id];
   const parent = state.source?.[pageData?.type]?.[pageData?.parent];
-  console.log(pageData);
 
   return (
     <Wrapper>
-      <Link link="/">Help center home</Link>
+      <Link link="/help/">Help center home</Link>
       {isSearchLink(state.router.link) && (
         <>
           <Divider />
           <span>Search results</span>
         </>
       )}
-      {data.isTag && (
+      {data.isHelpTags && (
         <>
           <Divider />
           <span>Tags</span>
@@ -34,7 +33,7 @@ const Breadcrumbs = ({ state }) => {
           <Link link={parent.link}>{decode(parent.title.rendered)}</Link>
         </>
       )}
-      {pageData.type === 'articles' && (
+      {pageData?.type === 'articles' && (
         <>
           <Divider />
           <Link link="/help/step-by-step-instructions">
@@ -42,7 +41,7 @@ const Breadcrumbs = ({ state }) => {
           </Link>
         </>
       )}
-      {pageData.type === 'webinars' && (
+      {pageData?.type === 'webinars' && (
         <>
           <Divider />
           <Link link="/help/webinars">Webinars</Link>

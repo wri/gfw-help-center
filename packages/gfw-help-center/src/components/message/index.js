@@ -19,10 +19,10 @@ const Message = ({ error, title, description, small }) => (
 );
 
 Message.propTypes = {
-  error: PropTypes.object,
+  error: PropTypes.bool,
   title: PropTypes.string,
   description: PropTypes.string,
-  small: PropTypes.string
+  small: PropTypes.string,
 };
 
 export default Message;

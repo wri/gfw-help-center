@@ -25,20 +25,20 @@ const settings = {
               archive: '/help', // link where this custom posts are listed
             },
             {
-              type: '(.*)?/step-by-step-instructions', // type slug
+              type: 'help/step-by-step-instructions', // type slug
               endpoint: 'articles', // REST API endpoint
               archive: '/step-by-step-instructions', // link where this custom posts are listed
             },
             {
-              type: '(.*)?/webinars', // type slug
+              type: 'help/webinars', // type slug
               endpoint: 'webinars', // REST API endpoint
               archive: '/webinars', // link where this custom posts are listed
             },
           ],
           taxonomies: [
             {
-              taxonomy: 'tool_cats', // taxonomy slug
-              endpoint: 'tool_cats', // REST API endpoint
+              taxonomy: 'help/tag', // taxonomy slug
+              endpoint: 'help_tags', // REST API endpoint
               postTypeEndpoint: 'articles', // endpoint from which posts from this taxonomy are fetched
             },
           ],

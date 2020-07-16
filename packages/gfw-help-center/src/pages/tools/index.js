@@ -51,17 +51,19 @@ const Page = ({ state, libraries }) => {
   // active parent page ID
   const currentParentPage = currentPage.parent || currentPage.id;
   const parentPage = currentPage.parent
-    ? allParentPages.find((p) => p.parent === currentPage.parent)
+    ? allParentPages.find((p) => p.id === currentPage.parent)
     : currentPage;
 
   // build the options for the side bar menu
   const sidebarPages = siblingPages
     ? [parentPage]?.concat(siblingPages)
     : [parentPage];
+
   const links = sidebarPages?.map((sub) => ({
     label: sub?.parent ? sub?.title?.rendered : 'Overview',
     link: sub?.acf?.alt_link || sub?.link,
-    active: currentPage?.link === sub?.link,
+    active:
+      currentPage?.link === sub?.link || currentPage?.link === `${sub?.link}/`,
   }));
 
   // get page content

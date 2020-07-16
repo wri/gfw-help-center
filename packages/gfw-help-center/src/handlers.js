@@ -91,7 +91,7 @@ export const topTagsHandler = {
 
     // 1. fetch the data you want from the endpoint page
     const response = await api.get({
-      endpoint: 'tags',
+      endpoint: 'help_tags',
       params: {
         per_page: 100, // To make sure you get all of them
         orderby: 'count',
@@ -104,7 +104,7 @@ export const topTagsHandler = {
 
     const tags = items.map((tag) => ({
       ...tag,
-      link: `/tag/${tag.slug}`,
+      link: `/help/tag/${tag.slug}`,
     }));
     // 3. add data to source
     const currentPageData = state.source.data[route];
