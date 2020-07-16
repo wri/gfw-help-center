@@ -20,9 +20,9 @@ const settings = {
           api: `${process.env.WORDPRESS_API_URL}/wp-json`,
           postTypes: [
             {
-              type: 'tools', // type slug
+              type: 'help', // type slug
               endpoint: 'tools', // REST API endpoint
-              archive: '/tools', // link where this custom posts are listed
+              archive: '/help', // link where this custom posts are listed
             },
             {
               type: 'faqs', // type slug

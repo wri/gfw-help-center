@@ -48,23 +48,24 @@ const Page = ({ state, libraries }) => {
     ...secondaryTools,
   ];
 
-  // build the options for the side bar menu
-  const links = siblingPages?.map((sub, i) => ({
-    label: sub.title.rendered,
-    link: sub?.acf?.alt_link || sub.link,
-    active:
-      (!currentPage.parent && i === 0) || currentPage.link === `${sub.link}/`,
-  }));
-
-  // get the current page content
-  // if parent page get the first sibling
-  const pageContent = currentPage.parent ? currentPage : siblingPages?.[0];
-
   // active parent page ID
   const currentParentPage = currentPage.parent || currentPage.id;
+  const parentPage = currentPage.parent
+    ? allParentPages.find((p) => p.parent === currentPage.parent)
+    : currentPage;
+
+  // build the options for the side bar menu
+  const sidebarPages = siblingPages
+    ? [parentPage]?.concat(siblingPages)
+    : [parentPage];
+  const links = sidebarPages?.map((sub) => ({
+    label: sub?.parent ? sub?.title?.rendered : 'Overview',
+    link: sub?.acf?.alt_link || sub?.link,
+    active: currentPage?.link === sub?.link,
+  }));
 
   // get page content
-  const { title, content, acf } = pageContent || {};
+  const { title, content, acf, parent } = currentPage || {};
 
   // build related content from acf
   const { related_content: relatedContent } = acf || {};
@@ -110,7 +111,7 @@ const Page = ({ state, libraries }) => {
         <Column width={[1, 7 / 12]}>
           {title && (
             <Title>
-              <Html2React html={title?.rendered} />
+              <Html2React html={parent ? title?.rendered : 'Overview'} />
             </Title>
           )}
           {content && (
