@@ -11,6 +11,7 @@ const Breadcrumbs = ({ state }) => {
   const data = state.source.get(state.router.link);
   const pageData = state.source?.[data?.type]?.[data?.id];
   const parent = state.source?.[pageData?.type]?.[pageData?.parent];
+  console.log(pageData);
 
   return (
     <Wrapper>
@@ -19,12 +20,6 @@ const Breadcrumbs = ({ state }) => {
         <>
           <Divider />
           <span>Search results</span>
-        </>
-      )}
-      {data.isCategory && (
-        <>
-          <Divider />
-          <span>{decode(state.source[data.taxonomy][data.id].name)}</span>
         </>
       )}
       {data.isTag && (
@@ -37,6 +32,20 @@ const Breadcrumbs = ({ state }) => {
         <>
           <Divider />
           <Link link={parent.link}>{decode(parent.title.rendered)}</Link>
+        </>
+      )}
+      {pageData.type === 'articles' && (
+        <>
+          <Divider />
+          <Link link="/help/step-by-step-instructions">
+            Step by step instructions
+          </Link>
+        </>
+      )}
+      {pageData.type === 'webinars' && (
+        <>
+          <Divider />
+          <Link link="/help/webinars">Webinars</Link>
         </>
       )}
       {data.isPostType && (
