@@ -48,10 +48,6 @@ const Theme = ({ state, actions }) => {
     if (redirectionPost) {
       actions.router.set(redirectionPost.link);
     }
-
-    if (state.router.link === '/') {
-      actions.router.set('/help');
-    }
   }, []);
 
   useEffect(() => {
@@ -132,7 +128,10 @@ const Theme = ({ state, actions }) => {
         <Switch>
           <Loading when={data.isFetching} />
           <Home
-            when={state.router.link === '/help/' && !data.link.includes('/?s=')}
+            when={
+              data.isHome ||
+              (state.router.link === '/help/' && !data.link.includes('/?s='))
+            }
           />
           <Tools when={data.isTools} />
           <Article when={data.isArticles} />
