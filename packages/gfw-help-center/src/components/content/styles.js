@@ -31,6 +31,11 @@ export default styled.div`
     }
   }
 
+  b,
+  strong {
+    font-weight: 500;
+  }
+
   hr {
     display: none;
     height: 2px;
@@ -50,6 +55,7 @@ export default styled.div`
     }
   }
 
+  h2,
   h3 {
     font-weight: 600;
     padding-top: 30px;
@@ -84,6 +90,10 @@ export default styled.div`
         margin-left: unset;
         margin-right: calc(-100% / 7);
       `}
+    }
+
+    iframe {
+      width: 100%;
     }
   }
 

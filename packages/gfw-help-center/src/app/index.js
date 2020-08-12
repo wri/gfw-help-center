@@ -75,7 +75,7 @@ const Theme = ({ state, actions }) => {
       <HeaderWrapper>
         <Header
           relative
-          pathname="https://www.globalforestwatch.org/help-center"
+          pathname="https://www.globalforestwatch.org/help"
           openContactUsModal={actions.theme.toggleContactUsModal}
           afterLangSelect={handleLangSelect}
           navMain={[
@@ -111,7 +111,7 @@ const Theme = ({ state, actions }) => {
             { label: 'About', href: '/about' },
             {
               label: 'Help Center',
-              extLink: 'https://www.globalforestwatch.org/help-center',
+              extLink: 'https://www.globalforestwatch.org/help',
             },
           ]}
         />

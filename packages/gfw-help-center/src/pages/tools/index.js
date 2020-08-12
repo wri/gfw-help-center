@@ -118,7 +118,7 @@ const Page = ({ state, libraries }) => {
           )}
           {content && (
             <ContentWrapper>
-              <Content>
+              <Content align="left">
                 <Html2React html={content?.rendered} />
               </Content>
             </ContentWrapper>

@@ -34,7 +34,7 @@ class ComponentToPrint extends Component {
             margin-bottom: 50px;
           `}
         >
-          https://www.globalforestwatch.org/help-center
+          https://www.globalforestwatch.org/help
         </p>
         <PostTitle className="notranslate">
           <Html2React html={title.rendered} />
