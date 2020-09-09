@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'frontity';
 import { CancelToken } from 'axios';
+import sortBy from 'lodash/sortBy';
 
 import { Loader } from 'gfw-components';
 
@@ -42,7 +43,11 @@ const PostType = ({ state, postType, include, maxCols }) => {
           cancelToken: source.token,
         });
 
-        setPosts(data);
+        const sortedData = sortBy(
+          data.map((d) => ({ ...d, order: include.indexOf(d.id) })),
+          'order'
+        );
+        setPosts(sortedData);
         setLoading(false);
       } catch (err) {
         setLoading(false);
