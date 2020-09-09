@@ -36,6 +36,10 @@ export default styled.div`
     font-weight: 500;
   }
 
+  i {
+    font-style: italic;
+  }
+
   hr {
     display: none;
     height: 2px;
@@ -77,7 +81,6 @@ export default styled.div`
     margin: 0;
     padding: 0;
     display: block;
-    margin-bottom: 30px;
     width: 100%;
 
     ${theme.mediaQueries.small} {
@@ -143,6 +146,7 @@ export default styled.div`
     figure {
       margin: 0 auto !important;
       width: 100% !important;
+      margin-bottom: 30px;
     }
 
     .slick-prev,
