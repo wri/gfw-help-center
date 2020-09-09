@@ -77,10 +77,11 @@ const Search = ({
     debounce(() => {
       const fetchSearchContent = async () => {
         const source = CancelToken.source();
-
         const articlesResponse = await get(
           `${state.source.api}/wp/v2/articles${
-            search ? `?search=${search}` : '?filter[meta_key]=featured'
+            search
+              ? `?search=${search}`
+              : '?filter[meta_key]=featured&filter[meta_value]=1'
           }`,
           {
             cancelToken: source.token,
@@ -89,7 +90,9 @@ const Search = ({
 
         const webinarsResponse = await get(
           `${state.source.api}/wp/v2/webinars${
-            search ? `?search=${search}` : '?filter[meta_key]=featured'
+            search
+              ? `?search=${search}`
+              : '?filter[meta_key]=featured&filter[meta_value]=1'
           }`,
           {
             cancelToken: source.token,
