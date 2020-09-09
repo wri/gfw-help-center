@@ -126,7 +126,7 @@ const Theme = ({ state, actions }) => {
             { label: 'Blog', extLink: 'https://blog.globalforestwatch.org/' },
             { label: 'About', href: '/about' },
             {
-              label: 'Help Center',
+              label: 'Help',
               extLink: 'https://www.globalforestwatch.org/help',
             },
           ]}
