@@ -289,11 +289,11 @@ export default styled.div`
     }
   }
 
-  tr:nth-child(2n + 1) {
+  tr:nth-of-type(2n + 1) {
     background-color: ${theme.colors.lightestGrey};
   }
 
-  tr:first-child {
+  tr:first-of-type {
     background-color: ${theme.colors.lightGrey};
     text-transform: uppercase;
     color: #777;
