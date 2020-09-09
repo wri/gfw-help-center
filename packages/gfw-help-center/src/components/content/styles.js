@@ -312,7 +312,7 @@ export default styled.div`
   tr {
     th,
     td {
-      &:first-child {
+      &:first-of-type {
         padding-left: 20px;
 
         ${theme.mediaQueries.small} {
@@ -320,7 +320,7 @@ export default styled.div`
         }
       }
 
-      &:last-child {
+      &:last-of-type {
         padding-right: 20px;
 
         ${theme.mediaQueries.small} {
