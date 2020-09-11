@@ -1,22 +1,22 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import { Row, Column, Desktop } from 'gfw-components';
 import ReactHtmlParser from 'react-html-parser';
+
+import { Row, Column, Desktop } from 'gfw-components';
 
 import ToolCard from 'components/card-tool';
 import SimpleCard from 'components/card-simple';
 // import Search from 'components/search';
 import Link from 'components/link';
 
-// import ArrowIcon from 'assets/icons/arrow.svg';
+import ArrowIcon from 'assets/icons/arrow.svg';
 
 import {
   Wrapper,
   Prompt,
   Tag,
-  // Arrow,
+  Arrow,
   ToolsTitle,
   ToolCardsWrapper,
   SearchWrapper,
@@ -24,9 +24,9 @@ import {
 } from './styles';
 
 const HomePage = ({ tools }) => {
+  const home = tools.find(t => t.slug === 'help-center')
   const primaryTools = tools?.slice(0, 4);
   const secondaryTools = tools?.slice(4, 8);
-  const home = tools.find(t => t.slug === 'help-center')
 
   return (
     <Wrapper>
@@ -55,7 +55,9 @@ const HomePage = ({ tools }) => {
               <Prompt>
                 <Tag>Most people start here!</Tag>
                 <Desktop>
-                  {/* <Arrow src={ArrowIcon} alt="arrow" /> */}
+                  <Arrow>
+                    <ArrowIcon alt="highlighting first card" />
+                  </Arrow>
                 </Desktop>
               </Prompt>
             )}

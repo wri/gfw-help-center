@@ -3,7 +3,6 @@ import { H4, Column, theme } from 'gfw-components';
 
 import IntroComp from 'components/intro';
 
-// eslint-disable-next-line import/prefer-default-export
 export const Wrapper = styled.div`
   width: 100%;
   padding: 30px 0;
@@ -43,7 +42,7 @@ export const Tag = styled.p`
   text-transform: uppercase;
 `;
 
-export const Arrow = styled.img`
+export const Arrow = styled.div`
   margin: 5px 10px;
 `;
 
