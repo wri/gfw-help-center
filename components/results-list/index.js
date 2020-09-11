@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactHtmlParser from 'react-html-parser';
+
 import Link from '../link';
 
 import { ListWrapper, ListItem, Divider } from './styles';
 
 const ResultsList = ({
   items = [],
-  libraries,
   onClickResult,
   selected,
   showCount,
 }) => {
-  const Html2React = libraries.html2react.Component;
 
   return (
     <ListWrapper>
@@ -30,15 +30,11 @@ const ResultsList = ({
                   <>
                     {item.link ? (
                       <Link link={item.link} onClick={onClickResult}>
-                        <Html2React
-                          html={`${item.name}${showCount ? ` (${item.count})` : ''}`}
-                        />
+                        {ReactHtmlParser(`${item.name}${showCount ? ` (${item.count})` : ''}`)}
                       </Link>
                       ) : (
                         <button onClick={item.onClick}>
-                          <Html2React
-                            html={`${item.name}${showCount ? ` (${item.count})` : ''}`}
-                          />
+                          {ReactHtmlParser(`${item.name}${showCount ? ` (${item.count})` : ''}`)}
                         </button>
                     )}
                   </>
@@ -53,8 +49,7 @@ const ResultsList = ({
 export default ResultsList;
 
 ResultsList.propTypes = {
-  items: PropTypes.object.isRequired,
-  libraries: PropTypes.object,
+  items: PropTypes.array.isRequired,
   onClickResult: PropTypes.func,
   selected: PropTypes.number,
   showCount: PropTypes.bool,

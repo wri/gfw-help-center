@@ -7,7 +7,7 @@ import { Row, Column, Desktop } from 'gfw-components';
 
 import ToolCard from 'components/card-tool';
 import SimpleCard from 'components/card-simple';
-// import Search from 'components/search';
+import Search from 'components/search';
 import Link from 'components/link';
 
 import ArrowIcon from 'assets/icons/arrow.svg';
@@ -38,7 +38,7 @@ const HomePage = ({ tools }) => {
           />
         </Column>
         <SearchWrapper>
-          {/* <Search expanded /> */}
+          <Search expanded />
         </SearchWrapper>
       </Row>
       <Row

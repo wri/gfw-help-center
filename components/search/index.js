@@ -5,10 +5,14 @@ import compact from 'lodash/compact';
 import deburr from 'lodash/deburr';
 import toUpper from 'lodash/toUpper';
 import debounce from 'lodash/debounce';
-import { SearchIcon, CloseIcon, Button } from 'gfw-components';
-import { get, CancelToken } from 'axios';
+import { CancelToken } from 'axios';
+import { useRouter } from 'next/router'
 
-import ResultsList from '../results-list';
+import { SearchIcon, CloseIcon, Button } from 'gfw-components';
+
+import { getPostsByType, getTags } from 'lib/api';
+
+import ResultsList from 'components/results-list';
 
 import {
   Wrapper,
@@ -29,14 +33,13 @@ const Search = ({
   expanded,
   ...props
 }) => {
-  const parse = libraries.source.parse(state.router.link);
-  const searchQuery = parse.query.s ? decodeURI(parse.query.s) : '';
-  const { tags } = state.source.data['top-tags/'];
+  const { query, replace } = useRouter();
+  const searchQuery = query.s ? decodeURI(query.s) : '';
 
+  const [open, setOpen] = useState(false);
   const [search, setSearch] = useState(searchQuery);
   const [results, setResults] = useState([]);
-
-  const open = state.theme.searchIsActive;
+  const [tags, setTags] = useState([]);
 
   const inputRef = React.createRef();
 
@@ -44,8 +47,8 @@ const Search = ({
 
   const keyDownHandler = (e) => {
     if (e.key === 'Enter') {
-      actions.router.set(`/help/?s=${search}`);
-      actions.theme.setSearchOpen(false);
+      replace(`/search/?query=${search}`)
+      setOpen(false);
     }
   };
 
@@ -73,35 +76,46 @@ const Search = ({
     if (open) inputRef.current.focus();
   }, [open]);
 
+  useEffect(() => {
+    const fetchTags = async () => {
+      const tagsResponse = await getTags();
+      setTags(tagsResponse)
+    }
+
+    fetchTags()
+  }, [])
+
   useEffect(
     debounce(() => {
       const fetchSearchContent = async () => {
         const source = CancelToken.source();
-        const articlesResponse = await get(
-          `${state.source.api}/wp/v2/articles${
-            search
-              ? `?search=${search}`
-              : '?filter[meta_key]=featured&filter[meta_value]=1'
-          }`,
+        const articlesResponse = await getPostsByType({ type: 'articles', params: search ?
           {
-            cancelToken: source.token,
+            search
           }
-        );
+          :
+          {
+            'filter[meta_key]': 'featured',
+            'filter[meta_value]': 1,
+          },
+          cancelToken: source.token
+        });
 
-        const webinarsResponse = await get(
-          `${state.source.api}/wp/v2/webinars${
-            search
-              ? `?search=${search}`
-              : '?filter[meta_key]=featured&filter[meta_value]=1'
-          }`,
+        const webinarsResponse = await getPostsByType({ type: 'webinars', params: search ?
           {
-            cancelToken: source.token,
+            search
           }
-        );
+          :
+          {
+            'filter[meta_key]': 'featured',
+            'filter[meta_value]': 1,
+          },
+          cancelToken: source.token
+        });
 
         const allResults = compact([
-          ...articlesResponse?.data,
-          ...webinarsResponse?.data,
+          ...articlesResponse,
+          ...webinarsResponse,
         ])?.map((r) => {
           const url = new URL(r.link);
 
@@ -124,7 +138,7 @@ const Search = ({
       <Container
         open={open}
         expanded={expanded}
-        onClick={() => actions.theme.setSearchOpen(true)}
+        onClick={() => setOpen(true)}
       >
         {(open || expanded) && (
           <SearchOpen>
@@ -166,7 +180,7 @@ const Search = ({
       {open && (
         <ResultsList
           items={searchResults}
-          onClickResult={() => actions.theme.setSearchOpen(false)}
+          onClickResult={() => setOpen(false)}
         />
       )}
     </Wrapper>

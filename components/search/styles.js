@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { BasicInput, theme } from 'gfw-components';
+import { BasicInput, theme } from 'gfw-components'
 
 export const Wrapper = styled.div`
   height: 60px;
