@@ -17,6 +17,7 @@ import {
   // SearchDesktop,
   Title,
   HeaderWrapper,
+  Divider,
 } from './styles';
 
 const Page = ({ parentTools, currentPage, siblingTools }) => {
@@ -60,7 +61,13 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
   const { title, content, acf, parent } = currentPage || {};
 
   // build related content from acf
-  const { related_content: relatedContent } = acf || {};
+  const { related_content } = acf || {};
+  const relatedContent =
+    related_content?.length &&
+    related_content?.filter((c) => c.acf_fc_layout !== 'posts');
+  const blogPosts =
+    related_content?.length &&
+    related_content?.filter((c) => c.acf_fc_layout === 'posts');
 
   return (
     <Wrapper>
@@ -115,6 +122,17 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
           )}
         </Column>
       </Row>
+      {blogPosts && !!blogPosts.length && (
+        <>
+          <Divider />
+          <Row>
+            <Column>
+              <RelatedContent sections={blogPosts} maxCols={3} />
+            </Column>
+          </Row>
+          <Divider />
+        </>
+      )}
       <Mobile>
         <Menu links={links} />
       </Mobile>

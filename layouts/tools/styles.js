@@ -79,3 +79,13 @@ export const SearchDesktop = styled(Search)`
     }
   `}
 `;
+
+export const Divider = styled.div`
+  border-top: 1px solid ${theme.colors.lightGrey};
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  ${theme.mediaQueries.small} {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+  }
+`;
