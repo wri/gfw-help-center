@@ -34,6 +34,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "responsive-loader": "^2.1.1",
+    "simple-entity-decode": "^0.0.3",
     "webp-loader": "^0.6.0"
   },
   "devDependencies": {

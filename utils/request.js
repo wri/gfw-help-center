@@ -3,6 +3,7 @@ import { stringify } from 'query-string';
 import flatMap from 'lodash/flatMap';
 import uniq from 'lodash/uniq';
 import compact from 'lodash/compact';
+import decode from 'simple-entity-decode';
 
 // eslint-disable-next-line import/prefer-default-export
 export const fetchPostTypeData = async ({ type, params, cancelToken }) => {
@@ -71,7 +72,7 @@ export const fetchPostTypeData = async ({ type, params, cancelToken }) => {
 
     return {
       ...post,
-      title: post.title.rendered,
+      title: decode(post.title.rendered),
       ...(media && {
         featured_media: media.find((m) => m.id === post.featured_media),
       }),

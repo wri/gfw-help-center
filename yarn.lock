@@ -8683,6 +8683,11 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
   integrity sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
 
+simple-entity-decode@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/simple-entity-decode/-/simple-entity-decode-0.0.3.tgz#38c63a8f862a24559ae265428579bccf4a28ed54"
+  integrity sha512-FTitmmei/+dtnk3BYzGKNJmIOwa9QRUEOewNogAUrDMZChSEA3NkS58nq5/AsgA4uZp3iJyKeF+QDfS5o3PTPg==
+
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
