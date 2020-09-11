@@ -48,7 +48,7 @@ const Search = ({
 
   const keyDownHandler = (e) => {
     if (e.key === 'Enter') {
-      replace(`/search/?query=${search}`);
+      replace(`/help/search/?query=${search}`);
       setOpen(false);
     }
   };
