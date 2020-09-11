@@ -16,8 +16,22 @@ import {
   PostExcerpt,
 } from './styles';
 
-const Card = ({ title, excerpt, media, categories, large, video }) => (
+const Card = ({ title, excerpt, media, categories, large, video, link }) => (
   <CardWrapper>
+    <a
+      href={link}
+      alt={title}
+      css={css`
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      `}
+    >
+      &nbsp;
+    </a>
     {!!media && (
       <MediaWrapper large={large}>
         <Media {...media} />

@@ -19,37 +19,18 @@ const Posts = ({ posts: articles, maxCols }) => {
               margin-bottom: 30px;
             `}
           >
-            <div
-              css={css`
-                position: relative;
-              `}
-            >
-              <a
-                href={`https://blog.globalforestwatch.org${link}`}
-                alt={rest?.title}
-                css={css`
-                  z-index: 1;
-                  position: absolute;
-                  top: 0;
-                  bottom: 0;
-                  left: 0;
-                  right: 0;
-                `}
-              >
-                &nbsp;
-              </a>
-              <Card
-                {...rest}
-                categories={categories?.map((cat) => ({
-                  ...cat,
-                  link: `https://blog.globalforestwatch.org${cat.link}`,
-                }))}
-                excerpt={ReactHtmlParser(excerpt.rendered)}
-                {...(media && {
-                  media,
-                })}
-              />
-            </div>
+            <Card
+              {...rest}
+              link={`https://blog.globalforestwatch.org${link}`}
+              categories={categories?.map((cat) => ({
+                ...cat,
+                link: `https://blog.globalforestwatch.org${cat.link}`,
+              }))}
+              excerpt={ReactHtmlParser(excerpt.rendered)}
+              {...(media && {
+                media,
+              })}
+            />
           </Column>
         )
       )}
