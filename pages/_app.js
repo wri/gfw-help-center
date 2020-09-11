@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
-
 import { CacheProvider } from '@emotion/core';
 import { cache } from 'emotion';
 
+// eslint-disable-next-line react/prop-types
 function MyApp({ Component, pageProps }) {
   return (
     <CacheProvider value={cache}>
@@ -10,10 +9,5 @@ function MyApp({ Component, pageProps }) {
     </CacheProvider>
   );
 }
-
-MyApp.propTypes = {
-  Component: PropTypes.node,
-  pageProps: PropTypes.shape({}),
-};
 
 export default MyApp;

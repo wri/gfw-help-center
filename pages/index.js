@@ -1,66 +1,45 @@
-import PropTypes from 'prop-types';
-import sortBy from 'lodash/sortBy';
+import Head from 'next/head';
 
+import { getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
 
 import HomePage from 'layouts/home';
+
 import Layout from 'components/layout';
-import { getPostsByType } from 'lib/api';
-import Head from 'next/head';
 
-export default function Index({ tools }) {
-
+export default function Index(props) {
   return (
-    <>
-      <Layout>
-        <Head>
-          <title>Global Forest Watch Help Center</title>
-        </Head>
-        <HomePage tools={tools} />
-        {/* <Container>
-          <Row>
-            <Column width={[1, 5 / 6, 2 / 3]}>
-              <Intro
-                title={home?.title?.rendered || state.theme.title}
-                description={
-                  <Html2React html={home?.excerpt?.rendered} /> ||
-                  state.theme.description
-                }
-              />
-            </Column>
-            <SearchWrapper>
-              <Search expanded />
-            </SearchWrapper>
-          </Row>
-          {tools?.map((p) => (
-            <div key={p.id}>
-              <h2>{p.title?.rendered}</h2>
-              <br />
-            </div>
-          ))}
-        </Container> */}
-      </Layout>
-    </>
+    <Layout {...props}>
+      <Head>
+        <title>How to Use Global Forest Watch Maps & Tools | GFW Help Center</title>
+        <meta
+          name="description"
+          content="Find tutorials, webinars and other resources in the GFW Help Center to help guide you through the forest monitoring data, analysis, technology and tools that GFW offers."
+        />
+      </Head>
+      <HomePage {...props} />
+    </Layout>
   );
 }
-
-Index.propTypes = {
-  tools: PropTypes.array,
-};
 
 export async function getStaticProps() {
   const tools = await getPostsByType({
     type: 'tools',
-    params: { per_page: 100 },
+    params: {
+      per_page: 100,
+      order: 'asc',
+      orderby: 'menu_order',
+      parent: 0
+    },
   });
 
-  const toolsMapped = tools?.filter(t => !t.parent).map((tool) => ({
+  const toolsMapped = tools?.map((tool) => ({
     ...convertTool(tool)
   }));
 
   return {
     props: {
-      tools: sortBy(toolsMapped, 'menu_order'),
+      tools: toolsMapped,
     },
     revalidate: 10,
   };
