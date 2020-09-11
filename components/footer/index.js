@@ -11,7 +11,7 @@ const Footer = ({ tools, openContactUsModal }) => {
   const support = tools?.find((t) => t.slug === 'community-forum');
   const contactUs = tools?.find((t) => t.slug === 'contact-us');
 
-  return (
+  return tools ? (
     <Row>
       <Column>
         <Title>Get support</Title>
@@ -56,7 +56,7 @@ const Footer = ({ tools, openContactUsModal }) => {
         </button>
       </Column>
     </Row>
-  );
+  ) : null;
 };
 
 const Title = styled(H4)`
