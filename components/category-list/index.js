@@ -10,7 +10,9 @@ const CategoryList = ({ categories = [], light, title, ...props }) => (
     {title && <H5>{title}</H5>}
     {categories.map(({ name, link } = {}) => (
       <Link key={name + link} href={link}>
-        <CategoryPill light={light}>{name}</CategoryPill>
+        <a>
+          <CategoryPill light={light}>{name}</CategoryPill>
+        </a>
       </Link>
     ))}
   </Wrapper>

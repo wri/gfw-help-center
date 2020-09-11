@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import { Row, Column, Desktop, Mobile, theme } from 'gfw-components';
+import { Row, Column, Desktop, Mobile } from 'gfw-components';
 import ReactHtmlParser from 'react-html-parser';
 
 import Breadcrumbs from 'components/breadcrumbs';
@@ -12,6 +12,7 @@ import RelatedContent from 'components/related-content';
 
 import {
   Wrapper,
+  BreadcrumbsWrapper,
   ContentWrapper,
   // SearchMobile,
   // SearchDesktop,
@@ -73,31 +74,27 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
     <Wrapper>
       <Row>
         <Column width={[3 / 4]}>
-          <Breadcrumbs
-            links={
-              currentPage.parent
-                ? [
-                    {
-                      label: parentPage?.title?.rendered,
-                      href: parentPage.link,
-                    },
-                    {
-                      label: currentPage?.title?.rendered,
-                    },
-                  ]
-                : [
-                    {
-                      label: currentPage?.title?.rendered,
-                    },
-                  ]
-            }
-            css={css`
-              margin-bottom: 25px;
-              ${theme.mediaQueries.small} {
-                margin-bottom: 40px;
+          <BreadcrumbsWrapper>
+            <Breadcrumbs
+              links={
+                currentPage.parent
+                  ? [
+                      {
+                        label: parentPage?.title?.rendered,
+                        href: parentPage.link,
+                      },
+                      {
+                        label: currentPage?.title?.rendered,
+                      },
+                    ]
+                  : [
+                      {
+                        label: currentPage?.title?.rendered,
+                      },
+                    ]
               }
-            `}
-          />
+            />
+          </BreadcrumbsWrapper>
         </Column>
         <Column width={[1 / 4]}>
           {/* <SearchMobile open={state.theme.searchIsActive} /> */}

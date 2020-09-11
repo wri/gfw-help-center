@@ -19,6 +19,7 @@ export const Title = styled(H3)`
   margin-bottom: 20px;
   font-size: 18px;
   font-weight: 500;
+
   ${theme.mediaQueries.small} {
     margin-bottom: 25px;
     font-size: 28px;
@@ -28,14 +29,24 @@ export const Title = styled(H3)`
 
 export const HeaderWrapper = styled(Column)`
   margin-bottom: 45px;
+
   ${theme.mediaQueries.small} {
     margin-bottom: 90px;
+  }
+`;
+
+export const BreadcrumbsWrapper = styled.div`
+  margin-bottom: 25px;
+
+  ${theme.mediaQueries.small} {
+    margin-bottom: 40px;
   }
 `;
 
 export const SearchMobile = styled(Search)`
   display: block;
   margin-top: -20px;
+
   ${theme.mediaQueries.small} {
     display: none;
   }
