@@ -7,6 +7,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
     "@wordpress/api-fetch": "^3.19.0",

@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css, connect, styled } from 'frontity';
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
+import ReactHtmlParser from 'react-html-parser';
+
 import { Row, Column, H4, theme } from 'gfw-components';
 import SimpleCard from '../card-simple';
 
-const Footer = ({ state, actions, libraries }) => {
-  const { support, contactUs } = state.source.data['all-tools/'];
-  const Html2React = libraries?.html2react?.Component;
+const Footer = ({ tools, openContactUsModal }) => {
+  const support = tools?.find((t) => t.slug === 'community-forum');
+  const contactUs = tools?.find((t) => t.slug === 'contact-us');
 
   return (
     <Row>
@@ -27,7 +30,7 @@ const Footer = ({ state, actions, libraries }) => {
           <SimpleCard
             {...support}
             title={support?.title?.rendered}
-            text={<Html2React html={support?.excerpt?.rendered} />}
+            text={ReactHtmlParser(support?.excerpt?.rendered)}
           />
         </a>
       </Column>
@@ -43,12 +46,12 @@ const Footer = ({ state, actions, libraries }) => {
             padding: 0;
             width: 100%;
           `}
-          onClick={actions.theme.toggleContactUsModal}
+          onClick={openContactUsModal}
         >
           <SimpleCard
             {...contactUs}
             title={contactUs?.title?.rendered}
-            text={<Html2React html={contactUs?.excerpt?.rendered} />}
+            text={ReactHtmlParser(contactUs?.excerpt?.rendered)}
           />
         </button>
       </Column>
@@ -65,9 +68,8 @@ const Title = styled(H4)`
 `;
 
 Footer.propTypes = {
-  actions: PropTypes.object,
-  state: PropTypes.object,
-  libraries: PropTypes.object,
+  tools: PropTypes.array,
+  openContactUsModal: PropTypes.func,
 };
 
-export default connect(Footer);
+export default Footer;
