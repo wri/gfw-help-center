@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Mobile } from 'gfw-components';
 
-import Link from '../link';
+import Link from 'next/link';
 
 import { MenuWrapper, MenuItem, Title } from './styles';
 
@@ -14,7 +14,7 @@ const Menu = ({ links }) => (
     {links?.map((l) => (
       <MenuItem active={l.active} key={l.label}>
         {l.link ? (
-          <Link link={l.link}>
+          <Link href={l.link}>
             {`${l.label}${l.count ? ` (${l.count})` : ''}`}
           </Link>
         ) : (

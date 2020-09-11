@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import ReactHtmlParser from 'react-html-parser';
+import Link from 'next/link';
 
 import { Row, Column, Desktop } from 'gfw-components';
 
 import ToolCard from 'components/card-tool';
 import SimpleCard from 'components/card-simple';
 import Search from 'components/search';
-import Link from 'components/link';
 
 import ArrowIcon from 'assets/icons/arrow.svg';
 
@@ -24,7 +24,7 @@ import {
 } from './styles';
 
 const HomePage = ({ tools }) => {
-  const home = tools.find(t => t.slug === 'help-center')
+  const home = tools.find((t) => t.slug === 'help-center');
   const primaryTools = tools?.slice(0, 4);
   const secondaryTools = tools?.slice(4, 8);
 
@@ -61,13 +61,15 @@ const HomePage = ({ tools }) => {
                 </Desktop>
               </Prompt>
             )}
-            <Link link={tool.link}>
-              <ToolCard
-                active={i === 0}
-                {...tool}
-                title={tool?.title?.rendered}
-                text={ReactHtmlParser(tool?.excerpt?.rendered)}
-              />
+            <Link href={tool.link}>
+              <a>
+                <ToolCard
+                  active={i === 0}
+                  {...tool}
+                  title={tool?.title?.rendered}
+                  text={ReactHtmlParser(tool?.excerpt?.rendered)}
+                />
+              </a>
             </Link>
           </ToolCardsWrapper>
         ))}
@@ -86,13 +88,15 @@ const HomePage = ({ tools }) => {
               })}
               key={tool.id}
             >
-              <Link link={tool.link}>
-                <SimpleCard
-                  {...tool}
-                  large={isFirst}
-                  title={tool?.title?.rendered}
-                  text={ReactHtmlParser(tool?.excerpt?.rendered)}
-                />
+              <Link href={tool.link}>
+                <a>
+                  <SimpleCard
+                    {...tool}
+                    large={isFirst}
+                    title={tool?.title?.rendered}
+                    text={ReactHtmlParser(tool?.excerpt?.rendered)}
+                  />
+                </a>
               </Link>
             </ToolCardsWrapper>
           );

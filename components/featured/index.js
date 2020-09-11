@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect, css } from 'frontity';
+import { css } from '@emotion/core';
+import Link from 'next/link';
 
 import { clearExcerptHellip } from 'utils/content';
 
 import Media from '../media';
 import CategoryList from '../category-list';
-import Link from '../link';
 
 import {
   Wrapper,
@@ -25,11 +25,9 @@ const MainPost = ({ libraries, state, id, type }) => {
 
   return (
     <Wrapper>
-      {media && (
-        <Media {...media} />
-      )}
+      {media && <Media {...media} />}
       <Link
-        link={link}
+        href={link}
         css={css`
           z-index: 1;
           position: absolute;
@@ -52,7 +50,7 @@ const MainPost = ({ libraries, state, id, type }) => {
   );
 };
 
-export default connect(MainPost);
+export default MainPost;
 
 MainPost.propTypes = {
   state: PropTypes.object,

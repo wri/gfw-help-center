@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, styled } from 'frontity';
-import Link from '../link';
+import Link from 'next/link';
 
 const CategoryItem = ({ state }) => {
   const { link } = state.router;
@@ -22,7 +22,7 @@ const CategoryItem = ({ state }) => {
 
   return item ? (
     <Wrapper>
-      <Link link={item.link}>{item.name}</Link>
+      <Link href={item.link}>{item.name}</Link>
     </Wrapper>
   ) : null;
 };

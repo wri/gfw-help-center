@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, decode } from 'frontity';
 import { isSearchLink } from 'utils/content';
-import Link from '../link';
+import Link from 'next/link';
 import Divider from './divider';
 
 import Wrapper from './styles';
@@ -14,7 +14,7 @@ const Breadcrumbs = ({ state }) => {
 
   return (
     <Wrapper>
-      <Link link="/help/">Help center home</Link>
+      <Link href="/">Help center home</Link>
       {isSearchLink(state.router.link) && (
         <>
           <Divider />
@@ -36,15 +36,13 @@ const Breadcrumbs = ({ state }) => {
       {pageData?.type === 'articles' && (
         <>
           <Divider />
-          <Link link="/help/step-by-step-instructions">
-            Step by step instructions
-          </Link>
+          <Link href="/guides">Step by step instructions</Link>
         </>
       )}
       {pageData?.type === 'webinars' && (
         <>
           <Divider />
-          <Link link="/help/webinars">Webinars</Link>
+          <Link href="/webinars">Webinars</Link>
         </>
       )}
       {data.isPostType && (

@@ -2,17 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 
-import Link from '../link';
+import Link from 'next/link';
 
 import { ListWrapper, ListItem, Divider } from './styles';
 
-const ResultsList = ({
-  items = [],
-  onClickResult,
-  selected,
-  showCount,
-}) => {
-
+const ResultsList = ({ items = [], onClickResult, selected, showCount }) => {
   return (
     <ListWrapper>
       {items &&
@@ -29,13 +23,19 @@ const ResultsList = ({
                 ) : (
                   <>
                     {item.link ? (
-                      <Link link={item.link} onClick={onClickResult}>
-                        {ReactHtmlParser(`${item.name}${showCount ? ` (${item.count})` : ''}`)}
+                      <Link href={item.link} onClick={onClickResult}>
+                        <a>
+                          {ReactHtmlParser(
+                            `${item.name}${showCount ? ` (${item.count})` : ''}`
+                          )}
+                        </a>
                       </Link>
-                      ) : (
-                        <button onClick={item.onClick}>
-                          {ReactHtmlParser(`${item.name}${showCount ? ` (${item.count})` : ''}`)}
-                        </button>
+                    ) : (
+                      <button onClick={item.onClick}>
+                        {ReactHtmlParser(
+                          `${item.name}${showCount ? ` (${item.count})` : ''}`
+                        )}
+                      </button>
                     )}
                   </>
                 )}
