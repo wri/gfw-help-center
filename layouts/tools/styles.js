@@ -50,6 +50,7 @@ export const SearchMobile = styled(Search)`
   ${theme.mediaQueries.small} {
     display: none;
   }
+
   ${({ open }) =>
     open &&
     `
@@ -60,9 +61,6 @@ export const SearchMobile = styled(Search)`
     max-width: 1120px;
     padding: 0 16px;
     margin: 0 auto;
-    ${theme.mediaQueries.small} {
-      padding: 0 20px;
-    }
   `}
 `;
 
@@ -85,9 +83,6 @@ export const SearchDesktop = styled(Search)`
     max-width: 1120px;
     padding: 0 16px;
     margin: 0 auto;
-    ${theme.mediaQueries.small} {
-      padding: 0 20px;
-    }
   `}
 `;
 

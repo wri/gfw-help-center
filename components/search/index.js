@@ -32,6 +32,7 @@ const Search = ({
   state,
   showTitle,
   expanded,
+  expandable,
   ...props
 }) => {
   const { query, replace } = useRouter();
@@ -146,7 +147,7 @@ const Search = ({
           onClick={() => setOpen(false)}
         />
       )}
-      <Wrapper {...props} open={open}>
+      <Wrapper {...props} open={open} expandable={expandable}>
         <Container
           open={open}
           expanded={expanded}
@@ -208,4 +209,5 @@ Search.propTypes = {
   showTitle: PropTypes.bool,
   libraries: PropTypes.object,
   expanded: PropTypes.bool,
+  expandable: PropTypes.bool,
 };

@@ -8,6 +8,19 @@ export const Wrapper = styled.div`
   cursor: pointer;
   z-index: 20;
   position: relative;
+
+  ${({ open, expandable }) =>
+    open &&
+    expandable &&
+    `
+    position: absolute;
+    left: 0;
+    right: 0;
+    max-width: 1120px;
+    padding: 0 16px;
+    margin: 0 auto;
+  `}
+
   ${theme.mediaQueries.small} {
     height: 80px;
   }

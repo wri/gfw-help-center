@@ -14,8 +14,8 @@ import {
   Wrapper,
   BreadcrumbsWrapper,
   ContentWrapper,
-  // SearchMobile,
-  // SearchDesktop,
+  SearchMobile,
+  SearchDesktop,
   Title,
   HeaderWrapper,
   Divider,
@@ -97,7 +97,7 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
           </BreadcrumbsWrapper>
         </Column>
         <Column width={[1 / 4]}>
-          {/* <SearchMobile open={state.theme.searchIsActive} /> */}
+          <SearchMobile expandable />
         </Column>
       </Row>
       <Row
@@ -109,7 +109,7 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
           <Dropdown items={toolsOptions} selected={currentParentPage} />
         </HeaderWrapper>
         <Column width={[1, 1 / 3]}>
-          {/* <SearchDesktop showTitle open={state.theme.searchIsActive} /> */}
+          <SearchDesktop expandable />
         </Column>
       </Row>
       <Row>
