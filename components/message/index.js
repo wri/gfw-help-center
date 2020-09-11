@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import treeErrorIcon from '../../assets/icons/error.svg';
-import treeIcon from '../../assets/images/tree-success.png';
+import treeErrorIcon from 'assets/icons/error.svg';
+import treeIcon from 'assets/images/tree-success.png';
 
 import { Container, Image, Title, Description } from './styles';
 

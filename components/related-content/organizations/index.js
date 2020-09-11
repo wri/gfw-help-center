@@ -1,14 +1,13 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactHtmlParser from 'react-html-parser';
 
-import ExpandableCard from '../../card-expandable';
+import ExpandableCard from 'components/card-expandable';
 
 import { CardWrapper } from './styles';
 
-const Organizations = ({ libraries, posts: organizations }) => {
-  const Html2React = libraries?.html2react?.Component;
-
+const Organizations = ({ posts: organizations }) => {
   return organizations?.map(
     ({
       id,
@@ -22,10 +21,10 @@ const Organizations = ({ libraries, posts: organizations }) => {
       <CardWrapper key={id}>
         <ExpandableCard
           {...rest}
-          text={<Html2React html={content?.rendered} />}
-          excerpt={
-            <Html2React html={`${content?.rendered?.split('</p>')[0]}</p>`} />
-          }
+          text={ReactHtmlParser(content?.rendered)}
+          excerpt={ReactHtmlParser(
+            `${content?.rendered?.split('</p>')[0]}</p>`
+          )}
           thumbnail={media?.media_details?.sizes?.medium?.source_url}
           arrow
           small

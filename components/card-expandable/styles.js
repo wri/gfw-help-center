@@ -1,6 +1,9 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 import { theme } from 'gfw-components';
+
+import PlusIconSvg from 'assets/icons/plus.svg';
+import MinusIconSvg from 'assets/icons/minus.svg';
 
 export const Card = styled.button`
   width: 100%;
@@ -17,8 +20,18 @@ export const Card = styled.button`
   }
 `;
 
-export const Icon = styled.img`
+export const MinusIcon = styled(MinusIconSvg)`
   width: 12px;
+  min-width: 12px;
+  height: 12px;
+  margin: 9px 0;
+  z-index: 1;
+  position: relative;
+`;
+
+export const PlusIcon = styled(PlusIconSvg)`
+  width: 12px;
+  min-width: 12px;
   height: 12px;
   margin: 9px 0;
   z-index: 1;

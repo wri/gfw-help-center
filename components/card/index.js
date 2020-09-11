@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-// import Link from 'next/link';
 
 import { Button } from 'gfw-components';
 
-import Media from '../media';
-import CategoryList from '../category-list';
-
-import PlayIconSrc from '../../assets/icons/play.svg';
+import Media from 'components/media';
+import CategoryList from 'components/category-list';
 
 import {
   CardWrapper,
@@ -21,22 +18,6 @@ import {
 
 const Card = ({ title, excerpt, media, categories, large, video }) => (
   <CardWrapper>
-    {/* <Link
-      href={link}
-    >
-      <a
-        css={css`
-          z-index: 1;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-        `}
-      >
-
-      </a>
-    </Link> */}
     {!!media && (
       <MediaWrapper large={large}>
         <Media {...media} />
@@ -49,7 +30,7 @@ const Card = ({ title, excerpt, media, categories, large, video }) => (
                 border: none;
               `}
             >
-              <PlayIcon src={PlayIconSrc} alt="video card" />
+              <PlayIcon />
             </Button>
           </Overlay>
         )}

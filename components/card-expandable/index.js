@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Content from '../content';
+import Content from 'components/content';
 
-import plusIcon from '../../assets/icons/plus.svg';
-import minusIcon from '../../assets/icons/minus.svg';
-
-import { Card, Title, Text, Icon, Thumbnail, ContentWrapper } from './styles';
+import {
+  Card,
+  Title,
+  Text,
+  MinusIcon,
+  PlusIcon,
+  Thumbnail,
+  ContentWrapper,
+} from './styles';
 
 const ExpandableCard = ({ title, text, excerpt, thumbnail, small }) => {
   const [open, setOpen] = useState(false);
@@ -27,11 +32,7 @@ const ExpandableCard = ({ title, text, excerpt, thumbnail, small }) => {
           </Content>
         )}
       </ContentWrapper>
-      {open ? (
-        <Icon src={minusIcon} alt={title} />
-      ) : (
-        <Icon src={plusIcon} alt={title} />
-      )}
+      {open ? <MinusIcon /> : <PlusIcon />}
     </Card>
   );
 };

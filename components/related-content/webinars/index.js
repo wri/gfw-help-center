@@ -1,18 +1,18 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect, css } from 'frontity';
+import { css } from '@emotion/core';
 import { Row, Column } from 'gfw-components';
+import ReactHtmlParser from 'react-html-parser';
+import Link from 'next/link';
 
 import Card from '../../card';
 
-const Webinars = ({ libraries, posts: webinars, maxCols }) => {
-  const Html2React = libraries?.html2react?.Component;
-
+const Webinars = ({ posts: webinars, maxCols }) => {
   return (
     <Row nested>
       {webinars?.map(
-        ({ id, excerpt, featured_media: media, tool_cats, ...rest }) => (
+        ({ id, excerpt, featured_media: media, tool_cats, link, ...rest }) => (
           <Column
             key={id}
             width={[1, 1 / 2, 1 / (maxCols || 2)]}
@@ -20,15 +20,19 @@ const Webinars = ({ libraries, posts: webinars, maxCols }) => {
               margin-bottom: 30px;
             `}
           >
-            <Card
-              {...rest}
-              excerpt={<Html2React html={excerpt.rendered} />}
-              categories={tool_cats}
-              {...(media && {
-                media,
-              })}
-              video
-            />
+            <Link href={link}>
+              <a>
+                <Card
+                  {...rest}
+                  excerpt={ReactHtmlParser(excerpt.rendered)}
+                  categories={tool_cats}
+                  {...(media && {
+                    media,
+                  })}
+                  video
+                />
+              </a>
+            </Link>
           </Column>
         )
       )}
@@ -38,8 +42,7 @@ const Webinars = ({ libraries, posts: webinars, maxCols }) => {
 
 Webinars.propTypes = {
   posts: PropTypes.array,
-  libraries: PropTypes.object,
   maxCols: PropTypes.number,
 };
 
-export default connect(Webinars);
+export default Webinars;

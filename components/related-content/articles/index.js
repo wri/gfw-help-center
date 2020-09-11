@@ -1,23 +1,25 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactHtmlParser from 'react-html-parser';
+import Link from 'next/link';
 
-import SimpleCard from '../../card-simple';
+import SimpleCard from 'components/card-simple';
 
 import { LinkWrapper } from './styles';
 
-const Articles = ({ libraries, posts: articles }) => {
-  const Html2React = libraries?.html2react?.Component;
-
+const Articles = ({ posts: articles }) => {
   return articles?.map(({ id, excerpt, link, tool_cats, ...rest }) => (
-    <LinkWrapper href={link} key={id}>
-      <SimpleCard
-        {...rest}
-        text={<Html2React html={excerpt?.rendered} />}
-        categories={tool_cats}
-        arrow
-      />
-    </LinkWrapper>
+    <Link href={link} key={id}>
+      <LinkWrapper>
+        <SimpleCard
+          {...rest}
+          text={ReactHtmlParser(excerpt?.rendered)}
+          categories={tool_cats}
+          arrow
+        />
+      </LinkWrapper>
+    </Link>
   ));
 };
 

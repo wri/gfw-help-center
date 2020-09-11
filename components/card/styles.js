@@ -1,6 +1,8 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import { rgba } from 'emotion-rgba';
 import { theme } from 'gfw-components';
+
+import PlayIconSrc from 'assets/icons/play.svg';
 
 export const CardWrapper = styled.article`
   position: relative;
@@ -51,7 +53,7 @@ export const Overlay = styled.div`
   background-color: ${rgba(theme.colors.darkestGrey, 0.4)};
 `;
 
-export const PlayIcon = styled.img`
+export const PlayIcon = styled(PlayIconSrc)`
   width: 10px;
   height: 10px;
 `;

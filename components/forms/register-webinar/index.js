@@ -11,7 +11,7 @@ import {
 } from 'gfw-components';
 import { get } from 'axios';
 
-import Message from '../../message';
+import Message from 'components/message';
 
 import postRequest from './actions';
 import { AgreeBoxWrapper, Title } from './styles';

@@ -22,7 +22,7 @@ const ContentComponents = {
   organizations: Organizations,
 };
 
-const PostType = ({ state, postType, include, maxCols }) => {
+const PostType = ({ postType, include, maxCols }) => {
   const Component = ContentComponents[postType];
 
   const [posts, setPosts] = useState([]);
@@ -34,7 +34,6 @@ const PostType = ({ state, postType, include, maxCols }) => {
 
       try {
         const data = await fetchPostTypeData({
-          baseUrl: state.source.api,
           type: postType,
           params: {
             include: include?.join(',') || '',
@@ -65,7 +64,6 @@ const PostType = ({ state, postType, include, maxCols }) => {
 };
 
 PostType.propTypes = {
-  state: PropTypes.object,
   postType: PropTypes.string,
   include: PropTypes.array,
   maxCols: PropTypes.number,

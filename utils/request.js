@@ -1,4 +1,3 @@
-import { decode } from 'frontity';
 import { get } from 'axios';
 import { stringify } from 'query-string';
 import flatMap from 'lodash/flatMap';
@@ -6,14 +5,11 @@ import uniq from 'lodash/uniq';
 import compact from 'lodash/compact';
 
 // eslint-disable-next-line import/prefer-default-export
-export const fetchPostTypeData = async ({
-  baseUrl,
-  type,
-  params,
-  cancelToken,
-}) => {
+export const fetchPostTypeData = async ({ type, params, cancelToken }) => {
   const { data: posts } = await get(
-    `${baseUrl}/wp/v2/${type}${params ? `?${stringify(params)}` : ''}`,
+    `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp/v2/${type}${
+      params ? `?${stringify(params)}` : ''
+    }`,
     { cancelToken }
   );
   let media = null;
@@ -24,7 +20,9 @@ export const fetchPostTypeData = async ({
 
   if (featuredMedia && featuredMedia.length) {
     const mediaResponse = await get(
-      `${baseUrl}/wp/v2/media?include=${featuredMedia.join(',')}`,
+      `${
+        process.env.NEXT_PUBLIC_WORDPRESS_URL
+      }/wp/v2/media?include=${featuredMedia.join(',')}`,
       { cancelToken }
     );
     media = mediaResponse.data;
@@ -34,7 +32,9 @@ export const fetchPostTypeData = async ({
     posts && compact(uniq(flatMap(posts.map((post) => post?.categories))));
   if (catIds && catIds.length) {
     const categoriesResponse = await get(
-      `${baseUrl}/wp/v2/categories?include=${catIds.join(',')}`,
+      `${
+        process.env.NEXT_PUBLIC_WORDPRESS_URL
+      }/wp/v2/categories?include=${catIds.join(',')}`,
       { cancelToken }
     );
     categories = categoriesResponse?.data?.map((cat) => {
@@ -51,7 +51,9 @@ export const fetchPostTypeData = async ({
     posts && compact(uniq(flatMap(posts.map((post) => post?.tool_cats))));
   if (toolCatIds && toolCatIds.length) {
     const toolCatsResponse = await get(
-      `${baseUrl}/wp/v2/tool_cats?include=${toolCatIds.join(',')}`,
+      `${
+        process.env.NEXT_PUBLIC_WORDPRESS_URL
+      }/wp/v2/tool_cats?include=${toolCatIds.join(',')}`,
       { cancelToken }
     );
     toolCats = toolCatsResponse?.data?.map((cat) => {
@@ -69,7 +71,7 @@ export const fetchPostTypeData = async ({
 
     return {
       ...post,
-      title: decode(post.title.rendered),
+      title: post.title.rendered,
       ...(media && {
         featured_media: media.find((m) => m.id === post.featured_media),
       }),

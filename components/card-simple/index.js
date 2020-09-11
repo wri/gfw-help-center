@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Desktop } from 'gfw-components';
 
-// import arrowIconSrc from 'assets/icons/chevron-down.svg';
-
 import Media from '../media';
 
 import CategoriesList from '../category-list';
@@ -33,7 +31,7 @@ const SimpleCard = ({
     </div>
     {arrow && (
       <Desktop>
-        {/* <ArrowIcon src={arrowIconSrc} alt={title} /> */}
+        <ArrowIcon />
       </Desktop>
     )}
   </Card>
