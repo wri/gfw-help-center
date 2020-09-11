@@ -1,5 +1,6 @@
-import styled from '@emotion/styled'
-import { BasicInput, theme } from 'gfw-components'
+import styled from '@emotion/styled';
+import { BasicInput, theme } from 'gfw-components';
+import { rgba } from 'emotion-rgba';
 
 export const Wrapper = styled.div`
   height: 60px;
@@ -83,4 +84,17 @@ export const Input = styled(BasicInput)`
     `
     padding-left: 0 !important;
   `}
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: ${rgba(theme.colors.white, 0.8)};
+  cursor: pointer;
+  z-index: 10;
 `;

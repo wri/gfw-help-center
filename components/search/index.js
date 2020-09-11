@@ -6,7 +6,7 @@ import deburr from 'lodash/deburr';
 import toUpper from 'lodash/toUpper';
 import debounce from 'lodash/debounce';
 import { CancelToken } from 'axios';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 import { SearchIcon, CloseIcon, Button } from 'gfw-components';
 
@@ -21,6 +21,7 @@ import {
   SearchClosed,
   OpenMessage,
   Input,
+  Overlay,
 } from './styles';
 
 const deburrUpper = (string) => toUpper(deburr(string));
@@ -47,7 +48,7 @@ const Search = ({
 
   const keyDownHandler = (e) => {
     if (e.key === 'Enter') {
-      replace(`/search/?query=${search}`)
+      replace(`/search/?query=${search}`);
       setOpen(false);
     }
   };
@@ -79,38 +80,40 @@ const Search = ({
   useEffect(() => {
     const fetchTags = async () => {
       const tagsResponse = await getTags();
-      setTags(tagsResponse)
-    }
+      setTags(tagsResponse);
+    };
 
-    fetchTags()
-  }, [])
+    fetchTags();
+  }, []);
 
   useEffect(
     debounce(() => {
       const fetchSearchContent = async () => {
         const source = CancelToken.source();
-        const articlesResponse = await getPostsByType({ type: 'articles', params: search ?
-          {
-            search
-          }
-          :
-          {
-            'filter[meta_key]': 'featured',
-            'filter[meta_value]': 1,
-          },
-          cancelToken: source.token
+        const articlesResponse = await getPostsByType({
+          type: 'articles',
+          params: search
+            ? {
+                search,
+              }
+            : {
+                'filter[meta_key]': 'featured',
+                'filter[meta_value]': 1,
+              },
+          cancelToken: source.token,
         });
 
-        const webinarsResponse = await getPostsByType({ type: 'webinars', params: search ?
-          {
-            search
-          }
-          :
-          {
-            'filter[meta_key]': 'featured',
-            'filter[meta_value]': 1,
-          },
-          cancelToken: source.token
+        const webinarsResponse = await getPostsByType({
+          type: 'webinars',
+          params: search
+            ? {
+                search,
+              }
+            : {
+                'filter[meta_key]': 'featured',
+                'filter[meta_value]': 1,
+              },
+          cancelToken: source.token,
         });
 
         const allResults = compact([
@@ -134,56 +137,66 @@ const Search = ({
   );
 
   return (
-    <Wrapper {...props} open={open}>
-      <Container
-        open={open}
-        expanded={expanded}
-        onClick={() => setOpen(true)}
-      >
-        {(open || expanded) && (
-          <SearchOpen>
-            <Input
-              ref={inputRef}
-              value={search}
-              expanded={expanded}
-              placeholder="Search the GFW help center"
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={keyDownHandler}
-            />
-            {search && (
-              <Button clear round onClick={() => setSearch('')}>
-                <CloseIcon
-                  css={css`
-                    height: 10px;
-                    width: 10px;
-                    max-height: 10px;
-                    max-width: 10px;
-                  `}
-                />
-              </Button>
-            )}
-          </SearchOpen>
-        )}
-        {!open && showTitle && (
-          <SearchClosed>
-            <OpenMessage>Search the GFW help center</OpenMessage>
-          </SearchClosed>
-        )}
-        <SearchIcon
-          css={css`
-            min-width: 32px;
-            min-height: 32px;
-            height: 32px;
-          `}
-        />
-      </Container>
+    <>
       {open && (
-        <ResultsList
-          items={searchResults}
-          onClickResult={() => setOpen(false)}
+        <Overlay
+          role="button"
+          aria-label="close search"
+          tabIndex={0}
+          onClick={() => setOpen(false)}
         />
       )}
-    </Wrapper>
+      <Wrapper {...props} open={open}>
+        <Container
+          open={open}
+          expanded={expanded}
+          onClick={() => setOpen(true)}
+        >
+          {(open || expanded) && (
+            <SearchOpen>
+              <Input
+                ref={inputRef}
+                value={search}
+                expanded={expanded}
+                placeholder="Search the GFW help center"
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={keyDownHandler}
+              />
+              {search && (
+                <Button clear round onClick={() => setSearch('')}>
+                  <CloseIcon
+                    css={css`
+                      height: 10px;
+                      width: 10px;
+                      max-height: 10px;
+                      max-width: 10px;
+                    `}
+                  />
+                </Button>
+              )}
+            </SearchOpen>
+          )}
+          {!open && showTitle && (
+            <SearchClosed>
+              <OpenMessage>Search the GFW help center</OpenMessage>
+            </SearchClosed>
+          )}
+          <SearchIcon
+            css={css`
+              min-width: 32px;
+              min-height: 32px;
+              height: 32px;
+            `}
+          />
+        </Container>
+        {open && (
+          <ResultsList
+            items={searchResults}
+            onClickResult={() => setOpen(false)}
+          />
+        )}
+      </Wrapper>
+    </>
   );
 };
 
