@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
+import ReactHtmlParser from 'react-html-parser';
 
 import {
   GlobalStyles,
@@ -14,8 +16,6 @@ import {
 import { initAnalytics, handlePageTrack } from 'analytics';
 
 import HelpFooter from 'components/footer';
-
-import Meta from './meta';
 
 export default function Layout({ children, tools, metaTags }) {
   const [open, setOpen] = useState(false);
@@ -31,7 +31,7 @@ export default function Layout({ children, tools, metaTags }) {
 
   return (
     <>
-      <Meta metaTags={metaTags} />
+      <Head>{metaTags && ReactHtmlParser(metaTags)}</Head>
       <GlobalStyles />
       <Header
         relative

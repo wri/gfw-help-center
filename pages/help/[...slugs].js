@@ -5,7 +5,7 @@ import { convertTool } from 'utils/tools';
 
 import ToolsPage from 'layouts/tools';
 
-import Layout from 'components/layout';
+import Layout from 'layouts/layout';
 
 export default function Tools(props) {
   return (

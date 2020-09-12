@@ -1,7 +1,7 @@
 import { getPostsByType, getPostByType } from 'lib/api';
 
 import ArticlePage from 'layouts/article';
-import Layout from 'components/layout';
+import Layout from 'layouts/layout';
 
 export default function Article(props) {
   return (

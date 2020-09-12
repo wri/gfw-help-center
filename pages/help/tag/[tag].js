@@ -2,7 +2,7 @@ import { getTags, getTagBySlug, getPostsByType } from 'lib/api';
 
 import ArchivePage from 'layouts/archive';
 
-import Layout from 'components/layout';
+import Layout from 'layouts/layout';
 
 export default function Tag(props) {
   return (

@@ -4,7 +4,7 @@ import { getPostsByType } from 'lib/api';
 
 import ArchivePage from 'layouts/archive';
 
-import Layout from 'components/layout';
+import Layout from 'layouts/layout';
 
 export default function Search(props) {
   return (

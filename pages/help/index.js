@@ -5,7 +5,7 @@ import { convertTool } from 'utils/tools';
 
 import HomePage from 'layouts/home';
 
-import Layout from 'components/layout';
+import Layout from 'layouts/layout';
 
 export default function Index(props) {
   return (

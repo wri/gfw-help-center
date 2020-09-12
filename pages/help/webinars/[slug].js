@@ -2,7 +2,7 @@ import { getPostsByType, getPostByType } from 'lib/api';
 
 import WebinarPage from 'layouts/webinar';
 
-import Layout from 'components/layout';
+import Layout from 'layouts/layout';
 
 export default function Webinar(props) {
   return (
