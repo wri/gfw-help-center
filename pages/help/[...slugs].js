@@ -30,7 +30,7 @@ export async function getStaticProps({ params }) {
     ...convertTool(tool),
   }));
 
-  const toolsGrouped = groupBy(toolsMapped, 'parent');
+  const toolsGrouped = toolsMapped && groupBy(toolsMapped, 'parent');
   const parentTools = toolsGrouped?.['0'];
 
   const currentParent = parentTools?.find((t) => t.slug === params.slugs[0]);
@@ -51,7 +51,7 @@ export async function getStaticProps({ params }) {
       parentTools: parentTools || [],
       currentPage: currentTool || null,
       siblingTools: siblingTools || [],
-      metaTags: currentTool?.yoast_head,
+      metaTags: currentTool?.yoast_head || null,
     },
     revalidate: 10,
   };

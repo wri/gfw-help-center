@@ -43,7 +43,7 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
   // active parent page ID
   const currentParentPage = currentPage?.parent || currentPage?.id;
   const parentPage = currentPage?.parent
-    ? parentTools.find((p) => p.id === currentPage?.parent)
+    ? parentTools?.find((p) => p.id === currentPage?.parent)
     : currentPage;
 
   // build the options for the side bar menu
@@ -77,11 +77,11 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
           <BreadcrumbsWrapper>
             <Breadcrumbs
               links={
-                currentPage.parent
+                currentPage?.parent
                   ? [
                       {
                         label: parentPage?.title?.rendered,
-                        href: parentPage.link,
+                        href: parentPage?.link,
                       },
                       {
                         label: currentPage?.title?.rendered,

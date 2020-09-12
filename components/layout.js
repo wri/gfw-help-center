@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import ErrorPage from 'next/error';
 
 import {
   GlobalStyles,
@@ -12,13 +11,23 @@ import {
   ContactUsModal,
 } from 'gfw-components';
 
+import { initAnalytics, handlePageTrack } from 'analytics';
+
 import HelpFooter from 'components/footer';
 
 import Meta from './meta';
 
-export default function Layout({ children, tools, metaTags, hasPageData }) {
+export default function Layout({ children, tools, metaTags }) {
   const [open, setOpen] = useState(false);
-  const { isFallback } = useRouter();
+  const { isFallback, asPath } = useRouter();
+
+  useEffect(() => {
+    if (!window.ANALYTICS_INITIALIZED) {
+      initAnalytics();
+      window.ANALYTICS_INITIALIZED = true;
+    }
+    handlePageTrack();
+  }, [asPath]);
 
   return (
     <>
@@ -67,7 +76,6 @@ export default function Layout({ children, tools, metaTags, hasPageData }) {
       />
       <div>
         <main>
-          {!isFallback && !hasPageData && <ErrorPage statusCode={404} />}
           {isFallback ? (
             <LoaderWrapper>
               <Loader />
@@ -95,7 +103,6 @@ Layout.propTypes = {
   children: PropTypes.node,
   tools: PropTypes.array,
   metaTags: PropTypes.string,
-  hasPageData: PropTypes.bool,
 };
 
 const HelpFooterWrapper = styled.div`
