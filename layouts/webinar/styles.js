@@ -65,7 +65,8 @@ export const PostTitle = styled.h1`
   line-height: 38px;
   color: ${theme.colors.darkestGrey};
   font-weight: 300;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
+  margin-top: -8px;
   ${theme.mediaQueries.small} {
     font-size: 48px;
     line-height: 60px;
