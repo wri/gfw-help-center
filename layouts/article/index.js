@@ -55,7 +55,16 @@ const Article = ({ article }) => {
         `}
       >
         <BreadCrumbsWrapper width={[5 / 6, 2 / 3]}>
-          <Breadcrumbs />
+          <Breadcrumbs
+            links={[
+              {
+                label: 'Guides',
+              },
+              {
+                label: article?.title?.rendered,
+              },
+            ]}
+          />
         </BreadCrumbsWrapper>
         <Column width={[1 / 6, 1 / 3]}>
           <Desktop>

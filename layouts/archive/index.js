@@ -66,6 +66,14 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
                 margin-bottom: 40px;
               }
             `}
+            links={[
+              {
+                label: isSearch ? 'Search' : 'Tags',
+              },
+              {
+                label: isSearch ? decodeURI(searchQuery) : tag?.name,
+              },
+            ]}
           />
         </Column>
         {!isSearch && (
