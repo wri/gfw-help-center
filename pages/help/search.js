@@ -1,48 +1,45 @@
 import Head from 'next/head';
 
 import { getPostsByType } from 'lib/api';
-import { convertTool } from 'utils/tools';
 
-import HomePage from 'layouts/home';
+import ArchivePage from 'layouts/archive';
 
 import Layout from 'components/layout';
 
-export default function Index(props) {
+export default function Search(props) {
   return (
     <Layout {...props}>
       <Head>
-        <title>
-          How to Use Global Forest Watch Maps & Tools | GFW Help Center
-        </title>
+        <title>Search | GFW Help Center</title>
         <meta
           name="description"
           content="Find tutorials, webinars and other resources in the GFW Help Center to help guide you through the forest monitoring data, analysis, technology and tools that GFW offers."
         />
       </Head>
-      <HomePage {...props} />
+      <ArchivePage {...props} isSearch />
     </Layout>
   );
 }
 
-export async function getStaticProps() {
-  const tools = await getPostsByType({
-    type: 'tools',
+export async function getServerSideProps({ query }) {
+  const articles = await getPostsByType({
+    type: 'articles',
     params: {
-      per_page: 100,
-      order: 'asc',
-      orderby: 'menu_order',
-      parent: 0,
+      search: query?.query,
     },
   });
 
-  const toolsMapped = tools?.map((tool) => ({
-    ...convertTool(tool),
-  }));
+  const webinars = await getPostsByType({
+    type: 'webinars',
+    params: {
+      search: query?.query,
+    },
+  });
 
   return {
     props: {
-      tools: toolsMapped,
+      articles: articles || [],
+      webinars: webinars || [],
     },
-    revalidate: 10,
   };
 }

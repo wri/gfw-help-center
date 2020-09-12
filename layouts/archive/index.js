@@ -5,7 +5,7 @@ import { Row, Column, Mobile, Desktop, theme } from 'gfw-components';
 import ReactHtmlParser from 'react-html-parser';
 import { useRouter } from 'next/router';
 
-import Link from 'components/link';
+import Link from 'next/link';
 import Card from 'components/card';
 import SimpleCard from 'components/card-simple';
 import Menu from 'components/menu';
@@ -32,13 +32,12 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
     : `${total} ${articleText} tagged with ${tag?.name}`;
 
   const taxFromList = tags?.find((tax) => tax.id === tag?.id);
-  const allTaxOptions = taxFromList
-    ? tags
-    : [{ ...tag, count: total }, ...tags];
+  const allTaxOptions =
+    tags && (taxFromList ? tags : [{ ...tag, count: total }, ...tags]);
 
   const links = [
     {
-      label: 'Articles',
+      label: 'Guides',
       onClick: () => setType('articles'),
       active: type === 'articles',
       count: articles?.length,
@@ -133,7 +132,14 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
               ))}
             {type === 'webinars' &&
               webinars?.map(
-                ({ id, title, excerpt, featured_media: media, ...rest }) => (
+                ({
+                  id,
+                  title,
+                  excerpt,
+                  featured_media: media,
+                  link,
+                  ...rest
+                }) => (
                   <Column
                     width={[1, 1 / 2]}
                     css={css`
@@ -141,15 +147,19 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
                     `}
                     key={id}
                   >
-                    <Card
-                      {...rest}
-                      title={ReactHtmlParser(title?.rendered)}
-                      excerpt={ReactHtmlParser(excerpt?.rendered)}
-                      {...(media && {
-                        media,
-                      })}
-                      video
-                    />
+                    <Link href={link}>
+                      <a>
+                        <Card
+                          {...rest}
+                          title={ReactHtmlParser(title?.rendered)}
+                          excerpt={ReactHtmlParser(excerpt?.rendered)}
+                          {...(media && {
+                            media,
+                          })}
+                          video
+                        />
+                      </a>
+                    </Link>
                   </Column>
                 )
               )}
