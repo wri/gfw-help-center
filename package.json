@@ -15,7 +15,7 @@
     "axios": "^0.20.0",
     "buttercms": "1.2.2",
     "classnames": "2.2.6",
-    "date-fns": "2.14.0",
+    "date-fns": "^2.16.1",
     "emotion": "^10.0.27",
     "emotion-rgba": "^0.0.8",
     "emotion-server": "^10.0.27",
@@ -33,6 +33,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-to-print": "^2.10.0",
     "responsive-loader": "^2.1.1",
     "simple-entity-decode": "^0.0.3",
     "webp-loader": "^0.6.0"

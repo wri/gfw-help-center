@@ -3685,12 +3685,7 @@ data-uri-to-buffer@3.0.0:
   dependencies:
     buffer-from "^1.1.1"
 
-date-fns@2.14.0:
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.14.0.tgz#359a87a265bb34ef2e38f93ecf63ac453f9bc7ba"
-  integrity sha512-1zD+68jhFgDIM0rF05rcwYO8cExdNqxjq4xP1QKM60Q45mnO6zaMWB4tOzrIr4M4GSLntsKeE4c9Bdl2jhL/yw==
-
-date-fns@^2.13.0:
+date-fns@^2.13.0, date-fns@^2.16.1:
   version "2.16.1"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.16.1.tgz#05775792c3f3331da812af253e1a935851d3834b"
   integrity sha512-sAJVKx/FqrLYHAQeN7VpJrPhagZc9R4ImZIWYRFZaaohR3KzmuK88touwsSwSVT8Qcbd4zoDsnGfX4GFB4imyQ==
@@ -8124,6 +8119,13 @@ react-tagsinput@^3.19.0:
   version "3.19.0"
   resolved "https://registry.yarnpkg.com/react-tagsinput/-/react-tagsinput-3.19.0.tgz#6e3b45595f2d295d4657bf194491988f948caabf"
   integrity sha512-ni+/qnZrYrvLg83LtTFHErKy1KQHL0fi0Y6C5jgC1dNUePE9cS/OlQ4XH6JRSjv9GGoeVE0R/ujSBaS1uzCRYQ==
+
+react-to-print@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.10.0.tgz#b45c3dd37341848c1b42f3d9a00cecbe83785f61"
+  integrity sha512-1xCUHGiNkgl2H7xtzyo0KsJHO3B51vuZumwHYYOatT4eQklkAswJDJREOUcGRAm8XO/J0+k3p6v0mNs2Vr6fWA==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-toggle@^4.1.1:
   version "4.1.1"

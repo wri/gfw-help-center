@@ -49,6 +49,7 @@ export const Title = styled.h4`
   z-index: 1;
   position: relative;
   text-align: left;
+  padding-right: 20px;
 `;
 
 export const Text = styled.div`
