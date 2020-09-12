@@ -10,7 +10,7 @@ export default function Search(props) {
   return (
     <Layout {...props}>
       <Head>
-        <title>Search | GFW Help Center</title>
+        <title>Search | Help Center | Global Forest Watch</title>
         <meta
           name="description"
           content="Find tutorials, webinars and other resources in the GFW Help Center to help guide you through the forest monitoring data, analysis, technology and tools that GFW offers."

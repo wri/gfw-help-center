@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
+import ErrorPage from 'next/error';
 
-import { GlobalStyles, Header, Footer, ContactUsModal } from 'gfw-components';
+import {
+  GlobalStyles,
+  Loader,
+  Header,
+  Footer,
+  ContactUsModal,
+} from 'gfw-components';
 
 import HelpFooter from 'components/footer';
 
 import Meta from './meta';
 
-export default function Layout({ children, tools }) {
+export default function Layout({ children, tools, metaTags, hasPageData }) {
   const [open, setOpen] = useState(false);
+  const { isFallback } = useRouter();
 
   return (
     <>
-      <Meta />
+      <Meta metaTags={metaTags} />
       <GlobalStyles />
       <Header
         relative
@@ -57,7 +66,16 @@ export default function Layout({ children, tools }) {
         ]}
       />
       <div>
-        <main>{children}</main>
+        <main>
+          {!isFallback && !hasPageData && <ErrorPage statusCode={404} />}
+          {isFallback ? (
+            <LoaderWrapper>
+              <Loader />
+            </LoaderWrapper>
+          ) : (
+            children
+          )}
+        </main>
       </div>
       <HelpFooterWrapper>
         <HelpFooter tools={tools} openContactUsModal={() => setOpen(true)} />
@@ -68,9 +86,16 @@ export default function Layout({ children, tools }) {
   );
 }
 
+const LoaderWrapper = styled.div`
+  position: relative;
+  min-height: 400px;
+`;
+
 Layout.propTypes = {
   children: PropTypes.node,
   tools: PropTypes.array,
+  metaTags: PropTypes.string,
+  hasPageData: PropTypes.bool,
 };
 
 const HelpFooterWrapper = styled.div`
