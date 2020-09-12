@@ -97,7 +97,7 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
           </BreadcrumbsWrapper>
         </Column>
         <Column width={[1 / 4]}>
-          <SearchMobile expandable />
+          <SearchMobile expandable showTitle />
         </Column>
       </Row>
       <Row
@@ -109,7 +109,7 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
           <Dropdown items={toolsOptions} selected={currentParentPage} />
         </HeaderWrapper>
         <Column width={[1, 1 / 3]}>
-          <SearchDesktop expandable />
+          <SearchDesktop expandable showTitle />
         </Column>
       </Row>
       <Row>
