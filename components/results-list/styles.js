@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import { theme } from 'gfw-components';
 
 export const ListWrapper = styled.ul`
@@ -20,7 +20,6 @@ export const ListWrapper = styled.ul`
 export const ListItem = styled.li`
   width: 100%;
 
-  a,
   button {
     color: ${theme.colors.grey};
     padding: 20px 0;

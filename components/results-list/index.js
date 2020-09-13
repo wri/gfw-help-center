@@ -23,11 +23,15 @@ const ResultsList = ({ items = [], onClickResult, selected, showCount }) => {
                 ) : (
                   <>
                     {item.link ? (
-                      <Link href={item.link} onClick={onClickResult}>
+                      <Link href={item.link}>
                         <a>
-                          {ReactHtmlParser(
-                            `${item.name}${showCount ? ` (${item.count})` : ''}`
-                          )}
+                          <button onClick={onClickResult}>
+                            {ReactHtmlParser(
+                              `${item.name}${
+                                showCount ? ` (${item.count})` : ''
+                              }`
+                            )}
+                          </button>
                         </a>
                       </Link>
                     ) : (
