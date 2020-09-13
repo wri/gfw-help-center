@@ -7,7 +7,7 @@ import Layout from 'layouts/layout';
 export default function Webinar(props) {
   return (
     // eslint-disable-next-line react/prop-types
-    <Layout {...props} hasPageData={!!props.webinar}>
+    <Layout {...props}>
       <WebinarPage {...props} />
     </Layout>
   );
@@ -21,8 +21,9 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      webinar,
-      metaTags: webinar?.yoast_head,
+      webinar: webinar || null,
+      metaTags: webinar?.yoast_head || '',
+      isError: !webinar,
     },
     revalidate: 10,
   };

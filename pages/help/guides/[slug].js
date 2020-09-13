@@ -6,7 +6,7 @@ import Layout from 'layouts/layout';
 export default function Article(props) {
   return (
     // eslint-disable-next-line react/prop-types
-    <Layout {...props} hasPageData={!!props.article}>
+    <Layout {...props}>
       <ArticlePage {...props} />
     </Layout>
   );
@@ -20,8 +20,9 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      article,
-      metaTags: article.yoast_head,
+      article: article || null,
+      metaTags: article?.yoast_head || '',
+      isError: !article,
     },
     revalidate: 10,
   };

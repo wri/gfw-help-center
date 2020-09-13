@@ -10,7 +10,7 @@ import Layout from 'layouts/layout';
 export default function Tools(props) {
   return (
     // eslint-disable-next-line react/prop-types
-    <Layout {...props} hasPageData={!!props.currentPage}>
+    <Layout {...props}>
       <ToolsPage {...props} />
     </Layout>
   );
@@ -47,11 +47,12 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      tools,
+      tools: tools || [],
       parentTools: parentTools || [],
       currentPage: currentTool || null,
       siblingTools: siblingTools || [],
       metaTags: currentTool?.yoast_head || null,
+      isError: !currentTool,
     },
     revalidate: 10,
   };

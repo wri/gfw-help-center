@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Head from 'next/head';
+import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
 import ReactHtmlParser from 'react-html-parser';
 
@@ -17,7 +18,22 @@ import { initAnalytics, handlePageTrack } from 'analytics';
 
 import HelpFooter from 'components/footer';
 
-export default function Layout({ children, metaTags }) {
+const renderPage = (isError, children, setOpen) => (
+  <>
+    {isError ? (
+      <ErrorPage statusCode={404} />
+    ) : (
+      <>
+        {children}
+        <HelpFooterWrapper>
+          <HelpFooter openContactUsModal={() => setOpen(true)} />
+        </HelpFooterWrapper>
+      </>
+    )}
+  </>
+);
+
+export default function Layout({ children, metaTags, isError }) {
   const [open, setOpen] = useState(false);
   const { isFallback, asPath } = useRouter();
 
@@ -81,13 +97,10 @@ export default function Layout({ children, metaTags }) {
               <Loader />
             </LoaderWrapper>
           ) : (
-            children
+            renderPage(isError, children, setOpen)
           )}
         </main>
       </div>
-      <HelpFooterWrapper>
-        <HelpFooter openContactUsModal={() => setOpen(true)} />
-      </HelpFooterWrapper>
       <Footer openContactUsModal={() => setOpen(true)} />
       <ContactUsModal open={open} onRequestClose={() => setOpen(false)} />
     </>
@@ -102,6 +115,7 @@ const LoaderWrapper = styled.div`
 Layout.propTypes = {
   children: PropTypes.node,
   metaTags: PropTypes.string,
+  isError: PropTypes.bool,
 };
 
 const HelpFooterWrapper = styled.div`

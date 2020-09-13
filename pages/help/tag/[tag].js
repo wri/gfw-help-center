@@ -7,7 +7,7 @@ import Layout from 'layouts/layout';
 export default function Tag(props) {
   return (
     // eslint-disable-next-line react/prop-types
-    <Layout {...props} hasPageData={!!props.tag}>
+    <Layout {...props}>
       <ArchivePage {...props} />
     </Layout>
   );
@@ -20,24 +20,25 @@ export async function getStaticProps({ params }) {
   const articles = await getPostsByType({
     type: 'articles',
     params: {
-      help_tags: tag.id,
+      help_tags: tag?.id,
     },
   });
 
   const webinars = await getPostsByType({
     type: 'webinars',
     params: {
-      help_tags: tag.id,
+      help_tags: tag?.id,
     },
   });
 
   return {
     props: {
-      tag,
-      tags,
+      tag: tag || null,
+      tags: tags || [],
       articles: articles || [],
       webinars: webinars || [],
-      metaTags: tag?.yoast_head,
+      metaTags: tag?.yoast_head || '',
+      isError: !tag,
     },
     revalidate: 10,
   };
