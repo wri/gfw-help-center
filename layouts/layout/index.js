@@ -65,6 +65,16 @@ export default function Layout({ children, metaTags, isError }) {
         />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/gfw-help-center-preview.jpg" />
+        <meta property="og:image:width" content="1280" />
+        <meta property="og:image:height" content="700" />
+        <meta
+          property="og:url"
+          content={`https://www.globalforestwatch.org${asPath}`}
+        />
+        <meta
+          property="fb:appid"
+          content={process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}
+        />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=5"
