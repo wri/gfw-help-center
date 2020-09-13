@@ -48,7 +48,6 @@ const Footer = ({ openContactUsModal }) => {
         >
           <SimpleCard
             {...support}
-            title={support?.title?.rendered}
             text={ReactHtmlParser(support?.excerpt?.rendered)}
           />
         </a>
@@ -69,7 +68,6 @@ const Footer = ({ openContactUsModal }) => {
         >
           <SimpleCard
             {...contactUs}
-            title={contactUs?.title?.rendered}
             text={ReactHtmlParser(contactUs?.excerpt?.rendered)}
           />
         </button>

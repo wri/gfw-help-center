@@ -36,8 +36,8 @@ const Post = ({ webinar }) => {
   const isUpcoming = isAfter(webinarDate, now);
 
   const postTitle = isUpcoming
-    ? `Upcoming webinar: ${title.rendered}`
-    : `Webinar: ${title.rendered}`;
+    ? `Upcoming webinar: ${title}`
+    : `Webinar: ${title}`;
 
   return (
     <PostContainer>
@@ -54,7 +54,7 @@ const Post = ({ webinar }) => {
                 label: 'Webinars',
               },
               {
-                label: webinar?.title?.rendered,
+                label: webinar?.title,
               },
             ]}
           />

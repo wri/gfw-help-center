@@ -2,11 +2,8 @@ import { getACFImageSizes } from 'utils/media';
 
 // eslint-disable-next-line import/prefer-default-export
 export const convertTool = (item) => {
-  const url = new URL(item.link);
-
   return {
     ...item,
-    link: url.pathname,
     ...(item?.acf?.logo && {
       logo: {
         ...item?.acf?.logo,

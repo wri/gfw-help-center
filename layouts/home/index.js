@@ -33,7 +33,7 @@ const HomePage = ({ tools }) => {
       <Row>
         <Column width={[1, 5 / 6, 2 / 3]}>
           <Intro
-            title={home?.title?.rendered}
+            title={home?.title}
             description={ReactHtmlParser(home?.excerpt?.rendered)}
           />
         </Column>
@@ -66,7 +66,6 @@ const HomePage = ({ tools }) => {
                 <ToolCard
                   active={i === 0}
                   {...tool}
-                  title={tool?.title?.rendered}
                   text={ReactHtmlParser(tool?.excerpt?.rendered)}
                 />
               </a>
@@ -93,7 +92,6 @@ const HomePage = ({ tools }) => {
                   <SimpleCard
                     {...tool}
                     large={isFirst}
-                    title={tool?.title?.rendered}
                     text={ReactHtmlParser(tool?.excerpt?.rendered)}
                   />
                 </a>

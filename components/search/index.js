@@ -121,11 +121,8 @@ const Search = ({
           ...articlesResponse,
           ...webinarsResponse,
         ])?.map((r) => {
-          const url = new URL(r.link);
-
           return {
-            name: r.title.rendered,
-            link: url.pathname,
+            name: r.title,
           };
         });
 

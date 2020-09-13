@@ -61,7 +61,7 @@ const Article = ({ article }) => {
                 label: 'Guides',
               },
               {
-                label: article?.title?.rendered,
+                label: article?.title,
               },
             ]}
           />
@@ -100,7 +100,7 @@ const Article = ({ article }) => {
         </Column>
         <Column width={[1, 7 / 12]}>
           <PostTitle className="notranslate">
-            {ReactHtmlParser(title.rendered)}
+            {ReactHtmlParser(title)}
           </PostTitle>
           <PostContentWrapper>
             <PostContent align="left">

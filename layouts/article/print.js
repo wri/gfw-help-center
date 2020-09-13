@@ -33,9 +33,7 @@ class ComponentToPrint extends Component {
         >
           https://www.globalforestwatch.org/help
         </p>
-        <PostTitle className="notranslate">
-          {ReactHtmlParser(title.rendered)}
-        </PostTitle>
+        <PostTitle className="notranslate">{ReactHtmlParser(title)}</PostTitle>
         <PostContent align="left">
           {ReactHtmlParser(content.rendered)}
         </PostContent>

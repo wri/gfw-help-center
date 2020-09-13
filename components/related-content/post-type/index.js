@@ -6,7 +6,7 @@ import sortBy from 'lodash/sortBy';
 
 import { Loader } from 'gfw-components';
 
-import { fetchPostTypeData } from 'utils/request';
+import { getPostsByType } from 'lib/api';
 
 import Articles from '../articles';
 import Webinars from '../webinars';
@@ -33,7 +33,7 @@ const PostType = ({ postType, include, maxCols }) => {
       const source = CancelToken.source();
 
       try {
-        const data = await fetchPostTypeData({
+        const data = await getPostsByType({
           type: postType,
           params: {
             include: include?.join(',') || '',

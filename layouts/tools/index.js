@@ -24,7 +24,7 @@ import {
 const Page = ({ parentTools, currentPage, siblingTools }) => {
   // build the options for the dropdown
   const parentPageOptions = parentTools?.map((tool) => ({
-    name: tool.title.rendered,
+    name: tool.title,
     id: tool.id,
     link: tool.link,
   }));
@@ -52,7 +52,7 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
     : [parentPage];
 
   const links = sidebarPages?.map((sub) => ({
-    label: sub?.parent ? sub?.title?.rendered : 'Overview',
+    label: sub?.parent ? sub?.title : 'Overview',
     link: sub?.acf?.alt_link || sub?.link,
     active:
       currentPage?.link === sub?.link || currentPage?.link === `${sub?.link}/`,
@@ -80,16 +80,16 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
                 currentPage?.parent
                   ? [
                       {
-                        label: parentPage?.title?.rendered,
+                        label: parentPage?.title,
                         href: parentPage?.link,
                       },
                       {
-                        label: currentPage?.title?.rendered,
+                        label: currentPage?.title,
                       },
                     ]
                   : [
                       {
-                        label: currentPage?.title?.rendered,
+                        label: currentPage?.title,
                       },
                     ]
               }
@@ -120,9 +120,7 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
         </Column>
         <Column width={[1, 7 / 12]}>
           {title && (
-            <Title>
-              {ReactHtmlParser(parent ? title?.rendered : 'Overview')}
-            </Title>
+            <Title>{ReactHtmlParser(parent ? title : 'Overview')}</Title>
           )}
           {content && (
             <ContentWrapper>

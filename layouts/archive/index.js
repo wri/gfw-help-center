@@ -119,7 +119,7 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
         <Column width={[1, 3 / 4]}>
           <Row nested>
             {type === 'articles' &&
-              articles?.map(({ id, title, excerpt, link, ...rest }) => (
+              articles?.map(({ id, excerpt, link, ...rest }) => (
                 <Column
                   key={id}
                   css={css`
@@ -130,7 +130,6 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
                     <a>
                       <SimpleCard
                         {...rest}
-                        title={ReactHtmlParser(title?.rendered)}
                         text={ReactHtmlParser(excerpt?.rendered)}
                         arrow
                       />
@@ -140,14 +139,7 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
               ))}
             {type === 'webinars' &&
               webinars?.map(
-                ({
-                  id,
-                  title,
-                  excerpt,
-                  featured_media: media,
-                  link,
-                  ...rest
-                }) => (
+                ({ id, excerpt, featured_media: media, link, ...rest }) => (
                   <Column
                     width={[1, 1 / 2]}
                     css={css`
@@ -159,7 +151,6 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
                       <a>
                         <Card
                           {...rest}
-                          title={ReactHtmlParser(title?.rendered)}
                           excerpt={ReactHtmlParser(excerpt?.rendered)}
                           {...(media && {
                             media,
