@@ -1,17 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import ReactHtmlParser from 'react-html-parser';
 
+import { getPostByType } from 'lib/api';
+
 import { Row, Column, H4, theme } from 'gfw-components';
 import SimpleCard from '../card-simple';
 
-const Footer = ({ tools, openContactUsModal }) => {
-  const support = tools?.find((t) => t.slug === 'community-forum');
-  const contactUs = tools?.find((t) => t.slug === 'contact-us');
+const Footer = ({ openContactUsModal }) => {
+  const [support, setSupport] = useState(null);
+  const [contactUs, setContactUs] = useState(null);
 
-  return tools ? (
+  useEffect(() => {
+    const fetchData = async () => {
+      const contactUsResponse = await getPostByType({
+        type: 'tools',
+        slug: 'contact-us',
+      });
+      const supportResponse = await getPostByType({
+        type: 'tools',
+        slug: 'community-forum',
+      });
+      setContactUs(contactUsResponse);
+      setSupport(supportResponse);
+    };
+
+    fetchData();
+  }, []);
+
+  return contactUs && support ? (
     <Row>
       <Column>
         <Title>Get support</Title>

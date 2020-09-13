@@ -17,7 +17,7 @@ import { initAnalytics, handlePageTrack } from 'analytics';
 
 import HelpFooter from 'components/footer';
 
-export default function Layout({ children, tools, metaTags }) {
+export default function Layout({ children, metaTags }) {
   const [open, setOpen] = useState(false);
   const { isFallback, asPath } = useRouter();
 
@@ -86,7 +86,7 @@ export default function Layout({ children, tools, metaTags }) {
         </main>
       </div>
       <HelpFooterWrapper>
-        <HelpFooter tools={tools} openContactUsModal={() => setOpen(true)} />
+        <HelpFooter openContactUsModal={() => setOpen(true)} />
       </HelpFooterWrapper>
       <Footer openContactUsModal={() => setOpen(true)} />
       <ContactUsModal open={open} onRequestClose={() => setOpen(false)} />
@@ -101,7 +101,6 @@ const LoaderWrapper = styled.div`
 
 Layout.propTypes = {
   children: PropTypes.node,
-  tools: PropTypes.array,
   metaTags: PropTypes.string,
 };
 
