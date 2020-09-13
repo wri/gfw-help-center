@@ -35,9 +35,7 @@ export async function getStaticPaths() {
     params: { per_page: 100 },
   });
 
-  const paths = allWebinars?.map(
-    (webinar) => `/help/webinars/${webinar.slug}/`
-  );
+  const paths = allWebinars?.map((webinar) => `/webinars/${webinar.slug}/`);
 
   return {
     paths: paths || [],

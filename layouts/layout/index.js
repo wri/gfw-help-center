@@ -84,7 +84,7 @@ export default function Layout({ children, metaTags, isError }) {
       <GlobalStyles />
       <Header
         relative
-        pathname="https://www.globalforestwatch.org/help"
+        pathname="/help"
         openContactUsModal={() => setOpen(true)}
         navMain={[
           { label: 'Map', href: '/map' },

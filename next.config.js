@@ -4,6 +4,7 @@ const optimizedImages = require('next-optimized-images');
 module.exports = withPlugins(
   [[optimizedImages, { handleImages: ['jpeg', 'png', 'webp', 'gif'] }]],
   {
+    basePath: '/help',
     webpack: (config) => {
       config.module.rules.push({
         test: /\.svg$/,
@@ -17,13 +18,6 @@ module.exports = withPlugins(
 
       return config;
     },
-    redirects: async () => [
-      {
-        source: '/',
-        destination: `/help/`,
-        permanent: true,
-      },
-    ],
     trailingSlash: true,
   }
 );

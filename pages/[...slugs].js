@@ -66,7 +66,7 @@ export async function getStaticPaths() {
 
   const paths = allTools?.map((tool) => {
     const parent = allTools.find((t) => t.id === tool.parent);
-    return `/help/${parent ? `${parent?.slug}/` : ''}${tool.slug}`;
+    return `/${parent ? `${parent?.slug}/` : ''}${tool.slug}`;
   });
 
   return {

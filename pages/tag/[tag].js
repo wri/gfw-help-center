@@ -47,7 +47,7 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
   const allTags = await getTags();
 
-  const paths = allTags?.map((tag) => `/help/tag/${tag.slug}/`);
+  const paths = allTags?.map((tag) => `/tag/${tag.slug}/`);
 
   return {
     paths: paths || [],

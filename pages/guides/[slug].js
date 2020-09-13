@@ -34,7 +34,7 @@ export async function getStaticPaths() {
     params: { per_page: 100 },
   });
 
-  const paths = allArticles?.map((article) => `/help/guides/${article.slug}/`);
+  const paths = allArticles?.map((article) => `/guides/${article.slug}/`);
 
   return {
     paths: paths || [],

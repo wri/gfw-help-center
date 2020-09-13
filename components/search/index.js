@@ -49,18 +49,18 @@ const Search = ({
 
   const keyDownHandler = (e) => {
     if (e.key === 'Enter') {
-      replace(`/help/search/?query=${search}`);
+      replace(`/search/?query=${search}`);
       setOpen(false);
     }
   };
 
   const filteredMeta = results.filter((meta) =>
     deburrUpper(meta.name).includes(deburrUpper(search))
-  ) || [{ name: search, link: `/help/search/?query=${search}` }];
+  ) || [{ name: search, link: `/search/?query=${search}` }];
 
   const filteredResults = filteredMeta?.length
     ? filteredMeta
-    : [{ name: search, link: `/help/search/?query=${search}` }];
+    : [{ name: search, link: `/search/?query=${search}` }];
 
   const searchResults = [
     ...filteredResults,
