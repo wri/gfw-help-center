@@ -36,7 +36,7 @@ const renderPage = (isError, children, setOpen) => (
 export default function Layout({ children, metaTags, isError }) {
   const [open, setOpen] = useState(false);
   const { isFallback, asPath } = useRouter();
-
+  console.log(asPath);
   useEffect(() => {
     if (!window.ANALYTICS_INITIALIZED) {
       initAnalytics();
@@ -64,12 +64,12 @@ export default function Layout({ children, metaTags, isError }) {
           content="Find tutorials, webinars and other resources in the GFW Help Center to help guide you through the forest monitoring data, analysis, technology and tools that GFW offers."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/gfw-help-center-preview.jpg" />
+        <meta property="og:image" content="/help/gfw-help-center-preview.jpg" />
         <meta property="og:image:width" content="1280" />
         <meta property="og:image:height" content="700" />
         <meta
           property="og:url"
-          content={`https://www.globalforestwatch.org${asPath}`}
+          content={`https://www.globalforestwatch.org/help/${asPath}`}
         />
         <meta
           property="fb:appid"
