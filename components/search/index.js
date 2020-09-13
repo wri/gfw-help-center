@@ -56,11 +56,11 @@ const Search = ({
 
   const filteredMeta = results.filter((meta) =>
     deburrUpper(meta.name).includes(deburrUpper(search))
-  ) || [{ name: search, link: `/help/?s=${search}` }];
+  ) || [{ name: search, link: `/help/search/?query=${search}` }];
 
   const filteredResults = filteredMeta?.length
     ? filteredMeta
-    : [{ name: search, link: `/help/?s=${search}` }];
+    : [{ name: search, link: `/help/search/?query=${search}` }];
 
   const searchResults = [
     ...filteredResults,
@@ -122,6 +122,7 @@ const Search = ({
           ...webinarsResponse,
         ])?.map((r) => {
           return {
+            ...r,
             name: r.title,
           };
         });
