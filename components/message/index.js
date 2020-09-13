@@ -1,18 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import treeErrorIcon from 'assets/icons/error.svg';
-import treeIcon from 'assets/images/tree-success.png?webp';
+import treeIcon from 'assets/images/tree-success.png';
 
-import { Container, Image, Title, Description } from './styles';
+import { Container, Image, Title, Description, TreeErrorIcon } from './styles';
 
 const Message = ({ error, title, description, small }) => (
   <Container>
-    {error ? (
-      <Image src={treeErrorIcon} alt="error tree" />
-    ) : (
-      <Image src={treeIcon} alt="success tree" />
-    )}
+    {error ? <TreeErrorIcon /> : <Image src={treeIcon} alt="success tree" />}
     <Title small={small}>{title}</Title>
     <Description small={small}>{description}</Description>
   </Container>

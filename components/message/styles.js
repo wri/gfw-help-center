@@ -1,6 +1,8 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 import { theme } from 'gfw-components';
+
+import TreeErrorIconSrc from 'assets/icons/error.svg';
 
 export const Container = styled.div`
   display: flex;
@@ -10,6 +12,17 @@ export const Container = styled.div`
 
 export const Image = styled.img`
   height: 200px;
+  margin: auto;
+  margin-bottom: 10px;
+
+  ${theme.mediaQueries.small} {
+    margin-bottom: 20px;
+  }
+`;
+
+export const TreeErrorIcon = styled(TreeErrorIconSrc)`
+  height: 200px;
+  width: 100%;
   margin: auto;
   margin-bottom: 10px;
 
