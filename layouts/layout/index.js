@@ -47,7 +47,30 @@ export default function Layout({ children, metaTags, isError }) {
 
   return (
     <>
-      <Head>{metaTags && ReactHtmlParser(metaTags)}</Head>
+      <Head>
+        <meta name="author" content="Vizzuality" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:creator" content="@globalforests" />
+        <meta
+          name="twitter:description"
+          content="Find tutorials, webinars and other resources in the GFW Help Center to help guide you through the forest monitoring data, analysis, technology and tools that GFW offers."
+        />
+        <meta
+          property="og:title"
+          content="How to Use Global Forest Watch Maps & Tools | GFW Help Center"
+        />
+        <meta
+          property="og:description"
+          content="Find tutorials, webinars and other resources in the GFW Help Center to help guide you through the forest monitoring data, analysis, technology and tools that GFW offers."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/gfw-help-center-preview.jpg" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5"
+        />
+        {metaTags && ReactHtmlParser(metaTags)}
+      </Head>
       <GlobalStyles />
       <Header
         relative
