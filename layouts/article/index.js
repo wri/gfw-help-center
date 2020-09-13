@@ -96,7 +96,7 @@ const Article = ({ article }) => {
           >
             <PrintArticle ref={contentEl} article={article} />
           </div>
-          <MetaItem>Print this article</MetaItem>
+          <MetaItem>Print this guide</MetaItem>
         </Column>
         <Column width={[1, 7 / 12]}>
           <PostTitle className="notranslate">
