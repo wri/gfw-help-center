@@ -36,7 +36,7 @@ const renderPage = (isError, children, setOpen) => (
 export default function Layout({ children, metaTags, isError }) {
   const [open, setOpen] = useState(false);
   const { isFallback, asPath } = useRouter();
-  console.log(asPath);
+
   useEffect(() => {
     if (!window.ANALYTICS_INITIALIZED) {
       initAnalytics();
