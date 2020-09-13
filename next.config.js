@@ -4,9 +4,7 @@ const optimizedImages = require('next-optimized-images');
 module.exports = withPlugins(
   [[optimizedImages, { handleImages: ['jpeg', 'png', 'webp', 'gif'] }]],
   {
-    ...(process.env.NODE_ENV === 'production' && {
-      basePath: '/help',
-    }),
+    basePath: '/help',
     webpack: (config) => {
       config.module.rules.push({
         test: /\.svg$/,
