@@ -76,11 +76,15 @@ export default function Layout({
         <meta property="og:image:height" content="700" />
         <meta
           property="og:url"
-          content={`https://www.globalforestwatch.org/help/${asPath}`}
+          content={`https://www.globalforestwatch.org/help${asPath}`}
         />
         <meta
           property="fb:appid"
           content={process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}
+        />
+        <link
+          rel="canonical"
+          href={`https://www.globalforestwatch.org/help${asPath}`}
         />
         <meta
           name="viewport"
