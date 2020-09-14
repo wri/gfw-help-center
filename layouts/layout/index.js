@@ -17,6 +17,7 @@ import { initAnalytics, handlePageTrack } from 'analytics';
 
 import ErrorPage from 'layouts/error';
 import HelpFooter from 'components/footer';
+import PreviewBanner from 'components/preview-banner';
 
 const renderPage = (isError, children, setOpen) => (
   <>
@@ -33,7 +34,7 @@ const renderPage = (isError, children, setOpen) => (
   </>
 );
 
-export default function Layout({ children, metaTags, isError }) {
+export default function Layout({ children, metaTags, isError, preview }) {
   const [open, setOpen] = useState(false);
   const { isFallback, asPath } = useRouter();
 
@@ -124,6 +125,7 @@ export default function Layout({ children, metaTags, isError }) {
         ]}
       />
       <div>
+        {preview && <PreviewBanner />}
         <main>
           {isFallback ? (
             <LoaderWrapper>
@@ -149,6 +151,7 @@ Layout.propTypes = {
   children: PropTypes.node,
   metaTags: PropTypes.string,
   isError: PropTypes.bool,
+  preview: PropTypes.bool,
 };
 
 const HelpFooterWrapper = styled.div`
