@@ -13,9 +13,16 @@ export default function Webinar(props) {
   );
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, preview, previewData }) {
+  const isPreview = !!preview && previewData?.slug === params.slug;
   const webinar = await getPostByType({
     type: 'webinars',
+    ...(isPreview && {
+      id: previewData?.id,
+      params: {
+        status: 'any',
+      },
+    }),
     slug: params.slug,
   });
 
@@ -24,6 +31,7 @@ export async function getStaticProps({ params }) {
       webinar: webinar || null,
       metaTags: webinar?.yoast_head || '',
       isError: !webinar,
+      preview: isPreview,
     },
     revalidate: 10,
   };

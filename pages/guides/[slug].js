@@ -12,9 +12,16 @@ export default function Article(props) {
   );
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, previewData, preview }) {
+  const isPreview = !!preview && previewData?.slug === params.slug;
   const article = await getPostByType({
     type: 'articles',
+    ...(isPreview && {
+      id: previewData?.id,
+      params: {
+        status: 'any',
+      },
+    }),
     slug: params.slug,
   });
 
@@ -23,6 +30,7 @@ export async function getStaticProps({ params }) {
       article: article || null,
       metaTags: article?.yoast_head || '',
       isError: !article,
+      preview: isPreview,
     },
     revalidate: 10,
   };
