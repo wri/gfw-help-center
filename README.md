@@ -18,4 +18,4 @@ yarn dev
 
 This will set up the app running on port 3000.
 
-As the application is deployed under a subpath, you can access all help center content on `http://localhost/help/`.
+As the application is deployed under a subpath, you can access all help center content on `http://localhost:3000/help/`.
