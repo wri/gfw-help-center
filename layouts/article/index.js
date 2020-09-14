@@ -29,14 +29,8 @@ import {
 } from './styles';
 
 const Article = ({ article }) => {
-  const {
-    title,
-    content,
-    modified,
-    tags,
-    acf: { related_content },
-  } = article || {};
-
+  const { title, content, modified, tags, acf } = article || {};
+  const { related_content } = acf || {};
   const relatedContent =
     related_content?.length &&
     related_content?.filter((c) => c.acf_fc_layout !== 'posts');
