@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import { theme } from 'gfw-components';
 
 export default styled.div`
@@ -213,18 +213,12 @@ export default styled.div`
   }
 
   li {
-    line-height: 1.5;
     margin: 0.5rem 0 0 2rem;
   }
 
   li > ul,
   li > ol {
     margin: 1rem 0 0 2rem;
-  }
-
-  dt,
-  dd {
-    line-height: 1.5;
   }
 
   dt {
@@ -279,7 +273,6 @@ export default styled.div`
     border: 1px solid ${theme.colors.lightGrey};
     border-right: 0;
     border-left: 0;
-    line-height: 1.4;
     margin: 0;
     overflow: visible;
     padding: 10px;
