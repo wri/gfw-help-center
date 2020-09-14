@@ -3,7 +3,7 @@ import { post } from 'axios';
 
 const COMMENTS_URI = '/wp/v2/comments';
 
-export default body => {
+const requestWebinar = (body) => {
   post(`${process.env.WORDPRESS_GFW_API}${COMMENTS_URI}`, body)
     .then(() => {})
     .catch((error) => {
@@ -15,3 +15,5 @@ export default body => {
       };
     });
 };
+
+export default requestWebinar;
