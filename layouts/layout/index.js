@@ -71,7 +71,7 @@ export default function Layout({
           content="Find tutorials, webinars and other resources in the GFW Help Center to help guide you through the forest monitoring data, analysis, technology and tools that GFW offers."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/help/gfw-help-center-preview.jpg" />
+        <meta property="og:image" content="/help/preview.jpg" />
         <meta property="og:image:width" content="1280" />
         <meta property="og:image:height" content="700" />
         <meta
