@@ -34,7 +34,13 @@ const renderPage = (isError, children, setOpen) => (
   </>
 );
 
-export default function Layout({ children, metaTags, isError, preview }) {
+export default function Layout({
+  children,
+  metaTags,
+  isError,
+  preview,
+  noIndex,
+}) {
   const [open, setOpen] = useState(false);
   const { isFallback, asPath } = useRouter();
 
@@ -80,6 +86,7 @@ export default function Layout({ children, metaTags, isError, preview }) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=5"
         />
+        {noIndex && <meta name="robots" content="noindex" />}
         {metaTags && ReactHtmlParser(metaTags)}
       </Head>
       <GlobalStyles />
@@ -152,6 +159,7 @@ Layout.propTypes = {
   metaTags: PropTypes.string,
   isError: PropTypes.bool,
   preview: PropTypes.bool,
+  noIndex: PropTypes.bool,
 };
 
 const HelpFooterWrapper = styled.div`

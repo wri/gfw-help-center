@@ -8,7 +8,7 @@ import Layout from 'layouts/layout';
 
 export default function Search(props) {
   return (
-    <Layout {...props}>
+    <Layout {...props} noIndex>
       <Head>
         <title>Search | Help Center | Global Forest Watch</title>
         <meta

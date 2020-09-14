@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start -p $PORT"
+    "start": "next start -p $PORT",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.27",
@@ -30,6 +31,7 @@
     "next": "latest",
     "next-compose-plugins": "^2.2.0",
     "next-optimized-images": "^2.6.2",
+    "next-sitemap": "^1.2.4",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

@@ -1,5 +1,4 @@
-Sitemap: https://content.globalforestwatch.org/articles-sitemap.xml
-Sitemap: https://content.globalforestwatch.org/webinars-sitemap.xml
-Sitemap: https://content.globalforestwatch.org/tools-sitemap.xml
 User-agent: *
-Disallow:
+Allow: /
+Host: https://www.globalforestwatch.org/help/
+Sitemap: https://www.globalforestwatch.org/help/sitemap.xml

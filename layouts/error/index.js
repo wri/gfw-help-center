@@ -27,7 +27,6 @@ const Page404 = ({ statusCode }) => {
           name="description"
           content={`${errorDescription} | GFW Help Center`}
         />
-        <meta name="robots" content="noindex" />
       </Head>
       <Column>
         <Message error title={errorTitle} description={errorDescription} />
