@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import { isAfter } from 'date-fns';
+import { isAfter, format } from 'date-fns';
 import ReactHtmlParser from 'react-html-parser';
 
 import { Row, Column, Desktop, Mobile } from 'gfw-components';
@@ -19,6 +19,7 @@ import {
   PostTitle,
   TagsWrapper,
   Divider,
+  MetaItem,
   PostContentWrapper,
   // FormWrapper,
 } from './styles';
@@ -28,6 +29,8 @@ const Post = ({ webinar }) => {
     title,
     content,
     tags,
+    modified,
+    tools,
     acf: { related_content: relatedContent, date_time },
   } = webinar || {};
 
@@ -39,6 +42,29 @@ const Post = ({ webinar }) => {
     ? `Upcoming webinar: ${title}`
     : `Webinar: ${title}`;
 
+  const breadCrumbs = webinar?.tools?.length
+    ? [
+        {
+          label: webinar?.tools?.[0]?.name,
+          href: webinar?.tools?.[0]?.link,
+        },
+        {
+          label: 'Webinars',
+          href: `/${webinar?.tools?.[0]?.slug}/webinars/`,
+        },
+        {
+          label: webinar?.title,
+        },
+      ]
+    : [
+        {
+          label: 'Webinars',
+        },
+        {
+          label: webinar?.title,
+        },
+      ];
+
   return (
     <PostContainer>
       <Row
@@ -48,16 +74,7 @@ const Post = ({ webinar }) => {
         `}
       >
         <BreadCrumbsWrapper width={[5 / 6, 2 / 3]}>
-          <Breadcrumbs
-            links={[
-              {
-                label: 'Webinars',
-              },
-              {
-                label: webinar?.title,
-              },
-            ]}
-          />
+          <Breadcrumbs links={breadCrumbs} />
         </BreadCrumbsWrapper>
         <Column width={[1 / 6, 1 / 3]}>
           <Desktop>
@@ -69,8 +86,20 @@ const Post = ({ webinar }) => {
         </Column>
       </Row>
       <Row>
-        <Column width={[1, 1 / 4]} />
+        <Column width={[1, 1 / 4]}>
+          <MetaItem>
+            {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
+          </MetaItem>
+        </Column>
         <Column width={[1, 7 / 12]}>
+          {!!tools?.length && (
+            <CategoryList
+              categories={tools}
+              css={css`
+                margin-bottom: 20px;
+              `}
+            />
+          )}
           <PostTitle className="notranslate">{postTitle}</PostTitle>
           {/* {isUpcoming && (
             <FormWrapper>

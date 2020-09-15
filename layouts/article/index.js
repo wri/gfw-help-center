@@ -29,7 +29,7 @@ import {
 } from './styles';
 
 const Article = ({ article }) => {
-  const { title, content, modified, tags, acf } = article || {};
+  const { title, content, modified, tags, acf, tools } = article || {};
   const { related_content } = acf || {};
   const relatedContent =
     related_content?.length &&
@@ -40,6 +40,29 @@ const Article = ({ article }) => {
 
   const contentEl = useRef(null);
 
+  const breadCrumbs = article?.tools?.length
+    ? [
+        {
+          label: article?.tools?.[0]?.name,
+          href: article?.tools?.[0]?.link,
+        },
+        {
+          label: 'Step by step instructions',
+          href: `/${article?.tools?.[0]?.slug}/guides/`,
+        },
+        {
+          label: article?.title,
+        },
+      ]
+    : [
+        {
+          label: 'Step by step instructions',
+        },
+        {
+          label: article?.title,
+        },
+      ];
+
   return (
     <PostContainer>
       <Row
@@ -49,16 +72,7 @@ const Article = ({ article }) => {
         `}
       >
         <BreadCrumbsWrapper width={[5 / 6, 2 / 3]}>
-          <Breadcrumbs
-            links={[
-              {
-                label: 'Guides',
-              },
-              {
-                label: article?.title,
-              },
-            ]}
-          />
+          <Breadcrumbs links={breadCrumbs} />
         </BreadCrumbsWrapper>
         <Column width={[1 / 6, 1 / 3]}>
           <Desktop>
@@ -93,6 +107,14 @@ const Article = ({ article }) => {
           <MetaItem>Print this guide</MetaItem>
         </Column>
         <Column width={[1, 7 / 12]}>
+          {!!tools?.length && (
+            <CategoryList
+              categories={tools}
+              css={css`
+                margin-bottom: 20px;
+              `}
+            />
+          )}
           <PostTitle className="notranslate">
             {ReactHtmlParser(title)}
           </PostTitle>

@@ -37,7 +37,7 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
 
   const links = [
     {
-      label: 'Guides',
+      label: 'Step by step instructions',
       onClick: () => setType('articles'),
       active: type === 'articles',
       count: articles?.length,

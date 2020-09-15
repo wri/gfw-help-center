@@ -43,10 +43,13 @@ export async function getStaticPaths() {
     params: { per_page: 100 },
   });
 
-  const webinarsWithoutTax = allWebinars.filter((a) => !a?.help_tools?.length);
-  const paths = webinarsWithoutTax?.map(
-    (webinar) => `/webinars/${webinar.slug}/`
-  );
+  const webinarsWithTax = allWebinars.filter((a) => a?.help_tools?.length);
+
+  const paths = webinarsWithTax?.map((webinar) => {
+    const taxonomy = webinar?._embedded?.['wp:term']?.[1]?.[0]?.slug;
+
+    return `/${taxonomy}/webinars/${webinar.slug}/`;
+  });
 
   return {
     paths: paths || [],

@@ -42,10 +42,13 @@ export async function getStaticPaths() {
     params: { per_page: 100 },
   });
 
-  const articlesWithoutTax = allArticles.filter((a) => !a?.help_tools?.length);
-  const paths = articlesWithoutTax?.map(
-    (article) => `/guides/${article.slug}/`
-  );
+  const articlesWithTax = allArticles.filter((a) => a?.help_tools?.length);
+
+  const paths = articlesWithTax?.map((article) => {
+    const taxonomy = article?._embedded?.['wp:term']?.[1]?.[0]?.slug;
+
+    return `/${taxonomy}/guides/${article.slug}/`;
+  });
 
   return {
     paths: paths || [],
