@@ -40,13 +40,13 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
       label: 'Step by step instructions',
       onClick: () => setType('articles'),
       active: type === 'articles',
-      count: articles?.length,
+      count: articles?.length || '0',
     },
     {
       label: 'Webinars',
       onClick: () => setType('webinars'),
       active: type === 'webinars',
-      count: webinars?.length,
+      count: webinars?.length || '0',
     },
   ];
 
