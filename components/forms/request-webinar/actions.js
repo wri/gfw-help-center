@@ -1,10 +1,8 @@
 import { FORM_ERROR } from 'gfw-components';
 import { post } from 'axios';
 
-const COMMENTS_URI = '/wp/v2/comments';
-
 const requestWebinar = (body) => {
-  post(`${process.env.WORDPRESS_GFW_API}${COMMENTS_URI}`, body)
+  post('https://api.resourcewatch.org/form/request-webinarz', body)
     .then(() => {})
     .catch((error) => {
       const { errors } = error.response && error.response.data;

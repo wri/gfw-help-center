@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import treeIcon from 'assets/images/tree-success.png?webp';
+import treeIcon from 'assets/images/tree-success.png';
 
 import { Container, Image, Title, Description, TreeErrorIcon } from './styles';
 
@@ -17,7 +17,7 @@ Message.propTypes = {
   error: PropTypes.bool,
   title: PropTypes.string,
   description: PropTypes.string,
-  small: PropTypes.string,
+  small: PropTypes.bool,
 };
 
 export default Message;
