@@ -37,6 +37,7 @@ const PostType = ({ postType, include, maxCols }) => {
           type: postType,
           params: {
             include: include?.join(',') || '',
+            per_page: 100,
           },
           cancelToken: source.token,
         });
