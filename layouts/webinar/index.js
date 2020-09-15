@@ -10,7 +10,7 @@ import PostContent from 'components/content';
 import Breadcrumbs from 'components/breadcrumbs';
 import RelatedContent from 'components/related-content';
 import CategoryList from 'components/category-list';
-import RegisterForm from 'components/forms/register-webinar';
+// import RegisterForm from 'components/forms/register-webinar';
 
 import {
   PostContainer,
@@ -20,7 +20,7 @@ import {
   TagsWrapper,
   Divider,
   PostContentWrapper,
-  FormWrapper,
+  // FormWrapper,
 } from './styles';
 
 const Post = ({ webinar }) => {
@@ -72,11 +72,11 @@ const Post = ({ webinar }) => {
         <Column width={[1, 1 / 4]} />
         <Column width={[1, 7 / 12]}>
           <PostTitle className="notranslate">{postTitle}</PostTitle>
-          {isUpcoming && (
+          {/* {isUpcoming && (
             <FormWrapper>
               <RegisterForm />
             </FormWrapper>
-          )}
+          )} */}
           <PostContentWrapper>
             <PostContent align="left">
               {ReactHtmlParser(content.rendered)}
