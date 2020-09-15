@@ -15,7 +15,7 @@ export const Container = styled.div`
   justify-content: flex-end;
   width: 100%;
   color: ${theme.colors.white};
-  font-size: 14px;
+  font-size: 12px;
 
   a {
     color: inherit;

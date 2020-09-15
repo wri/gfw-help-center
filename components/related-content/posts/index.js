@@ -22,10 +22,7 @@ const Posts = ({ posts: articles, maxCols }) => {
             <Card
               {...rest}
               link={`https://blog.globalforestwatch.org${link}`}
-              categories={categories?.map((cat) => ({
-                ...cat,
-                link: `https://blog.globalforestwatch.org${cat.link}`,
-              }))}
+              categories={categories}
               excerpt={ReactHtmlParser(excerpt.rendered)}
               {...(media && {
                 media,
