@@ -15,7 +15,7 @@ const SimpleCard = ({
   backgroundImage,
   large,
   arrow,
-  categories,
+  tools,
 }) => (
   <Card large={large}>
     {backgroundImage && (
@@ -25,7 +25,7 @@ const SimpleCard = ({
     )}
     <div>
       {icon && <Icon src={icon.url} alt={icon.title} />}
-      {categories && <CategoriesList categories={categories} />}
+      {tools && <CategoriesList categories={tools} />}
       {title && <Title light={!!backgroundImage}>{title}</Title>}
       {text && <Text light={!!backgroundImage}>{text}</Text>}
     </div>
@@ -45,6 +45,6 @@ SimpleCard.propTypes = {
   text: PropTypes.node,
   large: PropTypes.bool,
   arrow: PropTypes.bool,
-  categories: PropTypes.array,
+  tools: PropTypes.array,
   backgroundImage: PropTypes.object,
 };
