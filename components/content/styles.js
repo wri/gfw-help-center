@@ -181,6 +181,7 @@ export default styled.div`
     object-position: center;
     margin-bottom: 0;
     display: block;
+    height: auto;
   }
 
   ul,
