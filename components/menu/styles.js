@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import { H4, theme } from 'gfw-components';
 
 export const MenuWrapper = styled.ul`
@@ -20,9 +20,10 @@ export const MenuItem = styled.li`
     color: ${theme.colors.grey};
     padding: 10px ${theme.grid.mobileGutter};
     display: block;
+    text-align: left;
 
     ${theme.mediaQueries.small} {
-      padding: 10px 0;
+      padding: 0 0 20px;
     }
   }
 
