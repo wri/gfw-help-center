@@ -23,8 +23,7 @@ import {
   Intro,
 } from './styles';
 
-const HomePage = ({ tools }) => {
-  const home = tools.find((t) => t.slug === 'help-center');
+const HomePage = ({ homepage, tools }) => {
   const primaryTools = tools?.slice(0, 4);
   const secondaryTools = tools?.slice(4, 8);
 
@@ -33,8 +32,8 @@ const HomePage = ({ tools }) => {
       <Row>
         <Column width={[1, 5 / 6, 2 / 3]}>
           <Intro
-            title={home?.title}
-            description={ReactHtmlParser(home?.excerpt?.rendered)}
+            title={homepage?.title}
+            description={ReactHtmlParser(homepage?.excerpt?.rendered)}
           />
         </Column>
         <SearchWrapper>
@@ -106,6 +105,7 @@ const HomePage = ({ tools }) => {
 
 HomePage.propTypes = {
   tools: PropTypes.array,
+  homepage: PropTypes.object,
 };
 
 export default HomePage;

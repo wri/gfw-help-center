@@ -16,11 +16,11 @@ const Footer = ({ openContactUsModal }) => {
   useEffect(() => {
     const fetchData = async () => {
       const contactUsResponse = await getPostByType({
-        type: 'tools',
+        type: 'pages',
         slug: 'contact-us',
       });
       const supportResponse = await getPostByType({
-        type: 'tools',
+        type: 'pages',
         slug: 'community-forum',
       });
       setContactUs(contactUsResponse);

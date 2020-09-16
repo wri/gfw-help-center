@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { getPostsByType } from 'lib/api';
+import { getPostByType, getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
 
 import HomePage from 'layouts/home';
@@ -25,6 +25,11 @@ export default function Index(props) {
 }
 
 export async function getStaticProps() {
+  const homepage = await getPostByType({
+    type: 'pages',
+    slug: 'help-center',
+  });
+
   const tools = await getPostsByType({
     type: 'tools',
     params: {
@@ -41,6 +46,7 @@ export async function getStaticProps() {
 
   return {
     props: {
+      homepage: homepage || {},
       tools: toolsMapped || [],
     },
     revalidate: 10,
