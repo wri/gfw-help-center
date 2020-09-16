@@ -11,6 +11,7 @@ import { Wrapper, Divider, Title, Subtitle } from './styles';
 const ContentComponents = {
   faqs: FAQs,
   articles: PostType,
+  additional_materials: PostType,
   organizations: PostType,
   webinars: PostType,
   posts: PostType,

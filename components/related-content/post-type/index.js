@@ -17,6 +17,7 @@ import { PostsWrapper } from './styles';
 
 const ContentComponents = {
   articles: Articles,
+  additional_materials: Articles,
   webinars: Webinars,
   posts: Posts,
   organizations: Organizations,
