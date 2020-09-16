@@ -117,9 +117,23 @@ const Search = ({
           cancelToken: source.token,
         });
 
+        const additionalMaterialsResponse = await getPostsByType({
+          type: 'additional_materials',
+          params: search
+            ? {
+                search,
+              }
+            : {
+                'filter[meta_key]': 'featured',
+                'filter[meta_value]': 1,
+              },
+          cancelToken: source.token,
+        });
+
         const allResults = compact([
           ...articlesResponse,
           ...webinarsResponse,
+          ...additionalMaterialsResponse,
         ])?.map((r) => {
           return {
             ...r,

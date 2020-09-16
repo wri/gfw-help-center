@@ -31,12 +31,20 @@ export async function getStaticProps({ params }) {
     },
   });
 
+  const additionalMaterials = await getPostsByType({
+    type: 'additional_materials',
+    params: {
+      help_tags: tag?.id,
+    },
+  });
+
   return {
     props: {
       tag: tag || null,
       tags: tags || [],
       articles: articles || [],
       webinars: webinars || [],
+      additionalMaterials: additionalMaterials || [],
       metaTags: tag?.yoast_head || '',
       isError: !tag,
     },

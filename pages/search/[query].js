@@ -36,10 +36,18 @@ export async function getServerSideProps({ params }) {
     },
   });
 
+  const additionalMaterials = await getPostsByType({
+    type: 'additional_materials',
+    params: {
+      search: params?.query,
+    },
+  });
+
   return {
     props: {
       articles: articles || [],
       webinars: webinars || [],
+      additionalMaterials: additionalMaterials || [],
     },
   };
 }

@@ -20,12 +20,20 @@ import {
   ResultsStatement,
 } from './styles';
 
-const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
+const SearchPage = ({
+  tag,
+  tags,
+  articles,
+  webinars,
+  additionalMaterials,
+  isSearch,
+}) => {
   const [type, setType] = useState('articles');
   const { query } = useRouter();
   const { query: searchQuery } = query || {};
 
-  const total = articles?.length + webinars?.length;
+  const total =
+    articles?.length + webinars?.length + additionalMaterials?.length;
   const articleText = total === 1 ? 'article' : 'articles';
 
   const searchStatement =
@@ -53,6 +61,12 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
       onClick: () => setType('webinars'),
       active: type === 'webinars',
       count: webinars?.length || '0',
+    },
+    {
+      label: 'Additional Materials',
+      onClick: () => setType('additional-materials'),
+      active: type === 'additional-materials',
+      count: additionalMaterials?.length || '0',
     },
   ];
 
@@ -174,6 +188,25 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
                   </Column>
                 )
               )}
+            {type === 'additional-materials' &&
+              additionalMaterials?.map(({ id, excerpt, link, ...rest }) => (
+                <Column
+                  key={id}
+                  css={css`
+                    margin-bottom: 40px !important;
+                  `}
+                >
+                  <Link href={link}>
+                    <a>
+                      <SimpleCard
+                        {...rest}
+                        text={ReactHtmlParser(excerpt?.rendered)}
+                        arrow
+                      />
+                    </a>
+                  </Link>
+                </Column>
+              ))}
           </Row>
         </Column>
       </Row>
@@ -189,6 +222,7 @@ SearchPage.propTypes = {
   tags: PropTypes.array,
   articles: PropTypes.array,
   webinars: PropTypes.array,
+  additionalMaterials: PropTypes.array,
   isSearch: PropTypes.bool,
 };
 
