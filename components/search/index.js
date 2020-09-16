@@ -35,8 +35,8 @@ const Search = ({
   expandable,
   ...props
 }) => {
-  const { query, replace } = useRouter();
-  const searchQuery = query?.query ? decodeURI(query?.query) : '';
+  const { query, push } = useRouter();
+  const searchQuery = query?.q ? decodeURI(query?.q) : '';
 
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState(searchQuery);
@@ -49,18 +49,18 @@ const Search = ({
 
   const keyDownHandler = (e) => {
     if (e.key === 'Enter') {
-      replace(`/search/?query=${search}`);
+      push('/search/[query]', `/search/${search}/`);
       setOpen(false);
     }
   };
 
   const filteredMeta = results.filter((meta) =>
     deburrUpper(meta.name).includes(deburrUpper(search))
-  ) || [{ name: search, link: `/search/?query=${search}` }];
+  ) || [{ name: search, link: `/search/${search}/` }];
 
   const filteredResults = filteredMeta?.length
     ? filteredMeta
-    : [{ name: search, link: `/search/?query=${search}` }];
+    : [{ name: search, link: `/search/${search}/` }];
 
   const searchResults = [
     ...filteredResults,

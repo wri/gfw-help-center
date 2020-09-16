@@ -21,18 +21,18 @@ export default function Search(props) {
   );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ params }) {
   const articles = await getPostsByType({
     type: 'articles',
     params: {
-      search: query?.query,
+      search: params?.query,
     },
   });
 
   const webinars = await getPostsByType({
     type: 'webinars',
     params: {
-      search: query?.query,
+      search: params?.query,
     },
   });
 

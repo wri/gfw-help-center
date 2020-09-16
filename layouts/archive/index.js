@@ -4,6 +4,7 @@ import { css } from '@emotion/core';
 import { Row, Column, Mobile, Desktop, theme } from 'gfw-components';
 import ReactHtmlParser from 'react-html-parser';
 import { useRouter } from 'next/router';
+import compact from 'lodash/compact';
 
 import Link from 'next/link';
 import Card from 'components/card';
@@ -27,9 +28,14 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
   const total = articles?.length + webinars?.length;
   const articleText = total === 1 ? 'article' : 'articles';
 
-  const resultsStatement = isSearch
-    ? `${total} ${articleText} with the keyword ${decodeURI(searchQuery)}`
-    : `${total} ${articleText} tagged with ${tag?.name}`;
+  const searchStatement =
+    isSearch &&
+    searchQuery &&
+    `${total} ${articleText} with the keyword ${decodeURI(searchQuery)}`;
+  const tagStatement =
+    !isSearch && `${total} ${articleText} tagged with ${tag?.name}`;
+
+  const resultsStatement = isSearch ? searchStatement : tagStatement;
 
   const taxFromList = tags?.find((tax) => tax.id === tag?.id);
   const allTaxOptions =
@@ -50,6 +56,19 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
     },
   ];
 
+  const breadCrumbs = compact([
+    {
+      label: isSearch ? 'Search' : 'Tags',
+    },
+    searchQuery &&
+      isSearch && {
+        label: decodeURI(searchQuery),
+      },
+    !isSearch && {
+      label: tag?.name,
+    },
+  ]);
+
   return (
     <Wrapper>
       <Row
@@ -66,14 +85,7 @@ const SearchPage = ({ tag, tags, articles, webinars, isSearch }) => {
                 margin-bottom: 40px;
               }
             `}
-            links={[
-              {
-                label: isSearch ? 'Search' : 'Tags',
-              },
-              {
-                label: isSearch ? decodeURI(searchQuery) : tag?.name,
-              },
-            ]}
+            links={breadCrumbs}
           />
         </Column>
         {!isSearch && (
