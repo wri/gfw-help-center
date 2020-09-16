@@ -7,7 +7,7 @@ export default function Article(props) {
   return (
     // eslint-disable-next-line react/prop-types
     <Layout {...props}>
-      <ArticlePage {...props} />
+      <ArticlePage {...props} isGuide />
     </Layout>
   );
 }

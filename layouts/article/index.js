@@ -28,7 +28,7 @@ import {
   PostContentWrapper,
 } from './styles';
 
-const Article = ({ article }) => {
+const Article = ({ article, isGuide }) => {
   const { title, content, modified, tags, acf, tools } = article || {};
   const { related_content } = acf || {};
   const relatedContent =
@@ -40,6 +40,11 @@ const Article = ({ article }) => {
 
   const contentEl = useRef(null);
 
+  const pageLabel = isGuide
+    ? 'Step by step instructions'
+    : 'Additional materials';
+  const pageSlug = isGuide ? 'guides' : 'additional-materials';
+
   const breadCrumbs = article?.tools?.length
     ? [
         {
@@ -47,8 +52,8 @@ const Article = ({ article }) => {
           href: article?.tools?.[0]?.link,
         },
         {
-          label: 'Step by step instructions',
-          href: `/${article?.tools?.[0]?.slug}/guides/`,
+          label: pageLabel,
+          href: `/${article?.tools?.[0]?.slug}/${pageSlug}/`,
         },
         {
           label: article?.title,
@@ -56,7 +61,7 @@ const Article = ({ article }) => {
       ]
     : [
         {
-          label: 'Step by step instructions',
+          label: pageLabel,
         },
         {
           label: article?.title,
@@ -104,7 +109,7 @@ const Article = ({ article }) => {
           >
             <PrintArticle ref={contentEl} article={article} />
           </div>
-          <MetaItem>Print this guide</MetaItem>
+          <MetaItem>Print this article</MetaItem>
         </Column>
         <Column width={[1, 7 / 12]}>
           {!!tools?.length && (
@@ -153,6 +158,7 @@ const Article = ({ article }) => {
 
 Article.propTypes = {
   article: PropTypes.object,
+  isGuide: PropTypes.bool,
 };
 
 export default Article;

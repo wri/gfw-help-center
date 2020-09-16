@@ -3,11 +3,11 @@ import { getPostsByType, getPostByType } from 'lib/api';
 import ArticlePage from 'layouts/article';
 import Layout from 'layouts/layout';
 
-export default function Article(props) {
+export default function AdditionalMaterial(props) {
   return (
     // eslint-disable-next-line react/prop-types
     <Layout {...props}>
-      <ArticlePage {...props} isGuide />
+      <ArticlePage {...props} />
     </Layout>
   );
 }
@@ -15,7 +15,7 @@ export default function Article(props) {
 export async function getStaticProps({ params, previewData, preview }) {
   const isPreview = !!preview && previewData?.slug === params.slug;
   const article = await getPostByType({
-    type: 'articles',
+    type: 'additional_materials',
     ...(isPreview && {
       id: previewData?.id,
       params: {
@@ -38,7 +38,7 @@ export async function getStaticProps({ params, previewData, preview }) {
 
 export async function getStaticPaths() {
   const allArticles = await getPostsByType({
-    type: 'articles',
+    type: 'additional_materials',
     params: { per_page: 100 },
   });
 
@@ -47,7 +47,7 @@ export async function getStaticPaths() {
   const paths = articlesWithTax?.map((article) => {
     const taxonomy = article?._embedded?.['wp:term']?.[1]?.[0]?.slug;
 
-    return `/${taxonomy}/guides/${article.slug}/`;
+    return `/${taxonomy}/additional-materials/${article.slug}/`;
   });
 
   return {
