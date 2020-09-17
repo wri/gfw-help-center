@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { Row, Column, Desktop, Mobile } from 'gfw-components';
 import ReactHtmlParser from 'react-html-parser';
+import Sticky from 'react-stickynode';
 
 import Breadcrumbs from 'components/breadcrumbs';
 import Dropdown from 'components/dropdown';
@@ -126,7 +127,9 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
       <Row>
         <Column width={[1, 1 / 4]}>
           <Desktop>
-            <Menu links={links} />
+            <Sticky top={120} bottomBoundary="#content">
+              <Menu links={links} />
+            </Sticky>
           </Desktop>
         </Column>
         <Column width={[1, 7 / 12]}>
@@ -134,11 +137,13 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
             <Title>{ReactHtmlParser(parent ? title : 'Overview')}</Title>
           )}
           {content && (
-            <ContentWrapper>
-              <Content align="left">
-                {ReactHtmlParser(content?.rendered)}
-              </Content>
-            </ContentWrapper>
+            <div id="content">
+              <ContentWrapper>
+                <Content align="left">
+                  {ReactHtmlParser(content?.rendered)}
+                </Content>
+              </ContentWrapper>
+            </div>
           )}
           {relatedContent?.length > 0 && (
             <RelatedContent sections={relatedContent} />
