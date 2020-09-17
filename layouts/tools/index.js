@@ -16,6 +16,7 @@ import {
   ContentWrapper,
   SearchMobile,
   SearchDesktop,
+  MenuWrapper,
   Title,
   HeaderWrapper,
   Divider,
@@ -97,7 +98,7 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
           </BreadcrumbsWrapper>
         </Column>
         <Column width={[1 / 4]}>
-          <SearchMobile expandable showTitle />
+          <SearchMobile expandable />
         </Column>
       </Row>
       <Row
@@ -112,6 +113,16 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
           <SearchDesktop expandable showTitle />
         </Column>
       </Row>
+      <Mobile>
+        <MenuWrapper>
+          <Menu
+            links={links}
+            css={css`
+              margin-bottom: 40px;
+            `}
+          />
+        </MenuWrapper>
+      </Mobile>
       <Row>
         <Column width={[1, 1 / 4]}>
           <Desktop>
@@ -146,7 +157,14 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
         </>
       )}
       <Mobile>
-        <Menu links={links} />
+        <MenuWrapper>
+          <Menu
+            links={links}
+            css={css`
+              margin-bottom: 40px;
+            `}
+          />
+        </MenuWrapper>
       </Mobile>
     </Wrapper>
   );

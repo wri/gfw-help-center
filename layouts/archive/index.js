@@ -18,6 +18,7 @@ import {
   SearchMobile,
   SearchDesktop,
   ResultsStatement,
+  MenuWrapper,
 } from './styles';
 
 const SearchPage = ({
@@ -129,6 +130,11 @@ const SearchPage = ({
           </Column>
         </Row>
       )}
+      <Mobile>
+        <MenuWrapper>
+          <Menu links={links} />
+        </MenuWrapper>
+      </Mobile>
       <Row>
         <Column
           css={css`
@@ -142,7 +148,7 @@ const SearchPage = ({
             <Menu links={links} />
           </Desktop>
         </Column>
-        <Column width={[1, 3 / 4]}>
+        <Column width={[1, 7 / 12]}>
           <Row nested>
             {type === 'articles' &&
               articles?.map(({ id, excerpt, link, ...rest }) => (
@@ -211,7 +217,9 @@ const SearchPage = ({
         </Column>
       </Row>
       <Mobile>
-        <Menu links={links} />
+        <MenuWrapper>
+          <Menu links={links} />
+        </MenuWrapper>
       </Mobile>
     </Wrapper>
   );

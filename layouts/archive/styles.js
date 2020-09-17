@@ -69,7 +69,8 @@ export const ResultsStatement = styled.p`
   font-size: 14px;
   line-height: 21px;
   color: ${theme.colors.mediumGrey};
-  margin-top: 60px;
+  margin-top: 20px;
+
   ${theme.mediaQueries.small} {
     margin-top: 75px;
   }
@@ -80,4 +81,8 @@ export const LoadMoreWrapper = styled(Row)`
   ${theme.mediaQueries.small} {
     margin-top: 60px !important;
   }
+`;
+
+export const MenuWrapper = styled.div`
+  margin-top: 40px;
 `;

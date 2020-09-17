@@ -15,6 +15,10 @@ export const ContentWrapper = styled.div`
   margin-bottom: 40px;
 `;
 
+export const MenuWrapper = styled.div`
+  margin-bottom: 40px;
+`;
+
 export const Title = styled(H3)`
   margin-bottom: 20px;
   font-size: 18px;
