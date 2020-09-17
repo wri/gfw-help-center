@@ -5,7 +5,7 @@ import { rgba } from 'emotion-rgba';
 import SearchComponent from 'components/search';
 
 export const PostContainer = styled.div`
-  padding-top: 30px;
+  padding-top: 40px;
   width: 100%;
   overflow: hidden;
   min-height: 500px;
