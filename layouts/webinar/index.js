@@ -131,7 +131,7 @@ const Post = ({ webinar }) => {
           )}
         </Column>
       </Row>
-      {!!blogPosts.length && (
+      {!!blogPosts?.length && (
         <>
           <Divider />
           <Row>
