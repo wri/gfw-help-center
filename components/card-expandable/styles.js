@@ -45,7 +45,7 @@ export const ContentWrapper = styled.div`
 export const Title = styled.h4`
   color: #333333;
   font-size: 22px;
-  line-height: 28px;
+  line-height: 30px;
   z-index: 1;
   position: relative;
   text-align: left;
@@ -56,6 +56,8 @@ export const Text = styled.div`
   z-index: 1;
   position: relative;
   margin-top: 20px;
+  font-size: 18px;
+  line-break: 36px;
 
   ${({ small }) =>
     small &&
