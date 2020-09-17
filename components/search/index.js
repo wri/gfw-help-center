@@ -4,6 +4,7 @@ import { css } from '@emotion/core';
 import compact from 'lodash/compact';
 import deburr from 'lodash/deburr';
 import toUpper from 'lodash/toUpper';
+import sortBy from 'lodash/sortBy';
 import debounce from 'lodash/debounce';
 import { CancelToken } from 'axios';
 import { useRouter } from 'next/router';
@@ -130,11 +131,14 @@ const Search = ({
           cancelToken: source.token,
         });
 
-        const allResults = compact([
-          ...articlesResponse,
-          ...webinarsResponse,
-          ...additionalMaterialsResponse,
-        ])?.map((r) => {
+        const allResults = sortBy(
+          compact([
+            ...articlesResponse,
+            ...webinarsResponse,
+            ...additionalMaterialsResponse,
+          ]),
+          'acf.order'
+        )?.map((r) => {
           return {
             ...r,
             name: r.title,
