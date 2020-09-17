@@ -35,7 +35,8 @@ export const Icon = styled.img`
 
 export const ArrowIcon = styled(ArrowIconSvg)`
   width: 16px;
-  height: 16px;
+  max-width: 16px;
+  height: 100%;
   z-index: 1;
   position: relative;
   fill: ${theme.colors.green};
