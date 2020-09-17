@@ -134,7 +134,7 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
           )}
         </Column>
       </Row>
-      {blogPosts && !!blogPosts.length && (
+      {!!blogPosts.length && (
         <>
           <Divider />
           <Row>

@@ -31,8 +31,15 @@ const Post = ({ webinar }) => {
     tags,
     modified,
     tools,
-    acf: { related_content: relatedContent, date_time },
+    acf: { related_content, date_time },
   } = webinar || {};
+
+  const relatedContent =
+    related_content?.length &&
+    related_content?.filter((c) => c.acf_fc_layout !== 'posts');
+  const blogPosts =
+    related_content?.length &&
+    related_content?.filter((c) => c.acf_fc_layout === 'posts');
 
   const webinarDate = new Date(date_time);
   const now = new Date();
@@ -124,6 +131,17 @@ const Post = ({ webinar }) => {
           )}
         </Column>
       </Row>
+      {!!blogPosts.length && (
+        <>
+          <Divider />
+          <Row>
+            <Column>
+              <RelatedContent sections={blogPosts} maxCols={3} />
+            </Column>
+          </Row>
+          <Divider />
+        </>
+      )}
     </PostContainer>
   );
 };

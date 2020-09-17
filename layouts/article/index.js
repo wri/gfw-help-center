@@ -141,7 +141,7 @@ const Article = ({ article, isGuide }) => {
           )}
         </Column>
       </Row>
-      {blogPosts && (
+      {!!blogPosts.length && (
         <>
           <Divider />
           <Row>
