@@ -24,12 +24,12 @@ const renderPage = (isError, children, setOpen) => (
     {isError ? (
       <ErrorPage statusCode={404} />
     ) : (
-      <>
+      <PageWrapper>
         {children}
         <HelpFooterWrapper>
           <HelpFooter openContactUsModal={() => setOpen(true)} />
         </HelpFooterWrapper>
-      </>
+      </PageWrapper>
     )}
   </>
 );
@@ -94,47 +94,49 @@ export default function Layout({
         {metaTags && ReactHtmlParser(metaTags)}
       </Head>
       <GlobalStyles />
-      <Header
-        relative
-        pathname="https://www.globalforestwatch.org/help"
-        openContactUsModal={() => setOpen(true)}
-        navMain={[
-          { label: 'Map', href: '/map' },
-          { label: 'Dashboard', href: '/dashboards/global' },
-          {
-            label: 'Topics',
-            href: '/topics',
-            submenu: [
-              {
-                label: 'Biodiversity',
-                as: '/topics/biodiversity',
-                href: '/topics/[topic]',
-              },
-              {
-                label: 'Climate',
-                as: '/topics/climate',
-                href: '/topics/[topic]',
-              },
-              {
-                label: 'Commodities',
-                as: '/topics/commodities',
-                href: '/topics/[topic]',
-              },
-              {
-                label: 'Water',
-                as: '/topics/water',
-                href: '/topics/[topic]',
-              },
-            ],
-          },
-          { label: 'Blog', extLink: 'https://blog.globalforestwatch.org/' },
-          { label: 'About', href: '/about' },
-          {
-            label: 'Help',
-            extLink: 'https://www.globalforestwatch.org/help',
-          },
-        ]}
-      />
+      <HeaderWrapper>
+        <Header
+          relative
+          pathname="https://www.globalforestwatch.org/help"
+          openContactUsModal={() => setOpen(true)}
+          navMain={[
+            { label: 'Map', href: '/map' },
+            { label: 'Dashboard', href: '/dashboards/global' },
+            {
+              label: 'Topics',
+              href: '/topics',
+              submenu: [
+                {
+                  label: 'Biodiversity',
+                  as: '/topics/biodiversity',
+                  href: '/topics/[topic]',
+                },
+                {
+                  label: 'Climate',
+                  as: '/topics/climate',
+                  href: '/topics/[topic]',
+                },
+                {
+                  label: 'Commodities',
+                  as: '/topics/commodities',
+                  href: '/topics/[topic]',
+                },
+                {
+                  label: 'Water',
+                  as: '/topics/water',
+                  href: '/topics/[topic]',
+                },
+              ],
+            },
+            { label: 'Blog', extLink: 'https://blog.globalforestwatch.org/' },
+            { label: 'About', href: '/about' },
+            {
+              label: 'Help',
+              extLink: 'https://www.globalforestwatch.org/help',
+            },
+          ]}
+        />
+      </HeaderWrapper>
       <div>
         {preview && <PreviewBanner />}
         <main>
@@ -152,6 +154,17 @@ export default function Layout({
     </>
   );
 }
+
+const HeaderWrapper = styled.div`
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
+const PageWrapper = styled.div`
+  padding-top: 56px;
+`;
 
 const LoaderWrapper = styled.div`
   position: relative;
