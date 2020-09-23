@@ -124,32 +124,34 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
           />
         </MenuWrapper>
       </Mobile>
-      <Row>
-        <Column width={[1, 1 / 4]}>
-          <Desktop>
-            <Sticky top={120} bottomBoundary="#content">
-              <Menu links={links} />
-            </Sticky>
-          </Desktop>
-        </Column>
-        <Column width={[1, 7 / 12]}>
-          {title && (
-            <Title>{ReactHtmlParser(parent ? title : 'Overview')}</Title>
-          )}
-          {content && (
-            <div id="content">
-              <ContentWrapper>
-                <Content align="left">
-                  {ReactHtmlParser(content?.rendered)}
-                </Content>
-              </ContentWrapper>
-            </div>
-          )}
-          {relatedContent?.length > 0 && (
-            <RelatedContent sections={relatedContent} />
-          )}
-        </Column>
-      </Row>
+      <div className="sticky-boundary" style={{ position: 'relative' }}>
+        <Row>
+          <Column width={[1, 1 / 4]}>
+            <Desktop>
+              <Sticky top={120} bottomBoundary=".sticky-boundary">
+                <Menu links={links} />
+              </Sticky>
+            </Desktop>
+          </Column>
+          <Column width={[1, 7 / 12]}>
+            {title && (
+              <Title>{ReactHtmlParser(parent ? title : 'Overview')}</Title>
+            )}
+            {content && (
+              <div id="content">
+                <ContentWrapper>
+                  <Content align="left">
+                    {ReactHtmlParser(content?.rendered)}
+                  </Content>
+                </ContentWrapper>
+              </div>
+            )}
+            {relatedContent?.length > 0 && (
+              <RelatedContent sections={relatedContent} />
+            )}
+          </Column>
+        </Row>
+      </div>
       {!!blogPosts?.length && (
         <>
           <Divider />

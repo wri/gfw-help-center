@@ -5,6 +5,7 @@ import { Row, Column, Mobile, Desktop, theme } from 'gfw-components';
 import ReactHtmlParser from 'react-html-parser';
 import { useRouter } from 'next/router';
 import compact from 'lodash/compact';
+import Sticky from 'react-stickynode';
 
 import Link from 'next/link';
 import Card from 'components/card';
@@ -135,87 +136,91 @@ const SearchPage = ({
           <Menu links={links} />
         </MenuWrapper>
       </Mobile>
-      <Row>
-        <Column
-          css={css`
-            margin-bottom: 50px !important;
-          `}
-        >
-          <ResultsStatement>{resultsStatement}</ResultsStatement>
-        </Column>
-        <Column width={[1, 1 / 4]}>
-          <Desktop>
-            <Menu links={links} />
-          </Desktop>
-        </Column>
-        <Column width={[1, 7 / 12]}>
-          <Row nested>
-            {type === 'articles' &&
-              articles?.map(({ id, excerpt, link, ...rest }) => (
-                <Column
-                  key={id}
-                  css={css`
-                    margin-bottom: 40px !important;
-                  `}
-                >
-                  <Link href={link}>
-                    <a>
-                      <SimpleCard
-                        {...rest}
-                        text={ReactHtmlParser(excerpt?.rendered)}
-                        arrow
-                      />
-                    </a>
-                  </Link>
-                </Column>
-              ))}
-            {type === 'webinars' &&
-              webinars?.map(
-                ({ id, excerpt, featured_media: media, link, ...rest }) => (
+      <div className="sticky-boundary" style={{ position: 'relative' }}>
+        <Row>
+          <Column
+            css={css`
+              margin-bottom: 50px !important;
+            `}
+          >
+            <ResultsStatement>{resultsStatement}</ResultsStatement>
+          </Column>
+          <Column width={[1, 1 / 4]}>
+            <Desktop>
+              <Sticky top={120} bottomBoundary=".sticky-boundary">
+                <Menu links={links} />
+              </Sticky>
+            </Desktop>
+          </Column>
+          <Column width={[1, 7 / 12]}>
+            <Row nested>
+              {type === 'articles' &&
+                articles?.map(({ id, excerpt, link, ...rest }) => (
                   <Column
-                    width={[1, 1 / 2]}
+                    key={id}
                     css={css`
                       margin-bottom: 40px !important;
                     `}
-                    key={id}
                   >
                     <Link href={link}>
                       <a>
-                        <Card
+                        <SimpleCard
                           {...rest}
-                          excerpt={ReactHtmlParser(excerpt?.rendered)}
-                          {...(media && {
-                            media,
-                          })}
-                          video
+                          text={ReactHtmlParser(excerpt?.rendered)}
+                          arrow
                         />
                       </a>
                     </Link>
                   </Column>
-                )
-              )}
-            {type === 'additional-materials' &&
-              additionalMaterials?.map(({ id, excerpt, link, ...rest }) => (
-                <Column
-                  key={id}
-                  css={css`
-                    margin-bottom: 40px !important;
-                  `}
-                >
-                  <Link href={link}>
-                    <a>
-                      <SimpleCard
-                        {...rest}
-                        text={ReactHtmlParser(excerpt?.rendered)}
-                        arrow
-                      />
-                    </a>
-                  </Link>
-                </Column>
-              ))}
-          </Row>
-        </Column>
-      </Row>
+                ))}
+              {type === 'webinars' &&
+                webinars?.map(
+                  ({ id, excerpt, featured_media: media, link, ...rest }) => (
+                    <Column
+                      width={[1, 1 / 2]}
+                      css={css`
+                        margin-bottom: 40px !important;
+                      `}
+                      key={id}
+                    >
+                      <Link href={link}>
+                        <a>
+                          <Card
+                            {...rest}
+                            excerpt={ReactHtmlParser(excerpt?.rendered)}
+                            {...(media && {
+                              media,
+                            })}
+                            video
+                          />
+                        </a>
+                      </Link>
+                    </Column>
+                  )
+                )}
+              {type === 'additional-materials' &&
+                additionalMaterials?.map(({ id, excerpt, link, ...rest }) => (
+                  <Column
+                    key={id}
+                    css={css`
+                      margin-bottom: 40px !important;
+                    `}
+                  >
+                    <Link href={link}>
+                      <a>
+                        <SimpleCard
+                          {...rest}
+                          text={ReactHtmlParser(excerpt?.rendered)}
+                          arrow
+                        />
+                      </a>
+                    </Link>
+                  </Column>
+                ))}
+            </Row>
+          </Column>
+        </Row>
+      </div>
       <Mobile>
         <MenuWrapper>
           <Menu links={links} />

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { isAfter, format } from 'date-fns';
 import ReactHtmlParser from 'react-html-parser';
+import Sticky from 'react-stickynode';
 
 import { Row, Column, Desktop, Mobile } from 'gfw-components';
 
@@ -92,45 +93,49 @@ const Post = ({ webinar }) => {
           </Mobile>
         </Column>
       </Row>
-      <Row>
-        <Column width={[1, 1 / 4]}>
-          <MetaItem>
-            {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
-          </MetaItem>
-        </Column>
-        <Column width={[1, 7 / 12]}>
-          {!!tools?.length && (
-            <CategoryList
-              categories={tools}
-              css={css`
-                margin-bottom: 20px;
-              `}
-            />
-          )}
-          <PostTitle className="notranslate">{postTitle}</PostTitle>
-          {/* {isUpcoming && (
-            <FormWrapper>
-              <RegisterForm />
-            </FormWrapper>
-          )} */}
-          <PostContentWrapper>
-            <PostContent align="left">
-              {ReactHtmlParser(content.rendered)}
-            </PostContent>
-            {tags && (
-              <TagsWrapper>
-                <CategoryList categories={tags} light />
-              </TagsWrapper>
+      <div className="sticky-boundary" style={{ position: 'relative' }}>
+        <Row>
+          <Column width={[1, 1 / 4]}>
+            <Sticky top={120} bottomBoundary=".sticky-boundary">
+              <MetaItem>
+                {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
+              </MetaItem>
+            </Sticky>
+          </Column>
+          <Column width={[1, 7 / 12]}>
+            {!!tools?.length && (
+              <CategoryList
+                categories={tools}
+                css={css`
+                  margin-bottom: 20px;
+                `}
+              />
             )}
-          </PostContentWrapper>
-          {relatedContent && (
-            <>
-              <Divider />
-              <RelatedContent sections={relatedContent} />
-            </>
-          )}
-        </Column>
-      </Row>
+            <PostTitle className="notranslate">{postTitle}</PostTitle>
+            {/* {isUpcoming && (
+              <FormWrapper>
+                <RegisterForm />
+              </FormWrapper>
+            )} */}
+            <PostContentWrapper>
+              <PostContent align="left">
+                {ReactHtmlParser(content.rendered)}
+              </PostContent>
+              {tags && (
+                <TagsWrapper>
+                  <CategoryList categories={tags} light />
+                </TagsWrapper>
+              )}
+            </PostContentWrapper>
+            {relatedContent && (
+              <>
+                <Divider />
+                <RelatedContent sections={relatedContent} />
+              </>
+            )}
+          </Column>
+        </Row>
+      </div>
       {!!blogPosts?.length && (
         <>
           <Divider />

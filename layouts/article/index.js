@@ -4,6 +4,7 @@ import { css } from '@emotion/core';
 import { format } from 'date-fns';
 import ReactToPrint from 'react-to-print';
 import ReactHtmlParser from 'react-html-parser';
+import Sticky from 'react-stickynode';
 
 import { Row, Column, Desktop, Mobile } from 'gfw-components';
 
@@ -88,59 +89,63 @@ const Article = ({ article, isGuide }) => {
           </Mobile>
         </Column>
       </Row>
-      <Row>
-        <Column width={[1, 1 / 4]}>
-          <MetaItem>
-            {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
-          </MetaItem>
-          <ReactToPrint
-            documentTitle="Global Forest Watch Help Center"
-            trigger={() => (
-              <StyledButton light round>
-                <PrintIconSrc />
-              </StyledButton>
+      <div className="sticky-boundary" style={{ position: 'relative' }}>
+        <Row>
+          <Column width={[1, 1 / 4]}>
+            <Sticky top={120} bottomBoundary=".sticky-boundary">
+              <MetaItem>
+                {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
+              </MetaItem>
+              <ReactToPrint
+                documentTitle="Global Forest Watch Help Center"
+                trigger={() => (
+                  <StyledButton light round>
+                    <PrintIconSrc />
+                  </StyledButton>
+                )}
+                content={() => contentEl.current}
+              />
+              <div
+                css={css`
+                  display: none;
+                `}
+              >
+                <PrintArticle ref={contentEl} article={article} />
+              </div>
+              <MetaItem>Print this article</MetaItem>
+            </Sticky>
+          </Column>
+          <Column width={[1, 7 / 12]}>
+            {!!tools?.length && (
+              <CategoryList
+                categories={tools}
+                css={css`
+                  margin-bottom: 20px;
+                `}
+              />
             )}
-            content={() => contentEl.current}
-          />
-          <div
-            css={css`
-              display: none;
-            `}
-          >
-            <PrintArticle ref={contentEl} article={article} />
-          </div>
-          <MetaItem>Print this article</MetaItem>
-        </Column>
-        <Column width={[1, 7 / 12]}>
-          {!!tools?.length && (
-            <CategoryList
-              categories={tools}
-              css={css`
-                margin-bottom: 20px;
-              `}
-            />
-          )}
-          <PostTitle className="notranslate">
-            {ReactHtmlParser(title)}
-          </PostTitle>
-          <PostContentWrapper>
-            <PostContent align="left">
-              {ReactHtmlParser(content.rendered)}
-            </PostContent>
-            {tags && (
-              <TagsWrapper>
-                <CategoryList categories={tags} light />
-              </TagsWrapper>
+            <PostTitle className="notranslate">
+              {ReactHtmlParser(title)}
+            </PostTitle>
+            <PostContentWrapper>
+              <PostContent align="left">
+                {ReactHtmlParser(content.rendered)}
+              </PostContent>
+              {tags && (
+                <TagsWrapper>
+                  <CategoryList categories={tags} light />
+                </TagsWrapper>
+              )}
+            </PostContentWrapper>
+            {relatedContent && (
+              <>
+                <Divider />
+                <RelatedContent sections={relatedContent} />
+              </>
             )}
-          </PostContentWrapper>
-          {relatedContent && (
-            <>
-              <Divider />
-              <RelatedContent sections={relatedContent} />
-            </>
-          )}
-        </Column>
-      </Row>
+          </Column>
+        </Row>
+      </div>
       {!!blogPosts?.length && (
         <>
           <Divider />
