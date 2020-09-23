@@ -19,11 +19,11 @@ import ErrorPage from 'layouts/error';
 import HelpFooter from 'components/footer';
 import PreviewBanner from 'components/preview-banner';
 
-const renderPage = (isError, children, setOpen, preview) => (
+const renderPage = (isError, statusCode, children, setOpen, preview) => (
   <>
     {isError ? (
       <PageWrapper>
-        <ErrorPage statusCode={404} />
+        <ErrorPage statusCode={statusCode || 404} />
       </PageWrapper>
     ) : (
       <PageWrapper>
@@ -41,6 +41,7 @@ export default function Layout({
   children,
   metaTags,
   isError,
+  statusCode,
   preview,
   noIndex,
 }) {
@@ -146,7 +147,7 @@ export default function Layout({
             <Loader />
           </LoaderWrapper>
         ) : (
-          renderPage(isError, children, setOpen, preview)
+          renderPage(isError, statusCode, children, setOpen, preview)
         )}
       </main>
       <Footer openContactUsModal={() => setOpen(true)} />
@@ -175,6 +176,7 @@ Layout.propTypes = {
   children: PropTypes.node,
   metaTags: PropTypes.string,
   isError: PropTypes.bool,
+  statusCode: PropTypes.number,
   preview: PropTypes.bool,
   noIndex: PropTypes.bool,
 };

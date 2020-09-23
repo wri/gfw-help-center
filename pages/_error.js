@@ -3,7 +3,7 @@ import Layout from 'layouts/layout';
 
 export default function Error(props) {
   return (
-    <Layout {...props} noIndex>
+    <Layout {...props} isError noIndex>
       <ErrorPage {...props} />
     </Layout>
   );

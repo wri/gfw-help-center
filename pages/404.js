@@ -3,7 +3,7 @@ import Layout from 'layouts/layout';
 
 export default function Custom404() {
   return (
-    <Layout noIndex>
+    <Layout isError noIndex>
       <ErrorPage statusCode={404} />
     </Layout>
   );
