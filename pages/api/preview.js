@@ -13,8 +13,8 @@ export default async function preview(req, res) {
   // Check the secret and next parameters
   // This secret should only be known by this API route
   if (
-    !process.env.NEXT_PUBLIC_JWT_AUTH_SECRET_KEY ||
-    secret !== process.env.NEXT_PUBLIC_JWT_AUTH_SECRET_KEY ||
+    !process.env.NEXT_PUBLIC_AUTH_SECRET_KEY ||
+    secret !== process.env.NEXT_PUBLIC_AUTH_SECRET_KEY ||
     (!id && !slug)
   ) {
     return res.status(401).json({ message: 'Invalid token' });
