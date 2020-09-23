@@ -21,20 +21,26 @@ export default async function preview(req, res) {
   }
 
   // Fetch WordPress to check if the provided `id` or `slug` exists
-  const post = await getPostByType({ type: post_type, id });
-  let parentSlug = '';
-
-  if (post.parent) {
-    const postParent = await getPostByType({
-      type: post_type,
-      id: post.parent,
-    });
-    parentSlug = postParent.slug;
+  let post = null;
+  try {
+    post = await getPostByType({ type: post_type, id });
+  } catch (err) {
+    return res.status(401).json({ message: 'Post not found' });
   }
 
   // If the post doesn't exist prevent preview mode from being enabled
   if (!post) {
     return res.status(401).json({ message: 'Post not found' });
+  }
+
+  let parentSlug = '';
+
+  if (post?.parent) {
+    const postParent = await getPostByType({
+      type: post_type,
+      id: post?.parent,
+    });
+    parentSlug = postParent.slug;
   }
 
   // Enable Preview Mode by setting the cookies

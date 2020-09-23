@@ -16,7 +16,7 @@ class ComponentToPrint extends Component {
     return (
       <>
         <Global
-          css={css`
+          styles={css`
             @media print {
               html,
               body {

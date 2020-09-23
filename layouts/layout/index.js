@@ -19,12 +19,15 @@ import ErrorPage from 'layouts/error';
 import HelpFooter from 'components/footer';
 import PreviewBanner from 'components/preview-banner';
 
-const renderPage = (isError, children, setOpen) => (
+const renderPage = (isError, children, setOpen, preview) => (
   <>
     {isError ? (
-      <ErrorPage statusCode={404} />
+      <PageWrapper>
+        <ErrorPage statusCode={404} />
+      </PageWrapper>
     ) : (
       <PageWrapper>
+        {preview && <PreviewBanner />}
         {children}
         <HelpFooterWrapper>
           <HelpFooter openContactUsModal={() => setOpen(true)} />
@@ -137,18 +140,15 @@ export default function Layout({
           ]}
         />
       </HeaderWrapper>
-      <div>
-        {preview && <PreviewBanner />}
-        <main>
-          {isFallback ? (
-            <LoaderWrapper>
-              <Loader />
-            </LoaderWrapper>
-          ) : (
-            renderPage(isError, children, setOpen)
-          )}
-        </main>
-      </div>
+      <main>
+        {isFallback ? (
+          <LoaderWrapper>
+            <Loader />
+          </LoaderWrapper>
+        ) : (
+          renderPage(isError, children, setOpen, preview)
+        )}
+      </main>
       <Footer openContactUsModal={() => setOpen(true)} />
       <ContactUsModal open={open} onRequestClose={() => setOpen(false)} />
     </>
