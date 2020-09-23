@@ -5,12 +5,13 @@ import { rgba } from 'emotion-rgba';
 import SearchComponent from 'components/search';
 
 export const PostContainer = styled.div`
-  padding-top: 40px;
+  padding: 40px 0;
   width: 100%;
   overflow: hidden;
   min-height: 500px;
+
   ${theme.mediaQueries.small} {
-    padding-top: 50px;
+    padding: 50px 0;
   }
 `;
 
