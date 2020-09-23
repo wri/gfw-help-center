@@ -74,5 +74,8 @@
   },
   "cacheDirectories": [
     ".next/cache"
-  ]
+  ],
+  "resolutions": {
+    "debug": "^2.6.9"
+  }
 }
