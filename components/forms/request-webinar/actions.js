@@ -2,7 +2,7 @@ import { FORM_ERROR } from 'gfw-components';
 import { post } from 'axios';
 
 const requestWebinar = (body) => {
-  post('https://api.resourcewatch.org/form/request-webinarz', body)
+  post('https://api.resourcewatch.org/form/request-webinar', body)
     .then(() => {})
     .catch((error) => {
       const { errors } = error.response && error.response.data;
