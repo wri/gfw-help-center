@@ -164,6 +164,11 @@ export default styled.div`
 
     iframe {
       width: 100%;
+      min-height: 250px;
+
+      ${theme.mediaQueries.small} {
+        min-height: 400px;
+      }
     }
   }
 
