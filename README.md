@@ -1,4 +1,4 @@
-# GFW Blog
+# GFW Help Center
 
 The front end app for the Global Forest Watch Help Center built using [nextjs](https://nextjs.org/).
 
