@@ -9,6 +9,25 @@ import { PostTitle } from './styles';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class ComponentToPrint extends Component {
+  parseContent = (html) => {
+    return (
+      <div>
+        {ReactHtmlParser(html, {
+          transform: (node) =>
+            node.name === 'img' ? (
+              <img
+                key={node.attribs.href}
+                src={node.attribs.src}
+                alt={node.attribs.alt}
+              />
+            ) : (
+              ''
+            ),
+        })}
+      </div>
+    );
+  };
+
   render() {
     const { article } = this.props;
     const { title, content } = article || {};
@@ -51,7 +70,7 @@ class ComponentToPrint extends Component {
             {ReactHtmlParser(title)}
           </PostTitle>
           <PostContent align="left">
-            {ReactHtmlParser(content.rendered)}
+            {this.parseContent(content.rendered)}
           </PostContent>
         </div>
       </>
