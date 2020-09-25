@@ -1,9 +1,8 @@
-name: Build daily
+name: Build daily sitemaps
 
 on:
-  push:
-    branches:
-      - master
+  schedule:
+  - cron: "*/10 * * * *"
 
 jobs:
   build:
