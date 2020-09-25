@@ -96,11 +96,18 @@ const Post = ({ webinar }) => {
       <div className="sticky-boundary" style={{ position: 'relative' }}>
         <Row>
           <Column width={[1, 1 / 4]}>
-            <Sticky top={120} bottomBoundary=".sticky-boundary">
+            <Desktop>
+              <Sticky top={120} bottomBoundary=".sticky-boundary">
+                <MetaItem>
+                  {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
+                </MetaItem>
+              </Sticky>
+            </Desktop>
+            <Mobile>
               <MetaItem>
                 {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
               </MetaItem>
-            </Sticky>
+            </Mobile>
           </Column>
           <Column width={[1, 7 / 12]}>
             {!!tools?.length && (

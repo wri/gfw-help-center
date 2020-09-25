@@ -92,7 +92,31 @@ const Article = ({ article, isGuide }) => {
       <div className="sticky-boundary" style={{ position: 'relative' }}>
         <Row>
           <Column width={[1, 1 / 4]}>
-            <Sticky top={120} bottomBoundary=".sticky-boundary">
+            <Desktop>
+              <Sticky top={120} bottomBoundary=".sticky-boundary">
+                <MetaItem>
+                  {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
+                </MetaItem>
+                <ReactToPrint
+                  documentTitle="Global Forest Watch Help Center"
+                  trigger={() => (
+                    <StyledButton light round>
+                      <PrintIconSrc />
+                    </StyledButton>
+                  )}
+                  content={() => contentEl.current}
+                />
+                <div
+                  css={css`
+                    display: none;
+                  `}
+                >
+                  <PrintArticle ref={contentEl} article={article} />
+                </div>
+                <MetaItem>Print this article</MetaItem>
+              </Sticky>
+            </Desktop>
+            <Mobile>
               <MetaItem>
                 {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
               </MetaItem>
@@ -113,7 +137,7 @@ const Article = ({ article, isGuide }) => {
                 <PrintArticle ref={contentEl} article={article} />
               </div>
               <MetaItem>Print this article</MetaItem>
-            </Sticky>
+            </Mobile>
           </Column>
           <Column width={[1, 7 / 12]}>
             {!!tools?.length && (
