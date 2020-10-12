@@ -36,7 +36,7 @@ const ExpandableCard = ({
         return (
           <Card onClick={() => setOpen(!open)} className="notranslate">
             {thumbnail && <Thumbnail src={thumbnail} alt={title} />}
-            <ContentWrapper>
+            <ContentWrapper className="notranslate">
               <Title>{title}</Title>
               {open && content && (
                 <Text small={small}>

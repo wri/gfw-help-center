@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { getPostByType, getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
 

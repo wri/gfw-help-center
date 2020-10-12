@@ -7,7 +7,7 @@ import Layout from 'layouts/layout';
 export default function Webinar(props) {
   return (
     // eslint-disable-next-line react/prop-types
-    <Layout {...props}>
+    <Layout {...props} page={props?.webinar}>
       <WebinarPage {...props} />
     </Layout>
   );

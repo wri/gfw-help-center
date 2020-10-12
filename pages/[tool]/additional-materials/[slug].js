@@ -6,7 +6,7 @@ import Layout from 'layouts/layout';
 export default function AdditionalMaterial(props) {
   return (
     // eslint-disable-next-line react/prop-types
-    <Layout {...props}>
+    <Layout {...props} page={props?.article}>
       <ArticlePage {...props} />
     </Layout>
   );

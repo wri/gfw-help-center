@@ -59,9 +59,15 @@ const SimpleCard = ({
                 categories={tools}
               />
             )}
-            {title && <Title light={!!backgroundImage}>{title}</Title>}
+            {title && (
+              <Title className="notranslate" light={!!backgroundImage}>
+                {title}
+              </Title>
+            )}
             {excerpt && (
-              <Text light={!!backgroundImage}>{ReactHtmlParser(excerpt)}</Text>
+              <Text className="notranslate" light={!!backgroundImage}>
+                {ReactHtmlParser(excerpt)}
+              </Text>
             )}
           </div>
           {arrow && (

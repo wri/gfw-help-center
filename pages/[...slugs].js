@@ -10,7 +10,7 @@ import Layout from 'layouts/layout';
 export default function Tools(props) {
   return (
     // eslint-disable-next-line react/prop-types
-    <Layout {...props}>
+    <Layout {...props} page={props?.currentTool}>
       <ToolsPage {...props} />
     </Layout>
   );

@@ -7,7 +7,7 @@ import Wrapper from './styles';
 
 const Breadcrumbs = ({ links }) => {
   return (
-    <Wrapper>
+    <Wrapper className="notranslate">
       <Link href="/">Help center home</Link>
       {links?.map(({ label, ...link }) => (
         <Fragment key={label}>

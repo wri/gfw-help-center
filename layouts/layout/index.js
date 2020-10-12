@@ -45,10 +45,11 @@ export default function Layout({
   statusCode,
   preview,
   noIndex,
+  page,
 }) {
   const [open, setOpen] = useState(false);
   const [language, setLanguage] = useState('en');
-  const { isFallback, asPath } = useRouter();
+  const { isFallback, asPath, push } = useRouter();
 
   useEffect(() => {
     if (!window.ANALYTICS_INITIALIZED) {
@@ -64,7 +65,18 @@ export default function Layout({
   }, []);
 
   const handleLangSelect = (lang) => {
-    setLanguage(getAPILangCode(lang));
+    const newLang = getAPILangCode(lang);
+    console.log(page);
+    if (page) {
+      const translation = page?.translations_posts?.find((p) =>
+        p?.locale?.includes(newLang)
+      );
+      console.log(translation.link, asPath);
+      if (translation) {
+        push(translation.link);
+      }
+    }
+    setLanguage(newLang);
   };
 
   return (
@@ -124,6 +136,7 @@ Layout.propTypes = {
   statusCode: PropTypes.number,
   preview: PropTypes.bool,
   noIndex: PropTypes.bool,
+  page: PropTypes.object,
 };
 
 const HelpFooterWrapper = styled.div`
