@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactHtmlParser from 'react-html-parser';
 
 import ExpandableCard from 'components/card-expandable';
 
@@ -21,8 +20,8 @@ const Organizations = ({ posts: organizations }) => {
       <CardWrapper key={id}>
         <ExpandableCard
           {...rest}
-          text={ReactHtmlParser(content)}
-          excerpt={ReactHtmlParser(`${content?.split('</p>')[0]}</p>`)}
+          text={content}
+          excerpt={`${content?.split('</p>')[0]}</p>`}
           thumbnail={media?.media_details?.sizes?.medium?.source_url}
           arrow
           small

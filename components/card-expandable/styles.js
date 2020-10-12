@@ -53,27 +53,29 @@ export const Title = styled.h4`
 `;
 
 export const Text = styled.div`
-  z-index: 1;
-  position: relative;
-  margin-top: 20px;
-  font-size: 18px;
-  line-break: 36px;
+  > div {
+    z-index: 1;
+    position: relative;
+    margin-top: 20px;
+    font-size: 18px;
+    line-break: 36px;
 
-  ${({ small }) =>
-    small &&
-    `
-    font-size: 14px;
-    line-height: 21px;
-    color: ${theme.colors.grey};
-
-    p {
-      margin-bottom: 20px;
-    }
-
-    ${theme.mediaQueries.small} {
+    ${({ small }) =>
+      small &&
+      `
       font-size: 14px;
-    }
-  `}
+      line-height: 21px;
+      color: ${theme.colors.grey};
+
+      p {
+        margin-bottom: 20px;
+      }
+
+      ${theme.mediaQueries.small} {
+        font-size: 14px;
+      }
+    `}
+  }
 `;
 
 export const Thumbnail = styled.img`

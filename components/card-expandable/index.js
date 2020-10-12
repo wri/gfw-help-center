@@ -22,14 +22,14 @@ const ExpandableCard = ({ title, text, excerpt, thumbnail, small }) => {
       <ContentWrapper>
         <Title>{title}</Title>
         {open && text && (
-          <Content>
-            <Text small={small}>{text}</Text>
-          </Content>
+          <Text small={small}>
+            <Content>{text}</Content>
+          </Text>
         )}
         {!open && excerpt && (
-          <Content>
-            <Text small={small}>{excerpt}</Text>
-          </Content>
+          <Text small={small}>
+            <Content>{excerpt}</Content>
+          </Text>
         )}
       </ContentWrapper>
       {open ? <MinusIcon /> : <PlusIcon />}
