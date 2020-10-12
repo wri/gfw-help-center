@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { isAfter, format } from 'date-fns';
-import ReactHtmlParser from 'react-html-parser';
 import Sticky from 'react-stickynode';
 
 import { Row, Column, Desktop, Mobile } from 'gfw-components';
@@ -125,7 +124,7 @@ const Post = ({ webinar }) => {
               </FormWrapper>
             )} */}
             <PostContentWrapper>
-              <PostContent align="left">{ReactHtmlParser(content)}</PostContent>
+              <PostContent align="left">{content}</PostContent>
               {tags && (
                 <TagsWrapper>
                   <CategoryList categories={tags} light />

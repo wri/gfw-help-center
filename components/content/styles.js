@@ -144,6 +144,7 @@ export default styled.div`
   figure,
   iframe,
   .imagecenter,
+  blockquote,
   table {
     margin: 0;
     padding: 0;
@@ -170,6 +171,42 @@ export default styled.div`
         min-height: 400px;
       }
     }
+  }
+
+  .imageright,
+  .imageleft {
+    margin: 0;
+    padding: 0 20px;
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+
+    figure {
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  aside {
+    width: 100% !important;
+    background-color: #f6f6f4;
+    border: solid 1px #e5e5df;
+    border-left-width: 1px !important;
+    padding: 20px !important;
+    font-size: 14px !important;
+    line-height: 24px !important;
+    color: ${theme.colors.darkGrey} !important;
+
+    ${theme.mediaQueries.medium} {
+      padding: 30px !important;
+      width: calc(40% + (100% / 7)) !important;
+      margin-right: calc(-100% / 7) !important;
+    }
+  }
+
+  blockquote {
+    margin-bottom: 40px;
   }
 
   figcaption,
@@ -247,7 +284,7 @@ export default styled.div`
       margin-left: 20px;
     }
 
-    li {
+    > li {
       margin-bottom: 20px;
     }
   }
@@ -346,9 +383,15 @@ export default styled.div`
     font-weight: 600;
   }
 
-  figure {
+  figure,
+  .imagecenter {
     padding-top: 20px;
     margin-bottom: 40px;
+
+    .imagecentre {
+      padding-top: 0;
+      margin-bottom: 0;
+    }
   }
 
   .wp-block-gallery > div {
@@ -357,6 +400,7 @@ export default styled.div`
 
     img {
       height: 240px;
+      width: 100%;
 
       ${theme.mediaQueries.small} {
         height: 486px;
@@ -368,14 +412,18 @@ export default styled.div`
       width: 100% !important;
     }
 
+    li {
+      margin: 0;
+    }
+
     .slick-prev,
     .slick-next {
-      top: 100px;
+      top: 120px;
       background-color: #333;
       z-index: 5;
 
       ${theme.mediaQueries.small} {
-        top: 220px;
+        top: 223px;
       }
 
       &:hover {

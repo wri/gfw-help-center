@@ -152,7 +152,7 @@ const Article = ({ article, isGuide }) => {
               {ReactHtmlParser(title)}
             </PostTitle>
             <PostContentWrapper>
-              <PostContent align="left">{ReactHtmlParser(content)}</PostContent>
+              <PostContent align="left">{content}</PostContent>
               {tags && (
                 <TagsWrapper>
                   <CategoryList categories={tags} light />
