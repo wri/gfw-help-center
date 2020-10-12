@@ -66,12 +66,10 @@ export default function Layout({
 
   const handleLangSelect = (lang) => {
     const newLang = getAPILangCode(lang);
-    console.log(page);
     if (page) {
       const translation = page?.translations_posts?.find((p) =>
         p?.locale?.includes(newLang)
       );
-      console.log(translation.link, asPath);
       if (translation) {
         push(translation.link);
       }
