@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import ReactHtmlParser from 'react-html-parser';
 
 import ExpandableCard from 'components/card-expandable';
 
@@ -10,7 +9,7 @@ const FAQs = ({ faqs }) => {
     <>
       {faqs?.map(({ question, answer }) => (
         <CardWrapper key={question}>
-          <ExpandableCard title={question} text={ReactHtmlParser(answer)} />
+          <ExpandableCard title={question} content={answer} />
         </CardWrapper>
       ))}
     </>

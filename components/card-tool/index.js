@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactHtmlParser from 'react-html-parser';
 
 import Media from 'components/media';
 
@@ -7,10 +8,15 @@ import { LangConsumer } from 'utils/lang';
 
 import { Card, ContentWrapper, Title, Text, BannerImage, Logo } from './styles';
 
-const ToolCard = ({ translations_posts, bannerImage, logo, active }) => (
+const ToolCard = ({
+  translations_posts,
+  bannerImage,
+  logo,
+  active,
+  ...rawCardData
+}) => (
   <LangConsumer>
     {(lang) => {
-      const rawCardData = translations_posts?.find((c) => c.locale === 'en_US');
       const translatedData = translations_posts?.find((c) => c.locale === lang);
       const cardData = translatedData || rawCardData;
       const { title, excerpt } = cardData || {};
@@ -19,7 +25,7 @@ const ToolCard = ({ translations_posts, bannerImage, logo, active }) => (
         <Card active={active}>
           <ContentWrapper>
             {title && <Title>{title}</Title>}
-            {excerpt && <Text>{excerpt}</Text>}
+            {excerpt && <Text>{ReactHtmlParser(excerpt)}</Text>}
           </ContentWrapper>
           {logo && (
             <Logo>

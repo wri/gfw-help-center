@@ -14,6 +14,15 @@ export const Card = styled.div`
     padding: 50px 45px;
   }
 
+  > a {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+  }
+
   ${({ large }) =>
     large &&
     `

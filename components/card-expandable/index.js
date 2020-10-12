@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Content from 'components/content';
+import { LangConsumer } from 'utils/lang';
 
 import {
   Card,
@@ -13,36 +14,55 @@ import {
   ContentWrapper,
 } from './styles';
 
-const ExpandableCard = ({ title, text, excerpt, thumbnail, small }) => {
+const ExpandableCard = ({
+  translations_posts,
+  thumbnail,
+  small,
+  summary,
+  ...rawCardData
+}) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <Card onClick={() => setOpen(!open)}>
-      {thumbnail && <Thumbnail src={thumbnail} alt={title} />}
-      <ContentWrapper>
-        <Title>{title}</Title>
-        {open && text && (
-          <Text small={small}>
-            <Content>{text}</Content>
-          </Text>
-        )}
-        {!open && excerpt && (
-          <Text small={small}>
-            <Content>{excerpt}</Content>
-          </Text>
-        )}
-      </ContentWrapper>
-      {open ? <MinusIcon /> : <PlusIcon />}
-    </Card>
+    <LangConsumer>
+      {(lang) => {
+        const translatedData = translations_posts?.find(
+          (c) => c.locale === lang
+        );
+        const cardData = translatedData || rawCardData;
+        const { title, content } = cardData || {};
+        const excerpt = `${content?.split('</p>')[0]}</p>`;
+
+        return (
+          <Card onClick={() => setOpen(!open)} className="notranslate">
+            {thumbnail && <Thumbnail src={thumbnail} alt={title} />}
+            <ContentWrapper>
+              <Title>{title}</Title>
+              {open && content && (
+                <Text small={small}>
+                  <Content>{content}</Content>
+                </Text>
+              )}
+              {summary && !open && excerpt && (
+                <Text small={small}>
+                  <Content>{excerpt}</Content>
+                </Text>
+              )}
+            </ContentWrapper>
+            {open ? <MinusIcon /> : <PlusIcon />}
+          </Card>
+        );
+      }}
+    </LangConsumer>
   );
 };
 
 ExpandableCard.propTypes = {
-  title: PropTypes.string,
+  translations_posts: PropTypes.array,
   thumbnail: PropTypes.string,
   text: PropTypes.node,
-  excerpt: PropTypes.node,
   small: PropTypes.bool,
+  summary: PropTypes.bool,
 };
 
 export default ExpandableCard;

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import ReactHtmlParser from 'react-html-parser';
 
 import { getPostByType } from 'lib/api';
 
@@ -41,13 +40,7 @@ const Footer = ({ openContactUsModal }) => {
           margin-bottom: 30px;
         `}
       >
-        <a
-          href={support?.acf?.alt_link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <SimpleCard {...support} text={ReactHtmlParser(support?.excerpt)} />
-        </a>
+        <SimpleCard {...support} />
       </Column>
       <Column
         width={[1, 1 / 2]}
@@ -63,10 +56,7 @@ const Footer = ({ openContactUsModal }) => {
           `}
           onClick={openContactUsModal}
         >
-          <SimpleCard
-            {...contactUs}
-            text={ReactHtmlParser(contactUs?.excerpt)}
-          />
+          <SimpleCard {...contactUs} link={null} extLink={null} />
         </button>
       </Column>
     </Row>

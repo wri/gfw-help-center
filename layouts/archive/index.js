@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { Row, Column, Mobile, Desktop, theme } from 'gfw-components';
-import ReactHtmlParser from 'react-html-parser';
 import { useRouter } from 'next/router';
 import compact from 'lodash/compact';
 import Sticky from 'react-stickynode';
 
-import Link from 'next/link';
 import Card from 'components/card';
 import SimpleCard from 'components/card-simple';
 import Menu from 'components/menu';
@@ -162,15 +160,7 @@ const SearchPage = ({
                       margin-bottom: 40px !important;
                     `}
                   >
-                    <Link href={link}>
-                      <a>
-                        <SimpleCard
-                          {...rest}
-                          text={ReactHtmlParser(excerpt)}
-                          arrow
-                        />
-                      </a>
-                    </Link>
+                    <SimpleCard {...rest} arrow />
                   </Column>
                 ))}
               {type === 'webinars' &&
@@ -193,15 +183,7 @@ const SearchPage = ({
                       margin-bottom: 40px !important;
                     `}
                   >
-                    <Link href={link}>
-                      <a>
-                        <SimpleCard
-                          {...rest}
-                          text={ReactHtmlParser(excerpt)}
-                          arrow
-                        />
-                      </a>
-                    </Link>
+                    <SimpleCard {...rest} arrow />
                   </Column>
                 ))}
             </Row>

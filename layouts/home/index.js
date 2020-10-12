@@ -86,15 +86,7 @@ const HomePage = ({ homepage, tools }) => {
               })}
               key={tool.id}
             >
-              <Link href={tool.link}>
-                <a>
-                  <SimpleCard
-                    {...tool}
-                    large={isFirst}
-                    text={ReactHtmlParser(tool?.excerpt)}
-                  />
-                </a>
-              </Link>
+              <SimpleCard {...tool} large={isFirst} />
             </ToolCardsWrapper>
           );
         })}
