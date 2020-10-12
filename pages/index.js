@@ -1,5 +1,3 @@
-import Head from 'next/head';
-
 import { getPostByType, getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
 
@@ -10,15 +8,6 @@ import Layout from 'layouts/layout';
 export default function Index(props) {
   return (
     <Layout {...props}>
-      <Head>
-        <title>
-          How to Use Global Forest Watch Maps & Tools | GFW Help Center
-        </title>
-        <meta
-          name="description"
-          content="Find tutorials, webinars and other resources in the GFW Help Center to help guide you through the forest monitoring data, analysis, technology and tools that GFW offers."
-        />
-      </Head>
       <HomePage {...props} />
     </Layout>
   );
@@ -48,6 +37,7 @@ export async function getStaticProps() {
     props: {
       homepage: homepage || {},
       tools: toolsMapped || [],
+      metaTags: homepage?.yoast_head || '',
     },
     revalidate: 10,
   };

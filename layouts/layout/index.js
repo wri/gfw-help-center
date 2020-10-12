@@ -14,12 +14,13 @@ import {
 } from 'gfw-components';
 
 import { initAnalytics, handlePageTrack } from 'analytics';
+import { LangProvider, getAPILangCode } from 'utils/lang';
 
 import ErrorPage from 'layouts/error';
 import HelpFooter from 'components/footer';
 import PreviewBanner from 'components/preview-banner';
 
-const renderPage = (isError, statusCode, children, setOpen, preview) => (
+const renderPage = (isError, statusCode, children, setOpen, preview, lang) => (
   <>
     {isError ? (
       <PageWrapper>
@@ -28,7 +29,7 @@ const renderPage = (isError, statusCode, children, setOpen, preview) => (
     ) : (
       <PageWrapper>
         {preview && <PreviewBanner />}
-        {children}
+        <LangProvider value={lang}>{children}</LangProvider>
         <HelpFooterWrapper>
           <HelpFooter openContactUsModal={() => setOpen(true)} />
         </HelpFooterWrapper>
@@ -46,6 +47,7 @@ export default function Layout({
   noIndex,
 }) {
   const [open, setOpen] = useState(false);
+  const [language, setLanguage] = useState('en');
   const { isFallback, asPath } = useRouter();
 
   useEffect(() => {
@@ -56,45 +58,23 @@ export default function Layout({
     handlePageTrack();
   }, [asPath]);
 
+  useEffect(() => {
+    const lang = JSON.parse(localStorage.getItem('txlive:selectedlang'));
+    setLanguage(getAPILangCode(lang));
+  }, []);
+
+  const handleLangSelect = (lang) => {
+    setLanguage(getAPILangCode(lang));
+  };
+
   return (
     <>
       <Head>
-        <meta name="author" content="Vizzuality" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:creator" content="@globalforests" />
-        <meta
-          name="twitter:description"
-          content="Find tutorials, webinars and other resources in the GFW Help Center to help guide you through the forest monitoring data, analysis, technology and tools that GFW offers."
-        />
-        <meta
-          property="og:title"
-          content="How to Use Global Forest Watch Maps & Tools | GFW Help Center"
-        />
-        <meta
-          property="og:description"
-          content="Find tutorials, webinars and other resources in the GFW Help Center to help guide you through the forest monitoring data, analysis, technology and tools that GFW offers."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/help/preview.jpg" />
-        <meta property="og:image:width" content="1280" />
-        <meta property="og:image:height" content="700" />
-        <meta
-          property="og:url"
-          content={`https://www.globalforestwatch.org/help${asPath}`}
-        />
-        <meta
-          property="fb:appid"
-          content={process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}
-        />
-        <link
-          rel="canonical"
-          href={`https://www.globalforestwatch.org/help${asPath}`}
-        />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=5"
         />
-        {noIndex && <meta name="robots" content="noindex" />}
+        {(noIndex || isError) && <meta name="robots" content="noindex" />}
         {metaTags && ReactHtmlParser(metaTags)}
       </Head>
       <GlobalStyles />
@@ -103,6 +83,7 @@ export default function Layout({
           relative
           pathname="https://www.globalforestwatch.org/help/"
           openContactUsModal={() => setOpen(true)}
+          afterLangSelect={handleLangSelect}
         />
       </HeaderWrapper>
       <main>
@@ -111,7 +92,7 @@ export default function Layout({
             <Loader />
           </LoaderWrapper>
         ) : (
-          renderPage(isError, statusCode, children, setOpen, preview)
+          renderPage(isError, statusCode, children, setOpen, preview, language)
         )}
       </main>
       <Footer openContactUsModal={() => setOpen(true)} />

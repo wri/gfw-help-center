@@ -125,9 +125,7 @@ const Post = ({ webinar }) => {
               </FormWrapper>
             )} */}
             <PostContentWrapper>
-              <PostContent align="left">
-                {ReactHtmlParser(content.rendered)}
-              </PostContent>
+              <PostContent align="left">{ReactHtmlParser(content)}</PostContent>
               {tags && (
                 <TagsWrapper>
                   <CategoryList categories={tags} light />
