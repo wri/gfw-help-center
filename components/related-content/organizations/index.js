@@ -21,10 +21,8 @@ const Organizations = ({ posts: organizations }) => {
       <CardWrapper key={id}>
         <ExpandableCard
           {...rest}
-          text={ReactHtmlParser(content?.rendered)}
-          excerpt={ReactHtmlParser(
-            `${content?.rendered?.split('</p>')[0]}</p>`
-          )}
+          text={ReactHtmlParser(content)}
+          excerpt={ReactHtmlParser(`${content?.split('</p>')[0]}</p>`)}
           thumbnail={media?.media_details?.sizes?.medium?.source_url}
           arrow
           small

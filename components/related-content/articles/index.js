@@ -14,7 +14,7 @@ const Articles = ({ posts: articles }) => {
       <LinkWrapper>
         <SimpleCard
           {...rest}
-          text={ReactHtmlParser(excerpt?.rendered)}
+          text={ReactHtmlParser(excerpt)}
           categories={tool_cats}
           arrow
         />

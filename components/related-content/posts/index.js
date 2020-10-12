@@ -23,7 +23,7 @@ const Posts = ({ posts: articles, maxCols }) => {
               {...rest}
               link={`https://blog.globalforestwatch.org${link}`}
               categories={categories}
-              excerpt={ReactHtmlParser(excerpt.rendered)}
+              excerpt={ReactHtmlParser(excerpt)}
               {...(media && {
                 media,
               })}

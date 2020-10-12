@@ -166,7 +166,7 @@ const SearchPage = ({
                       <a>
                         <SimpleCard
                           {...rest}
-                          text={ReactHtmlParser(excerpt?.rendered)}
+                          text={ReactHtmlParser(excerpt)}
                           arrow
                         />
                       </a>
@@ -187,7 +187,7 @@ const SearchPage = ({
                         <a>
                           <Card
                             {...rest}
-                            excerpt={ReactHtmlParser(excerpt?.rendered)}
+                            excerpt={ReactHtmlParser(excerpt)}
                             {...(media && {
                               media,
                             })}
@@ -210,7 +210,7 @@ const SearchPage = ({
                       <a>
                         <SimpleCard
                           {...rest}
-                          text={ReactHtmlParser(excerpt?.rendered)}
+                          text={ReactHtmlParser(excerpt)}
                           arrow
                         />
                       </a>

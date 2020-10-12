@@ -39,7 +39,7 @@ const Webinars = ({ posts: webinars, maxCols }) => {
                 <a>
                   <Card
                     {...rest}
-                    excerpt={ReactHtmlParser(excerpt.rendered)}
+                    excerpt={ReactHtmlParser(excerpt)}
                     categories={tool_cats}
                     {...(media && {
                       media,

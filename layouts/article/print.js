@@ -69,9 +69,7 @@ class ComponentToPrint extends Component {
           <PostTitle className="notranslate">
             {ReactHtmlParser(title)}
           </PostTitle>
-          <PostContent align="left">
-            {this.parseContent(content.rendered)}
-          </PostContent>
+          <PostContent align="left">{this.parseContent(content)}</PostContent>
         </div>
       </>
     );

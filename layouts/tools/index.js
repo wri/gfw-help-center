@@ -140,9 +140,7 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
             {content && (
               <div id="content">
                 <ContentWrapper>
-                  <Content align="left">
-                    {ReactHtmlParser(content?.rendered)}
-                  </Content>
+                  <Content align="left">{ReactHtmlParser(content)}</Content>
                 </ContentWrapper>
               </div>
             )}

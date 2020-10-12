@@ -33,7 +33,7 @@ const HomePage = ({ homepage, tools }) => {
         <Column width={[1, 5 / 6, 2 / 3]}>
           <Intro
             title={homepage?.title}
-            description={ReactHtmlParser(homepage?.excerpt?.rendered)}
+            description={ReactHtmlParser(homepage?.excerpt)}
           />
         </Column>
         <SearchWrapper>
@@ -65,7 +65,7 @@ const HomePage = ({ homepage, tools }) => {
                 <ToolCard
                   active={i === 0}
                   {...tool}
-                  text={ReactHtmlParser(tool?.excerpt?.rendered)}
+                  text={ReactHtmlParser(tool?.excerpt)}
                 />
               </a>
             </Link>
@@ -91,7 +91,7 @@ const HomePage = ({ homepage, tools }) => {
                   <SimpleCard
                     {...tool}
                     large={isFirst}
-                    text={ReactHtmlParser(tool?.excerpt?.rendered)}
+                    text={ReactHtmlParser(tool?.excerpt)}
                   />
                 </a>
               </Link>

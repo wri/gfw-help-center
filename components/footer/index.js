@@ -46,10 +46,7 @@ const Footer = ({ openContactUsModal }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <SimpleCard
-            {...support}
-            text={ReactHtmlParser(support?.excerpt?.rendered)}
-          />
+          <SimpleCard {...support} text={ReactHtmlParser(support?.excerpt)} />
         </a>
       </Column>
       <Column
@@ -68,7 +65,7 @@ const Footer = ({ openContactUsModal }) => {
         >
           <SimpleCard
             {...contactUs}
-            text={ReactHtmlParser(contactUs?.excerpt?.rendered)}
+            text={ReactHtmlParser(contactUs?.excerpt)}
           />
         </button>
       </Column>
