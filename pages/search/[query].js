@@ -27,6 +27,7 @@ export async function getServerSideProps({ params }) {
     params: {
       search: params?.query,
     },
+    allLanguages: true,
   });
 
   const webinars = await getPostsByType({
@@ -34,6 +35,7 @@ export async function getServerSideProps({ params }) {
     params: {
       search: params?.query,
     },
+    allLanguages: true,
   });
 
   const additionalMaterials = await getPostsByType({
@@ -41,6 +43,7 @@ export async function getServerSideProps({ params }) {
     params: {
       search: params?.query,
     },
+    allLanguages: true,
   });
 
   return {
