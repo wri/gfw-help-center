@@ -174,30 +174,17 @@ const SearchPage = ({
                   </Column>
                 ))}
               {type === 'webinars' &&
-                webinars?.map(
-                  ({ id, excerpt, featured_media: media, link, ...rest }) => (
-                    <Column
-                      width={[1, 1 / 2]}
-                      css={css`
-                        margin-bottom: 40px !important;
-                      `}
-                      key={id}
-                    >
-                      <Link href={link}>
-                        <a>
-                          <Card
-                            {...rest}
-                            excerpt={ReactHtmlParser(excerpt)}
-                            {...(media && {
-                              media,
-                            })}
-                            video
-                          />
-                        </a>
-                      </Link>
-                    </Column>
-                  )
-                )}
+                webinars?.map(({ id, link, ...rest }) => (
+                  <Column
+                    width={[1, 1 / 2]}
+                    css={css`
+                      margin-bottom: 40px !important;
+                    `}
+                    key={id}
+                  >
+                    <Card {...rest} video />
+                  </Column>
+                ))}
               {type === 'additional-materials' &&
                 additionalMaterials?.map(({ id, excerpt, link, ...rest }) => (
                   <Column
