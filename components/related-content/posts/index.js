@@ -17,10 +17,7 @@ const Posts = ({ posts: articles, maxCols }) => {
             margin-bottom: 30px;
           `}
         >
-          <Card
-            {...rest}
-            extLink={`https://blog.globalforestwatch.org${link}`}
-          />
+          <Card {...rest} />
         </Column>
       ))}
     </Row>
