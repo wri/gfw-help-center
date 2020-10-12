@@ -43,6 +43,7 @@ const Search = ({
   const [search, setSearch] = useState(searchQuery);
   const [results, setResults] = useState([]);
   const [tags, setTags] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const inputRef = React.createRef();
 
@@ -91,6 +92,8 @@ const Search = ({
   useEffect(
     debounce(() => {
       const fetchSearchContent = async () => {
+        setLoading(true);
+
         const source = CancelToken.source();
         const articlesResponse = await getPostsByType({
           type: 'articles',
@@ -146,6 +149,7 @@ const Search = ({
         });
 
         setResults(allResults);
+        setLoading(false);
       };
 
       fetchSearchContent();
@@ -210,6 +214,7 @@ const Search = ({
           <ResultsList
             items={searchResults}
             onClickResult={() => setOpen(false)}
+            loading={loading}
           />
         )}
       </Wrapper>
