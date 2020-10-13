@@ -7,7 +7,7 @@ import SimpleCard from 'components/card-simple';
 import { LinkWrapper } from './styles';
 
 const Articles = ({ posts: articles }) => {
-  return articles?.map(({ id, excerpt, link, tool_cats, ...rest }) => (
+  return articles?.map(({ id, tool_cats, ...rest }) => (
     <LinkWrapper key={id}>
       <SimpleCard {...rest} categories={tool_cats} arrow />
     </LinkWrapper>

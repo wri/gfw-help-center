@@ -17,7 +17,7 @@ const Webinars = ({ posts: webinars, maxCols }) => {
     <Row nested>
       {sortBy(sortedWebinars, 'viewDate')
         .reverse()
-        ?.map(({ id, tool_cats, link, ...rest }) => (
+        ?.map(({ id, tool_cats, ...rest }) => (
           <Column
             key={id}
             width={[1, 1 / 2, 1 / (maxCols || 2)]}
