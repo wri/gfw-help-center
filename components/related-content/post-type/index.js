@@ -55,7 +55,7 @@ const PostType = ({ postType, include, maxCols }) => {
     };
 
     getArticles();
-  }, []);
+  }, [include]);
 
   return (
     <PostsWrapper waiting={loading}>
