@@ -24,6 +24,9 @@ class ComponentToPrint extends Component {
                 overflow: initial !important;
                 -webkit-print-color-adjust: exact;
               }
+              img {
+                max-height: 500px;
+              }
             }
 
             @page {
