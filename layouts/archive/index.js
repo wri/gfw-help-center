@@ -153,7 +153,7 @@ const SearchPage = ({
           <Column width={[1, 7 / 12]}>
             <Row nested>
               {type === 'articles' &&
-                articles?.map(({ id, excerpt, link, ...rest }) => (
+                articles?.map(({ id, ...rest }) => (
                   <Column
                     key={id}
                     css={css`
@@ -176,7 +176,7 @@ const SearchPage = ({
                   </Column>
                 ))}
               {type === 'additional-materials' &&
-                additionalMaterials?.map(({ id, excerpt, link, ...rest }) => (
+                additionalMaterials?.map(({ id, ...rest }) => (
                   <Column
                     key={id}
                     css={css`

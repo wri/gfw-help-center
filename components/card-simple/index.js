@@ -55,6 +55,7 @@ const SimpleCard = ({
                 css={css`
                   z-index: 3;
                   position: relative;
+                  width: fit-content;
                 `}
                 categories={tools}
               />
