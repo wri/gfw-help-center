@@ -22,7 +22,16 @@ const Footer = ({ openContactUsModal }) => {
         type: 'pages',
         slug: 'community-forum',
       });
-      setContactUs(contactUsResponse);
+      setContactUs({
+        ...contactUsResponse,
+        link: null,
+        extLink: null,
+        translations_posts: contactUsResponse?.translations_posts?.map((t) => ({
+          ...t,
+          link: null,
+          extLink: null,
+        })),
+      });
       setSupport(supportResponse);
     };
 
@@ -56,7 +65,7 @@ const Footer = ({ openContactUsModal }) => {
           `}
           onClick={openContactUsModal}
         >
-          <SimpleCard {...contactUs} link={null} extLink={null} />
+          <SimpleCard {...contactUs} />
         </button>
       </Column>
     </Row>
