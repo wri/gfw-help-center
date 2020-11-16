@@ -15,6 +15,7 @@ import {
 } from './styles';
 
 const ExpandableCard = ({
+  onAfterOpen,
   translations_posts,
   thumbnail,
   small,
@@ -34,7 +35,15 @@ const ExpandableCard = ({
         const excerpt = `${content?.split('</p>')[0]}</p>`;
 
         return (
-          <Card onClick={() => setOpen(!open)} className="notranslate">
+          <Card
+            onClick={() => {
+              setOpen(!open);
+              if (!open && onAfterOpen) {
+                onAfterOpen(cardData);
+              }
+            }}
+            className="notranslate"
+          >
             {thumbnail && <Thumbnail src={thumbnail} alt={title} />}
             <ContentWrapper className="notranslate">
               <Title>{title}</Title>
@@ -63,6 +72,7 @@ ExpandableCard.propTypes = {
   text: PropTypes.node,
   small: PropTypes.bool,
   summary: PropTypes.bool,
+  onAfterOpen: PropTypes.func,
 };
 
 export default ExpandableCard;

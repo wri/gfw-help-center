@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
+import { trackEvent } from 'utils/analytics';
+
 import ExpandableCard from 'components/card-expandable';
 
 const FAQs = ({ faqs }) => {
@@ -9,7 +11,16 @@ const FAQs = ({ faqs }) => {
     <>
       {faqs?.map(({ question, answer }) => (
         <CardWrapper key={question}>
-          <ExpandableCard title={question} content={answer} />
+          <ExpandableCard
+            title={question}
+            content={answer}
+            onAfterOpen={() =>
+              trackEvent({
+                category: 'Help Center',
+                action: 'User clicks FAQ',
+                label: `User expands ${question} FAQ`,
+              })}
+          />
         </CardWrapper>
       ))}
     </>

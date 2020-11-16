@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { trackEvent } from 'utils/analytics';
 
 import ResultsList from '../results-list';
 
@@ -39,7 +40,14 @@ const Dropdown = ({ selected, items }) => {
         <ResultsList
           items={items}
           selected={selected}
-          onClickResult={() => setOpen(false)}
+          onClickResult={(result) => {
+            setOpen(false);
+            trackEvent({
+              category: 'Help Center',
+              action: 'User clicks drop-down menu',
+              label: `User navigates to ${result.name} page from drop-down menu`,
+            });
+          }}
           showCount={items?.some((i) => !!i.count)}
         />
       )}

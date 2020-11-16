@@ -34,7 +34,7 @@ const ResultsList = ({
                     {item.link ? (
                       <Link href={item.link}>
                         <a>
-                          <button onClick={onClickResult}>
+                          <button onClick={() => onClickResult(item)}>
                             {ReactHtmlParser(
                               `${item.name}${
                                 showCount ? ` (${item.count})` : ''
