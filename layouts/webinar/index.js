@@ -73,7 +73,9 @@ const Post = ({ webinar }) => {
         },
       ];
 
-  const lastUpadtedTemplate = translateText('Last updated {date}');
+  const lastUpadtedTemplate = translateText('Last updated {date}', {
+    date: format(new Date(modified), 'MMMM do yyyy'),
+  });
 
   return (
     <PostContainer>
@@ -100,21 +102,11 @@ const Post = ({ webinar }) => {
           <Column width={[1, 1 / 4]}>
             <Desktop>
               <Sticky top={120} bottomBoundary=".sticky-boundary">
-                <MetaItem>
-                  {lastUpadtedTemplate.replace(
-                    '{date}',
-                    format(new Date(modified), 'MMMM do yyyy')
-                  )}
-                </MetaItem>
+                <MetaItem>{lastUpadtedTemplate}</MetaItem>
               </Sticky>
             </Desktop>
             <Mobile>
-              <MetaItem>
-                {lastUpadtedTemplate.replace(
-                  '{date}',
-                  format(new Date(modified), 'MMMM do yyyy')
-                )}
-              </MetaItem>
+              <MetaItem>{lastUpadtedTemplate}</MetaItem>
             </Mobile>
           </Column>
           <Column width={[1, 7 / 12]}>

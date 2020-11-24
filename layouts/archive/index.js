@@ -45,7 +45,8 @@ const SearchPage = ({
     !isSearch && `{total} ${articleText} tagged with ${tag?.name}`;
 
   const resultsStatement = translateText(
-    isSearch ? searchStatement : tagStatement
+    isSearch ? searchStatement : tagStatement,
+    { total }
   );
 
   const taxFromList = tags?.find((tax) => tax.id === tag?.id);
@@ -144,9 +145,7 @@ const SearchPage = ({
               margin-bottom: 50px !important;
             `}
           >
-            <ResultsStatement>
-              {resultsStatement.replace('{total}', total)}
-            </ResultsStatement>
+            <ResultsStatement>{resultsStatement}</ResultsStatement>
           </Column>
           <Column width={[1, 1 / 4]}>
             <Desktop>

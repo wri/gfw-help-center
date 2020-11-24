@@ -70,7 +70,9 @@ const Article = ({ article, isGuide }) => {
         },
       ];
 
-  const lastUpadtedTemplate = translateText('Last updated {date}');
+  const lastUpadtedTemplate = translateText('Last updated {date}', {
+    date: format(new Date(modified), 'MMMM do yyyy'),
+  });
 
   return (
     <PostContainer>
@@ -97,12 +99,7 @@ const Article = ({ article, isGuide }) => {
           <Column width={[1, 1 / 4]}>
             <Desktop>
               <Sticky top={120} bottomBoundary=".sticky-boundary">
-                <MetaItem>
-                  {lastUpadtedTemplate.replace(
-                    '{date}',
-                    format(new Date(modified), 'MMMM do yyyy')
-                  )}
-                </MetaItem>
+                <MetaItem>{lastUpadtedTemplate}</MetaItem>
                 <ReactToPrint
                   documentTitle="Global Forest Watch Help Center"
                   trigger={() => (
