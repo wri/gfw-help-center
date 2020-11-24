@@ -8,6 +8,7 @@ import sortBy from 'lodash/sortBy';
 import debounce from 'lodash/debounce';
 import { CancelToken } from 'axios';
 import { useRouter } from 'next/router';
+import { translateText } from 'utils/lang';
 
 import { SearchIcon, CloseIcon, Button } from 'gfw-components';
 
@@ -187,7 +188,7 @@ const Search = ({
                 ref={inputRef}
                 value={search}
                 expanded={expanded}
-                placeholder="Search the GFW help center"
+                placeholder={translateText('Search the GFW help center')}
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={keyDownHandler}
               />

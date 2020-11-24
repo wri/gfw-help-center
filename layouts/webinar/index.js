@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { isAfter, format } from 'date-fns';
 import Sticky from 'react-stickynode';
+import { translateText } from 'utils/lang';
 
 import { Row, Column, Desktop, Mobile } from 'gfw-components';
 
@@ -72,6 +73,8 @@ const Post = ({ webinar }) => {
         },
       ];
 
+  const lastUpadtedTemplate = translateText('Last updated {date}');
+
   return (
     <PostContainer>
       <Row
@@ -98,13 +101,19 @@ const Post = ({ webinar }) => {
             <Desktop>
               <Sticky top={120} bottomBoundary=".sticky-boundary">
                 <MetaItem>
-                  {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
+                  {lastUpadtedTemplate.replace(
+                    '{date}',
+                    format(new Date(modified), 'MMMM do yyyy')
+                  )}
                 </MetaItem>
               </Sticky>
             </Desktop>
             <Mobile>
               <MetaItem>
-                {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
+                {lastUpadtedTemplate.replace(
+                  '{date}',
+                  format(new Date(modified), 'MMMM do yyyy')
+                )}
               </MetaItem>
             </Mobile>
           </Column>

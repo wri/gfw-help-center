@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import ReactToPrint from 'react-to-print';
 import ReactHtmlParser from 'react-html-parser';
 import Sticky from 'react-stickynode';
+import { translateText } from 'utils/lang';
 
 import { Row, Column, Desktop, Mobile } from 'gfw-components';
 
@@ -69,6 +70,8 @@ const Article = ({ article, isGuide }) => {
         },
       ];
 
+  const lastUpadtedTemplate = translateText('Last updated {date}');
+
   return (
     <PostContainer>
       <Row
@@ -95,7 +98,10 @@ const Article = ({ article, isGuide }) => {
             <Desktop>
               <Sticky top={120} bottomBoundary=".sticky-boundary">
                 <MetaItem>
-                  {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
+                  {lastUpadtedTemplate.replace(
+                    '{date}',
+                    format(new Date(modified), 'MMMM do yyyy')
+                  )}
                 </MetaItem>
                 <ReactToPrint
                   documentTitle="Global Forest Watch Help Center"
