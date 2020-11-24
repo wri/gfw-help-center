@@ -5,6 +5,7 @@ import { Row, Column, Mobile, Desktop, theme } from 'gfw-components';
 import { useRouter } from 'next/router';
 import compact from 'lodash/compact';
 import Sticky from 'react-stickynode';
+import { translateText } from 'utils/lang';
 
 import Card from 'components/card';
 import SimpleCard from 'components/card-simple';
@@ -39,11 +40,13 @@ const SearchPage = ({
   const searchStatement =
     isSearch &&
     searchQuery &&
-    `${total} ${articleText} with the keyword ${decodeURI(searchQuery)}`;
+    `{total} ${articleText} with the keyword ${decodeURI(searchQuery)}`;
   const tagStatement =
-    !isSearch && `${total} ${articleText} tagged with ${tag?.name}`;
+    !isSearch && `{total} ${articleText} tagged with ${tag?.name}`;
 
-  const resultsStatement = isSearch ? searchStatement : tagStatement;
+  const resultsStatement = translateText(
+    isSearch ? searchStatement : tagStatement
+  );
 
   const taxFromList = tags?.find((tax) => tax.id === tag?.id);
   const allTaxOptions =
@@ -51,19 +54,19 @@ const SearchPage = ({
 
   const links = [
     {
-      label: 'Step by step instructions',
+      label: translateText('Step by step instructions'),
       onClick: () => setType('articles'),
       active: type === 'articles',
       count: articles?.length || '0',
     },
     {
-      label: 'Webinars',
+      label: translateText('Webinars'),
       onClick: () => setType('webinars'),
       active: type === 'webinars',
       count: webinars?.length || '0',
     },
     {
-      label: 'Additional Materials',
+      label: translateText('Additional Materials'),
       onClick: () => setType('additional-materials'),
       active: type === 'additional-materials',
       count: additionalMaterials?.length || '0',
@@ -141,7 +144,9 @@ const SearchPage = ({
               margin-bottom: 50px !important;
             `}
           >
-            <ResultsStatement>{resultsStatement}</ResultsStatement>
+            <ResultsStatement>
+              {resultsStatement.replace('{total}', total)}
+            </ResultsStatement>
           </Column>
           <Column width={[1, 1 / 4]}>
             <Desktop>
