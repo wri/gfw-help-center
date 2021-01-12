@@ -43,6 +43,7 @@ export default function Layout({
   children,
   metaTags,
   isError,
+  isPro,
   statusCode,
   preview,
   noIndex,
@@ -51,13 +52,14 @@ export default function Layout({
   const [open, setOpen] = useState(false);
   const [language, setLanguage] = useState('en');
   const { isFallback, push } = useRouter();
-
+  console.log('is pro', isPro)
   useTrackPage();
 
   useEffect(() => {
     const lang = JSON.parse(localStorage.getItem('txlive:selectedlang'));
     setLanguage(getAPILangCode(lang));
   }, []);
+
 
   const handleLangSelect = (lang) => {
     const newLang = getAPILangCode(lang);
@@ -84,6 +86,7 @@ export default function Layout({
         )}
         {metaTags && ReactHtmlParser(metaTags)}
       </Head>
+      {isPro && <h1>Is pro user</h1>}
       <GlobalStyles />
       <HeaderWrapper>
         <Header
