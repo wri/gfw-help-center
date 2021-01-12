@@ -21,29 +21,35 @@ import HelpFooter from 'components/footer';
 import PreviewBanner from 'components/preview-banner';
 import Cookies from 'components/cookies';
 
-const renderPage = (isError, statusCode, children, setOpen, preview, lang) => (
-  <>
-    {isError ? (
-      <PageWrapper>
-        <ErrorPage statusCode={statusCode || 404} />
-      </PageWrapper>
-    ) : (
-      <PageWrapper>
-        {preview && <PreviewBanner />}
-        <LangProvider value={lang}>{children}</LangProvider>
-        <HelpFooterWrapper>
-          <HelpFooter openContactUsModal={() => setOpen(true)} />
-        </HelpFooterWrapper>
-      </PageWrapper>
-    )}
-  </>
-);
+const renderPage = (isError, statusCode, children, setOpen, preview, isProAuthenticated, proLoginRequired, lang) => {
+  if (proLoginRequired && !isProAuthenticated) {
+    return <PageWrapper>Login to view page content</PageWrapper>;
+  }
 
+  return (
+    <>
+      {isError ? (
+        <PageWrapper>
+          <ErrorPage statusCode={statusCode || 404} />
+        </PageWrapper>
+      ) : (
+        <PageWrapper>
+          {preview && <PreviewBanner />}
+          <LangProvider value={lang}>{children}</LangProvider>
+          <HelpFooterWrapper>
+            <HelpFooter openContactUsModal={() => setOpen(true)} />
+          </HelpFooterWrapper>
+        </PageWrapper>
+      )}
+    </>
+  )
+}
 export default function Layout({
   children,
   metaTags,
   isError,
-  isPro,
+  isProAuthenticated,
+  proLoginRequired,
   statusCode,
   preview,
   noIndex,
@@ -52,7 +58,6 @@ export default function Layout({
   const [open, setOpen] = useState(false);
   const [language, setLanguage] = useState('en');
   const { isFallback, push } = useRouter();
-  console.log('is pro', isPro)
   useTrackPage();
 
   useEffect(() => {
@@ -86,7 +91,6 @@ export default function Layout({
         )}
         {metaTags && ReactHtmlParser(metaTags)}
       </Head>
-      {isPro && <h1>Is pro user</h1>}
       <GlobalStyles />
       <HeaderWrapper>
         <Header
@@ -102,7 +106,7 @@ export default function Layout({
             <Loader />
           </LoaderWrapper>
         ) : (
-          renderPage(isError, statusCode, children, setOpen, preview, language)
+          renderPage(isError, statusCode, children, setOpen, preview, isProAuthenticated, proLoginRequired, language)
         )}
       </main>
       <Footer openContactUsModal={() => setOpen(true)} />

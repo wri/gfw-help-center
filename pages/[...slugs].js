@@ -3,7 +3,7 @@ import btoa from 'btoa';
 
 import { getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
-import { isPro } from 'utils/pro-checks';
+import { proAuthenticated } from 'utils/pro-checks';
 
 import ToolsPage from 'layouts/tools';
 
@@ -22,7 +22,7 @@ export async function getStaticProps({ params, preview, previewData }) {
   const slug = params?.slugs?.[params?.slugs?.length - 1];
   const isPreview = !!preview && previewData?.slug === slug;
   // TODO: Implement
-  const isProUser = isPro();
+  const isProAuthenticated = proAuthenticated();
 
   const tools = await getPostsByType({
     type: 'tools',
@@ -54,6 +54,8 @@ export async function getStaticProps({ params, preview, previewData }) {
       t.slug === params.slugs[params.slugs.length - 1]
 );
 
+  const proLoginRequired = currentTool.status === 'publish';
+
   const siblingTools = currentTool?.parent
     ? toolsGrouped?.[currentTool?.parent]
     : toolsGrouped?.[currentTool?.id];
@@ -61,7 +63,8 @@ export async function getStaticProps({ params, preview, previewData }) {
   return {
     props: {
       tools: tools || [],
-      isPro: isProUser,
+      proAuthenticated: isProAuthenticated,
+      proLoginRequired,
       parentTools: parentTools || [],
       currentPage: currentTool || null,
       siblingTools: siblingTools || [],
