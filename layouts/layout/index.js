@@ -20,10 +20,15 @@ import ErrorPage from 'layouts/error';
 import HelpFooter from 'components/footer';
 import PreviewBanner from 'components/preview-banner';
 import Cookies from 'components/cookies';
+import ProLogin from 'components/pro-login';
 
 const renderPage = (isError, statusCode, children, setOpen, preview, isProAuthenticated, proLoginRequired, lang) => {
   if (proLoginRequired && !isProAuthenticated) {
-    return <PageWrapper>Login to view page content</PageWrapper>;
+    return (
+      <PageWrapper>
+        <ProLogin />
+      </PageWrapper>
+    );
   }
 
   return (

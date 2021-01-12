@@ -1,3 +1,3 @@
-export const isPro = () => {
+export const proAuthenticated = () => {
   return true;
 }
