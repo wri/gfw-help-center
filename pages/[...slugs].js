@@ -1,4 +1,5 @@
 import groupBy from 'lodash/groupBy';
+import btoa from 'btoa';
 
 import { getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
@@ -19,8 +20,18 @@ export default function Tools(props) {
 export async function getStaticProps({ params, preview, previewData }) {
   const slug = params?.slugs?.[params?.slugs?.length - 1];
   const isPreview = !!preview && previewData?.slug === slug;
+  const headers = {};
+
+  if (process.env.NEXT_PUBLIC_AUTH_USER && process.env.NEXT_PUBLIC_AUTH_TOKEN) {
+    const userPassword = btoa(
+      `${process.env.NEXT_PUBLIC_AUTH_USER}:${process.env.NEXT_PUBLIC_AUTH_TOKEN}`
+    );
+    headers.Authorization = `Basic ${userPassword}`;
+  }
+
   const tools = await getPostsByType({
     type: 'tools',
+    headers,
     params: {
       per_page: 100,
       order: 'asc',
