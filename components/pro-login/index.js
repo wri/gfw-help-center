@@ -26,9 +26,14 @@ const handleSubmit = props => {
     method: 'POST',
     body: JSON.stringify({
       ...props,
-      persist: props.persist.length > 0
+      persist: props.persist ? props.persist.length > 0 : false
     })
-  });
+  }).then(r => r.json()).then(response => {
+    if (response.pro) {
+      window.location.reload();
+    }
+    // TODO: Error handling
+  })
 }
 
 const ProLogin = ({ links }) => (

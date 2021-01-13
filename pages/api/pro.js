@@ -20,7 +20,7 @@ export default function handler(req, res) {
   if (req.method === 'POST') {
     // TODO: Perform actual auth
     res.setHeader('Set-Cookie', setCookie());
-    res.status(200).json({ name: 'Test' });
+    res.status(200).json({ pro: true });
     return;
   }
 

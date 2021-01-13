@@ -4,30 +4,16 @@ import btoa from 'btoa';
 
 import { getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
-import { proAuthenticated } from 'utils/pro-checks';
 
 import ToolsPage from 'layouts/tools';
 
 import Layout from 'layouts/layout';
 
 export default function Tools(props) {
-  const [proAuth, setProAuth] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await proAuthenticated();
-      setProAuth(result);
-    };
-    fetchData();
-  }, []);
-
-  // TODO: Loading
-  if (!proAuth) return null;
-
   return (
     // eslint-disable-next-line react/prop-types
-    <Layout {...props} proAuthenticated={proAuth.pro} page={props?.currentTool}>
-      <ToolsPage {...props} proAuthenticated={proAuth.pro} />
+    <Layout {...props} page={props?.currentTool}>
+      <ToolsPage {...props} />
     </Layout>
   );
 }

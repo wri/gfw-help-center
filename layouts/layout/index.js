@@ -13,6 +13,9 @@ import {
   ContactUsModal,
 } from 'gfw-components';
 
+import ProLogo from 'assets/images/GFW_PRO-logo.png';
+
+import { isProAuthenticated } from 'utils/pro-checks';
 import { useTrackPage } from 'utils/analytics';
 import { LangProvider, getAPILangCode } from 'utils/lang';
 
@@ -61,6 +64,8 @@ export default function Layout({
   page,
 }) {
   const [open, setOpen] = useState(false);
+  const [proAuth, setProAuth] = useState(null);
+
   const [language, setLanguage] = useState('en');
   const { isFallback, push } = useRouter();
   useTrackPage();
@@ -68,6 +73,14 @@ export default function Layout({
   useEffect(() => {
     const lang = JSON.parse(localStorage.getItem('txlive:selectedlang'));
     setLanguage(getAPILangCode(lang));
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await isProAuthenticated();
+      setProAuth(result);
+    };
+    fetchData();
   }, []);
 
   const handleLangSelect = (lang) => {
@@ -99,18 +112,25 @@ export default function Layout({
       <HeaderWrapper>
         <Header
           relative
+          customLogo={proAuth?.pro ? ProLogo : null}
+          navMain={proAuth?.pro ? [
+            { label: 'About', href: '/about/' },
+            { label: 'Blog', extLink: 'https://blog.globalforestwatch.org/tag/gfw-pro/' }
+          ] : null}
+          theme={proAuth?.pro ? 'pro' : 'default'}
+          appUrl={proAuth?.pro ? 'https://pro.globalforestwatch.org' : null}
           pathname="https://www.globalforestwatch.org/help/"
           openContactUsModal={() => setOpen(true)}
           afterLangSelect={handleLangSelect}
         />
       </HeaderWrapper>
       <main>
-        {isFallback ? (
+        {isFallback || !proAuth ? (
           <LoaderWrapper>
             <Loader />
           </LoaderWrapper>
         ) : (
-          renderPage(isError, statusCode, children, setOpen, preview, proAuthenticated, proLoginRequired, language)
+          renderPage(isError, statusCode, children, setOpen, preview, proAuth?.pro, proLoginRequired, language)
         )}
       </main>
       <Footer openContactUsModal={() => setOpen(true)} />
