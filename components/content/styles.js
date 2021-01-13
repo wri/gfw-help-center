@@ -326,6 +326,7 @@ export default styled.div`
     margin: 0;
     overflow: visible;
     padding: 10px;
+    font-size: 12px;
 
     ${theme.mediaQueries.small} {
       padding: 20px;
@@ -367,7 +368,7 @@ export default styled.div`
         padding-right: 20px;
 
         ${theme.mediaQueries.small} {
-          padding-left: 40px;
+          padding-left: 20px;
         }
       }
     }
