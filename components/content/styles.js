@@ -326,7 +326,6 @@ export default styled.div`
     margin: 0;
     overflow: visible;
     padding: 10px;
-    white-space: pre-wrap;
 
     ${theme.mediaQueries.small} {
       padding: 20px;
@@ -358,9 +357,9 @@ export default styled.div`
     td {
       &:first-of-type {
         padding-left: 20px;
-
+        white-space: nowrap;
         ${theme.mediaQueries.small} {
-          padding-left: 40px;
+          padding-left: 20px;
         }
       }
 
