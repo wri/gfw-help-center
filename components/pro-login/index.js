@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import ProLogo from 'assets/images/GFW_PRO-logo.png';
+
 import {
   Form,
   Submit,
@@ -10,11 +12,17 @@ import {
   Loader,
 } from 'gfw-components';
 
-import { LoginWrapper } from './styles';
+import {
+  LoginWrapper,
+  LogoContainer,
+  LoginContainer,
+  LoginTitle,
+  RequestAccountTitle,
+  RequestAccountBtn
+} from './styles';
 
 const handleSubmit = props => {
-  console.log('submit', props);
-  const r = fetch('/help/api/pro-login', {
+  fetch('/help/api/pro', {
     method: 'POST',
     body: JSON.stringify({
       ...props,
@@ -25,37 +33,48 @@ const handleSubmit = props => {
 
 const ProLogin = ({ links }) => (
   <LoginWrapper>
-    <Form onSubmit={handleSubmit}>
-      {({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <h1>Log in to GFW Pro to continue</h1>
-          <Input
-            name="username"
-            label="Username"
-            required
-          />
-          <Input
-            name="password"
-            label="Password"
-            type="password"
-            required
-          />
-          <Checkbox
-            name="persist"
-            options={[
-              {
-                label: 'Remember me',
-                value: '0'
-              }
-            ]}
-          />
-          <Submit>
-            Login
-          </Submit>
-        </form>
+    <LogoContainer>
+      <img src={ProLogo} alt="GFW Pro" />
+    </LogoContainer>
+    <LoginContainer>
+      <Form onSubmit={handleSubmit}>
+        {({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <LoginTitle>Log in to GFW Pro to continue</LoginTitle>
+            <Input
+              name="username"
+              label="Username"
+              required
+            />
+            <Input
+              name="password"
+              label="Password"
+              type="password"
+              required
+            />
+            <Checkbox
+              name="persist"
+              label=""
+              options={[
+                {
+                  label: 'Remember me',
+                  value: '0'
+                }
+              ]}
+            />
+            <Submit>
+              Login
+            </Submit>
+          </form>
       )}
     </Form>
-    Please login
+    <RequestAccountTitle><span>Don't have an account?</span></RequestAccountTitle>
+    <RequestAccountBtn
+      href="https://pro.globalforestwatch.org/account"
+      target="__BLANK"
+      rel="noreferrer"
+    >Request an account</RequestAccountBtn>
+    </LoginContainer>
   </LoginWrapper>
 );
 

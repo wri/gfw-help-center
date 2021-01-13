@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import groupBy from 'lodash/groupBy';
 import btoa from 'btoa';
 
@@ -10,19 +11,30 @@ import ToolsPage from 'layouts/tools';
 import Layout from 'layouts/layout';
 
 export default function Tools(props) {
+  const [proAuth, setProAuth] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await proAuthenticated();
+      setProAuth(result);
+    };
+    fetchData();
+  }, []);
+
+  // TODO: Loading
+  if (!proAuth) return null;
+
   return (
     // eslint-disable-next-line react/prop-types
-    <Layout {...props} page={props?.currentTool}>
-      <ToolsPage {...props} />
+    <Layout {...props} proAuthenticated={proAuth.pro} page={props?.currentTool}>
+      <ToolsPage {...props} proAuthenticated={proAuth.pro} />
     </Layout>
   );
 }
 
-export async function getStaticProps({ params, preview, previewData }) {
+export async function getStaticProps({ params, preview, previewData, ...rest }) {
   const slug = params?.slugs?.[params?.slugs?.length - 1];
   const isPreview = !!preview && previewData?.slug === slug;
-  // TODO: Implement
-  const isProAuthenticated = proAuthenticated();
 
   const tools = await getPostsByType({
     type: 'tools',
@@ -63,7 +75,6 @@ export async function getStaticProps({ params, preview, previewData }) {
   return {
     props: {
       tools: tools || [],
-      proAuthenticated: isProAuthenticated,
       proLoginRequired,
       parentTools: parentTools || [],
       currentPage: currentTool || null,

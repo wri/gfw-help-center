@@ -22,8 +22,8 @@ import PreviewBanner from 'components/preview-banner';
 import Cookies from 'components/cookies';
 import ProLogin from 'components/pro-login';
 
-const renderPage = (isError, statusCode, children, setOpen, preview, isProAuthenticated, proLoginRequired, lang) => {
-  if (proLoginRequired && !isProAuthenticated) {
+const renderPage = (isError, statusCode, children, setOpen, preview, proAuthenticated, proLoginRequired, lang) => {
+  if (proLoginRequired && !proAuthenticated) {
     return (
       <PageWrapper>
         <ProLogin />
@@ -53,7 +53,7 @@ export default function Layout({
   children,
   metaTags,
   isError,
-  isProAuthenticated,
+  proAuthenticated,
   proLoginRequired,
   statusCode,
   preview,
@@ -69,7 +69,6 @@ export default function Layout({
     const lang = JSON.parse(localStorage.getItem('txlive:selectedlang'));
     setLanguage(getAPILangCode(lang));
   }, []);
-
 
   const handleLangSelect = (lang) => {
     const newLang = getAPILangCode(lang);
@@ -111,7 +110,7 @@ export default function Layout({
             <Loader />
           </LoaderWrapper>
         ) : (
-          renderPage(isError, statusCode, children, setOpen, preview, isProAuthenticated, proLoginRequired, language)
+          renderPage(isError, statusCode, children, setOpen, preview, proAuthenticated, proLoginRequired, language)
         )}
       </main>
       <Footer openContactUsModal={() => setOpen(true)} />
