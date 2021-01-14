@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import groupBy from 'lodash/groupBy';
-import btoa from 'btoa';
 
 import { getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
@@ -18,7 +16,7 @@ export default function Tools(props) {
   );
 }
 
-export async function getStaticProps({ params, preview, previewData, ...rest }) {
+export async function getStaticProps({ params, preview, previewData }) {
   const slug = params?.slugs?.[params?.slugs?.length - 1];
   const isPreview = !!preview && previewData?.slug === slug;
 
@@ -52,7 +50,7 @@ export async function getStaticProps({ params, preview, previewData, ...rest }) 
       t.slug === params.slugs[params.slugs.length - 1]
 );
 
-  const proLoginRequired = currentTool.status === 'publish';
+  const proLoginRequired = currentTool.status === 'private';
 
   const siblingTools = currentTool?.parent
     ? toolsGrouped?.[currentTool?.parent]

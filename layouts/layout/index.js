@@ -56,7 +56,6 @@ export default function Layout({
   children,
   metaTags,
   isError,
-  proAuthenticated,
   proLoginRequired,
   statusCode,
   preview,
@@ -157,6 +156,7 @@ const LoaderWrapper = styled.div`
 `;
 
 Layout.propTypes = {
+  proLoginRequired: PropTypes.bool,
   children: PropTypes.node,
   metaTags: PropTypes.string,
   isError: PropTypes.bool,
