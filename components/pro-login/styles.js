@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
-import { H4, theme } from 'gfw-components';
 
 const PRO_GREY = '#555';
 const WHITE = '#FFF';
-const BLACK = '#000';
 
 export const LogoContainer = styled.div`
   width: 96px;
@@ -52,8 +50,7 @@ export const LoginContainer = styled.section`
     display: inline-block;
     width: 100%;
   }
-
-`
+`;
 
 export const LoginTitle = styled.h3`
   color: ${PRO_GREY};
@@ -61,7 +58,7 @@ export const LoginTitle = styled.h3`
   font-size: 20px;
   font-weight: 500;
   padding: 0 0 30px 0;
-`
+`;
 
 export const RequestAccountTitle = styled.div`
   position: relative;
@@ -78,7 +75,7 @@ export const RequestAccountTitle = styled.div`
   }
 
   &:before {
-    content: "";
+    content: '';
     background: ${PRO_GREY};
     position: absolute;
     height: 1px;
@@ -87,7 +84,7 @@ export const RequestAccountTitle = styled.div`
     top: 50%;
     transform: translateY(-50%);
   }
-`
+`;
 
 export const RequestAccountBtn = styled.a`
   font-size: 14px;
@@ -103,5 +100,10 @@ export const RequestAccountBtn = styled.a`
   color: ${PRO_GREY};
   padding: 12px 0;
   margin: 20px 0 0 0;
-`
+`;
 
+export const LoginErrorModal = styled.div`
+  button {
+    margin: 30px 0 0 0;
+  }
+`;
