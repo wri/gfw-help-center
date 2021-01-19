@@ -13,8 +13,6 @@ import {
   ContactUsModal,
 } from 'gfw-components';
 
-import ProLogo from 'assets/images/GFW_PRO-logo.png';
-
 import { isProAuthenticated } from 'utils/pro-checks';
 import { useTrackPage } from 'utils/analytics';
 import { LangProvider, getAPILangCode } from 'utils/lang';
@@ -25,7 +23,16 @@ import PreviewBanner from 'components/preview-banner';
 import Cookies from 'components/cookies';
 import ProLogin from 'components/pro-login';
 
-const renderPage = (isError, statusCode, children, setOpen, preview, proAuthenticated, proLoginRequired, lang) => {
+const renderPage = (
+  isError,
+  statusCode,
+  children,
+  setOpen,
+  preview,
+  proAuthenticated,
+  proLoginRequired,
+  lang
+) => {
   if (proLoginRequired && !proAuthenticated) {
     return (
       <PageWrapper>
@@ -50,8 +57,8 @@ const renderPage = (isError, statusCode, children, setOpen, preview, proAuthenti
         </PageWrapper>
       )}
     </>
-  )
-}
+  );
+};
 export default function Layout({
   children,
   metaTags,
@@ -124,7 +131,16 @@ export default function Layout({
             <Loader />
           </LoaderWrapper>
         ) : (
-          renderPage(isError, statusCode, children, setOpen, preview, proAuth?.pro, proLoginRequired, language)
+          renderPage(
+            isError,
+            statusCode,
+            children,
+            setOpen,
+            preview,
+            proAuth?.pro,
+            proLoginRequired,
+            language
+          )
         )}
       </main>
       <Footer openContactUsModal={() => setOpen(true)} />
