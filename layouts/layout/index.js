@@ -111,13 +111,8 @@ export default function Layout({
       <HeaderWrapper>
         <Header
           relative
-          customLogo={proAuth?.pro ? ProLogo : null}
-          navMain={proAuth?.pro ? [
-            { label: 'About', href: '/about/' },
-            { label: 'Blog', extLink: 'https://blog.globalforestwatch.org/tag/gfw-pro/' }
-          ] : null}
           theme={proAuth?.pro ? 'pro' : 'default'}
-          appUrl={proAuth?.pro ? 'https://pro.globalforestwatch.org' : null}
+          proAuthenticated={proAuth?.pro}
           pathname="https://www.globalforestwatch.org/help/"
           openContactUsModal={() => setOpen(true)}
           afterLangSelect={handleLangSelect}
