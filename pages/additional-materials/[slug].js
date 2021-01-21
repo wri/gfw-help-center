@@ -16,6 +16,12 @@ export async function getStaticProps({ params, previewData, preview }) {
   const isPreview = !!preview && previewData?.slug === params.slug;
   const article = await getPostByType({
     type: 'additional_materials',
+    ...(!isPreview && {
+      params: {
+        // XXX: We will perform a check in layouts as private posts are only available for PRO
+        status: 'publish, private',
+      },
+    }),
     ...(isPreview && {
       id: previewData?.id,
       params: {

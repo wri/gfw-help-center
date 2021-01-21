@@ -17,6 +17,12 @@ export async function getStaticProps({ params, preview, previewData }) {
   const isPreview = !!preview && previewData?.slug === params.slug;
   const webinar = await getPostByType({
     type: 'webinars',
+    ...(!isPreview && {
+      params: {
+        // XXX: We will perform a check in layouts as private posts are only available for PRO
+        status: 'publish, private',
+      },
+    }),
     ...(isPreview && {
       id: previewData?.id,
       params: {
