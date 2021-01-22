@@ -13,6 +13,7 @@ import {
   ContactUsModal,
 } from 'gfw-components';
 
+import { isProAuthenticated } from 'utils/pro-checks';
 import { useTrackPage } from 'utils/analytics';
 import { LangProvider, getAPILangCode } from 'utils/lang';
 
@@ -20,43 +21,72 @@ import ErrorPage from 'layouts/error';
 import HelpFooter from 'components/footer';
 import PreviewBanner from 'components/preview-banner';
 import Cookies from 'components/cookies';
+import ProLogin from 'components/pro-login';
 
-const renderPage = (isError, statusCode, children, setOpen, preview, lang) => (
-  <>
-    {isError ? (
+const renderPage = (
+  isError,
+  statusCode,
+  children,
+  setOpen,
+  preview,
+  proAuthenticated,
+  proLoginRequired,
+  lang
+) => {
+  if (proLoginRequired && !proAuthenticated) {
+    return (
       <PageWrapper>
-        <ErrorPage statusCode={statusCode || 404} />
+        <ProLogin />
       </PageWrapper>
-    ) : (
-      <PageWrapper>
-        {preview && <PreviewBanner />}
-        <LangProvider value={lang}>{children}</LangProvider>
-        <HelpFooterWrapper>
-          <HelpFooter openContactUsModal={() => setOpen(true)} />
-        </HelpFooterWrapper>
-      </PageWrapper>
-    )}
-  </>
-);
+    );
+  }
 
+  return (
+    <>
+      {isError ? (
+        <PageWrapper>
+          <ErrorPage statusCode={statusCode || 404} />
+        </PageWrapper>
+      ) : (
+        <PageWrapper>
+          {preview && <PreviewBanner />}
+          <LangProvider value={lang}>{children}</LangProvider>
+          <HelpFooterWrapper>
+            <HelpFooter openContactUsModal={() => setOpen(true)} />
+          </HelpFooterWrapper>
+        </PageWrapper>
+      )}
+    </>
+  );
+};
 export default function Layout({
   children,
   metaTags,
   isError,
+  proLoginRequired,
   statusCode,
   preview,
   noIndex,
   page,
 }) {
   const [open, setOpen] = useState(false);
+  const [proAuth, setProAuth] = useState(null);
+
   const [language, setLanguage] = useState('en');
   const { isFallback, push } = useRouter();
-
   useTrackPage();
 
   useEffect(() => {
     const lang = JSON.parse(localStorage.getItem('txlive:selectedlang'));
     setLanguage(getAPILangCode(lang));
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await isProAuthenticated();
+      setProAuth(result);
+    };
+    fetchData();
   }, []);
 
   const handleLangSelect = (lang) => {
@@ -88,18 +118,29 @@ export default function Layout({
       <HeaderWrapper>
         <Header
           relative
+          theme={proAuth?.pro ? 'pro' : 'default'}
+          proAuthenticated={proAuth?.pro}
           pathname="https://www.globalforestwatch.org/help/"
           openContactUsModal={() => setOpen(true)}
           afterLangSelect={handleLangSelect}
         />
       </HeaderWrapper>
       <main>
-        {isFallback ? (
+        {isFallback || !proAuth ? (
           <LoaderWrapper>
             <Loader />
           </LoaderWrapper>
         ) : (
-          renderPage(isError, statusCode, children, setOpen, preview, language)
+          renderPage(
+            isError,
+            statusCode,
+            children,
+            setOpen,
+            preview,
+            proAuth?.pro,
+            proLoginRequired,
+            language
+          )
         )}
       </main>
       <Footer openContactUsModal={() => setOpen(true)} />
@@ -126,6 +167,7 @@ const LoaderWrapper = styled.div`
 `;
 
 Layout.propTypes = {
+  proLoginRequired: PropTypes.bool,
   children: PropTypes.node,
   metaTags: PropTypes.string,
   isError: PropTypes.bool,

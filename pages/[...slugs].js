@@ -19,15 +19,18 @@ export default function Tools(props) {
 export async function getStaticProps({ params, preview, previewData }) {
   const slug = params?.slugs?.[params?.slugs?.length - 1];
   const isPreview = !!preview && previewData?.slug === slug;
+
   const tools = await getPostsByType({
     type: 'tools',
     params: {
       per_page: 100,
       order: 'asc',
       orderby: 'menu_order',
+      // XXX: We will perform a check in layouts as private posts are only available for PRO
+      status: 'publish, private',
       ...(isPreview && {
         status: 'any',
-      }),
+      })
     },
   });
 
@@ -45,7 +48,10 @@ export async function getStaticProps({ params, preview, previewData }) {
     (t) =>
       (!t.parent || currentParentId === t.parent) &&
       t.slug === params.slugs[params.slugs.length - 1]
-  );
+);
+
+  const proLoginRequired = currentTool.status === 'private';
+
   const siblingTools = currentTool?.parent
     ? toolsGrouped?.[currentTool?.parent]
     : toolsGrouped?.[currentTool?.id];
@@ -53,6 +59,7 @@ export async function getStaticProps({ params, preview, previewData }) {
   return {
     props: {
       tools: tools || [],
+      proLoginRequired,
       parentTools: parentTools || [],
       currentPage: currentTool || null,
       siblingTools: siblingTools || [],
