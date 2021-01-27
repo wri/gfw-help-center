@@ -26,6 +26,7 @@ export async function getServerSideProps({ params }) {
     type: 'articles',
     params: {
       search: params?.query,
+      status: 'publish, private',
     },
     allLanguages: true,
   });
@@ -34,6 +35,7 @@ export async function getServerSideProps({ params }) {
     type: 'webinars',
     params: {
       search: params?.query,
+      status: 'publish, private',
     },
     allLanguages: true,
   });
@@ -42,6 +44,7 @@ export async function getServerSideProps({ params }) {
     type: 'additional_materials',
     params: {
       search: params?.query,
+      status: 'publish, private',
     },
     allLanguages: true,
   });

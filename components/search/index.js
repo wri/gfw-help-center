@@ -101,11 +101,13 @@ const Search = ({
           params: search
             ? {
                 search,
+                status: 'publish, private',
               }
             : {
                 'filter[meta_key]': 'featured',
                 'filter[meta_value]': 1,
               },
+          status: 'publish, private',
           allLanguages: true,
           cancelToken: source.token,
         });
@@ -115,6 +117,7 @@ const Search = ({
           params: search
             ? {
                 search,
+                status: 'publish, private',
               }
             : {
                 'filter[meta_key]': 'featured',
@@ -129,6 +132,7 @@ const Search = ({
           params: search
             ? {
                 search,
+                status: 'publish, private',
               }
             : {
                 'filter[meta_key]': 'featured',
