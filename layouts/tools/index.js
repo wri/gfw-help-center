@@ -55,6 +55,7 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
 
   const links = sidebarPages?.map((sub) => ({
     label: sub?.parent ? sub?.title : 'Overview',
+    isPro: sub?.status === 'private',
     link: sub?.acf?.alt_link || sub?.link,
     active:
       currentPage?.link === sub?.link || currentPage?.link === `${sub?.link}/`,

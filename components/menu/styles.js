@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { H4, theme } from 'gfw-components';
+import { H4, H5, theme } from 'gfw-components';
 
 export const MenuWrapper = styled.ul`
   background-color: #f6f6f4;
@@ -40,4 +40,13 @@ export const MenuItem = styled.li`
 export const Title = styled(H4)`
   margin-left: ${theme.grid.mobileGutter};
   margin-bottom: 20px;
+`;
+
+export const ProTitle = styled(H5)`
+  color: ${theme.colors.grey};
+  font-size: 13px;
+  border-top: 1px solid ${theme.colors.grey};
+  margin-bottom: 20px;
+  margin-top: 10px;
+  padding-top: 25px;
 `;
