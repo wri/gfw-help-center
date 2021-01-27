@@ -31,8 +31,11 @@ export async function getStaticProps({ params, previewData, preview }) {
     slug: params.slug,
   });
 
+  const proLoginRequired = article.status === 'private';
+
   return {
     props: {
+      proLoginRequired,
       article: article || null,
       metaTags: article?.yoast_head || '',
       isError: !article,
