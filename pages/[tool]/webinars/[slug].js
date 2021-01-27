@@ -32,8 +32,11 @@ export async function getStaticProps({ params, preview, previewData }) {
     slug: params.slug,
   });
 
+  const proLoginRequired = webinar.status === 'private';
+
   return {
     props: {
+      proLoginRequired,
       webinar: webinar || null,
       metaTags: webinar?.yoast_head || '',
       isError: !webinar,
