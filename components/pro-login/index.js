@@ -10,9 +10,11 @@ import {
   LogoContainer,
   LoginContainer,
   LoginTitle,
+  LoginDescription,
   RequestAccountTitle,
   RequestAccountBtn,
   LoginErrorModal,
+  CloseIcon,
 } from './styles';
 
 const ProLogin = () => {
@@ -33,8 +35,17 @@ const ProLogin = () => {
       });
   };
 
+  const referBack = () => {
+    if (document.referrer !== '' && document.referrer.includes('/help')) {
+      history.back();
+    } else {
+      window.location.href = `${window.location.origin}/help`;
+    }
+  };
+
   return (
     <LoginWrapper>
+      <CloseIcon onClick={referBack} />
       <LogoContainer>
         <img src={ProLogo} alt="GFW Pro" />
       </LogoContainer>
@@ -43,6 +54,11 @@ const ProLogin = () => {
           {({ handleSubmit: handleSubmitCallback }) => (
             <form onSubmit={handleSubmitCallback}>
               <LoginTitle>Log in to GFW Pro to continue</LoginTitle>
+              <LoginDescription>
+                Log in with your GFW Pro credentials is required to view GFW Pro
+                training resources, such as step-by-step instructions, videos
+                and more.
+              </LoginDescription>
               <Input name="username" label="Username" required />
               <Input
                 name="password"

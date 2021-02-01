@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
+import { theme } from 'gfw-components';
 
-const PRO_GREY = '#555';
+import CloseIconSrc from 'assets/icons/close.svg';
+
+const PRO_GREY = '#343534';
 const WHITE = '#FFF';
 
 export const LogoContainer = styled.div`
@@ -32,7 +35,8 @@ export const LoginContainer = styled.section`
 
   .label {
     text-transform: capitalize;
-    font-weight: 400;
+    font-weight: 400 !important;
+    color: #777777 !important;
     font-size: 14px;
     padding: 0 0 5px 0;
   }
@@ -54,10 +58,16 @@ export const LoginContainer = styled.section`
 
 export const LoginTitle = styled.h3`
   color: ${PRO_GREY};
-  text-align: center;
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 500;
+  padding: 35px 0 20px 0;
+`;
+
+export const LoginDescription = styled.p`
+  color: #777777;
+  font-size: 14px;
   padding: 0 0 30px 0;
+  line-height: 25px;
 `;
 
 export const RequestAccountTitle = styled.div`
@@ -106,4 +116,15 @@ export const LoginErrorModal = styled.div`
   button {
     margin: 30px 0 0 0;
   }
+`;
+
+export const CloseIcon = styled(CloseIconSrc)`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  top: 20px;
+  right: 20px;
+  fill: ${theme.colors.white};
+  cursor: pointer;
 `;
