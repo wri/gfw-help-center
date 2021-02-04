@@ -30,13 +30,14 @@ const renderPage = (
   setOpen,
   preview,
   proAuthenticated,
+  proVerificationRequired,
   proLoginRequired,
   lang
 ) => {
-  if (proLoginRequired && !proAuthenticated) {
+  if (proLoginRequired && (!proAuthenticated || proVerificationRequired)) {
     return (
       <PageWrapper>
-        <ProLogin />
+        <ProLogin verificationRequired={proVerificationRequired} />
       </PageWrapper>
     );
   }
@@ -138,6 +139,7 @@ export default function Layout({
             setOpen,
             preview,
             proAuth?.pro,
+            proAuth?.proVerificationRequired,
             proLoginRequired,
             language
           )

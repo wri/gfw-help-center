@@ -24,6 +24,21 @@ export const LoginWrapper = styled.div`
   z-index: 9999;
 `;
 
+export const InputWrapper = styled.div`
+  position: relative;
+`;
+
+export const ForgotPasswordLink = styled.a`
+  position: absolute;
+  right: 0;
+  font-size: 14px;
+  top: -2px;
+  color: #97bd3d;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 export const LoginContainer = styled.section`
   background: ${WHITE};
   min-width: 430px;
@@ -60,6 +75,7 @@ export const LoginTitle = styled.h3`
   color: ${PRO_GREY};
   font-size: 21px;
   font-weight: 500;
+  line-height: 1.3em;
   padding: 35px 0 20px 0;
 `;
 

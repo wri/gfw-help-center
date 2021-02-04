@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import ProLogo from 'assets/images/GFW_PRO-logo.png';
 
@@ -11,14 +11,19 @@ import {
   LoginContainer,
   LoginTitle,
   LoginDescription,
+  InputWrapper,
+  ForgotPasswordLink,
   RequestAccountTitle,
   RequestAccountBtn,
   LoginErrorModal,
   CloseIcon,
 } from './styles';
 
-const ProLogin = () => {
+const ProLogin = ({ verificationRequired }) => {
   const [open, setIsOpen] = useState(false);
+  const [verification, setVerification] = useState(
+    verificationRequired || false
+  );
 
   const handleSubmit = (props) => {
     fetch('/help/api/pro', {
@@ -27,8 +32,10 @@ const ProLogin = () => {
     })
       .then((r) => r.json())
       .then((response) => {
-        if (response.pro) {
+        if (response?.pro) {
           window.location.reload();
+        } else if (response?.proVerificationRequired) {
+          setVerification(true);
         } else {
           setIsOpen(true);
         }
@@ -53,33 +60,66 @@ const ProLogin = () => {
         <Form onSubmit={handleSubmit}>
           {({ handleSubmit: handleSubmitCallback }) => (
             <form onSubmit={handleSubmitCallback}>
-              <LoginTitle>Log in to GFW Pro to continue</LoginTitle>
-              <LoginDescription>
-                Log in with your GFW Pro credentials is required to view GFW Pro
-                training resources, such as step-by-step instructions, videos
-                and more.
-              </LoginDescription>
-              <Input name="username" label="Username" required />
-              <Input
-                name="password"
-                label="Password"
-                type="password"
-                required
-              />
-              <Submit>Login</Submit>
+              <LoginTitle>
+                Login with your GFW Pro account to continue
+              </LoginTitle>
+              {!verification && (
+                <LoginDescription>
+                  Log in with your GFW Pro credentials is required to view GFW
+                  Pro training resources, such as step-by-step instructions,
+                  videos and more.
+                </LoginDescription>
+              )}
+              {verification && (
+                <LoginDescription>
+                  Enter the code that was emailed to you.
+                </LoginDescription>
+              )}
+              {verification && (
+                <InputWrapper>
+                  <Input name="verify" label="Verification code" required />
+                </InputWrapper>
+              )}
+              {!verification && (
+                <>
+                  <InputWrapper>
+                    <Input name="username" label="Username" required />
+                  </InputWrapper>
+                  <InputWrapper>
+                    <ForgotPasswordLink
+                      target="__BLANK"
+                      rel="noreferrer"
+                      href="https://pro.globalforestwatch.org/forgot"
+                    >
+                      Forgot your password?
+                    </ForgotPasswordLink>
+                    <Input
+                      name="password"
+                      label="Password"
+                      type="password"
+                      required
+                    />
+                  </InputWrapper>
+                </>
+              )}
+              <Submit>{verification ? 'Verify' : 'Login'}</Submit>
             </form>
           )}
         </Form>
-        <RequestAccountTitle>
-          <span>Don&apos;t have an account?</span>
-        </RequestAccountTitle>
-        <RequestAccountBtn
-          href="https://pro.globalforestwatch.org/account"
-          target="__BLANK"
-          rel="noreferrer"
-        >
-          Request an account
-        </RequestAccountBtn>
+        {!verification && (
+          <>
+            <RequestAccountTitle>
+              <span>Don&apos;t have an account?</span>
+            </RequestAccountTitle>
+            <RequestAccountBtn
+              href="https://pro.globalforestwatch.org/account"
+              target="__BLANK"
+              rel="noreferrer"
+            >
+              Request an account
+            </RequestAccountBtn>
+          </>
+        )}
       </LoginContainer>
       <Modal
         title="Unable to login"
@@ -97,6 +137,8 @@ const ProLogin = () => {
   );
 };
 
-ProLogin.propTypes = {};
+ProLogin.propTypes = {
+  verificationRequired: PropTypes.bool.isRequired,
+};
 
 export default ProLogin;
