@@ -13,7 +13,7 @@ import {
   ContactUsModal,
 } from 'gfw-components';
 
-import { isProAuthenticated } from 'utils/pro-checks';
+import { isProAuthenticated, proLogout } from 'utils/pro-checks';
 import { useTrackPage } from 'utils/analytics';
 import { LangProvider, getAPILangCode } from 'utils/lang';
 
@@ -120,6 +120,11 @@ export default function Layout({
         <Header
           relative
           theme={proAuth?.pro ? 'pro' : 'default'}
+          onProLogout={async (e) => {
+            e.preventDefault();
+            await proLogout();
+            window.location.reload();
+          }}
           proAuthenticated={proAuth?.pro}
           pathname="https://www.globalforestwatch.org/help/"
           openContactUsModal={() => setOpen(true)}

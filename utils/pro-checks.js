@@ -4,3 +4,9 @@ export const isProAuthenticated = async () => {
   const res = await response.json();
   return res;
 };
+
+export const proLogout = async () => {
+  const response = await fetch('/help/api/pro?logout=true');
+  const res = await response.json();
+  return res;
+};

@@ -71,6 +71,15 @@ export const LoginContainer = styled.section`
   }
 `;
 
+export const RememberMeWrapper = styled.div`
+  .label {
+    display: none !important;
+  }
+  .checkbox-option {
+    margin: 0;
+  }
+`;
+
 export const LoginTitle = styled.h3`
   color: ${PRO_GREY};
   font-size: 21px;

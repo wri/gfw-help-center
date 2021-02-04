@@ -5,27 +5,32 @@ import has from 'lodash/has';
 const PRO_LOGIN_ENDPOINT = 'https://pro.globalforestwatch.org/auth/signinpost';
 // const PRO_VERIFICATION_ENDPOINT = 'https://pro.globalforestwatch.org/auth/verifyLogin';
 
-const generateCookie = (name, expires, secure) => {
+const generateCookie = (name, expires, secure, remember) => {
   const cookieString = [
     name,
     'HttpOnly',
     'Path=/',
     'SameSite=Strict',
     secure,
-    `expires=${expires}`,
+    remember ? `expires=${expires}` : null,
   ];
-  return cookieString.join(';');
+  return cookieString.filter(Boolean).join(';');
 };
 
-function setCookie(needsVerify = false) {
+function setCookie(needsVerify = false, remember) {
   const expires = addHours(new Date(), 4);
   const secure = process.env.NODE_ENV === 'production' ? 'Secure' : '';
 
   if (needsVerify) {
-    return generateCookie('pro-x-verification-required=true', expires, secure);
+    return generateCookie(
+      'pro-x-verification-required=true',
+      expires,
+      secure,
+      remember
+    );
   }
 
-  return generateCookie('pro-x=true', expires, secure);
+  return generateCookie('pro-x=true', expires, secure, remember);
 }
 
 const authenticatePro = async (body) => {
@@ -79,7 +84,7 @@ export default async function handler(req, res) {
     // }
     const proAuth = await authenticatePro(body);
     if (proAuth) {
-      res.setHeader('Set-Cookie', setCookie());
+      res.setHeader('Set-Cookie', setCookie(false, has(body, 'remember')));
       res.status(200).json({ pro: true });
     } else {
       res.status(401).json({ pro: false });
@@ -89,6 +94,15 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
+    if (has(req.query, 'logout')) {
+      res.setHeader(
+        'Set-Cookie',
+        'pro-x=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
+      );
+      res.status(200).json({ pro: false });
+      return;
+    }
+
     const cookies = cookie.parse(req.headers.cookie || '');
     if (cookies && has(cookies, 'pro-x-verification-required')) {
       res.status(200).json({ proVerificationRequired: true });

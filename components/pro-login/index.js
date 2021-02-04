@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ProLogo from 'assets/images/GFW_PRO-logo.png';
 
-import { Form, Submit, Input, Modal, Button } from 'gfw-components';
+import { Form, Submit, Input, Checkbox, Modal, Button } from 'gfw-components';
 
 import {
   LoginWrapper,
@@ -16,10 +16,11 @@ import {
   RequestAccountTitle,
   RequestAccountBtn,
   LoginErrorModal,
+  RememberMeWrapper,
   CloseIcon,
 } from './styles';
 
-const ProLogin = ({ verificationRequired }) => {
+const ProLogin = ({ independent, verificationRequired }) => {
   const [open, setIsOpen] = useState(false);
   const [verification, setVerification] = useState(
     verificationRequired || false
@@ -33,7 +34,11 @@ const ProLogin = ({ verificationRequired }) => {
       .then((r) => r.json())
       .then((response) => {
         if (response?.pro) {
-          window.location.reload();
+          if (independent) {
+            window.location.href = `${window.location.origin}/help/gfw-pro/`;
+          } else {
+            window.location.reload();
+          }
         } else if (response?.proVerificationRequired) {
           setVerification(true);
         } else {
@@ -43,11 +48,7 @@ const ProLogin = ({ verificationRequired }) => {
   };
 
   const referBack = () => {
-    if (document.referrer !== '' && document.referrer.includes('/help')) {
-      history.back();
-    } else {
-      window.location.href = `${window.location.origin}/help`;
-    }
+    window.location.href = `${window.location.origin}/help/gfw-pro/`;
   };
 
   return (
@@ -102,6 +103,17 @@ const ProLogin = ({ verificationRequired }) => {
                   </InputWrapper>
                 </>
               )}
+              <RememberMeWrapper>
+                <Checkbox
+                  name="remember"
+                  options={[
+                    {
+                      label: 'Remember me',
+                      value: true,
+                    },
+                  ]}
+                />
+              </RememberMeWrapper>
               <Submit>{verification ? 'Verify' : 'Login'}</Submit>
             </form>
           )}
@@ -139,6 +151,7 @@ const ProLogin = ({ verificationRequired }) => {
 
 ProLogin.propTypes = {
   verificationRequired: PropTypes.bool.isRequired,
+  independent: PropTypes.bool,
 };
 
 export default ProLogin;
