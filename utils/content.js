@@ -11,7 +11,7 @@ export const cleanTitle = (str) => {
 };
 
 export const formatMenuData = (arr) => {
-  const links = arr.filter((a) => a.isPro === false);
+  const links = arr.filter((a) => a.isPro === false || !a.isPro);
   const proLinks = arr.filter((a) => a.isPro === true);
   return [links, proLinks];
 };

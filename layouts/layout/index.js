@@ -13,7 +13,7 @@ import {
   ContactUsModal,
 } from 'gfw-components';
 
-import { isProAuthenticated } from 'utils/pro-checks';
+import { isProAuthenticated, proLogout } from 'utils/pro-checks';
 import { useTrackPage } from 'utils/analytics';
 import { LangProvider, getAPILangCode } from 'utils/lang';
 
@@ -30,13 +30,14 @@ const renderPage = (
   setOpen,
   preview,
   proAuthenticated,
+  proVerificationRequired,
   proLoginRequired,
   lang
 ) => {
-  if (proLoginRequired && !proAuthenticated) {
+  if (proLoginRequired && (!proAuthenticated || proVerificationRequired)) {
     return (
       <PageWrapper>
-        <ProLogin />
+        <ProLogin verificationRequired={proVerificationRequired} />
       </PageWrapper>
     );
   }
@@ -119,6 +120,11 @@ export default function Layout({
         <Header
           relative
           theme={proAuth?.pro ? 'pro' : 'default'}
+          onProLogout={async (e) => {
+            e.preventDefault();
+            await proLogout();
+            window.location.reload();
+          }}
           proAuthenticated={proAuth?.pro}
           pathname="https://www.globalforestwatch.org/help/"
           openContactUsModal={() => setOpen(true)}
@@ -138,6 +144,7 @@ export default function Layout({
             setOpen,
             preview,
             proAuth?.pro,
+            proAuth?.proVerificationRequired,
             proLoginRequired,
             language
           )
