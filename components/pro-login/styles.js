@@ -57,7 +57,7 @@ export const LoginContainer = styled.section`
   }
 
   .checkbox-option {
-    margin: 0;
+    margin: 0 !important;
   }
 
   .input-field input {
