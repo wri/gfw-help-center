@@ -20,6 +20,31 @@ import {
   PostExcerpt,
 } from './styles';
 
+const CardLink = ({ extLink, link, children }) => {
+  if (extLink) {
+    return (
+      <a
+        href={extLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="external link"
+      >
+        {children}
+      </a>
+    );
+  }
+
+  if (!extLink && link) {
+    return (
+      <Link href={link}>
+        <a>{children}</a>
+      </Link>
+    );
+  }
+
+  return children;
+};
+
 const Card = ({
   featured_media,
   translations_posts,
@@ -36,57 +61,45 @@ const Card = ({
 
       return (
         <CardWrapper>
-          {extLink && (
-            // eslint-disable-next-line jsx-a11y/anchor-has-content
-            <a
-              href={extLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="external link"
-            />
-          )}
-          {!extLink && link && (
-            <Link href={link}>
-              <a> </a>
-            </Link>
-          )}
-          {!!featured_media && (
-            <MediaWrapper large={large}>
-              <Media {...featured_media} />
-              {video && (
-                <Overlay>
-                  <Button
-                    round
-                    light
-                    css={css`
-                      border: none;
-                    `}
-                  >
-                    <PlayIcon />
-                  </Button>
-                </Overlay>
-              )}
-            </MediaWrapper>
-          )}
-          {categories && (
-            <CategoryList
-              categories={categories}
-              css={css`
-                z-index: 2;
-                position: relative;
-              `}
-            />
-          )}
-          {title && (
-            <PostTitle className="notranslate" large={large}>
-              {title}
-            </PostTitle>
-          )}
-          {excerpt && (
-            <PostExcerpt className="notranslate" large={large}>
-              {ReactHtmlParser(excerpt)}
-            </PostExcerpt>
-          )}
+          <CardLink extLink={extLink} link={link}>
+            {!!featured_media && (
+              <MediaWrapper large={large}>
+                <Media {...featured_media} />
+                {video && (
+                  <Overlay>
+                    <Button
+                      round
+                      light
+                      css={css`
+                        border: none;
+                      `}
+                    >
+                      <PlayIcon />
+                    </Button>
+                  </Overlay>
+                )}
+              </MediaWrapper>
+            )}
+            {categories && (
+              <CategoryList
+                categories={categories}
+                css={css`
+                  z-index: 2;
+                  position: relative;
+                `}
+              />
+            )}
+            {title && (
+              <PostTitle className="notranslate" large={large}>
+                {title}
+              </PostTitle>
+            )}
+            {excerpt && (
+              <PostExcerpt className="notranslate" large={large}>
+                {ReactHtmlParser(excerpt)}
+              </PostExcerpt>
+            )}
+          </CardLink>
         </CardWrapper>
       );
     }}
