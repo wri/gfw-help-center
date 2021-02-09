@@ -16,6 +16,7 @@ import {
 import { isProAuthenticated, proLogout } from 'utils/pro-checks';
 import { useTrackPage } from 'utils/analytics';
 import { LangProvider, getAPILangCode } from 'utils/lang';
+import { appBasePath } from 'utils/path-resolver';
 
 import ErrorPage from 'layouts/error';
 import HelpFooter from 'components/footer';
@@ -102,7 +103,6 @@ export default function Layout({
     }
     setLanguage(newLang);
   };
-
   return (
     <>
       <Head>
@@ -119,14 +119,15 @@ export default function Layout({
       <HeaderWrapper>
         <Header
           relative
-          theme={proAuth?.pro ? 'pro' : 'default'}
+          theme={proAuth?.pro && proLoginRequired ? 'pro' : 'default'}
           onProLogout={async (e) => {
             e.preventDefault();
             await proLogout();
             window.location.reload();
           }}
-          proAuthenticated={proAuth?.pro}
-          pathname="https://www.globalforestwatch.org/help/"
+          proAuthenticated={proAuth?.pro && proLoginRequired}
+          pathname={`${appBasePath()}/help`}
+          appUrl={appBasePath()}
           openContactUsModal={() => setOpen(true)}
           afterLangSelect={handleLangSelect}
         />
