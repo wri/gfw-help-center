@@ -119,13 +119,13 @@ export default function Layout({
       <HeaderWrapper>
         <Header
           relative
-          theme={proAuth?.pro ? 'pro' : 'default'}
+          theme={proAuth?.pro && proLoginRequired ? 'pro' : 'default'}
           onProLogout={async (e) => {
             e.preventDefault();
             await proLogout();
             window.location.reload();
           }}
-          proAuthenticated={proAuth?.pro}
+          proAuthenticated={proAuth?.pro && proLoginRequired}
           pathname="https://www.globalforestwatch.org/help/"
           openContactUsModal={() => setOpen(true)}
           afterLangSelect={handleLangSelect}
