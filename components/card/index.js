@@ -58,7 +58,6 @@ const Card = ({
       const translatedData = translations_posts?.find((c) => c.locale === lang);
       const cardData = translatedData || rawCardData;
       const { title, excerpt, link, extLink } = cardData || {};
-
       return (
         <CardWrapper>
           <CardLink extLink={extLink} link={link}>

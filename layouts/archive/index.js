@@ -168,7 +168,7 @@ const SearchPage = ({
                   </Column>
                 ))}
               {type === 'webinars' &&
-                webinars?.map(({ id, link, ...rest }) => (
+                webinars?.map(({ id, ...rest }) => (
                   <Column
                     width={[1, 1 / 2]}
                     css={css`

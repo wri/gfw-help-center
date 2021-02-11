@@ -26,7 +26,6 @@ const SimpleCard = ({
       const translatedData = translations_posts?.find((c) => c.locale === lang);
       const cardData = translatedData || rawCardData;
       const { title, excerpt, extLink, link } = cardData || {};
-
       return (
         <Card large={large}>
           {extLink && (
