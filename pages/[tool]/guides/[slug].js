@@ -3,6 +3,8 @@ import { getPostsByType, getPostByType } from 'lib/api';
 import ArticlePage from 'layouts/article';
 import Layout from 'layouts/layout';
 
+import { articlesFilter } from 'utils/articles-filter';
+
 export default function Article(props) {
   return (
     // eslint-disable-next-line react/prop-types
@@ -16,19 +18,8 @@ export async function getStaticProps({ params, previewData, preview }) {
   const isPreview = !!preview && previewData?.slug === params.slug;
   const article = await getPostByType({
     type: 'articles',
-    ...(!isPreview && {
-      params: {
-        // XXX: We will perform a check in layouts as private posts are only available for PRO
-        status: 'publish, private'
-      }
-    }),
-    ...(isPreview && {
-      id: previewData?.id,
-      params: {
-        status: 'any',
-      },
-    }),
     slug: params.slug,
+    ...articlesFilter(isPreview, previewData),
   });
 
   const proLoginRequired = article.status === 'private';

@@ -6,6 +6,8 @@ import ArchivePage from 'layouts/archive';
 
 import Layout from 'layouts/layout';
 
+import { searchFilter } from 'utils/articles-filter';
+
 export default function Search(props) {
   return (
     <Layout {...props} noIndex>
@@ -24,28 +26,19 @@ export default function Search(props) {
 export async function getServerSideProps({ params }) {
   const articles = await getPostsByType({
     type: 'articles',
-    params: {
-      search: params?.query,
-      status: 'publish, private',
-    },
+    ...searchFilter(params),
     allLanguages: true,
   });
 
   const webinars = await getPostsByType({
     type: 'webinars',
-    params: {
-      search: params?.query,
-      status: 'publish, private',
-    },
+    ...searchFilter(params),
     allLanguages: true,
   });
 
   const additionalMaterials = await getPostsByType({
     type: 'additional_materials',
-    params: {
-      search: params?.query,
-      status: 'publish, private',
-    },
+    ...searchFilter(params),
     allLanguages: true,
   });
 

@@ -2,6 +2,7 @@ import groupBy from 'lodash/groupBy';
 
 import { getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
+import { statusFilter } from 'utils/articles-filter';
 
 import ToolsPage from 'layouts/tools';
 
@@ -27,10 +28,10 @@ export async function getStaticProps({ params, preview, previewData }) {
       order: 'asc',
       orderby: 'menu_order',
       // XXX: We will perform a check in layouts as private posts are only available for PRO
-      status: 'publish, private',
+      status: statusFilter(),
       ...(isPreview && {
         status: 'any',
-      })
+      }),
     },
   });
 
@@ -48,7 +49,7 @@ export async function getStaticProps({ params, preview, previewData }) {
     (t) =>
       (!t.parent || currentParentId === t.parent) &&
       t.slug === params.slugs[params.slugs.length - 1]
-);
+  );
 
   const proLoginRequired = currentTool.status === 'private';
 
