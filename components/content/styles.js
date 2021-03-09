@@ -9,6 +9,19 @@ export default styled.div`
   word-break: break-word;
   text-align: left;
 
+  code,
+  .code,
+  pre {
+    font-family: monospace;
+    background: #797979;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px;
+    white-space: normal;
+    border-radius: 5px;
+    line-height: 30px;
+  }
+
   ${theme.mediaQueries.small} {
     font-size: 20px;
     line-height: 36px;

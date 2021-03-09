@@ -5,6 +5,7 @@ import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import { Carousel } from 'gfw-components';
 
 import Blockquote from 'components/blockquote';
+import CodeBlock from 'components/code-block';
 
 import ContentWrapper from './styles';
 
@@ -12,6 +13,10 @@ const PostContent = ({ children, align, print }) => (
   <ContentWrapper align={align}>
     {ReactHtmlParser(children, {
       transform: (node) => {
+        if (node.name === 'code') {
+          return <CodeBlock>{node.children}</CodeBlock>;
+        }
+
         if (
           node.name === 'ul' &&
           node?.attribs.class === 'blocks-gallery-grid'

@@ -51,7 +51,7 @@ export async function getStaticProps({ params, preview, previewData }) {
       t.slug === params.slugs[params.slugs.length - 1]
   );
 
-  const proLoginRequired = currentTool.status === 'private';
+  const proLoginRequired = currentTool?.status === 'private';
 
   const siblingTools = currentTool?.parent
     ? toolsGrouped?.[currentTool?.parent]
