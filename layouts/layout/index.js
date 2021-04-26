@@ -17,6 +17,7 @@ import { isProAuthenticated, proLogout } from 'utils/pro-checks';
 import { useTrackPage } from 'utils/analytics';
 import { LangProvider, getAPILangCode } from 'utils/lang';
 import { appBasePath } from 'utils/path-resolver';
+import { navMain } from 'utils/nav';
 
 import ErrorPage from 'layouts/error';
 import HelpFooter from 'components/footer';
@@ -119,6 +120,7 @@ export default function Layout({
       <HeaderWrapper>
         <Header
           relative
+          navMain={proLoginRequired && proAuth?.pro ? [] : navMain}
           theme={proAuth?.pro && proLoginRequired ? 'pro' : 'default'}
           onProLogout={async (e) => {
             e.preventDefault();
