@@ -1,9 +1,7 @@
+import https from 'https';
 import cookie from 'cookie';
 import { addHours } from 'date-fns';
 import has from 'lodash/has';
-
-const PRO_LOGIN_ENDPOINT = 'https://pro.globalforestwatch.org/auth/signinpost';
-// const PRO_VERIFICATION_ENDPOINT = 'https://pro.globalforestwatch.org/auth/verifyLogin';
 
 const generateCookie = (name, expires, secure, remember) => {
   const cookieString = [
@@ -35,8 +33,11 @@ function setCookie(needsVerify = false, remember) {
 
 const authenticatePro = async (body) => {
   try {
-    const req = await fetch(PRO_LOGIN_ENDPOINT, {
+    const req = await fetch(process.env.NEXT_PUBLIC_PRO_AUTH_ENDPOINT, {
       method: 'POST',
+      agent: new https.Agent({
+        rejectUnauthorized: false,
+      }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -46,42 +47,21 @@ const authenticatePro = async (body) => {
       }),
     });
 
-    const response = await req.text();
-    return response.toLowerCase() === 'authenticated';
+    const response = await req.json();
+    if (response.success) {
+      // XXX: Should we do something with the token?
+      return true;
+    }
+    return false;
   } catch (e) {
     console.error('Pro login error', e); // eslint-disable-line
   }
   return false;
 };
 
-// const verifyProToken = async (body) => {
-//   try {
-//     const req = await fetch(PRO_VERIFICATION_ENDPOINT, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//         tokenID: body.verify
-//       }),
-//     });
-//
-//     const response = await req.text();
-//     return response.toLowerCase() === 'authenticated';
-//   } catch (e) {
-//     console.error('Pro login error', e); // eslint-disable-line
-//   }
-//   return false;
-// }
-
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const body = JSON.parse(req.body);
-    // if (has(body, 'verify')) {
-    //   const verifyToken = await verifyProToken(JSON.parse(req.body));
-    //   res.status(401).json({ pro: false });
-    //   return;
-    // }
     const proAuth = await authenticatePro(body);
     if (proAuth) {
       res.setHeader('Set-Cookie', setCookie(false, has(body, 'remember')));
