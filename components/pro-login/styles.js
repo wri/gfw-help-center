@@ -18,6 +18,8 @@ export const LoginWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  overflow-y: scroll;
+  padding-bottom: 30px;
   width: 100vw;
   height: 100vh;
   background: ${PRO_GREY};
@@ -144,7 +146,7 @@ export const LoginErrorModal = styled.div`
 `;
 
 export const CloseIcon = styled(CloseIconSrc)`
-  position: absolute;
+  position: fixed;
   width: 20px;
   height: 20px;
   margin-left: 10px;

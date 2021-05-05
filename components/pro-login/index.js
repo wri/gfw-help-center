@@ -62,13 +62,14 @@ const ProLogin = ({ independent, verificationRequired }) => {
           {({ handleSubmit: handleSubmitCallback }) => (
             <form onSubmit={handleSubmitCallback}>
               <LoginTitle>
-                Login with your GFW Pro account to continue
+                Log in with your GFW Pro account credentials to continue
               </LoginTitle>
               {!verification && (
                 <LoginDescription>
-                  Log in with your GFW Pro credentials is required to view GFW
-                  Pro training resources, such as step-by-step instructions,
-                  videos and more.
+                  Access to GFW Pro materials is limited to GFW Pro users.
+                  Logging in with your GFW Pro account credentials is required
+                  to view GFW Pro training resources, such as step-by-step
+                  instructions, videos and more.
                 </LoginDescription>
               )}
               {verification && (
