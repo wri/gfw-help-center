@@ -65,6 +65,11 @@ export default class MyDocument extends Document {
             src="/help/transifex.js"
             rel="preconnect"
           />
+          <script
+            type="text/javascript"
+            src="/help/hotjar.js"
+            rel="preconnect"
+          />
         </Head>
         <body>
           <Main />
