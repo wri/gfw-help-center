@@ -151,9 +151,7 @@ const Article = ({ article, isGuide }) => {
                 `}
               />
             )}
-            <PostTitle className="notranslate">
-              {ReactHtmlParser(title)}
-            </PostTitle>
+            <PostTitle>{ReactHtmlParser(title)}</PostTitle>
             <PostContentWrapper>
               <PostContent align="left">{content}</PostContent>
               {tags && (
