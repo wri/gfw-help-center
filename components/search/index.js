@@ -212,7 +212,9 @@ const Search = ({
           )}
           {!open && showTitle && (
             <SearchClosed>
-              <OpenMessage>Search the GFW help center</OpenMessage>
+              <OpenMessage>
+                {translateText('Search the GFW help center')}
+              </OpenMessage>
             </SearchClosed>
           )}
           <SearchIcon
