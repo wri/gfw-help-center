@@ -104,6 +104,9 @@ export default function Layout({
     }
     setLanguage(newLang);
   };
+
+  const isProduction = process.env.NEXT_PUBLIC_FEATURE_ENV === 'production';
+
   return (
     <>
       <Head>
@@ -111,10 +114,10 @@ export default function Layout({
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=5"
         />
-        {(noIndex || isError) && (
+        {metaTags && ReactHtmlParser(metaTags)}
+        {(!isProduction || noIndex || isError) && (
           <meta name="robots" content="noindex,follow" />
         )}
-        {metaTags && ReactHtmlParser(metaTags)}
       </Head>
       <GlobalStyles />
       <HeaderWrapper>
