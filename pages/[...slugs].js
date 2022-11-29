@@ -67,7 +67,7 @@ export async function getStaticProps({ params, preview, previewData }) {
       metaTags: currentTool?.yoast_head || null,
       preview: isPreview,
       isError:
-        !currentTool || currentTool?.link !== `/${params?.slugs?.join('/')}`,
+        !currentTool || currentTool?.link !== `/${params?.slugs?.join('/')}/`,
     },
     revalidate: 10,
   };
