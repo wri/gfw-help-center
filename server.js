@@ -1,5 +1,6 @@
 const next = require('next');
 const express = require('express');
+const sslRedirect = require('heroku-ssl-redirect').default;
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -8,6 +9,9 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
+
+  // Redirect from http to https when NODE_ENV is set to `production`.
+  server.use(sslRedirect(['production'], 301));
 
   server.all(/.*/, (req, res) => {
     return handle(req, res);
