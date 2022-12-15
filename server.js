@@ -14,7 +14,7 @@ function handleNonWwwToWwwRedirect(req, res) {
   try {
     const host = req.header('host');
     if (!host.match(/^www\..*/i)) {
-      res.redirect(301, `https://www.${host}${req.url}`);
+      res.redirect(301, `https://www.globalforestwatch.org${req.url}`);
     }
   } catch (_i) {
     // Ignore by default
