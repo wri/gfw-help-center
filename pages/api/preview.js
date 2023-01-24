@@ -4,6 +4,7 @@ const postTypePaths = {
   tools: '',
   articles: '/guides',
   webinars: '/webinars',
+  additional_materials: '/additional-materials',
 };
 
 // eslint-disable-next-line consistent-return
