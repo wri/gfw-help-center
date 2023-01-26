@@ -4,6 +4,7 @@ const postTypePaths = {
   tools: '',
   articles: '/guides',
   webinars: '/webinars',
+  additional_materials: '/additional-materials',
 };
 
 // eslint-disable-next-line consistent-return
@@ -56,7 +57,7 @@ export default async function preview(req, res) {
   res.writeHead(307, {
     Location: `/help${parentSlug ? `/${parentSlug}` : ''}${
       postTypePaths[post_type]
-    }/${post.slug}/`,
+    }/${post.id}/`,
   });
   res.end();
 }

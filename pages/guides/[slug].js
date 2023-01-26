@@ -15,7 +15,7 @@ export default function Article(props) {
 }
 
 export async function getStaticProps({ params, previewData, preview }) {
-  const isPreview = !!preview && previewData?.slug === params.slug;
+  const isPreview = !!preview;
   const article = await getPostByType({
     type: 'articles',
     ...articlesFilter(isPreview, previewData),
