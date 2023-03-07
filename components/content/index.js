@@ -6,6 +6,7 @@ import { Carousel } from 'gfw-components';
 
 import Blockquote from 'components/blockquote';
 import CodeBlock from 'components/code-block';
+import Lightbox from 'components/lightbox';
 
 import ContentWrapper from './styles';
 
@@ -42,14 +43,10 @@ const PostContent = ({ children, align, print }) => (
           );
         }
 
-        if (print && node.name === 'img') {
-          return (
-            <img
-              key={node.attribs.href}
-              src={node.attribs.src}
-              alt={node.attribs.alt}
-            />
-          );
+        if (node.name === 'img') {
+          const { src, alt, key } = node?.attribs;
+          if (print) return <img src={src} alt={alt} key={key} />;
+          return <Lightbox src={src} alt={alt} key={key} />;
         }
 
         return '';
