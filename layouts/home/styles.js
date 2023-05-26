@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { H4, Column, theme } from 'gfw-components';
+import { H4, Column, theme } from '@worldresources/gfw-components';
 
 import IntroComp from 'components/intro';
 

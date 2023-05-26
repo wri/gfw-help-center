@@ -11,7 +11,7 @@ import {
   Header,
   Footer,
   ContactUsModal,
-} from 'gfw-components';
+} from '@worldresources/gfw-components';
 
 import { isProAuthenticated, proLogout } from 'utils/pro-checks';
 import { useTrackPage } from 'utils/analytics';

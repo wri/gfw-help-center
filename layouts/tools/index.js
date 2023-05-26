@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import { Row, Column, Desktop, Mobile } from 'gfw-components';
+import { Row, Column, Desktop, Mobile } from '@worldresources/gfw-components';
 import ReactHtmlParser from 'react-html-parser';
 import Sticky from 'react-stickynode';
 

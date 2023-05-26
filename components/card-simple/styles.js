@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { theme } from 'gfw-components';
+import { theme } from '@worldresources/gfw-components';
 import ArrowIconSvg from 'assets/icons/chevron-down.svg';
 
 export const Card = styled.div`

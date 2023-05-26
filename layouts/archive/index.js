@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import { Row, Column, Mobile, Desktop, theme } from 'gfw-components';
+import {
+  Row,
+  Column,
+  Mobile,
+  Desktop,
+  theme,
+} from '@worldresources/gfw-components';
 import { useRouter } from 'next/router';
 import compact from 'lodash/compact';
 import Sticky from 'react-stickynode';

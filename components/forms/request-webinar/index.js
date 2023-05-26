@@ -7,7 +7,7 @@ import {
   Input,
   validations,
   Loader,
-} from 'gfw-components';
+} from '@worldresources/gfw-components';
 
 import Message from '../../message';
 

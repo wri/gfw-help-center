@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Column, Button, theme } from 'gfw-components';
+import { Column, Button, theme } from '@worldresources/gfw-components';
 import { rgba } from 'emotion-rgba';
 
 import SearchComponent from 'components/search';
