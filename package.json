@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "engines": {
     "node": "12.16.2"
-  },  "scripts": {
+  },
+  "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start -p $PORT",
@@ -24,7 +25,7 @@
     "emotion": "^10.0.27",
     "emotion-rgba": "^0.0.8",
     "emotion-server": "^10.0.27",
-    "@worldresources/gfw-components": "^2.0.0",
+    "@worldresources/gfw-components": "^2.0.1",
     "husky": "^4.3.0",
     "image-trace-loader": "^1.0.2",
     "imagemin-mozjpeg": "^9.0.0",
