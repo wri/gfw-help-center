@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 import { getPostByType } from 'lib/api';
 
-import { Row, Column, H4, theme } from 'gfw-components';
+import { Row, Column, H4, theme } from '@worldresources/gfw-components';
 import SimpleCard from '../card-simple';
 
 const Footer = ({ openContactUsModal }) => {

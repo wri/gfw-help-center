@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { CancelToken } from 'axios';
 import sortBy from 'lodash/sortBy';
 
-import { Loader } from 'gfw-components';
+import { Loader } from '@worldresources/gfw-components';
 
 import { getPostsByType } from 'lib/api';
 

@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import ReactHtmlParser from 'react-html-parser';
 import Link from 'next/link';
 
-import { Row, Column, Desktop } from 'gfw-components';
+import { Row, Column, Desktop } from '@worldresources/gfw-components';
 
 import ToolCard from 'components/card-tool';
 import SimpleCard from 'components/card-simple';

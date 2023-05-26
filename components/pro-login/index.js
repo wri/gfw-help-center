@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 
 import ProLogo from 'assets/images/GFW_PRO-logo.png';
 
-import { Form, Submit, Input, Checkbox, Modal, Button } from 'gfw-components';
+import {
+  Form,
+  Submit,
+  Input,
+  Checkbox,
+  Modal,
+  Button,
+} from '@worldresources/gfw-components';
 
 import {
   LoginWrapper,

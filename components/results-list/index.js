@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 
-import { Loader } from 'gfw-components';
+import { Loader } from '@worldresources/gfw-components';
 import { translateText } from 'utils/lang';
 
 import Link from 'next/link';
