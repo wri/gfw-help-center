@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { theme } from 'gfw-components';
+import { theme } from '@worldresources/gfw-components';
 
 import PlusIconSvg from 'assets/icons/plus.svg';
 import MinusIconSvg from 'assets/icons/minus.svg';

@@ -1,6 +1,6 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
-import { theme } from 'gfw-components';
+import { theme } from '@worldresources/gfw-components';
 
 export const Card = styled.div`
   position: relative;

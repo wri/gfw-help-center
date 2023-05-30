@@ -10,7 +10,7 @@ import { CancelToken } from 'axios';
 import { useRouter } from 'next/router';
 import { translateText } from 'utils/lang';
 
-import { SearchIcon, CloseIcon, Button } from 'gfw-components';
+import { SearchIcon, CloseIcon, Button } from '@worldresources/gfw-components';
 
 import { getPostsByType, getTags } from 'lib/api';
 

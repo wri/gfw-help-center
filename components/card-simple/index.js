@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Desktop } from 'gfw-components';
+import { Desktop } from '@worldresources/gfw-components';
 import ReactHtmlParser from 'react-html-parser';
 import Link from 'next/link';
 import { css } from '@emotion/core';
