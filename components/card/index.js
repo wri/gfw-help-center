@@ -88,13 +88,9 @@ const Card = ({
                 `}
               />
             )}
-            {title && (
-              <PostTitle className="notranslate" large={large}>
-                {title}
-              </PostTitle>
-            )}
+            {title && <PostTitle large={large}>{title}</PostTitle>}
             {excerpt && (
-              <PostExcerpt className="notranslate" large={large}>
+              <PostExcerpt large={large}>
                 {ReactHtmlParser(excerpt)}
               </PostExcerpt>
             )}
