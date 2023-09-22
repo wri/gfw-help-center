@@ -5,6 +5,8 @@ import Layout from 'layouts/layout';
 
 import { articlesFilter } from 'utils/articles-filter';
 
+import { getPublishedNotifications } from 'utils/notifications';
+
 export default function Article(props) {
   return (
     // eslint-disable-next-line react/prop-types
@@ -21,6 +23,7 @@ export async function getStaticProps({ params, previewData, preview }) {
     slug: params.slug,
     ...articlesFilter(isPreview, previewData),
   });
+  const notifications = await getPublishedNotifications();
 
   return {
     props: {
@@ -28,6 +31,7 @@ export async function getStaticProps({ params, previewData, preview }) {
       metaTags: article?.yoast_head || '',
       isError: !article,
       preview: isPreview,
+      notifications: notifications || [],
     },
     revalidate: 10,
   };

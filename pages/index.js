@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { getPostByType, getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
+import { getPublishedNotifications } from 'utils/notifications';
 
 import HomePage from 'layouts/home';
 
@@ -30,6 +31,8 @@ export async function getStaticProps() {
     },
   });
 
+  const notifications = await getPublishedNotifications();
+
   const toolsMapped = tools?.map((tool) => ({
     ...convertTool(tool),
   }));
@@ -39,6 +42,7 @@ export async function getStaticProps() {
       homepage: homepage || {},
       tools: toolsMapped || [],
       metaTags: homepage?.yoast_head || '',
+      notifications: notifications || [],
     },
     revalidate: 10,
   };

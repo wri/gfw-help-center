@@ -8,6 +8,8 @@ import Layout from 'layouts/layout';
 
 import { searchFilter } from 'utils/articles-filter';
 
+import { getPublishedNotifications } from 'utils/notifications';
+
 export default function Search(props) {
   return (
     <Layout {...props} noIndex>
@@ -42,11 +44,14 @@ export async function getServerSideProps({ params }) {
     allLanguages: true,
   });
 
+  const notifications = await getPublishedNotifications();
+
   return {
     props: {
       articles: articles || [],
       webinars: webinars || [],
       additionalMaterials: additionalMaterials || [],
+      notifications: notifications || [],
     },
   };
 }

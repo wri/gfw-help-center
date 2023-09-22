@@ -5,6 +5,7 @@ import WebinarPage from 'layouts/webinar';
 import Layout from 'layouts/layout';
 
 import { articlesFilter } from 'utils/articles-filter';
+import { getPublishedNotifications } from 'utils/notifications';
 
 export default function Webinar(props) {
   return (
@@ -22,6 +23,7 @@ export async function getStaticProps({ params, preview, previewData }) {
     slug: params.slug,
     ...articlesFilter(isPreview, previewData),
   });
+  const notifications = await getPublishedNotifications();
 
   return {
     props: {
@@ -29,6 +31,7 @@ export async function getStaticProps({ params, preview, previewData }) {
       metaTags: webinar?.yoast_head || '',
       isError: !webinar,
       preview: isPreview,
+      notifications: notifications || [],
     },
     revalidate: 10,
   };
