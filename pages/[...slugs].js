@@ -4,11 +4,15 @@ import { getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
 import { statusFilter } from 'utils/articles-filter';
 
+import dynamic from 'next/dynamic';
+
 import ToolsPage from 'layouts/tools';
 
-import Layout from 'layouts/layout';
-
 import { getPublishedNotifications } from 'utils/notifications';
+
+const Layout = dynamic(() => import('layouts/layout'), {
+  ssr: false,
+});
 
 export default function Tools(props) {
   return (

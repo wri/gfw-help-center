@@ -1,10 +1,14 @@
 import { getTags, getTagBySlug, getPostsByType } from 'lib/api';
 
+import dynamic from 'next/dynamic';
+
 import ArchivePage from 'layouts/archive';
 
-import Layout from 'layouts/layout';
-
 import { getPublishedNotifications } from 'utils/notifications';
+
+const Layout = dynamic(() => import('layouts/layout'), {
+  ssr: false,
+});
 
 export default function Tag(props) {
   return (
