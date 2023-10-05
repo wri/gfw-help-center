@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import ReactHtmlParser from 'react-html-parser';
 
 import {
   GlobalStyles,
   Loader,
-  Header,
   Footer,
   ContactUsModal,
 } from '@worldresources/gfw-components';
@@ -24,6 +24,10 @@ import HelpFooter from 'components/footer';
 import PreviewBanner from 'components/preview-banner';
 import Cookies from 'components/cookies';
 import ProLogin from 'components/pro-login';
+
+const Header = dynamic(() => import('@worldresources/gfw-components'), {
+  ssr: false,
+});
 
 const renderPage = (
   isError,
@@ -71,6 +75,7 @@ export default function Layout({
   preview,
   noIndex,
   page,
+  notifications = [],
 }) {
   const [open, setOpen] = useState(false);
   const [proAuth, setProAuth] = useState(null);
@@ -135,6 +140,7 @@ export default function Layout({
           appUrl={appBasePath()}
           openContactUsModal={() => setOpen(true)}
           afterLangSelect={handleLangSelect}
+          notifications={notifications}
         />
       </HeaderWrapper>
       <main>
@@ -188,6 +194,7 @@ Layout.propTypes = {
   preview: PropTypes.bool,
   noIndex: PropTypes.bool,
   page: PropTypes.object,
+  notifications: PropTypes.array,
 };
 
 const HelpFooterWrapper = styled.div`

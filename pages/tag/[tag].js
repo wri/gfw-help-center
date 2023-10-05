@@ -4,6 +4,8 @@ import ArchivePage from 'layouts/archive';
 
 import Layout from 'layouts/layout';
 
+import { getPublishedNotifications } from 'utils/notifications';
+
 export default function Tag(props) {
   return (
     // eslint-disable-next-line react/prop-types
@@ -38,6 +40,8 @@ export async function getStaticProps({ params }) {
     },
   });
 
+  const notifications = await getPublishedNotifications();
+
   return {
     props: {
       tag: tag || null,
@@ -47,6 +51,7 @@ export async function getStaticProps({ params }) {
       additionalMaterials: additionalMaterials || [],
       metaTags: tag?.yoast_head || '',
       isError: !tag,
+      notifications: notifications || [],
     },
     revalidate: 10,
   };

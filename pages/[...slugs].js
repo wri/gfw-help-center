@@ -8,6 +8,8 @@ import ToolsPage from 'layouts/tools';
 
 import Layout from 'layouts/layout';
 
+import { getPublishedNotifications } from 'utils/notifications';
+
 export default function Tools(props) {
   return (
     // eslint-disable-next-line react/prop-types
@@ -20,6 +22,8 @@ export default function Tools(props) {
 export async function getStaticProps({ params, preview, previewData }) {
   const slug = params?.slugs?.[params?.slugs?.length - 1];
   const isPreview = !!preview && previewData?.slug === slug;
+
+  const notifications = await getPublishedNotifications();
 
   const tools = await getPostsByType({
     type: 'tools',
@@ -68,6 +72,7 @@ export async function getStaticProps({ params, preview, previewData }) {
       preview: isPreview,
       isError:
         !currentTool || currentTool?.link !== `/${params?.slugs?.join('/')}`,
+      notifications: notifications || [],
     },
     revalidate: 10,
   };

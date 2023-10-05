@@ -6,6 +6,8 @@ import Layout from 'layouts/layout';
 
 import { articlesFilter } from 'utils/articles-filter';
 
+import { getPublishedNotifications } from 'utils/notifications';
+
 export default function Webinar(props) {
   return (
     // eslint-disable-next-line react/prop-types
@@ -23,6 +25,8 @@ export async function getStaticProps({ params, preview, previewData }) {
     ...articlesFilter(isPreview, previewData),
   });
 
+  const notifications = await getPublishedNotifications();
+
   const proLoginRequired = webinar.status === 'private';
 
   return {
@@ -32,6 +36,7 @@ export async function getStaticProps({ params, preview, previewData }) {
       metaTags: webinar?.yoast_head || '',
       isError: !webinar,
       preview: isPreview,
+      notifications: notifications || [],
     },
     revalidate: 10,
   };
