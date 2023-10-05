@@ -1,11 +1,15 @@
 import { getPostsByType, getPostByType } from 'lib/api';
 
-import WebinarPage from 'layouts/webinar';
+import dynamic from 'next/dynamic';
 
-import Layout from 'layouts/layout';
+import WebinarPage from 'layouts/webinar';
 
 import { articlesFilter } from 'utils/articles-filter';
 import { getPublishedNotifications } from 'utils/notifications';
+
+const Layout = dynamic(() => import('layouts/layout'), {
+  ssr: false,
+});
 
 export default function Webinar(props) {
   return (

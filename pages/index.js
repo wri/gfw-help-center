@@ -3,9 +3,13 @@ import { getPostByType, getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
 import { getPublishedNotifications } from 'utils/notifications';
 
+import dynamic from 'next/dynamic';
+
 import HomePage from 'layouts/home';
 
-import Layout from 'layouts/layout';
+const Layout = dynamic(() => import('layouts/layout'), {
+  ssr: false,
+});
 
 export default function Index(props) {
   return (

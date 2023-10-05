@@ -2,13 +2,17 @@ import Head from 'next/head';
 
 import { getPostsByType } from 'lib/api';
 
-import ArchivePage from 'layouts/archive';
+import dynamic from 'next/dynamic';
 
-import Layout from 'layouts/layout';
+import ArchivePage from 'layouts/archive';
 
 import { searchFilter } from 'utils/articles-filter';
 
 import { getPublishedNotifications } from 'utils/notifications';
+
+const Layout = dynamic(() => import('layouts/layout'), {
+  ssr: false,
+});
 
 export default function Search(props) {
   return (

@@ -1,11 +1,16 @@
 import { getPostsByType, getPostByType } from 'lib/api';
 
+import dynamic from 'next/dynamic';
+
 import ArticlePage from 'layouts/article';
-import Layout from 'layouts/layout';
 
 import { articlesFilter } from 'utils/articles-filter';
 
 import { getPublishedNotifications } from 'utils/notifications';
+
+const Layout = dynamic(() => import('layouts/layout'), {
+  ssr: false,
+});
 
 export default function Article(props) {
   return (
