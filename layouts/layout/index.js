@@ -6,9 +6,9 @@ import { useRouter } from 'next/router';
 import ReactHtmlParser from 'react-html-parser';
 
 import {
+  Header,
   GlobalStyles,
   Loader,
-  Header,
   Footer,
   ContactUsModal,
 } from '@worldresources/gfw-components';
@@ -71,6 +71,7 @@ export default function Layout({
   preview,
   noIndex,
   page,
+  notifications = [],
 }) {
   const [open, setOpen] = useState(false);
   const [proAuth, setProAuth] = useState(null);
@@ -135,6 +136,7 @@ export default function Layout({
           appUrl={appBasePath()}
           openContactUsModal={() => setOpen(true)}
           afterLangSelect={handleLangSelect}
+          notifications={notifications}
         />
       </HeaderWrapper>
       <main>
@@ -188,6 +190,7 @@ Layout.propTypes = {
   preview: PropTypes.bool,
   noIndex: PropTypes.bool,
   page: PropTypes.object,
+  notifications: PropTypes.array,
 };
 
 const HelpFooterWrapper = styled.div`

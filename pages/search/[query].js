@@ -2,11 +2,17 @@ import Head from 'next/head';
 
 import { getPostsByType } from 'lib/api';
 
+import dynamic from 'next/dynamic';
+
 import ArchivePage from 'layouts/archive';
 
-import Layout from 'layouts/layout';
-
 import { searchFilter } from 'utils/articles-filter';
+
+import { getPublishedNotifications } from 'utils/notifications';
+
+const Layout = dynamic(() => import('layouts/layout'), {
+  ssr: false,
+});
 
 export default function Search(props) {
   return (
@@ -42,11 +48,14 @@ export async function getServerSideProps({ params }) {
     allLanguages: true,
   });
 
+  const notifications = await getPublishedNotifications();
+
   return {
     props: {
       articles: articles || [],
       webinars: webinars || [],
       additionalMaterials: additionalMaterials || [],
+      notifications: notifications || [],
     },
   };
 }
