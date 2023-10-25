@@ -38,7 +38,7 @@ export async function getStaticProps({ params }) {
   });
 
   const additionalMaterials = await getPostsByType({
-    type: 'additional_materials',
+    type: 'additional-materials',
     params: {
       help_tags: tag?.id,
     },

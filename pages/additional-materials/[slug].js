@@ -24,7 +24,7 @@ export default function Article(props) {
 export async function getStaticProps({ params, previewData, preview }) {
   const isPreview = !!preview;
   const article = await getPostByType({
-    type: 'additional_materials',
+    type: 'additional-materials',
     slug: params.slug,
     ...articlesFilter(isPreview, previewData),
   });
@@ -44,13 +44,13 @@ export async function getStaticProps({ params, previewData, preview }) {
 
 export async function getStaticPaths() {
   const allArticles = await getPostsByType({
-    type: 'additional_materials',
+    type: 'additional-materials',
     params: { per_page: 100 },
   });
 
   const articlesWithoutTax = allArticles.filter((a) => !a?.help_tools?.length);
   const paths = articlesWithoutTax?.map(
-    (article) => `/additional_materials/${article.slug}/`
+    (article) => `/additional-materials/${article.slug}/`
   );
 
   return {

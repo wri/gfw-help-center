@@ -24,7 +24,7 @@ export default function AdditionalMaterial(props) {
 export async function getStaticProps({ params, previewData, preview }) {
   const isPreview = !!preview && previewData?.slug === params.slug;
   const article = await getPostByType({
-    type: 'additional_materials',
+    type: 'additional-materials',
     slug: params.slug,
     ...articlesFilter(isPreview, previewData),
   });
@@ -48,7 +48,7 @@ export async function getStaticProps({ params, previewData, preview }) {
 
 export async function getStaticPaths() {
   const allArticles = await getPostsByType({
-    type: 'additional_materials',
+    type: 'additional-materials',
     params: { per_page: 100 },
   });
 

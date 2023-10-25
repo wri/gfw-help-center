@@ -128,7 +128,7 @@ const Search = ({
         });
 
         const additionalMaterialsResponse = await getPostsByType({
-          type: 'additional_materials',
+          type: 'additional-materials',
           params: search
             ? {
                 search,

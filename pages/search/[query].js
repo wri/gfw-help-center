@@ -43,7 +43,7 @@ export async function getServerSideProps({ params }) {
   });
 
   const additionalMaterials = await getPostsByType({
-    type: 'additional_materials',
+    type: 'additional-materials',
     ...searchFilter(params),
     allLanguages: true,
   });
