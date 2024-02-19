@@ -12,7 +12,7 @@ export const navMain = [
     isVisibleOnMobile: false,
     submenu: [
       {
-        label: 'Tutorials',
+        label: 'Help Center',
         href: '/help/',
       },
       /* // TODO: enable these 2 links when we have the real urls
@@ -25,10 +25,6 @@ export const navMain = [
         href: '/faq/',
       },
       */
-      {
-        label: 'Community Forum',
-        extLink: 'https://groups.google.com/forum/#!forum/globalforestwatch/',
-      },
       {
         label: 'Grants & Opportunities',
         href: '/grants-and-fellowships/projects/',
