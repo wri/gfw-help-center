@@ -22,7 +22,6 @@ import { navMain } from 'utils/nav';
 import ErrorPage from 'layouts/error';
 import HelpFooter from 'components/footer';
 import PreviewBanner from 'components/preview-banner';
-import Cookies from 'components/cookies';
 import ProLogin from 'components/pro-login';
 
 const renderPage = (
@@ -160,7 +159,6 @@ export default function Layout({
       </main>
       <Footer openContactUsModal={() => setOpen(true)} />
       <ContactUsModal open={open} onRequestClose={() => setOpen(false)} />
-      <Cookies />
     </>
   );
 }
