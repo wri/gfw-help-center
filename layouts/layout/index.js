@@ -24,6 +24,8 @@ import HelpFooter from 'components/footer';
 import PreviewBanner from 'components/preview-banner';
 import ProLogin from 'components/pro-login';
 
+const isOsanoEnabled = process.env.NEXT_PUBLIC_OSANO_ENABLED === 'true';
+
 const renderPage = (
   isError,
   statusCode,
@@ -107,6 +109,15 @@ export default function Layout({
 
   const isProduction = process.env.NEXT_PUBLIC_FEATURE_ENV === 'production';
 
+  const handleOsanoCookiePreferences = (e) => {
+    e.preventDefault();
+
+    if (isOsanoEnabled) {
+      // eslint-disable-next-line no-undef
+      Osano.cm.showDrawer('osano-cm-dom-info-dialog-open');
+    }
+  };
+
   return (
     <>
       <Head>
@@ -157,7 +168,11 @@ export default function Layout({
           )
         )}
       </main>
-      <Footer openContactUsModal={() => setOpen(true)} />
+      <Footer
+        showCookiePreferencesLink={isOsanoEnabled}
+        handleCookiePreferencesClick={handleOsanoCookiePreferences}
+        openContactUsModal={() => setOpen(true)}
+      />
       <ContactUsModal open={open} onRequestClose={() => setOpen(false)} />
     </>
   );
