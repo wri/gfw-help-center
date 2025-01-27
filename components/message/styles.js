@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Image from 'next/image';
 
 import { theme } from '@worldresources/gfw-components';
 
@@ -10,7 +11,7 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
-export const Image = styled.img`
+export const StyledImage = styled(Image)`
   height: 200px;
   margin: auto;
   margin-bottom: 10px;
