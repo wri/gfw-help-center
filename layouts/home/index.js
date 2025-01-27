@@ -60,14 +60,12 @@ const HomePage = ({ homepage, tools }) => {
                 </Desktop>
               </Prompt>
             )}
-            <Link href={tool.link}>
-              <a>
-                <ToolCard
-                  active={i === 0}
-                  {...tool}
-                  text={ReactHtmlParser(tool?.excerpt)}
-                />
-              </a>
+            <Link legacyBehavior href={tool.link}>
+              <ToolCard
+                active={i === 0}
+                {...tool}
+                text={ReactHtmlParser(tool?.excerpt)}
+              />
             </Link>
           </ToolCardsWrapper>
         ))}

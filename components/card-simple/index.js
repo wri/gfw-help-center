@@ -37,11 +37,7 @@ const SimpleCard = ({
               aria-label="external link"
             />
           )}
-          {!extLink && link && (
-            <Link href={link}>
-              <a> </a>
-            </Link>
-          )}
+          {!extLink && link && <Link href={link} />}
           {backgroundImage && (
             <BackgroundImage>
               <Media {...backgroundImage} />

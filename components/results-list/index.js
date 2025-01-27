@@ -33,16 +33,14 @@ const ResultsList = ({
                 ) : (
                   <>
                     {item.link ? (
-                      <Link href={item.link}>
-                        <a>
-                          <button onClick={() => onClickResult(item)}>
-                            {ReactHtmlParser(
-                              `${translateText(item.name)}${
-                                showCount ? ` (${item.count})` : ''
-                              }`
-                            )}
-                          </button>
-                        </a>
+                      <Link legacyBehavior href={item.link}>
+                        <button onClick={() => onClickResult(item)}>
+                          {ReactHtmlParser(
+                            `${translateText(item.name)}${
+                              showCount ? ` (${item.count})` : ''
+                            }`
+                          )}
+                        </button>
                       </Link>
                     ) : (
                       <button onClick={item.onClick}>
