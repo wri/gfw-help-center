@@ -60,7 +60,7 @@ const HomePage = ({ homepage, tools }) => {
                 </Desktop>
               </Prompt>
             )}
-            <Link legacyBehavior href={tool.link}>
+            <Link href={tool.link}>
               <ToolCard
                 active={i === 0}
                 {...tool}

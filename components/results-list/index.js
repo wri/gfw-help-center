@@ -33,7 +33,7 @@ const ResultsList = ({
                 ) : (
                   <>
                     {item.link ? (
-                      <Link legacyBehavior href={item.link}>
+                      <Link href={item.link}>
                         <button onClick={() => onClickResult(item)}>
                           {ReactHtmlParser(
                             `${translateText(item.name)}${
