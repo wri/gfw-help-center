@@ -35,11 +35,7 @@ const CardLink = ({ extLink, link, children }) => {
   }
 
   if (!extLink && link) {
-    return (
-      <Link href={link}>
-        <a>{children}</a>
-      </Link>
-    );
+    return <Link href={link}>{children}</Link>;
   }
 
   return children;
