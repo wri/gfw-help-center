@@ -25,7 +25,7 @@ import {
 
 const HomePage = ({ homepage, tools }) => {
   const primaryTools = tools?.slice(0, 4);
-  const secondaryTools = tools?.slice(4, 8);
+  const secondaryTools = tools?.slice(4, 9);
 
   return (
     <Wrapper>
