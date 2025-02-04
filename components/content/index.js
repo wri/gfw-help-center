@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
+import Image from 'next/image';
 
 import { Carousel } from '@worldresources/gfw-components';
 
@@ -45,7 +46,7 @@ const PostContent = ({ children, align, print }) => (
 
         if (node.name === 'img') {
           const { src, alt, key } = node?.attribs;
-          if (print) return <img src={src} alt={alt} key={key} />;
+          if (print) return <Image src={src} alt={alt} key={key} />;
           return <Lightbox src={src} alt={alt} key={key} />;
         }
 
