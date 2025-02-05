@@ -80,7 +80,7 @@ const HomePage = ({ homepage, tools }) => {
           return (
             <ToolCardsWrapper
               {...(!isFirst && {
-                width: [1, 1 / 3],
+                width: [1, 1 / 4],
               })}
               key={tool.id}
             >
