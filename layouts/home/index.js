@@ -25,7 +25,7 @@ import {
 
 const HomePage = ({ homepage, tools }) => {
   const primaryTools = tools?.slice(0, 4);
-  const secondaryTools = tools?.slice(4, 8);
+  const secondaryTools = tools?.slice(4, 9);
 
   return (
     <Wrapper>
@@ -80,7 +80,7 @@ const HomePage = ({ homepage, tools }) => {
           return (
             <ToolCardsWrapper
               {...(!isFirst && {
-                width: [1, 1 / 3],
+                width: [1, 1 / 4],
               })}
               key={tool.id}
             >
