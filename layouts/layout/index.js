@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable no-console */
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Head from 'next/head';
@@ -78,7 +79,125 @@ export default function Layout({
   const [proAuth, setProAuth] = useState(null);
 
   const [language, setLanguage] = useState('en');
-  const { isFallback, push } = useRouter();
+  const router = useRouter();
+
+  const currentLanguageRef = useRef(null);
+  const isNavigatingRef = useRef(false);
+
+  useEffect(() => {
+    // DOM error prevention
+    const originalRemoveChild = Node.prototype.removeChild;
+    // eslint-disable-next-line func-names
+    Node.prototype.removeChild = function (child) {
+      try {
+        // eslint-disable-next-line react/no-this-in-sfc
+        if (this.contains && this.contains(child)) {
+          return originalRemoveChild.call(this, child);
+        }
+        return child;
+      } catch (error) {
+        console.warn('Prevented removeChild error:', error.message);
+        return child;
+      }
+    };
+
+    // Check if we're in a translated state
+    const isTranslated = () => {
+      const storedLang = localStorage.getItem('transifex_current_language');
+      return storedLang && storedLang !== 'en' && storedLang !== null;
+    };
+
+    // Handle navigation - force reload if translated
+    const handleRouteChangeStart = (url) => {
+      if (isNavigatingRef.current) return; // Prevent infinite loops
+
+      if (isTranslated()) {
+        isNavigatingRef.current = true;
+        router.events.off('routeChangeStart', handleRouteChangeStart); // Remove listener temporarily
+
+        // Force full page reload
+        window.location.href = url;
+        // eslint-disable-next-line no-throw-literal
+        throw 'Route change aborted'; // Prevent Next.js navigation
+      }
+    };
+
+    // Track current language
+    const updateCurrentLanguage = () => {
+      if (
+        typeof window !== 'undefined' &&
+        window.Transifex &&
+        window.Transifex.live
+      ) {
+        try {
+          const currentLang = window.Transifex.live.getSelectedLanguageCode();
+          if (currentLang) {
+            currentLanguageRef.current = currentLang;
+            localStorage.setItem('transifex_current_language', currentLang);
+          }
+        } catch (e) {
+          console.warn('Error getting current language:', e);
+        }
+      }
+    };
+
+    // Set up Transifex language change detection
+    const setupLanguageDetection = () => {
+      if (
+        typeof window !== 'undefined' &&
+        window.Transifex &&
+        window.Transifex.live
+      ) {
+        try {
+          // Override setLocale to track language changes
+          if (window.Transifex.live.setLocale) {
+            const originalSetLocale = window.Transifex.live.setLocale;
+            window.Transifex.live.setLocale = function (locale) {
+              console.log('Language changed to:', locale);
+              localStorage.setItem('transifex_current_language', locale);
+              currentLanguageRef.current = locale;
+              return originalSetLocale.call(this, locale);
+            };
+          }
+
+          // Also track the current language on initialization
+          setTimeout(() => {
+            updateCurrentLanguage();
+          }, 1000);
+        } catch (e) {
+          console.warn('Error setting up language detection:', e);
+        }
+      }
+    };
+
+    // Initialize language detection
+    if (typeof window !== 'undefined') {
+      if (window.Transifex && window.Transifex.live) {
+        setupLanguageDetection();
+      } else {
+        // Wait for Transifex to be ready
+        const checkTransifex = setInterval(() => {
+          if (window.Transifex && window.Transifex.live) {
+            clearInterval(checkTransifex);
+            setupLanguageDetection();
+          }
+        }, 100);
+
+        // Cleanup interval after 10 seconds
+        setTimeout(() => {
+          clearInterval(checkTransifex);
+        }, 10000);
+      }
+    }
+
+    router.events.on('routeChangeStart', handleRouteChangeStart);
+
+    return () => {
+      Node.prototype.removeChild = originalRemoveChild;
+      router.events.off('routeChangeStart', handleRouteChangeStart);
+    };
+  }, [router]);
+
   useTrackPage();
 
   useEffect(() => {
@@ -101,7 +220,7 @@ export default function Layout({
         p?.locale?.includes(newLang)
       );
       if (translation) {
-        push(translation.link);
+        router.push(translation.link);
       }
     }
     setLanguage(newLang);
@@ -150,7 +269,7 @@ export default function Layout({
         />
       </HeaderWrapper>
       <main>
-        {isFallback || !proAuth ? (
+        {router.isFallback || !proAuth ? (
           <LoaderWrapper>
             <Loader />
           </LoaderWrapper>
