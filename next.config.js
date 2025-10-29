@@ -4,6 +4,13 @@ const btoa = require('btoa');
 module.exports = {
   basePath: '/help',
   assetPrefix: '/help',
+  images: {
+    domains: [
+      'dev-global-forest-watch-blog.pantheonsite.io',
+      'test-global-forest-watch-blog.pantheonsite.io',
+      'content.globalforestwatch.org',
+    ],
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
