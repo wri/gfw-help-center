@@ -11,7 +11,7 @@ import SimpleCard from 'components/card-simple';
 import Search from 'components/search';
 
 import ArrowIcon from 'assets/icons/arrow.svg';
-
+import { groupBy } from 'lodash';
 import {
   Wrapper,
   Prompt,
@@ -24,8 +24,41 @@ import {
 } from './styles';
 
 const HomePage = ({ homepage, tools }) => {
-  const primaryTools = tools?.slice(0, 4);
-  const secondaryTools = tools?.slice(4, 9);
+  const toolsGrouped = tools && groupBy(tools, 'parent');
+  const parentTools = toolsGrouped?.['0'];
+
+  // Filter parent tools for display (same as before)
+  const primaryTools = parentTools?.slice(0, 4);
+  const secondaryTools = parentTools?.slice(4, 9);
+
+  // eslint-disable-next-line no-console
+  console.log(
+    'parentTools: ',
+    parentTools?.map((item) => ({
+      id: item.id,
+      slug: item.slug,
+      title: item.title,
+    }))
+  );
+
+  const menu = parentTools.map((parent) => {
+    return {
+      id: parent.id,
+      link: parent.link,
+      slug: parent.slug,
+      title: parent.title,
+      sections:
+        toolsGrouped[parent.id]?.map((item) => ({
+          id: item.id,
+          link: item.link,
+          slug: item.slug,
+          title: item.title,
+        })) || [],
+    };
+  });
+
+  // eslint-disable-next-line no-console
+  console.log('menu: ', menu);
 
   return (
     <Wrapper>
