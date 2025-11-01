@@ -12,6 +12,7 @@ import Search from 'components/search';
 
 import ArrowIcon from 'assets/icons/arrow.svg';
 import { groupBy } from 'lodash';
+import Accordion from 'components/accordion';
 import {
   Wrapper,
   Prompt,
@@ -25,21 +26,12 @@ import {
 
 const HomePage = ({ homepage, tools }) => {
   const toolsGrouped = tools && groupBy(tools, 'parent');
-  const parentTools = toolsGrouped?.['0'];
-
-  // Filter parent tools for display (same as before)
+  const parentTools = toolsGrouped?.['0'].filter(
+    (item) => item.slug !== 'mapbuilder'
+  );
   const primaryTools = parentTools?.slice(0, 4);
   const secondaryTools = parentTools?.slice(4, 9);
-
-  // eslint-disable-next-line no-console
-  console.log(
-    'parentTools: ',
-    parentTools?.map((item) => ({
-      id: item.id,
-      slug: item.slug,
-      title: item.title,
-    }))
-  );
+  const proLinks = tools.filter((t) => t.status === 'private');
 
   const menu = parentTools.map((parent) => {
     return {
@@ -47,14 +39,47 @@ const HomePage = ({ homepage, tools }) => {
       link: parent.link,
       slug: parent.slug,
       title: parent.title,
-      sections:
-        toolsGrouped[parent.id]?.map((item) => ({
+      subsections: [
+        ...(!['glossary', 'account'].includes(parent.slug)
+          ? [
+              {
+                id: parent.id,
+                link: parent.link,
+                slug: parent.slug,
+                title: 'Overview',
+              },
+            ]
+          : []),
+        ...(toolsGrouped[parent.id]?.map((item) => ({
           id: item.id,
           link: item.link,
           slug: item.slug,
           title: item.title,
-        })) || [],
+        })) || []),
+      ],
     };
+  });
+
+  menu.forEach((item) => {
+    if (item.slug === 'gfw-pro') {
+      item.subsections = [
+        ...(toolsGrouped[item.id]
+          ?.filter((t) => t.status !== 'private')
+          .map((i) => ({
+            id: i.id,
+            link: i.link,
+            slug: i.slug,
+            title: i.title,
+          })) || []),
+        ...proLinks.map((i, index) => ({
+          id: i.id,
+          link: i.link,
+          slug: i.slug,
+          title: i.title,
+          hasDivider: index === 0,
+        })),
+      ];
+    }
   });
 
   // eslint-disable-next-line no-console
@@ -75,7 +100,9 @@ const HomePage = ({ homepage, tools }) => {
               <Search expanded />
             </SearchWrapper>
           </Row>
-          <Row>hola</Row>
+          <Row>
+            <Accordion sections={menu} />
+          </Row>
         </Column>
         <Column width={[1, 3 / 4]}>
           <Intro
