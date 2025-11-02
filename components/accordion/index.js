@@ -4,11 +4,12 @@ import {
   AccordionItem,
   AccordionSubItem,
   AccordionWrapper,
+  DividerTitle,
   GreenDot,
   GreenDotWrapper,
 } from './styles';
 
-const Accordion = ({ isExpanded = null, onToggle, sections }) => {
+const Accordion = ({ isExpanded = null, onToggle, sections, selectedSlug }) => {
   const [openIndex, setOpenIndex] = useState(isExpanded);
 
   // Keep internal state in sync when parent changes the prop
@@ -54,6 +55,9 @@ const Accordion = ({ isExpanded = null, onToggle, sections }) => {
     </svg>
   );
 
+  // eslint-disable-next-line no-console
+  console.log('selectedSlug: ', selectedSlug);
+
   return (
     <AccordionWrapper>
       {sections.map((section, index) => (
@@ -62,11 +66,11 @@ const Accordion = ({ isExpanded = null, onToggle, sections }) => {
           {section.subsections.length === 0 && (
             <AccordionItem>
               <span>
-                <CaretRight color="#000000" />
+                <CaretRight color="transparent" />
               </span>
               <a href={`/help${section.link}`}>{section.title}</a>
               <GreenDotWrapper>
-                <GreenDot />
+                {openIndex === index && <GreenDot />}
               </GreenDotWrapper>
             </AccordionItem>
           )}
@@ -82,9 +86,6 @@ const Accordion = ({ isExpanded = null, onToggle, sections }) => {
                 </span>
                 <span>{section.title}</span>
               </button>
-              <GreenDotWrapper>
-                <GreenDot />
-              </GreenDotWrapper>
             </AccordionItem>
           )}
           {openIndex === index && (
@@ -92,10 +93,13 @@ const Accordion = ({ isExpanded = null, onToggle, sections }) => {
               {section.subsections.map((sub, subIndex) => (
                 <div key={subIndex}>
                   {sub.hasDivider && <hr />}
-                  <AccordionSubItem>
+                  {sub.hasDivider && (
+                    <DividerTitle>{sub.dividerTitle}</DividerTitle>
+                  )}
+                  <AccordionSubItem selected={openIndex === subIndex}>
                     <a href={`/help${sub.link}`}>{sub.title}</a>
                     <GreenDotWrapper>
-                      <GreenDot />
+                      {openIndex === subIndex && <GreenDot />}
                     </GreenDotWrapper>
                   </AccordionSubItem>
                 </div>
@@ -114,4 +118,5 @@ Accordion.propTypes = {
   isExpanded: PropTypes.number,
   onToggle: PropTypes.func,
   sections: PropTypes.array,
+  selectedSlug: PropTypes.string,
 };

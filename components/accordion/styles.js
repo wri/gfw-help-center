@@ -17,6 +17,7 @@ export const AccordionItem = styled.div`
   span {
     color: #555555;
     font-size: 1rem;
+    font-weight: ${(props) => (props.selected ? 'bold' : 'normal')};
   }
 
   a {
@@ -36,11 +37,19 @@ export const AccordionSubItem = styled.div`
   span {
     color: #555555;
     font-size: 1rem;
+    font-weight: ${(props) => (props.selected ? 'bold' : 'normal')};
   }
 
   a {
     width: 100%;
   }
+`;
+
+export const DividerTitle = styled.p`
+  padding-left: 1.625rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: bold;
 `;
 
 export const GreenDotWrapper = styled.span`
