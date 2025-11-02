@@ -192,7 +192,7 @@ const Search = ({
                 ref={inputRef}
                 value={search}
                 expanded={expanded}
-                placeholder={translateText('Search the GFW help center')}
+                placeholder={translateText('Search')}
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={keyDownHandler}
               />
@@ -208,22 +208,16 @@ const Search = ({
                   />
                 </Button>
               )}
+              <div>
+                <SearchIcon />
+              </div>
             </SearchOpen>
           )}
           {!open && showTitle && (
             <SearchClosed>
-              <OpenMessage>
-                {translateText('Search the GFW help center')}
-              </OpenMessage>
+              <OpenMessage>{translateText('Search')}</OpenMessage>
             </SearchClosed>
           )}
-          <SearchIcon
-            css={css`
-              min-width: 32px;
-              min-height: 32px;
-              height: 32px;
-            `}
-          />
         </Container>
         {open && (
           <ResultsList

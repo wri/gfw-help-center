@@ -64,9 +64,5 @@ export const ToolCardsWrapper = styled(Column)`
 `;
 
 export const SearchWrapper = styled(Column)`
-  margin-bottom: 50px;
-
-  ${theme.mediaQueries.small} {
-    margin-bottom: 100px;
-  }
+  margin-bottom: 0.625rem;
 `;
