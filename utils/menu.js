@@ -16,12 +16,14 @@ const createMenuStructure = ({ parentTools, toolsGrouped, proLinks }) => {
               },
             ]
           : []),
-        ...(toolsGrouped[parent.id]?.map((item) => ({
-          id: item.id,
-          link: item.link,
-          slug: item.slug,
-          title: item.title,
-        })) || []),
+        ...(toolsGrouped[parent.id]
+          ?.map((item) => ({
+            id: item.id,
+            link: item.link,
+            slug: item.slug,
+            title: item.title,
+          }))
+          .sort((a, b) => a.title < b.title) || []),
       ],
     };
   });

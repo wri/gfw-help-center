@@ -12,6 +12,7 @@ import Search from 'components/search';
 import Accordion from 'components/accordion';
 import { groupBy } from 'lodash';
 import createMenuStructure from 'utils/menu';
+import { useRouter } from 'next/router';
 import {
   Wrapper,
   BreadcrumbsWrapper,
@@ -21,6 +22,8 @@ import {
 } from './styles';
 
 const Page = ({ tools, currentPage }) => {
+  const { asPath } = useRouter();
+  const selectedSlug = asPath.substring(0, asPath.length - 1);
   const toolsGrouped = tools && groupBy(tools, 'parent');
   const parentTools = toolsGrouped?.['0'].filter(
     (item) => item.slug !== 'mapbuilder'
@@ -32,6 +35,16 @@ const Page = ({ tools, currentPage }) => {
     toolsGrouped,
     proLinks,
   });
+
+  const slugTokens = selectedSlug.split('/');
+  let mainSection;
+  let selectedIndex;
+
+  // slugTokens can have 2 tokens when clicking on "overview" or 3 tokens when clicking on any other subsection
+  if (slugTokens.length >= 2) {
+    [, mainSection] = slugTokens;
+    selectedIndex = menu.findIndex((item) => item.slug === mainSection);
+  }
 
   const parentPage = currentPage?.parent
     ? parentTools?.find((p) => p.id === currentPage?.parent)
@@ -85,7 +98,11 @@ const Page = ({ tools, currentPage }) => {
             </SearchWrapper>
           </Row>
           <Row>
-            <Accordion sections={menu} />
+            <Accordion
+              sections={menu}
+              selectedIndex={selectedIndex}
+              selectedSlug={selectedSlug}
+            />
           </Row>
         </Column>
         <Column width={[1, 3 / 4]}>

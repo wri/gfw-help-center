@@ -9,13 +9,18 @@ import {
   GreenDotWrapper,
 } from './styles';
 
-const Accordion = ({ isExpanded = null, onToggle, sections, selectedSlug }) => {
-  const [openIndex, setOpenIndex] = useState(isExpanded);
+const Accordion = ({
+  selectedIndex = null,
+  onToggle,
+  sections,
+  selectedSlug,
+}) => {
+  const [openIndex, setOpenIndex] = useState(selectedIndex);
 
   // Keep internal state in sync when parent changes the prop
   useEffect(() => {
-    setOpenIndex(isExpanded);
-  }, [isExpanded]);
+    setOpenIndex(selectedIndex);
+  }, [selectedIndex]);
 
   const handleToggle = (index) => {
     const newIndex = openIndex === index ? null : index;
@@ -55,22 +60,19 @@ const Accordion = ({ isExpanded = null, onToggle, sections, selectedSlug }) => {
     </svg>
   );
 
-  // eslint-disable-next-line no-console
-  console.log('selectedSlug: ', selectedSlug);
-
   return (
     <AccordionWrapper>
       {sections.map((section, index) => (
         <div key={index}>
           {section.hasDivider && <hr />}
           {section.subsections.length === 0 && (
-            <AccordionItem>
+            <AccordionItem selected={selectedSlug === section.link}>
               <span>
                 <CaretRight color="transparent" />
               </span>
               <a href={`/help${section.link}`}>{section.title}</a>
               <GreenDotWrapper>
-                {openIndex === index && <GreenDot />}
+                {selectedSlug === section.link && <GreenDot />}
               </GreenDotWrapper>
             </AccordionItem>
           )}
@@ -96,10 +98,10 @@ const Accordion = ({ isExpanded = null, onToggle, sections, selectedSlug }) => {
                   {sub.hasDivider && (
                     <DividerTitle>{sub.dividerTitle}</DividerTitle>
                   )}
-                  <AccordionSubItem selected={openIndex === subIndex}>
+                  <AccordionSubItem selected={selectedSlug === sub.link}>
                     <a href={`/help${sub.link}`}>{sub.title}</a>
                     <GreenDotWrapper>
-                      {openIndex === subIndex && <GreenDot />}
+                      {selectedSlug === sub.link && <GreenDot />}
                     </GreenDotWrapper>
                   </AccordionSubItem>
                 </div>
@@ -115,7 +117,7 @@ const Accordion = ({ isExpanded = null, onToggle, sections, selectedSlug }) => {
 export default Accordion;
 
 Accordion.propTypes = {
-  isExpanded: PropTypes.number,
+  selectedIndex: PropTypes.number,
   onToggle: PropTypes.func,
   sections: PropTypes.array,
   selectedSlug: PropTypes.string,
