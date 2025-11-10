@@ -6,6 +6,11 @@ export const AccordionWrapper = styled.div`
   width: 100%;
 `;
 
+export const CaretWrapper = styled.span`
+  margin-right: 0.313rem;
+  vertical-align: middle;
+`;
+
 export const AccordionItem = styled.div`
   width: 100%;
   display: flex;

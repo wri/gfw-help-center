@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionSubItem,
   AccordionWrapper,
+  CaretWrapper,
   DividerTitle,
   GreenDot,
   GreenDotWrapper,
@@ -79,13 +80,13 @@ const Accordion = ({
           {section.subsections.length !== 0 && (
             <AccordionItem>
               <button onClick={() => handleToggle(index)}>
-                <span>
+                <CaretWrapper>
                   {openIndex === index ? (
                     <CaretDown color="#000000" />
                   ) : (
                     <CaretRight color="#000000" />
                   )}
-                </span>
+                </CaretWrapper>
                 <span>{section.title}</span>
               </button>
             </AccordionItem>

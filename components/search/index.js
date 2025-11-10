@@ -24,6 +24,7 @@ import {
   OpenMessage,
   Input,
   Overlay,
+  SearchIconWrapper,
 } from './styles';
 
 const deburrUpper = (string) => toUpper(deburr(string));
@@ -208,9 +209,9 @@ const Search = ({
                   />
                 </Button>
               )}
-              <div>
-                <SearchIcon />
-              </div>
+              <SearchIconWrapper>
+                <SearchIcon style={{ width: '1.5rem', height: '1.5rem' }} />
+              </SearchIconWrapper>
             </SearchOpen>
           )}
           {!open && showTitle && (

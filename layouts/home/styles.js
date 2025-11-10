@@ -64,5 +64,5 @@ export const ToolCardsWrapper = styled(Column)`
 `;
 
 export const SearchWrapper = styled(Column)`
-  margin-bottom: 0.625rem;
+  padding: 0 !important;
 `;

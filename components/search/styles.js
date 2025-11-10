@@ -3,7 +3,6 @@ import { BasicInput, theme } from '@worldresources/gfw-components';
 import { rgba } from 'emotion-rgba';
 
 export const Wrapper = styled.div`
-  height: 60px;
   width: 100%;
   cursor: pointer;
   z-index: 20;
@@ -22,7 +21,7 @@ export const Wrapper = styled.div`
   `}
 
   ${theme.mediaQueries.small} {
-    height: 80px;
+    height: 4rem;
   }
 `;
 
@@ -39,9 +38,7 @@ export const Container = styled.div`
   -moz-border-radius: 1.25rem;
   border-radius: 1.25rem;
   padding-left: 1rem;
-  ${theme.mediaQueries.small} {
-    height: 80px;
-  }
+
   ${({ open, expanded }) =>
     (open || expanded) &&
     `
@@ -107,6 +104,11 @@ export const Input = styled(BasicInput)`
     `
     padding-left: 0 !important;
   `}
+`;
+
+export const SearchIconWrapper = styled.div`
+  padding-right: 1rem;
+  writing-mode: vertical-rl;
 `;
 
 export const Overlay = styled.div`
