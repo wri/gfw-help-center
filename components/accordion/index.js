@@ -6,6 +6,7 @@ import {
   AccordionWrapper,
   CaretWrapper,
   DividerTitle,
+  EmptySpace,
   GreenDot,
   GreenDotWrapper,
 } from './styles';
@@ -68,9 +69,7 @@ const Accordion = ({
           {section.hasDivider && <hr />}
           {section.subsections.length === 0 && (
             <AccordionItem selected={selectedSlug === section.link}>
-              <span>
-                <CaretRight color="transparent" />
-              </span>
+              <EmptySpace />
               <a href={`/help${section.link}`}>{section.title}</a>
               <GreenDotWrapper>
                 {selectedSlug === section.link && <GreenDot />}

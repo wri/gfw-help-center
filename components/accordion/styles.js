@@ -17,10 +17,11 @@ export const AccordionItem = styled.div`
   justify-content: space-between;
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
+  text-wrap-mode: nowrap;
 
   a,
   span {
-    color: #555555;
+    color: ${(props) => (props.selected ? '#555555' : '#AAAAAA')};
     font-size: 1rem;
     font-weight: ${(props) => (props.selected ? 'bold' : 'normal')};
   }
@@ -28,6 +29,10 @@ export const AccordionItem = styled.div`
   a {
     width: 100%;
   }
+`;
+
+export const EmptySpace = styled.span`
+  margin-left: 1.75rem;
 `;
 
 export const AccordionSubItem = styled.div`
@@ -40,7 +45,7 @@ export const AccordionSubItem = styled.div`
 
   a,
   span {
-    color: #555555;
+    color: ${(props) => (props.selected ? '#555555' : '#AAAAAA')};
     font-size: 1rem;
     font-weight: ${(props) => (props.selected ? 'bold' : 'normal')};
   }

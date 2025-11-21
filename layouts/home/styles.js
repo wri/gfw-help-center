@@ -50,7 +50,8 @@ export const ToolsTitle = styled(H4)`
   margin-bottom: 20px;
 
   ${theme.mediaQueries.small} {
-    margin-bottom: 50px;
+    margin-top: 1.875rem;
+    margin-bottom: 3.125rem;
   }
 `;
 

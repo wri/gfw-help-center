@@ -1,3 +1,11 @@
+/**
+ *
+ * @param {Object} data - data
+ * @param {array} data.parentTools - array of posts.
+ * @param {array} data.toolsGrouped - array of grouped posts.
+ * @param {array} data.proLinks - array of pro links.
+ * @returns {array} menu structure.
+ */
 const createMenuStructure = ({ parentTools, toolsGrouped, proLinks }) => {
   const menu = parentTools.map((parent) => {
     return {
