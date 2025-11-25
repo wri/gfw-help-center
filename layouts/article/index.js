@@ -4,10 +4,9 @@ import { css } from '@emotion/core';
 import { format } from 'date-fns';
 import ReactToPrint from 'react-to-print';
 import ReactHtmlParser from 'react-html-parser';
-import Sticky from 'react-stickynode';
 import { translateText } from 'utils/lang';
 
-import { Row, Column, Desktop, Mobile } from '@worldresources/gfw-components';
+import { Row, Column, Mobile } from '@worldresources/gfw-components';
 
 import PostContent from 'components/content';
 import Breadcrumbs from 'components/breadcrumbs';
@@ -18,11 +17,12 @@ import PrintIconSrc from 'assets/icons/print.svg';
 
 import createMenuStructure from 'utils/menu';
 import { groupBy } from 'lodash';
+import { SearchWrapper } from 'layouts/home/styles';
+import Accordion from 'components/accordion';
 import PrintArticle from './print';
 
 import {
   PostContainer,
-  BreadCrumbsWrapper,
   Search,
   PostTitle,
   TagsWrapper,
@@ -48,7 +48,6 @@ const Article = ({ article, isGuide, toolsMapped }) => {
   );
   const proLinks = toolsMapped.filter((t) => t.status === 'private');
 
-  // eslint-disable-next-line no-unused-vars
   const menu = createMenuStructure({
     parentTools,
     toolsGrouped,
@@ -91,99 +90,91 @@ const Article = ({ article, isGuide, toolsMapped }) => {
 
   return (
     <PostContainer>
-      <Row
-        css={css`
-          position: relative;
-          min-height: 40px;
-        `}
-      >
-        <BreadCrumbsWrapper width={[5 / 6, 2 / 3]}>
-          <Breadcrumbs links={breadCrumbs} />
-        </BreadCrumbsWrapper>
-        <Column width={[1 / 6, 1 / 3]}>
-          <Desktop>
-            <Search expandable showTitle />
-          </Desktop>
+      <Row>
+        <Column width={[1, 1 / 4]}>
+          <Row
+            css={css`
+              padding-top: 2rem;
+            `}
+          >
+            <SearchWrapper>
+              <Search expanded />
+            </SearchWrapper>
+          </Row>
+          <Row>
+            <Accordion sections={menu} />
+          </Row>
           <Mobile>
-            <Search expandable />
+            <MetaItem>
+              {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
+            </MetaItem>
+            <ReactToPrint
+              documentTitle="Global Forest Watch Help Center"
+              trigger={() => (
+                <StyledButton light round>
+                  <PrintIconSrc />
+                </StyledButton>
+              )}
+              content={() => contentEl.current}
+            />
+            <div
+              css={css`
+                display: none;
+              `}
+            >
+              <PrintArticle ref={contentEl} article={article} />
+            </div>
+            <MetaItem>Print this article</MetaItem>
           </Mobile>
         </Column>
-      </Row>
-      <div className="sticky-boundary" style={{ position: 'relative' }}>
-        <Row>
-          <Column width={[1, 1 / 4]}>
-            <Desktop>
-              <Sticky top={120} bottomBoundary=".sticky-boundary">
-                <MetaItem>{lastUpadtedTemplate}</MetaItem>
-                <ReactToPrint
-                  documentTitle="Global Forest Watch Help Center"
-                  trigger={() => (
-                    <StyledButton light round>
-                      <PrintIconSrc />
-                    </StyledButton>
-                  )}
-                  content={() => contentEl.current}
-                />
-                <div
-                  css={css`
-                    display: none;
-                  `}
-                >
-                  <PrintArticle ref={contentEl} article={article} />
-                </div>
-                <MetaItem>Print this article</MetaItem>
-              </Sticky>
-            </Desktop>
-            <Mobile>
-              <MetaItem>
-                {`Last updated ${format(new Date(modified), 'MMMM do yyyy')}`}
-              </MetaItem>
-              <ReactToPrint
-                documentTitle="Global Forest Watch Help Center"
-                trigger={() => (
-                  <StyledButton light round>
-                    <PrintIconSrc />
-                  </StyledButton>
-                )}
-                content={() => contentEl.current}
-              />
-              <div
-                css={css`
-                  display: none;
-                `}
-              >
-                <PrintArticle ref={contentEl} article={article} />
-              </div>
-              <MetaItem>Print this article</MetaItem>
-            </Mobile>
-          </Column>
-          <Column width={[1, 7 / 12]}>
-            {!!tools?.length && (
-              <CategoryList
-                categories={tools}
-                css={css`
-                  margin-bottom: 20px;
-                `}
-              />
-            )}
-            <PostTitle>{ReactHtmlParser(title)}</PostTitle>
-            <PostContentWrapper>
-              <PostContent align="left">{content}</PostContent>
-              {tags && (
-                <TagsWrapper>
-                  <CategoryList categories={tags} light />
-                </TagsWrapper>
+        <Column width={[1, 7 / 12]}>
+          <Breadcrumbs links={breadCrumbs} />
+          {!!tools?.length && (
+            <CategoryList
+              categories={tools}
+              css={css`
+                padding-bottom: 1.25rem;
+                padding-top: 1.25rem;
+              `}
+            />
+          )}
+          <PostTitle>{ReactHtmlParser(title)}</PostTitle>
+          <Row css={{ display: 'block' }}>
+            <MetaItem>{lastUpadtedTemplate}</MetaItem>
+            <ReactToPrint
+              documentTitle="Global Forest Watch Help Center"
+              trigger={() => (
+                <StyledButton light round>
+                  <PrintIconSrc />
+                </StyledButton>
               )}
-            </PostContentWrapper>
-            {relatedContent && (
-              <>
-                <Divider />
-                <RelatedContent sections={relatedContent} />
-              </>
+              content={() => contentEl.current}
+            />
+            <div
+              css={css`
+                display: none;
+              `}
+            >
+              <PrintArticle ref={contentEl} article={article} />
+            </div>
+            <MetaItem>Print this article</MetaItem>
+          </Row>
+          <PostContentWrapper>
+            <PostContent align="left">{content}</PostContent>
+            {tags && (
+              <TagsWrapper>
+                <CategoryList categories={tags} light />
+              </TagsWrapper>
             )}
-          </Column>
-        </Row>
-      </div>
+          </PostContentWrapper>
+          {relatedContent && (
+            <>
+              <Divider />
+              <RelatedContent sections={relatedContent} />
+            </>
+          )}
+        </Column>
+      </Row>
       {!!blogPosts?.length && (
         <>
           <Divider />

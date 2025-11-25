@@ -5,7 +5,7 @@ import Search from '../../components/search';
 
 export const Wrapper = styled.div`
   width: 100%;
-  padding-top: 5rem;
+  padding-top: 3rem;
   padding-bottom: 3.125rem;
 `;
 
