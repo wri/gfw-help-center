@@ -16,6 +16,8 @@ import RelatedContent from 'components/related-content';
 
 import PrintIconSrc from 'assets/icons/print.svg';
 
+import createMenuStructure from 'utils/menu';
+import { groupBy } from 'lodash';
 import PrintArticle from './print';
 
 import {
@@ -30,7 +32,7 @@ import {
   PostContentWrapper,
 } from './styles';
 
-const Article = ({ article, isGuide }) => {
+const Article = ({ article, isGuide, toolsMapped }) => {
   const { title, content, modified, tags, acf, tools } = article || {};
   const { related_content } = acf || {};
   const relatedContent =
@@ -39,6 +41,19 @@ const Article = ({ article, isGuide }) => {
   const blogPosts =
     related_content?.length &&
     related_content?.filter((c) => c.acf_fc_layout === 'posts');
+
+  const toolsGrouped = toolsMapped && groupBy(toolsMapped, 'parent');
+  const parentTools = toolsGrouped?.['0'].filter(
+    (item) => item.slug !== 'mapbuilder'
+  );
+  const proLinks = toolsMapped.filter((t) => t.status === 'private');
+
+  // eslint-disable-next-line no-unused-vars
+  const menu = createMenuStructure({
+    parentTools,
+    toolsGrouped,
+    proLinks,
+  });
 
   const contentEl = useRef(null);
 
@@ -187,6 +202,7 @@ const Article = ({ article, isGuide }) => {
 Article.propTypes = {
   article: PropTypes.object,
   isGuide: PropTypes.bool,
+  toolsMapped: PropTypes.array,
 };
 
 export default Article;

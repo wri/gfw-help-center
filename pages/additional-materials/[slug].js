@@ -7,6 +7,7 @@ import ArticlePage from 'layouts/article';
 import { articlesFilter } from 'utils/articles-filter';
 
 import { getPublishedNotifications } from 'utils/notifications';
+import { convertTool } from 'utils/tools';
 
 const Layout = dynamic(() => import('layouts/layout'), {
   ssr: false,
@@ -30,6 +31,20 @@ export async function getStaticProps({ params, previewData, preview }) {
   });
   const notifications = await getPublishedNotifications();
 
+  const tools = await getPostsByType({
+    type: 'tools',
+    params: {
+      per_page: 100,
+      order: 'asc',
+      orderby: 'menu_order',
+      status: 'publish, private',
+    },
+  });
+
+  const toolsMapped = tools?.map((tool) => ({
+    ...convertTool(tool),
+  }));
+
   return {
     props: {
       article: article || null,
@@ -37,6 +52,7 @@ export async function getStaticProps({ params, previewData, preview }) {
       isError: !article,
       preview: isPreview,
       notifications: notifications || [],
+      toolsMapped: toolsMapped || [],
     },
     revalidate: 10,
   };
