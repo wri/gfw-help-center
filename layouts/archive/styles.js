@@ -5,10 +5,8 @@ import Search from '../../components/search';
 
 export const Wrapper = styled.div`
   width: 100%;
-  padding: 40px 0 50px;
-  ${theme.mediaQueries.small} {
-    padding-top: 50px;
-  }
+  padding-top: 5rem;
+  padding-bottom: 3.125rem;
 `;
 
 export const SearchMobile = styled(Search)`
@@ -66,14 +64,8 @@ export const CategoryDescription = styled.p`
 `;
 
 export const ResultsStatement = styled.p`
-  font-size: 14px;
-  line-height: 21px;
   color: ${theme.colors.mediumGrey};
-  margin-top: 20px;
-
-  ${theme.mediaQueries.small} {
-    margin-top: 75px;
-  }
+  padding-bottom: 2rem;
 `;
 
 export const LoadMoreWrapper = styled(Row)`
@@ -85,4 +77,11 @@ export const LoadMoreWrapper = styled(Row)`
 
 export const MenuWrapper = styled.div`
   margin-top: 40px;
+`;
+
+export const ResultTitle = styled.h1`
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  font-size: xxx-large;
+  font-weight: lighter;
 `;
