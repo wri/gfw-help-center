@@ -23,10 +23,10 @@ export const ListItem = styled.li`
 
   button {
     color: ${theme.colors.grey};
-    padding: 20px 0;
+    padding: 0.938rem 0;
     width: 100%;
     display: block;
-    font-size: 22px;
+    font-size: medium;
     text-align: left;
 
     &:hover {

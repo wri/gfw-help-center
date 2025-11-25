@@ -5,13 +5,13 @@ import ArrowIconSvg from 'assets/icons/chevron-down.svg';
 export const Card = styled.div`
   height: 100%;
   border: 1px solid #e5e5df;
-  padding: 40px 30px;
   position: relative;
   display: flex;
   justify-content: space-between;
+  overflow-wrap: anywhere;
 
   ${theme.mediaQueries.small} {
-    padding: 50px 45px;
+    padding: 1.25rem 1.25rem;
   }
 
   > a {
