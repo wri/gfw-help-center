@@ -13,6 +13,7 @@ import ArrowIcon from 'assets/icons/arrow.svg';
 import { groupBy } from 'lodash';
 import Accordion from 'components/accordion';
 import createMenuStructure from 'utils/menu';
+import RowContainer from 'layouts/styles';
 import {
   Wrapper,
   Prompt,
@@ -41,7 +42,7 @@ const HomePage = ({ homepage, tools }) => {
 
   return (
     <Wrapper>
-      <Row>
+      <RowContainer>
         <Column width={[1, 1 / 4]}>
           <Row>
             <SearchWrapper>
@@ -101,7 +102,7 @@ const HomePage = ({ homepage, tools }) => {
             })}
           </Row>
         </Column>
-      </Row>
+      </RowContainer>
     </Wrapper>
   );
 };

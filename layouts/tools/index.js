@@ -13,6 +13,7 @@ import Accordion from 'components/accordion';
 import { groupBy } from 'lodash';
 import createMenuStructure from 'utils/menu';
 import { useRouter } from 'next/router';
+import RowContainer from 'layouts/styles';
 import {
   Wrapper,
   BreadcrumbsWrapper,
@@ -64,7 +65,7 @@ const Page = ({ tools, currentPage }) => {
 
   return (
     <Wrapper>
-      <Row>
+      <RowContainer>
         <Column width={[3 / 4]}>
           <BreadcrumbsWrapper>
             <Breadcrumbs
@@ -88,9 +89,9 @@ const Page = ({ tools, currentPage }) => {
             />
           </BreadcrumbsWrapper>
         </Column>
-      </Row>
+      </RowContainer>
 
-      <Row>
+      <RowContainer>
         <Column width={[1, 1 / 4]}>
           <Row>
             <SearchWrapper>
@@ -120,7 +121,7 @@ const Page = ({ tools, currentPage }) => {
             <RelatedContent sections={relatedContent} />
           )}
         </Column>
-      </Row>
+      </RowContainer>
       {!!blogPosts?.length && (
         <>
           <Divider />

@@ -16,6 +16,7 @@ import { groupBy } from 'lodash';
 import Accordion from 'components/accordion';
 import { SearchWrapper } from 'layouts/home/styles';
 import Search from 'components/search';
+import RowContainer from 'layouts/styles';
 import { Wrapper, ResultsStatement, MenuWrapper, ResultTitle } from './styles';
 
 const SearchPage = ({
@@ -91,9 +92,11 @@ const SearchPage = ({
     },
   ]);
 
+  const tokens = window.location.pathname.split('/').filter((t) => t !== '');
+
   return (
     <Wrapper>
-      <Row>
+      <RowContainer>
         <Column width={[1, 1 / 4]}>
           <Row>
             <SearchWrapper>
@@ -112,7 +115,7 @@ const SearchPage = ({
             <Row>
               <ResultTitle>
                 Results for&nbsp;&ldquo;
-                {tag?.name}
+                {tokens.length !== 0 ? tokens[tokens.length - 1] : ''}
                 &rdquo;
               </ResultTitle>
             </Row>
@@ -156,7 +159,7 @@ const SearchPage = ({
               ))}
           </Row>
         </Column>
-      </Row>
+      </RowContainer>
       <Mobile>
         <MenuWrapper>
           <Menu links={links} />

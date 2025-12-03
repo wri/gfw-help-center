@@ -19,6 +19,7 @@ import createMenuStructure from 'utils/menu';
 import { groupBy } from 'lodash';
 import { SearchWrapper } from 'layouts/home/styles';
 import Accordion from 'components/accordion';
+import RowContainer from 'layouts/styles';
 import PrintArticle from './print';
 
 import {
@@ -90,7 +91,7 @@ const Article = ({ article, isGuide, toolsMapped }) => {
 
   return (
     <PostContainer>
-      <Row>
+      <RowContainer>
         <Column width={[1, 1 / 4]}>
           <Row
             css={css`
@@ -174,7 +175,7 @@ const Article = ({ article, isGuide, toolsMapped }) => {
             </>
           )}
         </Column>
-      </Row>
+      </RowContainer>
       {!!blogPosts?.length && (
         <>
           <Divider />
