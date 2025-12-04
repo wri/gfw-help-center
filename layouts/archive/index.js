@@ -94,6 +94,11 @@ const SearchPage = ({
 
   const tokens = window.location.pathname.split('/').filter((t) => t !== '');
 
+  const tagName =
+    tag?.name || tokens.length !== 0
+      ? tokens[tokens.length - 1].replaceAll('-', ' ')
+      : '';
+
   return (
     <Wrapper>
       <RowContainer>
@@ -115,7 +120,7 @@ const SearchPage = ({
             <Row>
               <ResultTitle>
                 Results for&nbsp;&ldquo;
-                {tokens.length !== 0 ? tokens[tokens.length - 1] : ''}
+                {tagName}
                 &rdquo;
               </ResultTitle>
             </Row>
