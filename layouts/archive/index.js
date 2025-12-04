@@ -1,43 +1,46 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import {
-  Row,
-  Column,
-  Mobile,
-  Desktop,
-  theme,
-} from '@worldresources/gfw-components';
+import { Row, Column, Mobile } from '@worldresources/gfw-components';
 import { useRouter } from 'next/router';
 import compact from 'lodash/compact';
-import Sticky from 'react-stickynode';
 import { translateText } from 'utils/lang';
 
 import Card from 'components/card';
 import SimpleCard from 'components/card-simple';
 import Menu from 'components/menu';
 import Breadcrumbs from 'components/breadcrumbs';
-import Dropdown from 'components/dropdown';
 
-import {
-  Wrapper,
-  SearchMobile,
-  SearchDesktop,
-  ResultsStatement,
-  MenuWrapper,
-} from './styles';
+import createMenuStructure from 'utils/menu';
+import { groupBy } from 'lodash';
+import Accordion from 'components/accordion';
+import { SearchWrapper } from 'layouts/home/styles';
+import Search from 'components/search';
+import RowContainer from 'layouts/styles';
+import { Wrapper, ResultsStatement, MenuWrapper, ResultTitle } from './styles';
 
 const SearchPage = ({
   tag,
-  tags,
   articles,
   webinars,
   additionalMaterials,
   isSearch,
+  tools,
 }) => {
   const [type, setType] = useState('articles');
   const { query } = useRouter();
   const { query: searchQuery } = query || {};
+
+  const toolsGrouped = tools && groupBy(tools, 'parent');
+  const parentTools =
+    toolsGrouped?.['0'].filter((item) => item.slug !== 'mapbuilder') || [];
+  const proLinks = tools?.filter((t) => t.status === 'private') || [];
+
+  const menu = createMenuStructure({
+    parentTools,
+    toolsGrouped,
+    proLinks,
+  });
 
   const total =
     articles?.length + webinars?.length + additionalMaterials?.length;
@@ -54,10 +57,6 @@ const SearchPage = ({
     isSearch ? searchStatement : tagStatement,
     { total }
   );
-
-  const taxFromList = tags?.find((tax) => tax.id === tag?.id);
-  const allTaxOptions =
-    tags && (taxFromList ? tags : [{ ...tag, count: total }, ...tags]);
 
   const links = [
     {
@@ -93,113 +92,79 @@ const SearchPage = ({
     },
   ]);
 
+  const tokens = window.location.pathname.split('/').filter((t) => t !== '');
+
+  const tagName =
+    tag?.name || tokens.length !== 0
+      ? tokens[tokens.length - 1].replaceAll('-', ' ')
+      : '';
+
   return (
     <Wrapper>
-      <Row
-        css={css`
-          position: relative;
-          min-height: 40px;
-        `}
-      >
-        <Column width={[3 / 4]}>
-          <Breadcrumbs
-            css={css`
-              margin-bottom: 25px;
-              ${theme.mediaQueries.small} {
-                margin-bottom: 40px;
-              }
-            `}
-            links={breadCrumbs}
-          />
+      <RowContainer>
+        <Column width={[1, 1 / 4]}>
+          <Row>
+            <SearchWrapper>
+              <Search expanded />
+            </SearchWrapper>
+          </Row>
+          <Row>
+            <Accordion sections={menu} />
+          </Row>
         </Column>
-        {!isSearch && (
-          <Column width={[1 / 4]}>
-            <SearchMobile expandable />
-          </Column>
-        )}
-        {isSearch && (
-          <>
-            <Column>
-              <SearchDesktop expanded isSearch />
-            </Column>
-          </>
-        )}
-      </Row>
-      {!isSearch && (
-        <Row
-          css={css`
-            position: relative;
-          `}
-        >
-          <Column width={[1, 2 / 3]}>
-            <Dropdown items={allTaxOptions} selected={tag?.id} />
-          </Column>
-          <Column width={[1, 1 / 3]}>
-            <SearchDesktop showTitle expandable />
-          </Column>
-        </Row>
-      )}
-      <Mobile>
-        <MenuWrapper>
-          <Menu links={links} />
-        </MenuWrapper>
-      </Mobile>
-      <div className="sticky-boundary" style={{ position: 'relative' }}>
-        <Row>
-          <Column
-            css={css`
-              margin-bottom: 50px !important;
-            `}
-          >
-            <ResultsStatement>{resultsStatement}</ResultsStatement>
-          </Column>
-          <Column width={[1, 1 / 4]}>
-            <Desktop>
-              <Sticky top={120} bottomBoundary=".sticky-boundary">
-                <Menu links={links} />
-              </Sticky>
-            </Desktop>
-          </Column>
-          <Column width={[1, 7 / 12]}>
-            <Row nested>
-              {type === 'articles' &&
-                articles?.map(({ id, ...rest }) => (
-                  <Column
-                    key={id}
-                    css={css`
-                      margin-bottom: 40px !important;
-                    `}
-                  >
-                    <SimpleCard {...rest} arrow />
-                  </Column>
-                ))}
-              {type === 'webinars' &&
-                webinars?.map(({ id, ...rest }) => (
-                  <Column
-                    width={[1, 1 / 2]}
-                    css={css`
-                      margin-bottom: 40px !important;
-                    `}
-                    key={id}
-                  >
-                    <Card {...rest} video />
-                  </Column>
-                ))}
-              {type === 'additional-materials' &&
-                additionalMaterials?.map(({ id, ...rest }) => (
-                  <Column
-                    key={id}
-                    css={css`
-                      margin-bottom: 40px !important;
-                    `}
-                  >
-                    <SimpleCard {...rest} arrow />
-                  </Column>
-                ))}
+        <Column width={[1, 3 / 4]}>
+          <Row css={{ display: 'block' }}>
+            <Row>
+              <Breadcrumbs links={breadCrumbs} />
             </Row>
-          </Column>
-        </Row>
-      </div>
+            <Row>
+              <ResultTitle>
+                Results for&nbsp;&ldquo;
+                {tagName}
+                &rdquo;
+              </ResultTitle>
+            </Row>
+            <ResultsStatement>{resultsStatement}</ResultsStatement>
+            <Menu links={links} />
+          </Row>
+          <Row nested>
+            {type === 'articles' &&
+              articles?.map(({ id, ...rest }) => (
+                <Column
+                  key={id}
+                  css={css`
+                    margin-bottom: 40px !important;
+                  `}
+                >
+                  <SimpleCard {...rest} arrow />
+                </Column>
+              ))}
+            {type === 'webinars' &&
+              webinars?.map(({ id, ...rest }) => (
+                <Column
+                  width={[1, 1 / 2]}
+                  css={css`
+                    margin-bottom: 40px !important;
+                  `}
+                  key={id}
+                >
+                  <Card {...rest} video />
+                </Column>
+              ))}
+            {type === 'additional-materials' &&
+              additionalMaterials?.map(({ id, ...rest }) => (
+                <Column
+                  key={id}
+                  css={css`
+                    margin-bottom: 40px !important;
+                  `}
+                >
+                  <SimpleCard {...rest} arrow />
+                </Column>
+              ))}
+          </Row>
+        </Column>
+      </RowContainer>
       <Mobile>
         <MenuWrapper>
           <Menu links={links} />
@@ -216,6 +181,7 @@ SearchPage.propTypes = {
   webinars: PropTypes.array,
   additionalMaterials: PropTypes.array,
   isSearch: PropTypes.bool,
+  tools: PropTypes.array,
 };
 
 export default SearchPage;

@@ -2,7 +2,6 @@ import groupBy from 'lodash/groupBy';
 
 import { getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
-import { statusFilter } from 'utils/articles-filter';
 
 import dynamic from 'next/dynamic';
 
@@ -35,11 +34,7 @@ export async function getStaticProps({ params, preview, previewData }) {
       per_page: 100,
       order: 'asc',
       orderby: 'menu_order',
-      // XXX: We will perform a check in layouts as private posts are only available for PRO
-      status: statusFilter(),
-      ...(isPreview && {
-        status: 'any',
-      }),
+      status: 'publish, private',
     },
   });
 
