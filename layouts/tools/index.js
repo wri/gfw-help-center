@@ -1,65 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/core';
-import { Row, Column, Desktop, Mobile } from '@worldresources/gfw-components';
+import { Row, Column } from '@worldresources/gfw-components';
 import ReactHtmlParser from 'react-html-parser';
-import Sticky from 'react-stickynode';
 
 import Breadcrumbs from 'components/breadcrumbs';
-import Dropdown from 'components/dropdown';
 import Content from 'components/content';
-import Menu from 'components/menu';
 import RelatedContent from 'components/related-content';
 
+import { SearchWrapper } from 'layouts/home/styles';
+import Search from 'components/search';
+import Accordion from 'components/accordion';
+import { groupBy } from 'lodash';
+import createMenuStructure from 'utils/menu';
+import { useRouter } from 'next/router';
+import RowContainer from 'layouts/styles';
 import {
   Wrapper,
   BreadcrumbsWrapper,
   ContentWrapper,
-  SearchMobile,
-  SearchDesktop,
-  MenuWrapper,
   Title,
-  HeaderWrapper,
   Divider,
 } from './styles';
 
-const Page = ({ parentTools, currentPage, siblingTools }) => {
-  // build the options for the dropdown
-  const parentPageOptions = parentTools?.map((tool) => ({
-    name: tool.title,
-    id: tool.id,
-    link: tool.link,
-  }));
+const Page = ({ tools, currentPage }) => {
+  const { asPath } = useRouter();
+  const selectedSlug = asPath.substring(0, asPath.length - 1);
+  const toolsGrouped = tools && groupBy(tools, 'parent');
+  const parentTools = toolsGrouped?.['0'].filter(
+    (item) => item.slug !== 'mapbuilder'
+  );
+  const proLinks = tools.filter((t) => t.status === 'private');
 
-  const primaryTools = parentPageOptions?.slice(0, 4);
-  const secondaryTools = parentPageOptions?.slice(4, 8);
-  const toolsOptions = [
-    ...(primaryTools || []),
-    {
-      name: 'divider',
-      id: 'div-1',
-    },
-    ...(secondaryTools || []),
-  ];
+  const menu = createMenuStructure({
+    parentTools,
+    toolsGrouped,
+    proLinks,
+  });
 
-  // active parent page ID
-  const currentParentPage = currentPage?.parent || currentPage?.id;
+  const slugTokens = selectedSlug.split('/');
+  let mainSection;
+  let selectedIndex;
+
+  // slugTokens can have 2 tokens when clicking on "overview" or 3 tokens when clicking on any other subsection
+  if (slugTokens.length >= 2) {
+    [, mainSection] = slugTokens;
+    selectedIndex = menu.findIndex((item) => item.slug === mainSection);
+  }
+
   const parentPage = currentPage?.parent
     ? parentTools?.find((p) => p.id === currentPage?.parent)
     : currentPage;
-
-  // build the options for the side bar menu
-  const sidebarPages = siblingTools
-    ? [parentPage]?.concat(siblingTools)
-    : [parentPage];
-
-  const links = sidebarPages?.map((sub) => ({
-    label: sub?.parent ? sub?.title : 'Overview',
-    isPro: sub?.status === 'private',
-    link: sub?.acf?.alt_link || sub?.link,
-    active:
-      currentPage?.link === sub?.link || currentPage?.link === `${sub?.link}/`,
-  }));
 
   // get page content
   const { title, content, acf, parent } = currentPage || {};
@@ -75,7 +65,7 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
 
   return (
     <Wrapper>
-      <Row>
+      <RowContainer>
         <Column width={[3 / 4]}>
           <BreadcrumbsWrapper>
             <Breadcrumbs
@@ -99,58 +89,39 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
             />
           </BreadcrumbsWrapper>
         </Column>
-        <Column width={[1 / 4]}>
-          <SearchMobile expandable />
+      </RowContainer>
+
+      <RowContainer>
+        <Column width={[1, 1 / 4]}>
+          <Row>
+            <SearchWrapper>
+              <Search expanded />
+            </SearchWrapper>
+          </Row>
+          <Row>
+            <Accordion
+              sections={menu}
+              selectedIndex={selectedIndex}
+              selectedSlug={selectedSlug}
+            />
+          </Row>
         </Column>
-      </Row>
-      <Row
-        css={css`
-          position: relative;
-        `}
-      >
-        <HeaderWrapper width={[1, 2 / 3]}>
-          <Dropdown items={toolsOptions} selected={currentParentPage} />
-        </HeaderWrapper>
-        <Column width={[1, 1 / 3]}>
-          <SearchDesktop expandable showTitle />
+        <Column width={[1, 3 / 4]}>
+          {title && (
+            <Title>{ReactHtmlParser(parent ? title : 'Overview')}</Title>
+          )}
+          {content && (
+            <div id="content">
+              <ContentWrapper>
+                <Content align="left">{content}</Content>
+              </ContentWrapper>
+            </div>
+          )}
+          {relatedContent?.length > 0 && (
+            <RelatedContent sections={relatedContent} />
+          )}
         </Column>
-      </Row>
-      <Mobile>
-        <MenuWrapper>
-          <Menu
-            links={links}
-            css={css`
-              margin-bottom: 40px;
-            `}
-          />
-        </MenuWrapper>
-      </Mobile>
-      <div className="sticky-boundary" style={{ position: 'relative' }}>
-        <Row>
-          <Column width={[1, 1 / 4]}>
-            <Desktop>
-              <Sticky top={120} bottomBoundary=".sticky-boundary">
-                <Menu links={links} />
-              </Sticky>
-            </Desktop>
-          </Column>
-          <Column width={[1, 7 / 12]}>
-            {title && (
-              <Title>{ReactHtmlParser(parent ? title : 'Overview')}</Title>
-            )}
-            {content && (
-              <div id="content">
-                <ContentWrapper>
-                  <Content align="left">{content}</Content>
-                </ContentWrapper>
-              </div>
-            )}
-            {relatedContent?.length > 0 && (
-              <RelatedContent sections={relatedContent} />
-            )}
-          </Column>
-        </Row>
-      </div>
+      </RowContainer>
       {!!blogPosts?.length && (
         <>
           <Divider />
@@ -162,24 +133,13 @@ const Page = ({ parentTools, currentPage, siblingTools }) => {
           <Divider />
         </>
       )}
-      <Mobile>
-        <MenuWrapper>
-          <Menu
-            links={links}
-            css={css`
-              margin-bottom: 40px;
-            `}
-          />
-        </MenuWrapper>
-      </Mobile>
     </Wrapper>
   );
 };
 
 Page.propTypes = {
-  parentTools: PropTypes.array,
+  tools: PropTypes.array,
   currentPage: PropTypes.object,
-  siblingTools: PropTypes.array,
 };
 
 export default Page;
