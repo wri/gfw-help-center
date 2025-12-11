@@ -50,7 +50,8 @@ export const ToolsTitle = styled(H4)`
   margin-bottom: 20px;
 
   ${theme.mediaQueries.small} {
-    margin-bottom: 50px;
+    margin-top: 1.875rem;
+    margin-bottom: 3.125rem;
   }
 `;
 
@@ -64,9 +65,5 @@ export const ToolCardsWrapper = styled(Column)`
 `;
 
 export const SearchWrapper = styled(Column)`
-  margin-bottom: 50px;
-
-  ${theme.mediaQueries.small} {
-    margin-bottom: 100px;
-  }
+  padding: 0 !important;
 `;

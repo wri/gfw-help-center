@@ -3,7 +3,6 @@ import { BasicInput, theme } from '@worldresources/gfw-components';
 import { rgba } from 'emotion-rgba';
 
 export const Wrapper = styled.div`
-  height: 60px;
   width: 100%;
   cursor: pointer;
   z-index: 20;
@@ -22,7 +21,7 @@ export const Wrapper = styled.div`
   `}
 
   ${theme.mediaQueries.small} {
-    height: 80px;
+    height: 4rem;
   }
 `;
 
@@ -31,11 +30,15 @@ export const Container = styled.div`
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  height: 60px;
-  border-bottom: solid 1px transparent;
-  ${theme.mediaQueries.small} {
-    height: 80px;
-  }
+  height: 3.75rem;
+  background-color: #f6f6f4;
+  max-height: 2.625rem;
+  height: 2.625rem;
+  -webkit-border-radius: 1.25rem;
+  -moz-border-radius: 1.25rem;
+  border-radius: 1.25rem;
+  padding-left: 1rem;
+
   ${({ open, expanded }) =>
     (open || expanded) &&
     `
@@ -50,6 +53,7 @@ export const SearchClosed = styled.div`
 
 export const SearchOpen = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -65,24 +69,27 @@ export const OpenMessage = styled.span`
 
 export const Input = styled(BasicInput)`
   appearance: none;
-  width: 100%;
-  height: 100%;
-  background: ${theme.colors.white};
   border: none !important;
   border-radius: 0;
-  font-size: 22px;
   color: ${theme.colors.darkestGrey};
-  padding: 0 10px 0 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  background-color: #f6f6f4;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 0.875rem;
+  letter-spacing: 0.016rem;
+  width: 75%;
+  height: 80%;
+
+  ::placeholder {
+    color: #7f7f80;
+    opacity: 1;
+  }
 
   &:focus {
     outline: none;
-  }
-
-  ${theme.mediaQueries.small} {
-    padding: 0 20px;
   }
 
   ${({ value, expanded }) =>
@@ -97,6 +104,11 @@ export const Input = styled(BasicInput)`
     `
     padding-left: 0 !important;
   `}
+`;
+
+export const SearchIconWrapper = styled.div`
+  padding-right: 1rem;
+  writing-mode: vertical-rl;
 `;
 
 export const Overlay = styled.div`

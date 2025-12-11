@@ -31,7 +31,7 @@ export async function getStaticProps() {
       per_page: 100,
       order: 'asc',
       orderby: 'menu_order',
-      parent: 0,
+      status: 'publish, private',
     },
   });
 
