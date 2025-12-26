@@ -9,6 +9,7 @@ import ArchivePage from 'layouts/archive';
 import { searchFilter } from 'utils/articles-filter';
 
 import { getPublishedNotifications } from 'utils/notifications';
+import { convertTool } from 'utils/tools';
 
 const Layout = dynamic(() => import('layouts/layout'), {
   ssr: false,
@@ -50,12 +51,27 @@ export async function getServerSideProps({ params }) {
 
   const notifications = await getPublishedNotifications();
 
+  const tools = await getPostsByType({
+    type: 'tools',
+    params: {
+      per_page: 100,
+      order: 'asc',
+      orderby: 'menu_order',
+      status: 'publish, private',
+    },
+  });
+
+  const toolsMapped = tools?.map((tool) => ({
+    ...convertTool(tool),
+  }));
+
   return {
     props: {
       articles: articles || [],
       webinars: webinars || [],
       additionalMaterials: additionalMaterials || [],
       notifications: notifications || [],
+      tools: toolsMapped || [],
     },
   };
 }
