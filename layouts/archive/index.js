@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { Row, Column, Mobile } from '@worldresources/gfw-components';
@@ -27,7 +27,6 @@ const SearchPage = ({
   isSearch,
   tools,
 }) => {
-  const [type, setType] = useState('articles');
   const { query } = useRouter();
   const { query: searchQuery } = query || {};
 
@@ -61,20 +60,14 @@ const SearchPage = ({
   const links = [
     {
       label: translateText('Step by step instructions'),
-      onClick: () => setType('articles'),
-      active: type === 'articles',
       count: articles?.length || '0',
     },
     {
       label: translateText('Webinars'),
-      onClick: () => setType('webinars'),
-      active: type === 'webinars',
       count: webinars?.length || '0',
     },
     {
       label: translateText('Additional Materials'),
-      onClick: () => setType('additional-materials'),
-      active: type === 'additional-materials',
       count: additionalMaterials?.length || '0',
     },
   ];
@@ -127,42 +120,108 @@ const SearchPage = ({
             <ResultsStatement>{resultsStatement}</ResultsStatement>
             <Menu links={links} />
           </Row>
-          <Row nested>
-            {type === 'articles' &&
-              articles?.map(({ id, ...rest }) => (
-                <Column
-                  key={id}
+          {/* Step by step instructions */}
+          {articles && articles.length > 0 && (
+            <>
+              <Row>
+                <h2
                   css={css`
-                    margin-bottom: 40px !important;
+                    font-size: 24px;
+                    font-weight: 600;
+                    margin: 40px 0 20px 0;
+                    color: #333;
                   `}
                 >
-                  <SimpleCard {...rest} arrow />
-                </Column>
-              ))}
-            {type === 'webinars' &&
-              webinars?.map(({ id, ...rest }) => (
-                <Column
-                  width={[1, 1 / 2]}
+                  {translateText('Step by step instructions')}
+                  {' '}
+                  (
+                  {articles.length}
+                  )
+                </h2>
+              </Row>
+              <Row nested>
+                {articles.map(({ id, ...rest }) => (
+                  <Column
+                    key={id}
+                    css={css`
+                      margin-bottom: 40px !important;
+                    `}
+                  >
+                    <SimpleCard {...rest} arrow />
+                  </Column>
+                ))}
+              </Row>
+            </>
+          )}
+
+          {/* Webinars */}
+          {webinars && webinars.length > 0 && (
+            <>
+              <Row>
+                <h2
                   css={css`
-                    margin-bottom: 40px !important;
+                    font-size: 24px;
+                    font-weight: 600;
+                    margin: 40px 0 20px 0;
+                    color: #333;
                   `}
-                  key={id}
                 >
-                  <Card {...rest} video />
-                </Column>
-              ))}
-            {type === 'additional-materials' &&
-              additionalMaterials?.map(({ id, ...rest }) => (
-                <Column
-                  key={id}
+                  {translateText('Webinars')}
+                  {' '}
+                  (
+                  {webinars.length}
+                  )
+                </h2>
+              </Row>
+              <Row nested>
+                {webinars.map(({ id, ...rest }) => (
+                  <Column
+                    width={[1, 1 / 2]}
+                    css={css`
+                      margin-bottom: 40px !important;
+                    `}
+                    key={id}
+                  >
+                    <Card {...rest} video />
+                  </Column>
+                ))}
+              </Row>
+            </>
+          )}
+
+          {/* Additional Materials */}
+          {additionalMaterials && additionalMaterials.length > 0 && (
+            <>
+              <Row>
+                <h2
                   css={css`
-                    margin-bottom: 40px !important;
+                    font-size: 24px;
+                    font-weight: 600;
+                    margin: 40px 0 20px 0;
+                    color: #333;
                   `}
                 >
-                  <SimpleCard {...rest} arrow />
-                </Column>
-              ))}
-          </Row>
+                  {translateText('Additional Materials')}
+                  {' '}
+                  (
+                  {additionalMaterials.length}
+                  )
+                </h2>
+              </Row>
+              <Row nested>
+                {additionalMaterials.map(({ id, ...rest }) => (
+                  <Column
+                    key={id}
+                    css={css`
+                      margin-bottom: 40px !important;
+                    `}
+                  >
+                    <SimpleCard {...rest} arrow />
+                  </Column>
+                ))}
+              </Row>
+            </>
+          )}
         </Column>
       </RowContainer>
       <Mobile>
