@@ -1,9 +1,17 @@
 import { getPostsByType, getPostByType } from 'lib/api';
 
 import ArticlePage from 'layouts/article';
-import Layout from 'layouts/layout';
+
+import dynamic from 'next/dynamic';
 
 import { articlesFilter } from 'utils/articles-filter';
+
+import { getPublishedNotifications } from 'utils/notifications';
+import { convertTool } from 'utils/tools';
+
+const Layout = dynamic(() => import('layouts/layout'), {
+  ssr: false,
+});
 
 export default function AdditionalMaterial(props) {
   return (
@@ -22,7 +30,23 @@ export async function getStaticProps({ params, previewData, preview }) {
     ...articlesFilter(isPreview, previewData),
   });
 
+  const notifications = await getPublishedNotifications();
+
   const proLoginRequired = article.status === 'private';
+
+  const tools = await getPostsByType({
+    type: 'tools',
+    params: {
+      per_page: 100,
+      order: 'asc',
+      orderby: 'menu_order',
+      status: 'publish, private',
+    },
+  });
+
+  const toolsMapped = tools?.map((tool) => ({
+    ...convertTool(tool),
+  }));
 
   return {
     props: {
@@ -31,6 +55,8 @@ export async function getStaticProps({ params, previewData, preview }) {
       metaTags: article?.yoast_head || '',
       isError: !article,
       preview: isPreview,
+      notifications: notifications || [],
+      toolsMapped: toolsMapped || [],
     },
     revalidate: 10,
   };

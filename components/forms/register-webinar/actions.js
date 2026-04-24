@@ -1,11 +1,11 @@
-import { FORM_ERROR } from 'gfw-components';
+import { FORM_ERROR } from '@worldresources/gfw-components';
 import { post } from 'axios';
 
 export default (webinarId, body) => {
   post(`https://api.zoom.us/v2/webinars/${webinarId}/registrants`, body, {
     headers: {
-      'Authorization': `Bearer ${process.env.ZOOM_API_JWT}`
-    }
+      Authorization: `Bearer ${process.env.ZOOM_API_JWT}`,
+    },
   })
     .then(() => {})
     .catch((error) => {

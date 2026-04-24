@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Desktop } from 'gfw-components';
+import { Desktop } from '@worldresources/gfw-components';
 import ReactHtmlParser from 'react-html-parser';
 import Link from 'next/link';
 import { css } from '@emotion/core';
@@ -37,11 +37,7 @@ const SimpleCard = ({
               aria-label="external link"
             />
           )}
-          {!extLink && link && (
-            <Link href={link}>
-              <a> </a>
-            </Link>
-          )}
+          {!extLink && link && <Link href={link} />}
           {backgroundImage && (
             <BackgroundImage>
               <Media {...backgroundImage} />
@@ -59,15 +55,9 @@ const SimpleCard = ({
                 categories={tools}
               />
             )}
-            {title && (
-              <Title className="notranslate" light={!!backgroundImage}>
-                {title}
-              </Title>
-            )}
+            {title && <Title light={!!backgroundImage}>{title}</Title>}
             {excerpt && (
-              <Text className="notranslate" light={!!backgroundImage}>
-                {ReactHtmlParser(excerpt)}
-              </Text>
+              <Text light={!!backgroundImage}>{ReactHtmlParser(excerpt)}</Text>
             )}
           </div>
           {arrow && (

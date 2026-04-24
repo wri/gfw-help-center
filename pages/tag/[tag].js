@@ -1,8 +1,15 @@
 import { getTags, getTagBySlug, getPostsByType } from 'lib/api';
 
+import dynamic from 'next/dynamic';
+
 import ArchivePage from 'layouts/archive';
 
-import Layout from 'layouts/layout';
+import { getPublishedNotifications } from 'utils/notifications';
+import { convertTool } from 'utils/tools';
+
+const Layout = dynamic(() => import('layouts/layout'), {
+  ssr: false,
+});
 
 export default function Tag(props) {
   return (
@@ -38,6 +45,22 @@ export async function getStaticProps({ params }) {
     },
   });
 
+  const notifications = await getPublishedNotifications();
+
+  const tools = await getPostsByType({
+    type: 'tools',
+    params: {
+      per_page: 100,
+      order: 'asc',
+      orderby: 'menu_order',
+      status: 'publish, private',
+    },
+  });
+
+  const toolsMapped = tools?.map((tool) => ({
+    ...convertTool(tool),
+  }));
+
   return {
     props: {
       tag: tag || null,
@@ -47,6 +70,8 @@ export async function getStaticProps({ params }) {
       additionalMaterials: additionalMaterials || [],
       metaTags: tag?.yoast_head || '',
       isError: !tag,
+      notifications: notifications || [],
+      tools: toolsMapped || [],
     },
     revalidate: 10,
   };

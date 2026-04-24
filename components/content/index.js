@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 
-import { Carousel } from 'gfw-components';
+import { Carousel } from '@worldresources/gfw-components';
 
 import Blockquote from 'components/blockquote';
 import CodeBlock from 'components/code-block';
+import Lightbox from 'components/lightbox';
 
 import ContentWrapper from './styles';
 
@@ -42,14 +43,10 @@ const PostContent = ({ children, align, print }) => (
           );
         }
 
-        if (print && node.name === 'img') {
-          return (
-            <img
-              key={node.attribs.href}
-              src={node.attribs.src}
-              alt={node.attribs.alt}
-            />
-          );
+        if (node.name === 'img') {
+          const { src, alt, key } = node?.attribs;
+          if (print) return <img src={src} alt={alt} key={key} />;
+          return <Lightbox src={src} alt={alt} key={key} />;
         }
 
         return '';

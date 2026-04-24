@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { H3, Column, theme } from 'gfw-components';
+import { H3, Column, theme } from '@worldresources/gfw-components';
 
 import Search from 'components/search';
 

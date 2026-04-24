@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Mobile } from 'gfw-components';
+import { Mobile } from '@worldresources/gfw-components';
 
 import Link from 'next/link';
 

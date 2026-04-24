@@ -2,11 +2,16 @@ import groupBy from 'lodash/groupBy';
 
 import { getPostsByType } from 'lib/api';
 import { convertTool } from 'utils/tools';
-import { statusFilter } from 'utils/articles-filter';
+
+import dynamic from 'next/dynamic';
 
 import ToolsPage from 'layouts/tools';
 
-import Layout from 'layouts/layout';
+import { getPublishedNotifications } from 'utils/notifications';
+
+const Layout = dynamic(() => import('layouts/layout'), {
+  ssr: false,
+});
 
 export default function Tools(props) {
   return (
@@ -21,17 +26,15 @@ export async function getStaticProps({ params, preview, previewData }) {
   const slug = params?.slugs?.[params?.slugs?.length - 1];
   const isPreview = !!preview && previewData?.slug === slug;
 
+  const notifications = await getPublishedNotifications();
+
   const tools = await getPostsByType({
     type: 'tools',
     params: {
       per_page: 100,
       order: 'asc',
       orderby: 'menu_order',
-      // XXX: We will perform a check in layouts as private posts are only available for PRO
-      status: statusFilter(),
-      ...(isPreview && {
-        status: 'any',
-      }),
+      status: 'publish, private',
     },
   });
 
@@ -68,6 +71,7 @@ export async function getStaticProps({ params, preview, previewData }) {
       preview: isPreview,
       isError:
         !currentTool || currentTool?.link !== `/${params?.slugs?.join('/')}`,
+      notifications: notifications || [],
     },
     revalidate: 10,
   };

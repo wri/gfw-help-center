@@ -23,7 +23,7 @@ const ToolCard = ({
 
       return (
         <Card active={active}>
-          <ContentWrapper className="notranslate">
+          <ContentWrapper>
             {title && <Title>{title}</Title>}
             {excerpt && <Text>{ReactHtmlParser(excerpt)}</Text>}
           </ContentWrapper>

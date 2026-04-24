@@ -1,5 +1,5 @@
-import styled from '@emotion/styled'
-import { H4, H5, theme } from 'gfw-components';
+import styled from '@emotion/styled';
+import { H4, H5, theme } from '@worldresources/gfw-components';
 
 export const Wrapper = styled.div`
   width: 100%;

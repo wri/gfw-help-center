@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 
-import { Loader } from 'gfw-components';
+import { Loader } from '@worldresources/gfw-components';
 import { translateText } from 'utils/lang';
 
 import Link from 'next/link';
@@ -34,15 +34,13 @@ const ResultsList = ({
                   <>
                     {item.link ? (
                       <Link href={item.link}>
-                        <a>
-                          <button onClick={() => onClickResult(item)}>
-                            {ReactHtmlParser(
-                              `${translateText(item.name)}${
-                                showCount ? ` (${item.count})` : ''
-                              }`
-                            )}
-                          </button>
-                        </a>
+                        <button onClick={() => onClickResult(item)}>
+                          {ReactHtmlParser(
+                            `${translateText(item.name)}${
+                              showCount ? ` (${item.count})` : ''
+                            }`
+                          )}
+                        </button>
                       </Link>
                     ) : (
                       <button onClick={item.onClick}>

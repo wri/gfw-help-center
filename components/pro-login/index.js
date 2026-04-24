@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 
 import ProLogo from 'assets/images/GFW_PRO-logo.png';
 
-import { Form, Submit, Input, Checkbox, Modal, Button } from 'gfw-components';
+import {
+  Form,
+  Submit,
+  Input,
+  Checkbox,
+  Modal,
+  Button,
+} from '@worldresources/gfw-components';
 
 import {
   LoginWrapper,
@@ -55,7 +63,7 @@ const ProLogin = ({ independent, verificationRequired }) => {
     <LoginWrapper>
       <CloseIcon onClick={referBack} />
       <LogoContainer>
-        <img src={ProLogo} alt="GFW Pro" />
+        <Image src={ProLogo} alt="GFW Pro" />
       </LogoContainer>
       <LoginContainer>
         <Form onSubmit={handleSubmit}>

@@ -42,10 +42,9 @@ const ExpandableCard = ({
                 onAfterOpen(cardData);
               }
             }}
-            className="notranslate"
           >
             {thumbnail && <Thumbnail src={thumbnail} alt={title} />}
-            <ContentWrapper className="notranslate">
+            <ContentWrapper>
               <Title>{title}</Title>
               {open && content && (
                 <Text small={small}>

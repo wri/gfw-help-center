@@ -8,7 +8,7 @@ import {
   Select,
   validations,
   Loader,
-} from 'gfw-components';
+} from '@worldresources/gfw-components';
 import { get } from 'axios';
 
 import Message from 'components/message';

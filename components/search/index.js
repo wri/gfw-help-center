@@ -10,7 +10,7 @@ import { CancelToken } from 'axios';
 import { useRouter } from 'next/router';
 import { translateText } from 'utils/lang';
 
-import { SearchIcon, CloseIcon, Button } from 'gfw-components';
+import { SearchIcon, CloseIcon, Button } from '@worldresources/gfw-components';
 
 import { getPostsByType, getTags } from 'lib/api';
 
@@ -24,6 +24,7 @@ import {
   OpenMessage,
   Input,
   Overlay,
+  SearchIconWrapper,
 } from './styles';
 
 const deburrUpper = (string) => toUpper(deburr(string));
@@ -192,7 +193,7 @@ const Search = ({
                 ref={inputRef}
                 value={search}
                 expanded={expanded}
-                placeholder={translateText('Search the GFW help center')}
+                placeholder={translateText('Search')}
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={keyDownHandler}
               />
@@ -208,20 +209,16 @@ const Search = ({
                   />
                 </Button>
               )}
+              <SearchIconWrapper>
+                <SearchIcon style={{ width: '1.5rem', height: '1.5rem' }} />
+              </SearchIconWrapper>
             </SearchOpen>
           )}
           {!open && showTitle && (
             <SearchClosed>
-              <OpenMessage>Search the GFW help center</OpenMessage>
+              <OpenMessage>{translateText('Search')}</OpenMessage>
             </SearchClosed>
           )}
-          <SearchIcon
-            css={css`
-              min-width: 32px;
-              min-height: 32px;
-              height: 32px;
-            `}
-          />
         </Container>
         {open && (
           <ResultsList

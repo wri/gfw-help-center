@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { H4 } from 'gfw-components';
+import { H4 } from '@worldresources/gfw-components';
 
 export const Title = styled(H4)`
   margin-bottom: 40px;

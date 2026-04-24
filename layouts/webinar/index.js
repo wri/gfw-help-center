@@ -5,7 +5,7 @@ import { isAfter, format } from 'date-fns';
 import Sticky from 'react-stickynode';
 import { translateText } from 'utils/lang';
 
-import { Row, Column, Desktop, Mobile } from 'gfw-components';
+import { Row, Column, Desktop, Mobile } from '@worldresources/gfw-components';
 
 import PostContent from 'components/content';
 import Breadcrumbs from 'components/breadcrumbs';

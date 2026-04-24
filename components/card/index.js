@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import ReactHtmlParser from 'react-html-parser';
 import Link from 'next/link';
 
-import { Button } from 'gfw-components';
+import { Button } from '@worldresources/gfw-components';
 
 import { LangConsumer } from 'utils/lang';
 
@@ -35,11 +35,7 @@ const CardLink = ({ extLink, link, children }) => {
   }
 
   if (!extLink && link) {
-    return (
-      <Link href={link}>
-        <a>{children}</a>
-      </Link>
-    );
+    return <Link href={link}>{children}</Link>;
   }
 
   return children;
@@ -88,13 +84,9 @@ const Card = ({
                 `}
               />
             )}
-            {title && (
-              <PostTitle className="notranslate" large={large}>
-                {title}
-              </PostTitle>
-            )}
+            {title && <PostTitle large={large}>{title}</PostTitle>}
             {excerpt && (
-              <PostExcerpt className="notranslate" large={large}>
+              <PostExcerpt large={large}>
                 {ReactHtmlParser(excerpt)}
               </PostExcerpt>
             )}

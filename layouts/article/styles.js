@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
-import { Column, Button, theme } from 'gfw-components';
+import { Column, Button, theme } from '@worldresources/gfw-components';
 import { rgba } from 'emotion-rgba';
 
 import SearchComponent from 'components/search';
 
 export const PostContainer = styled.div`
-  padding: 40px 0;
+  padding: 3rem 0;
   width: 100%;
   overflow: hidden;
   min-height: 500px;
