@@ -1,7 +1,0 @@
-allowBuilds:
-  core-js: set this to true or false
-  cwebp-bin: set this to true or false
-  husky: set this to true or false
-  mozjpeg: set this to true or false
-  optipng-bin: set this to true or false
-  unrs-resolver: set this to true or false
