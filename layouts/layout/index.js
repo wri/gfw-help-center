@@ -20,10 +20,16 @@ import { LangProvider, getAPILangCode } from 'utils/lang';
 import { appBasePath } from 'utils/path-resolver';
 import { navMain } from 'utils/nav';
 
+import gnwBadgeSrc from 'assets/logos/gfw.png';
+
 import ErrorPage from 'layouts/error';
 import HelpFooter from 'components/footer';
 import PreviewBanner from 'components/preview-banner';
 import ProLogin from 'components/pro-login';
+import FooterLogoStyles from 'components/footer-logo-styles';
+
+const gnwBadge =
+  typeof gnwBadgeSrc === 'string' ? gnwBadgeSrc : gnwBadgeSrc.src;
 
 const isOsanoEnabled = process.env.NEXT_PUBLIC_OSANO_ENABLED === 'true';
 
@@ -250,9 +256,11 @@ export default function Layout({
         )}
       </Head>
       <GlobalStyles />
+      <FooterLogoStyles />
       <HeaderWrapper>
         <Header
           relative
+          customLogo={gnwBadge}
           navMain={proLoginRequired && proAuth?.pro ? [] : navMain}
           theme={proAuth?.pro && proLoginRequired ? 'pro' : 'default'}
           onProLogout={async (e) => {
