@@ -1,12 +1,10 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { CancelToken } from 'axios';
-import sortBy from 'lodash/sortBy';
 
 import { Loader } from '@worldresources/gfw-components';
 
-import { getPostsByType } from 'lib/api';
+import { fetchPostsByIds } from 'utils/related-content';
 
 import Articles from '../articles';
 import Webinars from '../webinars';
@@ -23,40 +21,29 @@ const ContentComponents = {
   organizations: Organizations,
 };
 
-const PostType = ({ postType, include, maxCols }) => {
+const PostType = ({ postType, include, maxCols, resolvedPosts }) => {
   const Component = ContentComponents[postType];
+  const hasPrefetchedPosts = resolvedPosts !== undefined;
 
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState(resolvedPosts || []);
+  const [loading, setLoading] = useState(!hasPrefetchedPosts);
 
   useEffect(() => {
-    const getArticles = async () => {
-      const source = CancelToken.source();
+    if (!hasPrefetchedPosts) {
+      const getArticles = async () => {
+        try {
+          const data = await fetchPostsByIds(postType, include);
+          setPosts(data);
+        } catch (err) {
+          setPosts([]);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-      try {
-        const data = await getPostsByType({
-          type: postType,
-          params: {
-            include: include?.join(',') || '',
-            per_page: 100,
-            status: 'publish, private',
-          },
-          cancelToken: source.token,
-        });
-
-        const sortedData = sortBy(
-          data.map((d) => ({ ...d, order: include.indexOf(d.id) })),
-          'order'
-        );
-        setPosts(sortedData);
-        setLoading(false);
-      } catch (err) {
-        setLoading(false);
-      }
-    };
-
-    getArticles();
-  }, [include]);
+      getArticles();
+    }
+  }, [hasPrefetchedPosts, include, postType]);
 
   return (
     <PostsWrapper waiting={loading}>
@@ -70,6 +57,7 @@ PostType.propTypes = {
   postType: PropTypes.string,
   include: PropTypes.array,
   maxCols: PropTypes.number,
+  resolvedPosts: PropTypes.array,
 };
 
 export default PostType;

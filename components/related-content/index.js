@@ -39,6 +39,7 @@ const RelatedContent = ({ sections, maxCols }) => (
               {...section}
               postType={sectionType}
               include={include}
+              resolvedPosts={section.resolvedPosts}
               maxCols={maxCols}
             />
           </div>
