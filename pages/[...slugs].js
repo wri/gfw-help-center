@@ -1,6 +1,7 @@
 import groupBy from 'lodash/groupBy';
 
 import { getPostsByType } from 'lib/api';
+import { resolveRelatedContentSections } from 'utils/related-content';
 import { convertTool } from 'utils/tools';
 
 import dynamic from 'next/dynamic';
@@ -60,12 +61,28 @@ export async function getStaticProps({ params, preview, previewData }) {
     ? toolsGrouped?.[currentTool?.parent]
     : toolsGrouped?.[currentTool?.id];
 
+  let currentPage = currentTool;
+
+  if (currentTool?.acf?.related_content?.length) {
+    const relatedContent = await resolveRelatedContentSections(
+      currentTool.acf.related_content
+    );
+
+    currentPage = {
+      ...currentTool,
+      acf: {
+        ...currentTool.acf,
+        related_content: relatedContent,
+      },
+    };
+  }
+
   return {
     props: {
       tools: tools || [],
       proLoginRequired,
       parentTools: parentTools || [],
-      currentPage: currentTool || null,
+      currentPage: currentPage || null,
       siblingTools: siblingTools || [],
       metaTags: currentTool?.yoast_head || null,
       preview: isPreview,
