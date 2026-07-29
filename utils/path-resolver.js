@@ -1,3 +1,5 @@
+import { GFW_APP_DOMAIN } from './domain';
+
 const FEATURE_ENV = process.env.NEXT_PUBLIC_FEATURE_ENV;
 // eslint-disable-next-line import/prefer-default-export
 export const appBasePath = () => {
@@ -9,5 +11,5 @@ export const appBasePath = () => {
     return 'http://localhost:3000';
   }
 
-  return 'https://globalforestwatch.org';
+  return GFW_APP_DOMAIN;
 };

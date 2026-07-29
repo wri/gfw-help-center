@@ -4,6 +4,7 @@ import { Global, css } from '@emotion/core';
 import ReactHtmlParser from 'react-html-parser';
 
 import PostContent from 'components/content';
+import { GFW_DOMAIN } from 'utils/external-links';
 
 import { PostTitle } from './styles';
 
@@ -48,7 +49,7 @@ class ComponentToPrint extends Component {
               margin-bottom: 50px;
             `}
           >
-            https://www.globalforestwatch.org/help
+            {`${GFW_DOMAIN}/help`}
           </p>
           <PostTitle className="notranslate">
             {ReactHtmlParser(title)}

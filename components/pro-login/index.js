@@ -13,6 +13,8 @@ import {
   Button,
 } from '@worldresources/gfw-components';
 
+import { PRO_URL } from 'utils/external-links';
+
 import {
   LoginWrapper,
   LogoContainer,
@@ -99,7 +101,7 @@ const ProLogin = ({ independent, verificationRequired }) => {
                     <ForgotPasswordLink
                       target="__BLANK"
                       rel="noreferrer"
-                      href="https://pro.globalforestwatch.org/forgot"
+                      href={`${PRO_URL}/forgot`}
                     >
                       Forgot your password?
                     </ForgotPasswordLink>
@@ -133,7 +135,7 @@ const ProLogin = ({ independent, verificationRequired }) => {
               <span>Don&apos;t have an account?</span>
             </RequestAccountTitle>
             <RequestAccountBtn
-              href="https://pro.globalforestwatch.org/account"
+              href={`${PRO_URL}/account`}
               target="__BLANK"
               rel="noreferrer"
             >
