@@ -2,7 +2,7 @@
 // Node script during build, so it can't load an ES module. Once
 // globalnaturewatch.org is serving the app, this is the only line that
 // needs to change.
-const ROOT_DOMAIN = 'globalforestwatch.org';
+const ROOT_DOMAIN = 'globalnaturewatch.org';
 
 const GFW_DOMAIN = `https://www.${ROOT_DOMAIN}`;
 
