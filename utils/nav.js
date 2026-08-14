@@ -31,8 +31,7 @@ export const navMain = [
       },
       {
         label: 'Contact Us',
-        onClick: () => [],
-        isContactModal: true,
+        extLink: 'https://globalnaturewatch.zendesk.com/hc/en-us/requests/new',
       },
     ],
   },
